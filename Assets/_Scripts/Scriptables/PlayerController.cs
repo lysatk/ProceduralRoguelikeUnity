@@ -56,11 +56,11 @@ public class PlayerController : MonoBehaviour
             // Set direction of sprite to movement direction
             if (movementInput.x < 0)
             {
-                spriteRenderer.flipX = true;
+                spriteRenderer.flipX = false;
             }
             else if (movementInput.x > 0)
             {
-                spriteRenderer.flipX = false;
+                spriteRenderer.flipX = true;
             }
         }
     }
