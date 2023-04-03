@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Random Walk Cave
   m_EditorClassIdentifier: 
   algorithm: 5
-  randomSeed: 0
+  randomSeed: 1
   seed: 2137
   fillAmount: 0
   smoothAmount: 0
