@@ -11,23 +11,20 @@ public class IKController : MonoBehaviour
     float x = 0;
     float y = 0;
 
-
-    float pointDirection(float x1, float x2, float y1, float y2)
+    Vector2 pointDirection(float x1, float x2, float y1, float y2)
     {
-        Vector2 vectorTemp1 = new Vector2(x1, y1);
-        Vector2 vectorTemp2 = new Vector2(x2, y2);
 
-        //calc Direction here
-
-        return 0;
+        float degree = (float)(Math.Atan2(y2 - y1, x2 - x1) * (180 / Math.PI));
+        return new Vector2(Mathf.Cos(degree * Mathf.Deg2Rad), Mathf.Sin(degree * Mathf.Deg2Rad));
     }
-    float pointDistance(float x1, float x2, float y1, float y2)
+    Vector2 pointDirection(float degree)
     {
-        Vector2 vectorTemp1 = new Vector2(x1, y1);
-        Vector2 vectorTemp2 = new Vector2(x2, y2);
+        return new Vector2(Mathf.Cos(degree * Mathf.Deg2Rad), Mathf.Sin(degree * Mathf.Deg2Rad));
+    }
+    float pointDistance(float x1, float y1, float x2, float y2)
+    {
+        return (float)Math.Sqrt(Math.Pow(x1 - x2, 2) + Math.Pow(y1 - y2, 2));// Euclidean distance formula 
 
-        Vector2.Distance(vectorTemp1, vectorTemp2);
-        return Vector2.Distance(vectorTemp1, vectorTemp2); 
     }
 
 
@@ -65,26 +62,30 @@ public class IKController : MonoBehaviour
 
 
         //Rule of Cosines will be here soon 
-        float cLength, bLength, aLength, alpha, beta, ax, ay, ix, iy, knee_mod, Ax, Ay, Bx, By, Cx, Cy, C2x, C2y;
+        float cLength, bLength, aLength, ax, ay, ix, iy, kneeMod, Ax, Ay, Bx, By, Cx, Cy, C2x, C2y;
         //cLenght is the distance from hip to foot
+
         Ax = hipX;
         Ay = hipY;
         bLength = lengthThigh;
         aLength = lengthCalf;
 
+
+        ix = 0;//temporary 
+        iy = 0;//temporary
+        Vector2 alpha, beta;
+
         //mo_co -> motion counter used for the oscillating animation of foot // move somewhere else
 
-        knee_mod = Ax - (Ax + lengthDirX(1, facingDirection)); //Direction the knee will bend for the "3D" knee
+        kneeMod = Ax - (Ax + lengthDirX(1, facingDirection)); //Direction the knee will bend for the "3D" knee
 
         if (legspeed > 0)
-            gait = (float)Math.Pow(legspeed * 2, 0.4); //how big the step is (you may want to tweak this!)
-                                                       //Note that the stride is not related to movement speed linearly, but instead uses a exponent of 0.4.
+            gait = (float)Math.Pow(legspeed * 2, 0.4); //how big the step is (may need tweaking)
+                                                       //Stride is not related to movement speed linearly, it uses a exponent of 0.4.
 
-        ///////////////////////////////////////////////////////////////////
-        //
+
         //Sin-> Horizontal movement, Cos-> Veritcal movement of the "foot"
-        //
-        //////////////////////////////////////////////////////////////////
+
 
         ax = x + lengthDirX(Convert.ToSingle((gait) * ((aLength + bLength) / 4) * (Math.Sin(Mathf.Deg2Rad * mo_co)) - ((legspeed * 1.25)) * 2), movingDirection);
         //x=location x
@@ -97,10 +98,23 @@ public class IKController : MonoBehaviour
 
         cLength = Math.Min(pointDistance(Ax, Ay, ax, ay), (aLength + bLength)); //distance between hip and foot, restricted to total limb length
 
+        Bx = Ax + lengthDirX(cLength, alpha); //foot x position
+
+        By = Ay + lengthDirY(cLength, alpha); //foot y position
+
+        beta = pointDirection((float)(Mathf.Rad2Deg * (Math.Acos(Math.Min(1, Math.Max(-1, (Math.Pow(bLength, 2) + Math.Pow(cLength, 2) - Math.Pow(aLength, 2)) / (2 * (bLength) * cLength))))))); //"Law of Cosines" to get angle of thigh, _c
+
+        Cx = Ax + lengthDirX(bLength, alpha - beta);//knee x position
+        Cy = Ay + lengthDirY(bLength, alpha - beta);//knee y position
 
 
+        C2x = ix + lengthDirX(pointDistance(ix, iy, Cx, Cy) * kneeMod, pointDirection(ix, iy, Cx, Cy));//"3D" knee x position
+        C2y = iy + lengthDirY(pointDistance(ix, iy, Cx, Cy) * kneeMod, pointDirection(ix, iy, Cx, Cy));//"3D" knee y position
 
 
+        ///////////////////////////////////////////////////////////////////////
+       //////////////////DRAWING THE SPRITES WILL GO HERE/////////////////////
+      ///////////////////////////////////////////////////////////////////////
     }
 
 
