@@ -11,6 +11,10 @@ public class IKController : MonoBehaviour
     float x = 0;
     float y = 0;
 
+    float hipx, hipy, motion_counter, thigh, calf, facingdirection, movingdirection;
+
+    GameObject player;
+
     Vector2 pointDirection(float x1, float x2, float y1, float y2)
     {
 
@@ -42,7 +46,23 @@ public class IKController : MonoBehaviour
 
     void createIK(float lengthCalf, float lengthThigh)
     {
-        //
+        hipx = x; //hip x location
+
+        hipy = y;//hip y location
+
+        motion_counter = 0; //counter for animating the leg movement
+
+        thigh = lengthCalf; //thigh length
+
+        calf = lengthThigh; //calf length
+
+        facingdirection = 0; //direction for knee (but also character in general)
+
+        legspeed = 0; //speed of movement
+
+        movingdirection = 0; //direction of movement
+
+        gait = 0; //size of step
 
     }
 
@@ -113,14 +133,27 @@ public class IKController : MonoBehaviour
 
 
         ///////////////////////////////////////////////////////////////////////
-       //////////////////DRAWING THE SPRITES WILL GO HERE/////////////////////
-      ///////////////////////////////////////////////////////////////////////
+        //////////////////DRAWING THE SPRITES WILL GO HERE/////////////////////
+        ///////////////////////////////////////////////////////////////////////
+        ///
+        Debug.DrawLine(alpha, new Vector2(hipX,hipY), Color.white, .5f);
+
+
     }
 
 
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         createIK(10, 8);//Crete the IK on Start
+    }
+
+    private void FixedUpdate()
+    {
+        x = player.transform.position.x;
+        y = player.transform.position.y;
+        Debug.Log("x: " + x + "/ y: " + y);
+        drawLeg(2,2,x,y);
     }
 
 }
