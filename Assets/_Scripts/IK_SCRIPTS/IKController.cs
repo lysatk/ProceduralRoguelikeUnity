@@ -4,20 +4,31 @@ using UnityEngine;
 
 public class IKController : MonoBehaviour
 {
-    float legspeed = 0.1f;
+    public float legspeed = 0f;
     float gait = 0f;
-    float movingDirection = 0;
-    float facingDirection = 180;
+    public float movingDirection = 0;
+    public float facingDirection = 180;
     float x = 0;
     float y = 0;
-    float mo_co = 0;// motion counter used for the oscillating animation of foot // move somewhere else
+    float mo_co = 1f;// motion counter used for the oscillating animation of foot // move somewhere else
     float hipx, hipy, motion_counter, thigh, calf, facingdirection, movingdirection;
 
+    Rigidbody2D rb;
+    public Texture2D tex;
+    private Sprite mySprite;
+    private SpriteRenderer sr;
     GameObject player;
 
-    float pointDirection(float x1, float x2, float y1, float y2)
+    //////////////////
+    ///PRAWDOPODOBNIE PRZYCZYN¥ JEST U¯YWANIE GLOBALNEGO TRANSFORM SPRÓBUJ PIEWR JAKOŒ LOKAL TO ZROBIÆ EJ
+    ///
+    ///
+    ///////////////
+    float pointDirection(float x1, float y1, float x2, float y2)
     {
-        return (float)(Math.Atan2(y2 - y1, x2 - x1) * (180 / Math.PI));
+        float xDiff = x2 - x1;
+        float yDiff = y2 - y1;
+        return (float)((float)Mathf.Rad2Deg * Math.Atan2(yDiff, xDiff));
     }
 
     float pointDistance(float x1, float y1, float x2, float y2)
@@ -56,7 +67,7 @@ public class IKController : MonoBehaviour
 
     }
 
-    void drawLeg(float lengthCalf, float lengthThigh, float hipX, float hipY)
+    void drawLeg(float lengthCalf, float lengthThigh, float hipX, float hipY, float off)
     {
         //**********A*********//
         //*********/|*********//
@@ -89,8 +100,8 @@ public class IKController : MonoBehaviour
         kneeMod = Ax - (Ax + lengthDirX(0.01f, facingDirection)); //Direction the knee will bend for the "3D" knee
 
         if (legspeed > 0)
-            gait = (float)Math.Pow(legspeed/2, 0.4); //how big the step is (may need tweaking)
-                                                   //Stride is not related to movement speed linearly, it uses a exponent of 0.4.
+            gait = (float)Math.Pow(legspeed / 2, 0.4); //how big the step is (may need tweaking)
+                                                       //Stride is not related to movement speed linearly, it uses a exponent of 0.4.
 
 
         //Sin-> Horizontal movement, Cos-> Veritcal movement of the "foot"
@@ -99,7 +110,7 @@ public class IKController : MonoBehaviour
         ax = x + lengthDirX(Convert.ToSingle((gait) * ((aLength + bLength) / 4) * (Mathf.Rad2Deg * Math.Sin(mo_co)) - ((legspeed * 1.25)) * 2), movingDirection);
         //x=location x
 
-        ay = (float)(y + ((gait) * ((aLength + bLength) / 6) * (Mathf.Rad2Deg * -Math.Cos((mo_co)) - 1f)));
+        ay = (float)(y + ((gait) * ((aLength + bLength) / 6) * (-Math.Cos((mo_co)) - 1f)));
         //y=location y
 
         ///IK CALCULATION///
@@ -130,14 +141,19 @@ public class IKController : MonoBehaviour
         ///////////////////////////////////////////////////////////////////////
 
         ///draw_line_width(Ax+lengthdir_x(argument5,facingdirection+90),Ay,C2x+lengthdir_x(argument5,facingdirection+90),C2y,3)
-        // Debug.DrawRay(new Vector2(Ax + lengthDirX(mo_co, facingDirection), Ay), new Vector2(C2x + lengthDirX(mo_co, facingDirection), C2y), Color.black, 2f);
-        Debug.DrawLine(new Vector2(hipX, hipY), new Vector2(Cx, Cy), Color.black);
+        ///draw_line_width(C2x+lengthdir_x(argument5,facingdirection+90),C2y,Bx+lengthdir_x(argument5,facingdirection+90),By,
+        Debug.DrawLine(new Vector2(Ax + lengthDirX(off, facingDirection + 90), Ay), new Vector2(C2x + lengthDirX(off, facingDirection + 90), C2y), Color.magenta);
+        Debug.DrawLine(new Vector2(C2x + lengthDirX(off, facingDirection + 90), C2y), new Vector2(Bx + lengthDirX(off, facingDirection + 90), By), Color.blue);
+
+
 
         //////////////move to another funtion perhaps???///////////////////////
+        ///
         mo_co += (float)(Math.Pow(legspeed, 0.4));//this is the counting variable for the animation
         mo_co = mo_co % 360;  //limit the variable between 0 and 360
 
         Debug.Log("Ax:" + Ax + " Ay:" + Ay + " ix" + ix + " iy:" + iy + " Bx" + Bx + " By" + By);
+        sr.sprite = mySprite;
     }
 
 
@@ -145,17 +161,28 @@ public class IKController : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         // createIK(0.10f, 0.8f);//Crete the IK on Start
+
+        sr = gameObject.GetComponent<SpriteRenderer>();
+        sr.color = new Color(0.9f, 0.9f, 0.9f, 1.0f);
+        rb = player.GetComponent<Rigidbody2D>();
+
     }
 
     private void FixedUpdate()
     {
-        x = player.transform.position.x;
-        y = player.transform.position.y;
+        facingDirection = pointDirection(x, Input.mousePosition.x, Input.mousePosition.y, y);
+        movingDirection = pointDirection(x, Input.mousePosition.x, Input.mousePosition.y, y);
+        x = player.transform.localPosition.x;////NIE WIEM CZY TO MA SENS
+        y = player.transform.localPosition.y;
         y -= .08f;
         Debug.Log("x: " + x + "/ y: " + y);
-       
-        drawLeg(0.1f, 0.12f, x, y);
-        //drawLeg(hipx, hipy, thigh, calf, motion_counter + 180, -4)
+
+
+
+        drawLeg(0.1f, 0.12f, x, y, 0.05f); drawLeg(0.1f, 0.12f, x, y, -0.05f);
+
+
+        //  transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 
 }
