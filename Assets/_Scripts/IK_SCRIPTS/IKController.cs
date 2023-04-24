@@ -10,14 +10,20 @@ public class IKController : MonoBehaviour
     public float facingDirection = 180;
     float x = 0;
     float y = 0;
-    float mo_co = 1f;// motion counter used for the oscillating animation of foot // move somewhere else
+    float motionCounter = 1f;// motion counter used for the oscillating animation of foot // move somewhere else
     float hipx, hipy, motion_counter, thigh, calf, facingdirection, movingdirection;
+
+
+    Camera mainCam;
+
 
     Rigidbody2D rb;
     public Texture2D tex;
     private Sprite mySprite;
     private SpriteRenderer sr;
     GameObject player;
+
+    Vector2 mousePos;
 
     //////////////////
     ///PRAWDOPODOBNIE PRZYCZYN¥ JEST U¯YWANIE GLOBALNEGO TRANSFORM SPRÓBUJ PIEWR JAKOŒ LOKAL TO ZROBIÆ EJ
@@ -29,6 +35,7 @@ public class IKController : MonoBehaviour
         float xDiff = x2 - x1;
         float yDiff = y2 - y1;
         return (float)((float)Mathf.Rad2Deg * Math.Atan2(yDiff, xDiff));
+        
     }
 
     float pointDistance(float x1, float y1, float x2, float y2)
@@ -90,27 +97,23 @@ public class IKController : MonoBehaviour
         Ay = hipY;
         bLength = lengthThigh;
         aLength = lengthCalf;
-
-
-        ix = 0;//temporary 
-        iy = 0;//temporary
         float alpha, beta;
 
 
         kneeMod = Ax - (Ax + lengthDirX(0.01f, facingDirection)); //Direction the knee will bend for the "3D" knee
 
         if (legspeed > 0)
-            gait = (float)Math.Pow(legspeed / 2, 0.4); //how big the step is (may need tweaking)
-                                                       //Stride is not related to movement speed linearly, it uses a exponent of 0.4.
+            gait = (float)Math.Pow(legspeed * 0.25f, 0.4f); //how big the step is (may need tweaking)
+                                                            //Stride is not related to movement speed linearly, it uses a exponent of 0.4.
 
 
         //Sin-> Horizontal movement, Cos-> Veritcal movement of the "foot"
 
 
-        ax = x + lengthDirX(Convert.ToSingle((gait) * ((aLength + bLength) / 4) * (Mathf.Rad2Deg * Math.Sin(mo_co)) - ((legspeed * 1.25)) * 2), movingDirection);
+        ax = x + lengthDirX(Convert.ToSingle((gait) * ((aLength + bLength) / 4) * (Mathf.Rad2Deg * Math.Sin(motionCounter)) - ((legspeed * 1.25)) * 2), movingDirection);
         //x=location x
 
-        ay = (float)(y + ((gait) * ((aLength + bLength) / 6) * (-Math.Cos((mo_co)) - 1f)));
+        ay = (float)(y + ((gait) * ((aLength + bLength) / 6) * (-Math.Cos((motionCounter)) - 1f)));
         //y=location y
 
         ///IK CALCULATION///
@@ -119,11 +122,10 @@ public class IKController : MonoBehaviour
         cLength = Math.Min(pointDistance(Ax, Ay, ax, ay), (aLength + bLength)); //distance between hip and foot, restricted to total limb length
 
         Bx = Ax + lengthDirX(cLength, alpha); //foot x position
-
         By = Ay + lengthDirY(cLength, alpha); //foot y position
+
         beta = (float)(Mathf.Rad2Deg * (Math.Acos(Math.Min(1, Math.Max(-1, (Math.Pow(bLength, 2) + Math.Pow(cLength, 2) - Math.Pow(aLength, 2)) / (2 * (bLength) * cLength))))));
 
-        // beta = pointDirection(betaDeg); //"Law of Cosines" to get angle of thigh, _c
         Cx = Ax + lengthDirX(bLength, alpha - beta);//knee x position
         Cy = Ay + lengthDirY(bLength, alpha - beta);//knee y position
 
@@ -137,7 +139,7 @@ public class IKController : MonoBehaviour
 
 
         ///////////////////////////////////////////////////////////////////////
-        //////////////////DRAWING THE SPRITES WILL GO HERE/////////////////////
+        //////////////////DRAWING THE SPRITES (might move to ext)///////////////
         ///////////////////////////////////////////////////////////////////////
 
         ///draw_line_width(Ax+lengthdir_x(argument5,facingdirection+90),Ay,C2x+lengthdir_x(argument5,facingdirection+90),C2y,3)
@@ -147,33 +149,41 @@ public class IKController : MonoBehaviour
 
 
 
-        //////////////move to another funtion perhaps???///////////////////////
-        ///
-        mo_co += (float)(Math.Pow(legspeed, 0.4));//this is the counting variable for the animation
-        mo_co = mo_co % 360;  //limit the variable between 0 and 360
 
-        Debug.Log("Ax:" + Ax + " Ay:" + Ay + " ix" + ix + " iy:" + iy + " Bx" + Bx + " By" + By);
-        sr.sprite = mySprite;
+
+        Debug.Log("Ax:" + Ax + " Ay:" + Ay + " ix" + ix + " iy:" + iy + " Bx" + Bx + " By" + By + "Cx:" + Cx + " Cy:" + Cy + " C2x" + C2x + " C2y:" + C2y);
+    //    sr.sprite = mySprite;//drawing sprite not used now
     }
 
-
+    void motionCounterStep()
+    {
+        motionCounter += (float)(Math.Pow(legspeed, 0.4));//this is the counting variable for the animation
+        motionCounter = motionCounter % 360;  //limit the variable between 0 and 360
+    }
     void Start()
     {
+        mainCam = Camera.main;
         player = GameObject.FindGameObjectWithTag("Player");
         // createIK(0.10f, 0.8f);//Crete the IK on Start
 
         sr = gameObject.GetComponent<SpriteRenderer>();
         sr.color = new Color(0.9f, 0.9f, 0.9f, 1.0f);
         rb = player.GetComponent<Rigidbody2D>();
+        if (legspeed > 0.1)
+        {
+            motionCounterStep();
+        }
 
     }
 
     private void FixedUpdate()
     {
-        facingDirection = pointDirection(x, Input.mousePosition.x, Input.mousePosition.y, y);
-        movingDirection = pointDirection(x, Input.mousePosition.x, Input.mousePosition.y, y);
-        x = player.transform.localPosition.x;////NIE WIEM CZY TO MA SENS
-        y = player.transform.localPosition.y;
+        x = player.transform.position.x;////NIE WIEM CZY TO MA SENS
+        y = player.transform.position.y;
+
+        mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
+        facingDirection = pointDirection(x, y, mousePos.x, mousePos.y);
+        movingDirection = pointDirection(x, y, mousePos.x, mousePos.y);
         y -= .08f;
         Debug.Log("x: " + x + "/ y: " + y);
 
@@ -182,7 +192,10 @@ public class IKController : MonoBehaviour
         drawLeg(0.1f, 0.12f, x, y, 0.05f); drawLeg(0.1f, 0.12f, x, y, -0.05f);
 
 
+
         //  transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
+
+
 
 }
