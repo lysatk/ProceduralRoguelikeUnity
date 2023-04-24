@@ -2199,6 +2199,10 @@ PrefabInstance:
       propertyPath: m_GravityScale
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8625112190653593689, guid: 76f2a9e4edbc87c40ab109994159960c, type: 3}
+      propertyPath: legspeed
+      value: 0.64
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 76f2a9e4edbc87c40ab109994159960c, type: 3}
 --- !u!1 &1545835403
