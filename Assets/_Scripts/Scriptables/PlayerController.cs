@@ -17,8 +17,6 @@ public class PlayerController : MonoBehaviour
 
     bool canMove = true;
 
-    //stats.CurrentHp -= Convert.ToInt32(dmg * stats.Armor);
-
     // Start is called before the first frame update
     void Start()
     {
@@ -33,61 +31,19 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (canMove)
+
+        rb.velocity = movementInput * moveSpeed;
+        if (movementInput.x < 0)
         {
-            // If movement input is not 0, try to move
-            if (movementInput != Vector2.zero)
-            {
-
-                bool success = TryMove(movementInput);
-
-                if (!success)
-                {
-                    success = TryMove(new Vector2(movementInput.x, 0));
-                }
-
-                if (!success)
-                {
-                    _ = TryMove(new Vector2(0, movementInput.y));
-                }
-
-            }
-
-            // Set direction of sprite to movement direction
-            if (movementInput.x < 0)
-            {
-                spriteRenderer.flipX = false;//left
-            }
-            else if (movementInput.x > 0)
-            {
-                spriteRenderer.flipX = true;//right
-            }
+            spriteRenderer.flipX = false;//left
+        }
+        else if (movementInput.x > 0)
+        {
+            spriteRenderer.flipX = true;//right
         }
     }
 
-    private bool TryMove(Vector2 direction)
-    {
-        if (direction != Vector2.zero)
-        {
-            // Check for potential collisions
-            int count = rb.Cast(
-                direction, // X and Y values between -1 and 1 that represent the direction from the body to look for collisions
-                movementFilter, // The settings that determine where a collision can occur on such as layers to collide with
-                castCollisions, // List of collisions to store the found collisions into after the Cast is finished
-                moveSpeed * Time.fixedDeltaTime + collisionOffset); // The amount to cast equal to the movement plus an offset
 
-            if (count == 0)
-            {
-                rb.MovePosition(rb.position + moveSpeed * Time.fixedDeltaTime * direction);
-                return true;
-            }
-
-            return false;
-        }
-
-        // Can't move if there's no direction to move in
-        return false;
-    }
 
     public void LockMovement()
     {
