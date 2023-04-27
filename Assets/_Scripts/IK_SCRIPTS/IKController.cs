@@ -27,14 +27,23 @@ public class IKController : MonoBehaviour
 
     //////////////////
     ///PRAWDOPODOBNIE PRZYCZYN¥ JEST U¯YWANIE GLOBALNEGO TRANSFORM SPRÓBUJ PIEWR JAKOŒ LOKAL TO ZROBIÆ EJ
-    ///
-    ///
+    ///+
+    ///K¥T OD 0 360 W RÓDLE A TU OD -180 DO 180
+    /// 
     ///////////////
+    ///
+
+
+    public static float Remap(float value, float from1, float to1, float from2, float to2)
+    {
+        return (value - from1) / (to1 - from1) * (to2 - from2) + from2;
+    }
     float pointDirection(float x1, float y1, float x2, float y2)
+
     {
         float xDiff = x2 - x1;
         float yDiff = y2 - y1;
-        return (float)((float)Mathf.Rad2Deg * Math.Atan2(yDiff, xDiff));
+        return Remap((float)((float)Math.Atan2(yDiff, xDiff)), -180f, 0f, 180f, 360f);
 
     }
 
@@ -95,23 +104,23 @@ public class IKController : MonoBehaviour
 
         Ax = hipX;
         Ay = hipY;
-        bLength = lengthThigh;
-        aLength = lengthCalf;
+        aLength = lengthThigh;
+        bLength = lengthCalf;
         float alpha, beta;
 
 
         kneeMod = Ax - (Ax + lengthDirX(0.1f, facingDirection)); //Direction the knee will bend for the "3D" knee
 
         if (legspeed > 0)
-            gait = (float)Math.Pow(legspeed * 0.25f, 0.4f); //how big the step is (may need tweaking)
-                                                            //Stride is not related to movement speed linearly, it uses a exponent of 0.4.
+            gait = (float)Math.Pow(legspeed * 25f, 0.0004f); //how big the step is (may need tweaking)
+                                                             //Stride is not related to movement speed linearly, it uses a exponent of 0.4.
 
 
         //Sin-> Horizontal movement, Cos-> Veritcal movement of the "foot"
-        ax = x + lengthDirX(Convert.ToSingle((gait) * ((aLength + bLength) / 4) * (-Math.Sin(Mathf.Deg2Rad*motionCounter)) - ((legspeed * 1.25f)) * 2), movingDirection);
+        ax = x + lengthDirX(Convert.ToSingle((gait) * ((aLength + bLength) / 4) * (-Math.Sin(Mathf.Deg2Rad * motionCounter)) - ((legspeed * 1.25f)) * 2), movingDirection);
         //x=location x
 
-        ay = (float)(y + ((gait) * ((aLength + bLength) / 6) * (Mathf.Rad2Deg * Math.Cos((motionCounter)) - 1f)));
+        ay = (float)(y + ((gait) * ((aLength + bLength) / 6) * (Math.Cos((motionCounter)) - 1f)));
         //y=location y
 
         ///IK CALCULATION///
@@ -121,7 +130,7 @@ public class IKController : MonoBehaviour
         Bx = Ax + lengthDirX(cLength, alpha); //foot x position
         By = Ay + lengthDirY(cLength, alpha); //foot y position
 
-        beta = (float)(Mathf.Rad2Deg * (Math.Acos(Math.Min(1, Math.Max(-1, (Math.Pow(bLength, 2) + Math.Pow(cLength, 2) - Math.Pow(aLength, 2)) / (2 * (bLength) * cLength))))));
+        beta = (float)((Math.Acos(Math.Min(1, Math.Max(-1, (Math.Pow(bLength, 2) + Math.Pow(cLength, 2) - Math.Pow(aLength, 2)) / (2 * (bLength) * cLength))))));
 
         Cx = Ax + lengthDirX(bLength, alpha - beta);//knee x position
         Cy = Ay + lengthDirY(bLength, alpha - beta);//knee y position
@@ -141,12 +150,12 @@ public class IKController : MonoBehaviour
 
         ///draw_line_width(Ax+lengthdir_x(argument5,facingdirection+90),Ay,C2x+lengthdir_x(argument5,facingdirection+90),C2y)
         ///draw_line_width(C2x+lengthdir_x(argument5,facingdirection+90),C2y,Bx+lengthdir_x(argument5,facingdirection+90),By)
-        Debug.DrawLine(new Vector2(Ax + lengthDirX(off, facingDirection-90), Ay), new Vector2(C2x + lengthDirX(off, facingDirection-90), C2y), Color.magenta);
-        Debug.DrawLine(new Vector2(C2x + lengthDirX(off, facingDirection-90), C2y), new Vector2(Bx + lengthDirX(off, facingDirection-90), By), Color.blue);
+        Debug.DrawLine(new Vector2(Ax + lengthDirX(off, facingDirection +90), Ay), new Vector2(C2x + lengthDirX(off, facingDirection +90), C2y), Color.magenta);
+        Debug.DrawLine(new Vector2(C2x + lengthDirX(off, facingDirection +90), C2y), new Vector2(Bx + lengthDirX(off, facingDirection +90), By), Color.blue);
 
 
 
-
+        Debug.Log(facingDirection);
 
         Debug.Log("Ax:" + Ax + " Ay:" + Ay + " ix" + ix + " iy:" + iy + " Bx" + Bx + " By" + By + "Cx:" + Cx + " Cy:" + Cy + " C2x" + C2x + " C2y:" + C2y);
         //    sr.sprite = mySprite;//drawing sprite not used now
@@ -155,7 +164,7 @@ public class IKController : MonoBehaviour
     void motionCounterStep()
     {
         motionCounter += (float)(Math.Pow(legspeed, 0.4));//this is the counting variable for the animation
-        motionCounter = motionCounter % 90;  //limit the variable between 0 and 360
+        motionCounter = motionCounter % 360;  //limit the variable between 0 and 360
     }
     void Start()
     {
@@ -185,7 +194,7 @@ public class IKController : MonoBehaviour
 
 
 
-        drawLeg(0.06f, 0.08f, x, y, 0.05f); drawLeg(0.06f, 0.08f, x, y, -0.05f);
+        drawLeg(0.06f, 0.1f, x, y, 0.05f); drawLeg(0.06f, 0.1f, x, y, -0.05f);
 
         if (legspeed > 0.001f)
         {
