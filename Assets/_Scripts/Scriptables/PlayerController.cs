@@ -6,14 +6,13 @@ using UnityEngine.InputSystem;
 // Takes and handles input and movement for a player character
 public class PlayerController : MonoBehaviour
 {
-    public float moveSpeed = 1f;
+    public float moveSpeed = 3f;
     public float collisionOffset = 0.05f;
     public ContactFilter2D movementFilter;
 
     Vector2 movementInput;
     SpriteRenderer spriteRenderer;
     Rigidbody2D rb;
-    List<RaycastHit2D> castCollisions = new();
 
     bool canMove = true;
 
@@ -32,7 +31,7 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
 
-        rb.velocity = movementInput * moveSpeed;
+        rb.AddForce(  movementInput * moveSpeed);
         if (movementInput.x < 0)
         {
             spriteRenderer.flipX = false;//left
