@@ -43,7 +43,9 @@ public class IKController : MonoBehaviour
     {
         float xDiff = x2 - x1;
         float yDiff = y2 - y1;
-        return Remap((float)((float)Mathf.Rad2Deg*Math.Atan2(yDiff, xDiff)), -180f, 0f, 180f, 360f);
+        return (float)Math.Atan2(yDiff, xDiff);
+
+        // return Remap((float)((float)Mathf.Rad2Deg*Math.Atan2(yDiff, xDiff)), -180f, 0f, 180f, 360f);
 
     }
 
@@ -55,12 +57,12 @@ public class IKController : MonoBehaviour
 
     float lengthDirX(float len, float dir)// lenght, direction
     {
-        return (float)(len * Math.Cos(dir));
+        return (float)(len * Math.Cos(Mathf.Deg2Rad*dir));
     }
 
     float lengthDirY(float len, float dir)// lenght, direction
     {
-        return (float)(len * Math.Sin(dir));
+        return (float)(len * Math.Sin(Mathf.Deg2Rad * dir));
     }
 
     //void createIK(float lengthCalf, float lengthThigh) //will be used later for proper initialization of variables needed for IK calculations
@@ -109,10 +111,10 @@ public class IKController : MonoBehaviour
         float alpha, beta;
 
 
-        kneeMod = Ax - (Ax + lengthDirX(0.1f, facingDirection)); //Direction the knee will bend for the "3D" knee
+        kneeMod = Ax - (Ax + lengthDirX(1f, facingDirection)); //Direction the knee will bend for the "3D" knee
 
         if (legspeed > 0)
-            gait = (float)Math.Pow(legspeed * 2.5f, 0.0004f); //how big the step is (may need tweaking)
+            gait = (float)Math.Pow(legspeed *1.25, 0.4f); //how big the step is (may need tweaking)
                                                              //Stride is not related to movement speed linearly, it uses a exponent of 0.4.
 
 
@@ -145,7 +147,7 @@ public class IKController : MonoBehaviour
         //////////////////DRAWING THE SPRITES (might move to ext)////////////
         /////////////////////////////////////////////////////////////////////
 
-        float temp = Mathf.Rad2Deg * (facingDirection )-90;
+        float temp =  facingDirection -Mathf.PI;
 
         ///draw_line_width(Ax+lengthdir_x(argument5,facingdirection+90),Ay,C2x+lengthdir_x(argument5,facingdirection+90),C2y)
         ///draw_line_width(C2x+lengthdir_x(argument5,facingdirection+90),C2y,Bx+lengthdir_x(argument5,facingdirection+90),By)
