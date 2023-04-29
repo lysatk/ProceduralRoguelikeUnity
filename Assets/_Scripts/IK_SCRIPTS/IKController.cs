@@ -57,12 +57,12 @@ public class IKController : MonoBehaviour
 
     float lengthDirX(float len, float dir)// lenght, direction
     {
-        return (float)(len * Math.Cos(Mathf.Deg2Rad*dir));
+        return (float)(len * Math.Cos(dir));
     }
 
     float lengthDirY(float len, float dir)// lenght, direction
     {
-        return (float)(len * Math.Sin(Mathf.Deg2Rad * dir));
+        return (float)(len * Math.Sin( dir));
     }
 
     //void createIK(float lengthCalf, float lengthThigh) //will be used later for proper initialization of variables needed for IK calculations
@@ -132,7 +132,7 @@ public class IKController : MonoBehaviour
         Bx = Ax + lengthDirX(cLength, alpha); //foot x position
         By = Ay + lengthDirY(cLength, alpha); //foot y position
 
-        beta = (float)(Mathf.Rad2Deg*(Math.Acos(Math.Min(1, Math.Max(-1, (Math.Pow(bLength, 2) + Math.Pow(cLength, 2) - Math.Pow(aLength, 2)) / (2 * (bLength) * cLength))))));
+        beta = (float)((Math.Acos(Math.Min(1, Math.Max(-1, (Math.Pow(bLength, 2) + Math.Pow(cLength, 2) - Math.Pow(aLength, 2)) / (2 * (bLength) * cLength))))));
 
         Cx = Ax + lengthDirX(bLength, alpha - beta);//knee x position
         Cy = Ay + lengthDirY(bLength, alpha - beta);//knee y position
@@ -147,7 +147,7 @@ public class IKController : MonoBehaviour
         //////////////////DRAWING THE SPRITES (might move to ext)////////////
         /////////////////////////////////////////////////////////////////////
 
-        float temp =  facingDirection -Mathf.PI;
+        float temp =  facingDirection +Mathf.PI/2;
 
         ///draw_line_width(Ax+lengthdir_x(argument5,facingdirection+90),Ay,C2x+lengthdir_x(argument5,facingdirection+90),C2y)
         ///draw_line_width(C2x+lengthdir_x(argument5,facingdirection+90),C2y,Bx+lengthdir_x(argument5,facingdirection+90),By)
@@ -164,9 +164,9 @@ public class IKController : MonoBehaviour
 
     void motionCounterStep()
     {
-        motionCounter += (float)(Math.Pow(legspeed, 0.4));//this is the counting variable for the animation
-        motionCounter = motionCounter % 360;  //limit the variable between 0 and 360
-        motionCounter *= Mathf.Deg2Rad;    
+        motionCounter += (float)(Math.Pow(legspeed, 0.04));//this is the counting variable for the animation
+        motionCounter = motionCounter % (Mathf.PI*2);  //limit the variable between 0 and 360
+     //   motionCounter *= Mathf.Deg2Rad;    
     }
     void Start()
     {
@@ -189,7 +189,7 @@ public class IKController : MonoBehaviour
 
         mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
         facingDirection = pointDirection(x, y, mousePos.x, mousePos.y);
-       // movingDirection = pointDirection(x, y, mousePos.x, mousePos.y);
+       movingDirection = pointDirection(x, y, mousePos.x, mousePos.y);
         y -= .08f;
         legspeed = rb.velocity.magnitude;
 
