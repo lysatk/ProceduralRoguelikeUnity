@@ -2111,11 +2111,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7069621003308234956, guid: 76f2a9e4edbc87c40ab109994159960c, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 16
+      value: 0.16
       objectReference: {fileID: 0}
     - target: {fileID: 7069621003308234956, guid: 76f2a9e4edbc87c40ab109994159960c, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 16
+      value: 0.16
       objectReference: {fileID: 0}
     - target: {fileID: 7859230366371754204, guid: 76f2a9e4edbc87c40ab109994159960c, type: 3}
       propertyPath: m_Size.x
@@ -2131,10 +2131,14 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 68fa2cb0fcabdd446a49945e1c83fbab, type: 3}
     - target: {fileID: 7859230366371754204, guid: 76f2a9e4edbc87c40ab109994159960c, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7859230366371754204, guid: 76f2a9e4edbc87c40ab109994159960c, type: 3}
       propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8328539516825410194, guid: 76f2a9e4edbc87c40ab109994159960c, type: 3}
+      propertyPath: m_Mass
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8328539516825410194, guid: 76f2a9e4edbc87c40ab109994159960c, type: 3}
@@ -2143,7 +2147,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8328539516825410194, guid: 76f2a9e4edbc87c40ab109994159960c, type: 3}
       propertyPath: m_LinearDrag
-      value: 1.5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8328539516825410194, guid: 76f2a9e4edbc87c40ab109994159960c, type: 3}
       propertyPath: m_AngularDrag
