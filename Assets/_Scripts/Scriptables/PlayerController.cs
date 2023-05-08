@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 // Takes and handles input and movement for a player character
 public class PlayerController : MonoBehaviour
 {
-    public float moveSpeed = 3f;
+    public float moveSpeed = 0.7f;
     public float collisionOffset = 0.05f;
     public ContactFilter2D movementFilter;
 
