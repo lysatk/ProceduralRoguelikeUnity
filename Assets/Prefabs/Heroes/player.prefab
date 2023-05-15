@@ -179,7 +179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23ab7d98e1734d7439ceef798b9051d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1
+  moveSpeed: 1.03
   collisionOffset: 0.05
   movementFilter:
     useTriggers: 0
@@ -252,6 +252,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f75c9e28e919ff498dac9fe32b939b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  legspeed: 0
+  movingDirection: 0
+  facingDirection: 0
+  motionCounter: 0
   tex: {fileID: 10305, guid: 0000000000000000f000000000000000, type: 0}
 --- !u!212 &1792614921878744786
 SpriteRenderer:

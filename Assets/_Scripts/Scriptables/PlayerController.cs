@@ -16,11 +16,18 @@ public class PlayerController : MonoBehaviour
 
     bool canMove = true;
 
-    // Start is called before the first frame update
+
+    [SerializeField]
+    public GameObject healthBarManagerObj;
+    HealthBarManager healthBar;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        healthBar = FindObjectOfType<HealthBarManager>();
+        healthBar.SetMaxHealth(100);
+        healthBar.SetHealth(50);
     }
 
     void OnMove(InputValue movementValue)
@@ -54,4 +61,5 @@ public class PlayerController : MonoBehaviour
     {
         canMove = true;
     }
+
 }
