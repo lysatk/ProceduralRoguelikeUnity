@@ -1,27 +1,32 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Tilemaps;
+using System;
 
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
 
 public class LevelGenerator : MonoBehaviour {
+
 	[Tooltip("The Tilemap to draw onto")]
 	public Tilemap tilemap;
+
 	[Tooltip("The Tile to draw (use a RuleTile for best results)")]
 	public TileBase tile;
 
+	[Tooltip("The Tile to be used as a spawnerPoint")]
+	public TileBase tileSpawner;
+
 	[Tooltip("Width of our map")]
 	public int width;
+
 	[Tooltip("Height of our map")]
 	public int height;
 	
 	[Tooltip("The settings of our map")]
 	public MapSettings mapSetting;
-	
-	private void Update()
+
+    void Update()
 	{
 		if (Input.GetKeyDown(KeyCode.N))
 		{
@@ -31,11 +36,13 @@ public class LevelGenerator : MonoBehaviour {
 	}
 
 	[ExecuteInEditMode]
-	public void GenerateMap()
+	public int[,] GenerateMap()
 	{
 		ClearMap();
-		int[,] map = new int[width, height];
+
+        int[,] map = new int[width, height];
 		float seed;
+
 		if (mapSetting.randomSeed)
 		{
 			seed = Time.time;
@@ -51,14 +58,18 @@ public class LevelGenerator : MonoBehaviour {
 				//Next generate the random walk cave
 				map = MapFunctions.RandomWalkCave(map, seed, mapSetting.clearAmount);		
 		//Render the result
-		MapFunctions.RenderMap(map, tilemap, tile);
-	}
+		MapFunctions.RenderMap(map, tilemap, tile,tileSpawner);
+
+		return map;
+    }
+
 	public void ClearMap()
 	{
 		tilemap.ClearAllTiles();
 	}
 }
 
+#if UNITY_EDITOR
 [CustomEditor(typeof(LevelGenerator))]
 public class LevelGeneratorEditor : Editor
 {
@@ -77,7 +88,7 @@ public class LevelGeneratorEditor : Editor
 
 			if (GUILayout.Button("Generate"))
 			{
-				levelGen.GenerateMap();
+				//levelGen.GenerateMap();
 			}
 
 			if (GUILayout.Button("Clear"))
@@ -87,3 +98,4 @@ public class LevelGeneratorEditor : Editor
 		}
 	}
 }
+#endif
