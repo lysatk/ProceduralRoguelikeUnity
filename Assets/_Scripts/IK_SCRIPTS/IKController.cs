@@ -103,10 +103,10 @@ public class IKController : MonoBehaviour
         float alpha, beta;
 
 
-        kneeMod = Ax - (Ax - lengthDirX(0.1f, facingDirection)); //Direction the knee will bend for the "3D" knee
+        kneeMod = Ax - (Ax - lengthDirX(1f, facingDirection)); //Direction the knee will bend for the "3D" knee
 
         if (legspeed > 0)
-            gait = 2 * (float)Math.Pow(legspeed * 3, 0.4f); //how big the step is (may need tweaking)
+            gait = 2 * (float)Math.Pow(legspeed * 3, 4f); //how big the step is (may need tweaking)
                                                             //Stride is not related to movement speed linearly, it uses a exponent of 0.4.
 
 
@@ -140,7 +140,7 @@ public class IKController : MonoBehaviour
         /////////////////////////////////////////////////////////////////////
 
         float temp = facingDirection + Mathf.PI * 2;
-        Debug.DrawLine(new Vector3(Ax + 0.03f, Ay, 0), new Vector3(Ax - 0.03f, Ay, 0));
+        Debug.DrawLine(new Vector3(Ax + 0.3f, Ay, 0), new Vector3(Ax - 0.3f, Ay, 0));
 
 
         Debug.DrawLine(new Vector2(Ax + lengthDirX(off, temp), Ay), new Vector2(C2x + lengthDirX(off, temp), C2y), Color.magenta);
