@@ -1,12 +1,12 @@
 fileFormatVersion: 2
-guid: dbc12410160729c459f87930a0a99739
+guid: 71e450ccf4e56ca47ab0b2e8e5915989
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
   - tilemap: {instanceID: 0}
-  - tile: {fileID: 11400000, guid: cd7f5fc6f5067164285dd56252519a45, type: 2}
-  - mapSetting: {fileID: 11400000, guid: 530a8acbf15cb0649a3c961fc68e6433, type: 2}
+  - tile: {instanceID: 0}
+  - mapSetting: {fileID: 11400000, guid: 4f8f9db741539ab43834170d360b72d4, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

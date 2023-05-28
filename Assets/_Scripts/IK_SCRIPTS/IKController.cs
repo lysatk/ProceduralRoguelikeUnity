@@ -189,7 +189,7 @@ public class IKController : MonoBehaviour
             legspeed = (float)Math.Min(rb.velocity.magnitude, 2);
             movingDirection = facingDirection;
         }
-        drawLeg(0.08f, 0.08f, x, y, 0.03f, motionCounter); drawLeg(0.08f, 0.08f, x, y, -0.03f, (float)(motionCounter + Mathf.PI / 2));
+        drawLeg(0.8f, 0.8f, x, y, 0.3f, motionCounter); drawLeg(0.8f, 0.8f, x, y, -0.3f, (float)(motionCounter + Mathf.PI / 2));
 
 
     }

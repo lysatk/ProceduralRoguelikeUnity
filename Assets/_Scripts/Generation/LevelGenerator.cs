@@ -6,8 +6,7 @@ using System;
 using UnityEditor;
 #endif
 
-public class LevelGenerator : MonoBehaviour
-{
+public class LevelGenerator : MonoBehaviour {
 
 	[Tooltip("The Tilemap to draw onto")]
 	public Tilemap tilemap;
@@ -23,11 +22,11 @@ public class LevelGenerator : MonoBehaviour
 
 	[Tooltip("Height of our map")]
 	public int height;
-
+	
 	[Tooltip("The settings of our map")]
 	public MapSettings mapSetting;
 
-	void Update()
+    void Update()
 	{
 		if (Input.GetKeyDown(KeyCode.N))
 		{
@@ -41,7 +40,7 @@ public class LevelGenerator : MonoBehaviour
 	{
 		ClearMap();
 
-		int[,] map = new int[width, height];
+        int[,] map = new int[width, height];
 		float seed;
 
 		if (mapSetting.randomSeed)
@@ -54,15 +53,15 @@ public class LevelGenerator : MonoBehaviour
 		}
 
 		//Generate the map depending omapSen the algorithm selected
-		//First generate our array
-		map = MapFunctions.GenerateArray(width, height, false);
-		//Next generate the random walk cave
-		map = MapFunctions.RandomWalkCave(map, seed, mapSetting.clearAmount);
+				//First generate our array
+				map = MapFunctions.GenerateArray(width, height, false);
+				//Next generate the random walk cave
+				map = MapFunctions.RandomWalkCave(map, seed, mapSetting.clearAmount);		
 		//Render the result
-		MapFunctions.RenderMap(map, tilemap, tile, tileSpawner);
+		MapFunctions.RenderMap(map, tilemap, tile,tileSpawner);
 
 		return map;
-	}
+    }
 
 	public void ClearMap()
 	{
@@ -70,6 +69,7 @@ public class LevelGenerator : MonoBehaviour
 	}
 }
 
+#if UNITY_EDITOR
 [CustomEditor(typeof(LevelGenerator))]
 public class LevelGeneratorEditor : Editor
 {
@@ -79,7 +79,7 @@ public class LevelGeneratorEditor : Editor
 
 		//Reference to our script
 		LevelGenerator levelGen = (LevelGenerator)target;
-
+		
 		//Only show the mapsettings UI if we have a reference set up in the editor
 		if (levelGen.mapSetting != null)
 		{
@@ -88,7 +88,7 @@ public class LevelGeneratorEditor : Editor
 
 			if (GUILayout.Button("Generate"))
 			{
-				levelGen.GenerateMap();
+				//levelGen.GenerateMap();
 			}
 
 			if (GUILayout.Button("Clear"))
@@ -98,3 +98,4 @@ public class LevelGeneratorEditor : Editor
 		}
 	}
 }
+#endif

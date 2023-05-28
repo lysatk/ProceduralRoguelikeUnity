@@ -59,7 +59,7 @@ public class MapFunctions
         {
             for (int y = 0; y < map.GetUpperBound(1); y++) //Loop through the height of the map
             {
-                if (map[x, y] == 0 || map[x, y] == 3) // 1 = tile, 0 = no tile,
+                if (map[x, y] == 0 || map[x, y]==3) // 1 = tile, 0 = no tile,
                 {
                     tilemap.SetTile(new Vector3Int(x, y, 0), null);
                     tilemap.SetTile(new Vector3Int(x, y, 0), null);
@@ -306,26 +306,26 @@ public class MapFunctions
 
 
         return map;
-    }
+    } 
 
 
-    /// <summary>
-    /// Same as the Render function but finds spawners and add them in correct spots
-    /// </summary>
-    /// <param name="map">Map that we want to draw</param>
-    static private bool CheckSurroundedByZeroes(int x, int y, int[,] map)
+/// <summary>
+/// Same as the Render function but finds spawners and add them in correct spots
+/// </summary>
+/// <param name="map">Map that we want to draw</param>
+static private bool CheckSurroundedByZeroes(int x, int y, int[,] map)
+{
+    int numRows = map.GetUpperBound(0);
+    int numCols = map.GetUpperBound(1);
+
+    // Check if the element is at a border position
+    if (x == 0 || y == 0 || x == numRows - 1 || y == numCols - 1)
     {
-        int numRows = map.GetUpperBound(0);
-        int numCols = map.GetUpperBound(1);
-
-        // Check if the element is at a border position
-        if (x == 0 || y == 0 || x == numRows - 1 || y == numCols - 1)
-        {
-            return false;
-        }
-
-        // Check if the element is surrounded by zeroes
-        return (map[x - 1, y] == 0 && map[x + 1, y] == 0 && map[x, y - 1] == 0 && map[x, y + 1] == 0 &&
-                map[x - 1, y - 1] == 0 && map[x - 1, y + 1] == 0 && map[x + 1, y + 1] == 0 && map[x + 1, y - 1] == 0);
+        return false;
     }
+
+    // Check if the element is surrounded by zeroes
+    return (map[x - 1, y] == 0 && map[x + 1, y] == 0 && map[x, y - 1] == 0 && map[x, y + 1] == 0 &&
+            map[x - 1, y - 1] == 0 && map[x - 1, y + 1] == 0 && map[x + 1, y + 1] == 0 && map[x + 1, y - 1] == 0);
 }
+} 

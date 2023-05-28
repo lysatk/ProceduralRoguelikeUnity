@@ -168,7 +168,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ee6eaf7eca0afc84c8abfb347e12780f, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -297,8 +297,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 113.362915, y: -108.915436}
-  m_SizeDelta: {x: 2.9224, y: 3.1645}
+  m_AnchoredPosition: {x: 108.74609, y: -108.915436}
+  m_SizeDelta: {x: 2.7977, y: 3.1645}
   m_Pivot: {x: 1, y: 0}
 --- !u!222 &93546769161026140
 CanvasRenderer:
@@ -368,7 +368,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 93546769161026137}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e00becf1f007f9640a34560fc3f63400, type: 3}
+  m_Script: {fileID: 11500000, guid: 41d3c95cd16155649817588c4087f9bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 93546769161026141}
