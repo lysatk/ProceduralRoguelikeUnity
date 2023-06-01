@@ -185,8 +185,9 @@ public class MapFunctions
                         {
                             //Change it to not a tile
                             map[floorX, floorY] = 0;
+                            map[floorX-1, floorY] = 0;
                             //Increase floor count
-                            floorCount++;
+                            floorCount+=2;
                         }
                     }
                     break;
@@ -201,8 +202,9 @@ public class MapFunctions
                         {
                             //Change it to not a tile
                             map[floorX, floorY] = 0;
-                            //Increase the floor count
-                            floorCount++;
+                            map[floorX - 1, floorY ] = 0;
+                            //Increase floor count
+                            floorCount += 2;
 
                         }
                     }
@@ -218,8 +220,9 @@ public class MapFunctions
                         {
                             //Change it to not a tile
                             map[floorX, floorY] = 0;
-                            //Increase the floor count
-                            floorCount++;
+                            map[floorX - 1, floorY ] = 0;
+                            //Increase floor count
+                            floorCount += 2;
 
                         }
                     }
@@ -235,8 +238,9 @@ public class MapFunctions
                         {
                             //Change it to not a tile
                             map[floorX, floorY] = 0;
-                            //Increase the floor count
-                            floorCount++;
+                            map[floorX - 1, floorY ] = 0;
+                            //Increase floor count
+                            floorCount += 2;
 
                         }
 

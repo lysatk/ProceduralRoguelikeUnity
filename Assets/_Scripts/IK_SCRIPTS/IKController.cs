@@ -106,15 +106,15 @@ public class IKController : MonoBehaviour
         kneeMod = Ax - (Ax - lengthDirX(1f, facingDirection)); //Direction the knee will bend for the "3D" knee
 
         if (legspeed > 0)
-            gait = 2 * (float)Math.Pow(legspeed * 3, 4f); //how big the step is (may need tweaking)
+            gait =  (float)Math.Pow(legspeed, 0.4f); //how big the step is (may need tweaking)
                                                             //Stride is not related to movement speed linearly, it uses a exponent of 0.4.
 
 
         //Sin-> Horizontal movement, Cos-> Veritcal movement of the "foot"
-        ax = x + lengthDirX(Convert.ToSingle((gait) * ((aLength + bLength) / 4) * (-Math.Sin(motionCount)) - ((legspeed * 0.25f))), movingDirection);
+        ax = x + lengthDirX(Convert.ToSingle((gait) * ((aLength + bLength) / 4) * (-Math.Sin(motionCount)) - ((legspeed * 2.5f))), movingDirection);
         //x=location x
 
-        ay = (float)(y + ((gait) * ((aLength + bLength) / 6) * (Math.Cos(motionCount) - 1f)));
+        ay = (float)(y + ((gait) * ((aLength + bLength) / 2) * (Math.Cos(motionCount) - 1f)));
         //y=location y
 
         ///IK CALCULATION///
@@ -139,8 +139,8 @@ public class IKController : MonoBehaviour
         //////////////////DRAWING THE SPRITES (might move to ext)////////////
         /////////////////////////////////////////////////////////////////////
 
-        float temp = facingDirection + Mathf.PI * 2;
-        Debug.DrawLine(new Vector3(Ax + 0.3f, Ay, 0), new Vector3(Ax - 0.3f, Ay, 0));
+        float temp = facingDirection + Mathf.PI / 2;
+        //Debug.DrawLine(new Vector3(Ax + 0.3f, Ay, 0), new Vector3(Ax - 0.3f, Ay, 0));
 
 
         Debug.DrawLine(new Vector2(Ax + lengthDirX(off, temp), Ay), new Vector2(C2x + lengthDirX(off, temp), C2y), Color.magenta);
@@ -153,7 +153,7 @@ public class IKController : MonoBehaviour
 
     void motionCounterStep()
     {
-        motionCounter += (float)(5.2f*(Math.Pow(legspeed, 4f)));//this is the counting variable for the animation
+        motionCounter += (float)(5f*(Math.Pow(legspeed, 0.4f)));//this is the counting variable for the animation
         motionCounter = motionCounter % Mathf.PI;  //limit the variable between 0 and 180
     }
     void Start()
@@ -161,8 +161,7 @@ public class IKController : MonoBehaviour
         mainCam = Camera.main;
         player = GameObject.FindGameObjectWithTag("Player");
         // createIK(0.10f, 0.8f);//Crete the IK on Start
-        sr = gameObject.GetComponent<SpriteRenderer>();
-        //  sr.color = new Color(0.1f, 0.9f, 0.9f, 1.0f);
+  
         rb = player.GetComponent<Rigidbody2D>();
     }
 
