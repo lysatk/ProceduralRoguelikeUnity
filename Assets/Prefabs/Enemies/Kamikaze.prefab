@@ -85,6 +85,7 @@ GameObject:
   - component: {fileID: 7061813054309352363}
   - component: {fileID: 8109268066809691}
   - component: {fileID: 3214218647730200590}
+  - component: {fileID: 1948403712116856336}
   m_Layer: 9
   m_Name: Kamikaze
   m_TagString: Enemy
@@ -275,6 +276,23 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1948403712116856336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6262015385233187950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f75c9e28e919ff498dac9fe32b939b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  legspeed: 0
+  movingDirection: 0
+  facingDirection: 0
+  motionCounter: 0
+  tex: {fileID: 0}
 --- !u!1001 &5021696542079753168
 PrefabInstance:
   m_ObjectHideFlags: 0

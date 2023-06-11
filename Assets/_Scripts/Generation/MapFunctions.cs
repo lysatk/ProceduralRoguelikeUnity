@@ -332,4 +332,18 @@ static private bool CheckSurroundedByZeroes(int x, int y, int[,] map)
     return (map[x - 1, y] == 0 && map[x + 1, y] == 0 && map[x, y - 1] == 0 && map[x, y + 1] == 0 &&
             map[x - 1, y - 1] == 0 && map[x - 1, y + 1] == 0 && map[x + 1, y + 1] == 0 && map[x + 1, y - 1] == 0);
 }
+
+
+static private int [,] mapFunctionSomething(int[,] map)
+    {
+
+
+
+        //shoot random tiles
+
+        return map;
+
+    }
+
+
 } 

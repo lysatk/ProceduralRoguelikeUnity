@@ -153,8 +153,8 @@ public class IKController : MonoBehaviour
 
     void motionCounterStep()
     {
-        motionCounter += (float)(5f*(Math.Pow(legspeed, 0.4f)));//this is the counting variable for the animation
-        motionCounter = motionCounter % Mathf.PI;  //limit the variable between 0 and 180
+        motionCounter += (float)(5.2f*(Math.Pow(legspeed, 0.4f)));//this is the counting variable for the animation
+        motionCounter = motionCounter % Mathf.PI*2;  //limit the variable between 0 and 180
     }
     void Start()
     {
