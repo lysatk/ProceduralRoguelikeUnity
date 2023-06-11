@@ -10,7 +10,6 @@ public class HeroUnitBase : UnitBase
 {
     public float collisionOffset = 0.05f;
     public ContactFilter2D movementFilter;
-    public int moveSpeed = 10;
 
     Stats stats;
     bool _canMove = true;
@@ -68,9 +67,9 @@ public class HeroUnitBase : UnitBase
         healthBar = FindObjectOfType<HealthBarManager>();
         healthBar.SetMaxHealth(stats.MaxHp);
 
-       // _anim = GetComponent<Animator>();
+        _anim = GetComponent<Animator>();
 
-       conditionsBar = gameObject.transform.GetChild(0);
+        conditionsBar = gameObject.transform.GetChild(0);
 
         _conditionUI = conditionsBar.GetComponent<ConditionUI>();
     }
@@ -110,20 +109,26 @@ public class HeroUnitBase : UnitBase
 
     void Move()
     {
-      
         // If movement input is not 0, try to move
         if (movementInput != Vector2.zero)
         {
+            bool success = TryMove(movementInput);
+            _anim.CrossFade("Walk", 0, 0);
+            //Gliding around walls
+            #region Gliding
 
-            rb.velocity=movementInput * moveSpeed;
-            if (movementInput.x < 0)
+            if (!success)
             {
-                spriteRenderer.flipX = false;//left
+                success = TryMove(new Vector2(movementInput.x, 0));
             }
-            else if (movementInput.x > 0)
+
+            if (!success)
             {
-                spriteRenderer.flipX = true;//right
+                _ = TryMove(new Vector2(0, movementInput.y));
             }
+
+            #endregion
+
         }
         else
         {
@@ -560,7 +565,7 @@ public class HeroUnitBase : UnitBase
     {
         Debug.Log($"{name} is dead");
         HideWand();
-      //  _anim.CrossFade("Death", 0, 0);
+        _anim.CrossFade("Death", 0, 0);
         _canMove = false;
         Destroy(gameObject, 3f);
         GameManager.Instance.ChangeState(GameState.Lose);

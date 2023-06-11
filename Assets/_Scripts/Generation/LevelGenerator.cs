@@ -88,7 +88,7 @@ public class LevelGeneratorEditor : Editor
 
 			if (GUILayout.Button("Generate"))
 			{
-				levelGen.GenerateMap();
+				//levelGen.GenerateMap();
 			}
 
 			if (GUILayout.Button("Clear"))

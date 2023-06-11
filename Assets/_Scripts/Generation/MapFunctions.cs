@@ -185,9 +185,8 @@ public class MapFunctions
                         {
                             //Change it to not a tile
                             map[floorX, floorY] = 0;
-                            map[floorX-1, floorY] = 0;
                             //Increase floor count
-                            floorCount+=2;
+                            floorCount++;
                         }
                     }
                     break;
@@ -202,9 +201,8 @@ public class MapFunctions
                         {
                             //Change it to not a tile
                             map[floorX, floorY] = 0;
-                            map[floorX - 1, floorY ] = 0;
-                            //Increase floor count
-                            floorCount += 2;
+                            //Increase the floor count
+                            floorCount++;
 
                         }
                     }
@@ -220,9 +218,8 @@ public class MapFunctions
                         {
                             //Change it to not a tile
                             map[floorX, floorY] = 0;
-                            map[floorX - 1, floorY ] = 0;
-                            //Increase floor count
-                            floorCount += 2;
+                            //Increase the floor count
+                            floorCount++;
 
                         }
                     }
@@ -238,9 +235,8 @@ public class MapFunctions
                         {
                             //Change it to not a tile
                             map[floorX, floorY] = 0;
-                            map[floorX - 1, floorY ] = 0;
-                            //Increase floor count
-                            floorCount += 2;
+                            //Increase the floor count
+                            floorCount++;
 
                         }
 
@@ -332,18 +328,4 @@ static private bool CheckSurroundedByZeroes(int x, int y, int[,] map)
     return (map[x - 1, y] == 0 && map[x + 1, y] == 0 && map[x, y - 1] == 0 && map[x, y + 1] == 0 &&
             map[x - 1, y - 1] == 0 && map[x - 1, y + 1] == 0 && map[x + 1, y + 1] == 0 && map[x + 1, y - 1] == 0);
 }
-
-
-static private int [,] mapFunctionSomething(int[,] map)
-    {
-
-
-
-        //shoot random tiles
-
-        return map;
-
-    }
-
-
 } 
