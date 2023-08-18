@@ -1,23 +1,75 @@
 using Assets._Scripts.Managers;
+using Assets.Resources.Entities;
 using Assets.Resources.SOs;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
+/// <summary>
+/// Manages the game behavior
+/// </summary>
 public class GameManager : StaticInstance<GameManager>
 {
+    /// <summary>
+    /// Invoked before state would change to new one
+    /// </summary>
     public static event Action<GameState> OnBeforeStateChanged;
+
+    /// <summary>
+    /// Invoked after state would change to new one
+    /// </summary>
     public static event Action<GameState> OnAfterStateChanged;
 
+    /// <summary>
+    /// Current game state
+    /// </summary>
+    public GameState State { get; private set; }
+
+    /// <summary>
+    /// Reference to player
+    /// </summary>
     public static GameObject Player;
+
+    /// <summary>
+    /// game map in numeric representation
+    /// </summary>
     public static int[,] map;
+
+    /// <summary>
+    /// ?????
+    /// </summary>
     public static Vector2[,] mapPositions;
+
+    /// <summary>
+    /// List of all enemies alive
+    /// </summary>
     public static List<GameObject> enemies;
 
-    //private HighScore highScore;
-    //private List<HighScore> highScores;
+    /// <summary>
+    /// Contains info about wave name
+    /// </summary>
+    public Text waveName;
+
+    /// <summary>
+    /// Contains info about amount of enemies alive
+    /// </summary>
+    public Text enemyCounter;
+
+    /// <summary>
+    /// ?????
+    /// </summary>
+    public List<GameObject> gameObjects;
+
+    /// <summary>
+    /// flag that shows if the Scores were saved
+    /// </summary>
+    public bool ScoresWasSaved = false;
+
+    private List<HighScore> highScores;
+    private HighScore highScore;
 
     [SerializeField]
     private intSO scoreSO;
@@ -25,23 +77,32 @@ public class GameManager : StaticInstance<GameManager>
     [SerializeField]
     private stringSO mageNameSO;
 
-    public GameState State { get; private set; }
+    private Scene _currentScene;
 
     void Start()
     {
-        switch (SceneManager.GetActiveScene().name)
-        {
-            case "LevelTest":
-                ChangeState(GameState.Starting);
-                break;
-            case "LevelHub":
-                ChangeState(GameState.Hub);
-                break;
-            default:
-                break;
-        }
+        enemies = new();
+
+        var _ = StartCoroutine(LoadScoresAsync());
+
+        ChangeState(GameState.Hub);
     }
 
+    IEnumerator LoadScoresAsync()
+    {
+        while (XMLManager.Instance == null)
+        {
+            yield return null;
+        }
+
+        highScores = XMLManager.Instance.LoadScores();
+    }
+
+    /// <summary>
+    /// Method that allows to manage current game state
+    /// </summary>
+    /// <param name="newState">new game state</param>
+    /// <exception cref="ArgumentOutOfRangeException">if the new state is not handled</exception>
     public void ChangeState(GameState newState)
     {
         OnBeforeStateChanged?.Invoke(newState);
@@ -58,18 +119,6 @@ public class GameManager : StaticInstance<GameManager>
             case GameState.Starting:
                 HandleStarting();
                 break;
-            case GameState.SpawningHero:
-                HandleSpawningHero();
-                break;
-            case GameState.SpawningEnemies:
-                HandleSpawningEnemies();
-                break;
-            case GameState.Playing:
-                HandlePlaying();
-                break;
-            case GameState.Win:
-                HandleWin();
-                break;
             case GameState.Lose:
                 HandleLose();
                 break;
@@ -84,55 +133,53 @@ public class GameManager : StaticInstance<GameManager>
 
     void HandleHub()
     {
-        if (SceneManager.GetActiveScene().name != "LevelHub")
-        {
-            SceneManager.LoadScene("LevelHub");
-            //highScore = new();
-        }
+        var _ = StartCoroutine(LoadAsync("LevelHub", GameState.Null));
 
         Player = UnitManager.Instance.SpawnHero(mageNameSO.String, new Vector2(27, 42));
+
+        highScore = new() { score = 0 };
+    }
+
+    IEnumerator LoadAsync(string SceneName, GameState state)
+    {
+        SceneManager.LoadScene(SceneName, LoadSceneMode.Additive);
+        _currentScene = SceneManager.GetSceneAt(1);
+
+        while (!_currentScene.isLoaded)
+        {
+            yield return null;
+        }
+
+        SceneManager.SetActiveScene(_currentScene);
+
+        if (state != GameState.Null)
+            ChangeState(state);
     }
 
     void HandleLevelChange()
     {
-        SceneManager.LoadScene("LevelTest");
-        ChangeState(GameState.Starting);
+        SceneManager.SetActiveScene(SceneManager.GetSceneAt(0));
+
+        SceneManager.UnloadScene("LevelHub");
+
+        var _ = StartCoroutine(LoadAsync("LevelTest", GameState.Starting));
     }
 
     void HandleStarting()
     {
-        enemies = new();//not sure where to put it
-        map = FindObjectOfType<LevelGenerator>().GenerateMap();
-        ChangeState(GameState.SpawningHero);
-    }
-
-    void HandleSpawningHero()
-    {
-        Player = UnitManager.Instance.SpawnHero(mageNameSO.String);
-
-        ChangeState(GameState.SpawningEnemies);
-    }
-
-    void HandleSpawningEnemies()
-    {
-        ChangeState(GameState.Playing);
-    }
-
-    void HandlePlaying()
-    {
-
+        FindObjectOfType<LevelGenerator>().GenerateMap();
     }
 
     void HandleLose()
     {
-        WaveManager.Instance.gameOver = true;
-        WaveManager.Instance.waveName.text = "YOU DIED!";
+        waveName.text = "YOU DIED!";
+        WaveManager.Instance.StopAllCoroutines();
 
-        //highScore.score = scoreSO.Int;
-        //highScores.Add(highScore);
+        highScore.score = scoreSO.Int;
+        highScores.Add(highScore);
         scoreSO.Int = 0;
 
-        var asd = StartCoroutine(WaitSomeSecs());
+        var _ = StartCoroutine(WaitSomeSecs());
     }
 
     IEnumerator WaitSomeSecs()
@@ -144,11 +191,47 @@ public class GameManager : StaticInstance<GameManager>
             yield return null;
         }
 
+        waveName.text = "Press L To Start";
+        Destroy(WaveManager.Instance.gameObject);
+        LevelChangeToHub();
         ChangeState(GameState.Hub);
     }
 
-    void HandleWin()
+    void LevelChangeToHub()
     {
+        SceneManager.SetActiveScene(SceneManager.GetSceneAt(0));
 
+        enemies.Clear();
+
+        foreach (Transform children in UnitManager.Instance.transform)
+        {
+            Destroy(children.gameObject);
+        }
+
+        SceneManager.UnloadScene("LevelTest");
+    }
+
+    /// <summary>
+    /// Returns value of hight scores or new list if null
+    /// </summary>
+    /// <returns></returns>
+    public List<HighScore> GetHightScores()
+    {
+        return highScores ??= new List<HighScore>();
+    }
+
+    protected override void OnApplicationQuit()
+    {
+        var _ = StartCoroutine(WaitToSave());
+    }
+
+    IEnumerator WaitToSave()
+    {
+        while (!ScoresWasSaved)
+        {
+            yield return null;
+        }
+
+        base.OnApplicationQuit();
     }
 }
