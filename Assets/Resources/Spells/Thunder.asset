@@ -16,7 +16,7 @@ MonoBehaviour:
   Description: 
   image: {fileID: 0}
   Prefab: {fileID: -7366516161574519796, guid: 63d3dfe7044a4994b9942728f71a3f60, type: 3}
-  DMG: 0
+  DMG: 8
   conditions: []
   speed: 10
   destroyTime: 4

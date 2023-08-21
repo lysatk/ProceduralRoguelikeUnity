@@ -26,7 +26,7 @@ public abstract class EnemyBase : UnitBase
 
     protected Rigidbody2D rb;
     List<RaycastHit2D> castCollisions = new();
-    bool _canMove = true;
+  // bool _canMove = true;
     protected Vector2 heading;
     protected float[] wages = new float[8];
 

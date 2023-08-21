@@ -16,8 +16,11 @@ MonoBehaviour:
   Description: Ball of poisonous fluid
   image: {fileID: 0}
   Prefab: {fileID: 7698074129301163778, guid: 90712f16b9d483a43aceff43e05a1eed, type: 3}
-  DMG: 0
-  conditions: []
+  DMG: 5
+  conditions:
+  - Condition: 3
+    AffectTime: 5
+    AffectOnTick: 1
   speed: 8
   destroyTime: 4
   caster: {fileID: 0}

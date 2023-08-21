@@ -16,8 +16,11 @@ MonoBehaviour:
   Description: hfvhjmfvgmhj
   image: {fileID: 0}
   Prefab: {fileID: 1305789690271010945, guid: 4a0d019563540db40a47577db9de39c7, type: 3}
-  DMG: 0
-  conditions: []
+  DMG: 5
+  conditions:
+  - Condition: 2
+    AffectTime: 2
+    AffectOnTick: 0
   speed: 7
   destroyTime: 4
   caster: {fileID: 0}
