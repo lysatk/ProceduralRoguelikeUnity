@@ -42,9 +42,9 @@ public class HeroUnitBase : UnitBase
 
     StaffRotation spellRotator;
 
-    Component conditionsBar;
+    //Component conditionsBar;
 
-    ConditionUI _conditionUI;
+   // ConditionUI _conditionUI;
 
     private Animator _anim;
 
@@ -191,14 +191,14 @@ public class HeroUnitBase : UnitBase
 
     #region Conditions
 
-    private void ConditionAffect(List<ConditionBase> conditions)
+    protected void  ConditionAffect(List<ConditionBase> conditions)
     {
         if (conditions != null && conditions.Count > 0)
             foreach (ConditionBase condition in conditions)
                 Affect(condition);
     }
 
-    private void Affect(ConditionBase condition)
+    protected void Affect(ConditionBase condition)
     {
         switch (condition.Condition)
         {
@@ -252,7 +252,7 @@ public class HeroUnitBase : UnitBase
         }
     }
 
-    private IEnumerator BurnTask(ConditionBase condition)
+    override protected IEnumerator BurnTask(ConditionBase condition)
     {
         _conditionUI.AddConditionSprite(0);
 
@@ -274,7 +274,7 @@ public class HeroUnitBase : UnitBase
         burnRoutine = null;
     }
 
-    private IEnumerator SlowTask(ConditionBase condition)
+    override protected IEnumerator SlowTask(ConditionBase condition)
     {
         _conditionUI.AddConditionSprite(1);
 
@@ -293,7 +293,7 @@ public class HeroUnitBase : UnitBase
         slowRoutine = null;
     }
 
-    private IEnumerator PoisonTask(ConditionBase condition)
+    override protected IEnumerator PoisonTask(ConditionBase condition)
     {
         _conditionUI.AddConditionSprite(2);
         var end = Time.time + condition.AffectTime;
@@ -314,7 +314,7 @@ public class HeroUnitBase : UnitBase
         poisonRoutine = null;
     }
 
-    private IEnumerator FreezeTask(ConditionBase condition)
+    override protected IEnumerator FreezeTask(ConditionBase condition)
     {
         _conditionUI.AddConditionSprite(3);
 
@@ -332,7 +332,7 @@ public class HeroUnitBase : UnitBase
         freezeRoutine = null;
     }
 
-    private IEnumerator SpeedUpTask(ConditionBase condition)
+    override protected IEnumerator SpeedUpTask(ConditionBase condition)
     {
         _conditionUI.AddConditionSprite(4);
 
@@ -351,7 +351,7 @@ public class HeroUnitBase : UnitBase
         speedUpRoutine = null;
     }
 
-    private IEnumerator ArmorUpTask(ConditionBase condition)
+    override protected IEnumerator ArmorUpTask(ConditionBase condition)
     {
         _conditionUI.AddConditionSprite(5);
 
@@ -371,7 +371,7 @@ public class HeroUnitBase : UnitBase
         armorUpRoutine = null;
     }
 
-    private IEnumerator ArmorDownTask(ConditionBase condition)
+    override protected IEnumerator ArmorDownTask(ConditionBase condition)
     {
         _conditionUI.AddConditionSprite(6);
 
@@ -391,7 +391,7 @@ public class HeroUnitBase : UnitBase
         armorDownRoutine = null;
     }
 
-    private IEnumerator HasteTask(ConditionBase condition)
+    override protected IEnumerator HasteTask(ConditionBase condition)
     {
         _conditionUI.AddConditionSprite(7);
 
@@ -411,7 +411,7 @@ public class HeroUnitBase : UnitBase
         hasteRoutine = null;
     }
 
-    private IEnumerator DmgUpTask(ConditionBase condition)
+    override protected IEnumerator DmgUpTask(ConditionBase condition)
     {
         _conditionUI.AddConditionSprite(8);
 

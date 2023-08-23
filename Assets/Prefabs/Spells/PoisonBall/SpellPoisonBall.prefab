@@ -169,3 +169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Posion Ball
+  DMG: 0
+  conditions: []
+  speed: 0
+  destroyTime: 0

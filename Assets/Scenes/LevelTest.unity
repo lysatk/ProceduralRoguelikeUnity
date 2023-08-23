@@ -4075,8 +4075,8 @@ MonoBehaviour:
   tilemap: {fileID: 1547520407}
   tile: {fileID: 11400000, guid: 3c2e80fd0720f1747ab228fe73c0fcae, type: 2}
   tileSpawner: {fileID: 11400000, guid: 6ce7057b9c6bb114793dd5234d35aad3, type: 2}
-  width: 50
-  height: 50
+  width: 25
+  height: 25
   mapSetting: {fileID: 11400000, guid: 4f8f9db741539ab43834170d360b72d4, type: 2}
 --- !u!4 &490710558
 Transform:
@@ -4137,7 +4137,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af3d5a3ab6607d24badb7543fb585949, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
   waveName: {fileID: 0}
   enemyCounter: {fileID: 0}
   gameOver: 0

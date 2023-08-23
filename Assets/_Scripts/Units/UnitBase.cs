@@ -3,6 +3,7 @@ using System.Collections;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 
 /// <summary>
 /// Base class for every unit in game
@@ -133,8 +134,8 @@ public abstract class UnitBase : MonoBehaviour
         while (Time.time < end)
         {
             stats.CurrentHp -= Convert.ToInt32(condition.AffectOnTick);
-
-            healthBar.SetHealth(stats.CurrentHp);
+          //  if(healthBar!=null)
+        //    healthBar.SetHealth(stats.CurrentHp);
 
             if (stats.CurrentHp <= 0)
                 Die();
@@ -174,7 +175,7 @@ public abstract class UnitBase : MonoBehaviour
         {
             stats.CurrentHp -= Convert.ToInt32(condition.AffectOnTick);
 
-            healthBar.SetHealth(stats.CurrentHp);
+         //   healthBar.SetHealth(stats.CurrentHp);
 
             if (stats.CurrentHp <= 0)
                 Die();

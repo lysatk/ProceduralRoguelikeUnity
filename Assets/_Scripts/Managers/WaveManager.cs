@@ -86,7 +86,7 @@ namespace Assets._Scripts.Managers
                 TrySpawn();
                 totalEnemies = GameManager.enemies.Count;
 
-                if (currentWaveNumber % 10 == 0)
+                if (currentWaveNumber % 5 == 0)
                     enemyCounter.text = "Enemies Left: \n" + totalEnemies;
                 else
                     enemyCounter.text = "";
@@ -101,7 +101,7 @@ namespace Assets._Scripts.Managers
             {
                 currentWave = new Wave("Wave: " + currentWaveNumber, currentWaveNumber + 4, currentWaveNumber + 4);
 
-                if (currentWaveNumber % 10 == 0)
+                if (currentWaveNumber % 5 == 0)
                 {
                     enemyCounter.text = "Enemies Left: \n" + totalEnemies;
                     allEnemiesToSpawn = 1;
