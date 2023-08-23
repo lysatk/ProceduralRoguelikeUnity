@@ -9,15 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbfcb9f22e288fd42843fe69bc4a142d, type: 3}
+  m_Script: {fileID: 11500000, guid: 56108ee06b19b2d428bc25058329b3d6, type: 3}
   m_Name: Random Walk Cave
   m_EditorClassIdentifier: 
   algorithm: 5
   randomSeed: 1
-  seed: 2137
+  seed: 6
   fillAmount: 0
   smoothAmount: 0
-  clearAmount: 50
+  clearAmount: 67
   interval: 0
   minPathWidth: 0
   maxPathWidth: 0
