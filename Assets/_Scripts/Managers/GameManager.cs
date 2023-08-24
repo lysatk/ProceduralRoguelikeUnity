@@ -179,12 +179,12 @@ public class GameManager : StaticInstance<GameManager>
         highScores.Add(highScore);
         scoreSO.Int = 0;
 
-        var _ = StartCoroutine(WaitSomeSecs());
+        var temp = StartCoroutine(PostLoseWait(3));
     }
 
-    IEnumerator WaitSomeSecs()
+    IEnumerator PostLoseWait(int delay)
     {
-        var end = Time.time + 3;
+        var end = Time.time + delay;
 
         while (Time.time < end)
         {

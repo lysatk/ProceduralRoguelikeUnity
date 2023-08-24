@@ -4073,10 +4073,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilemap: {fileID: 1547520407}
-  tile: {fileID: 11400000, guid: 3c2e80fd0720f1747ab228fe73c0fcae, type: 2}
+  tile: {fileID: 11400000, guid: 5f31cf9d496c0044aba8144dc0af2bf6, type: 2}
   tileSpawner: {fileID: 11400000, guid: 6ce7057b9c6bb114793dd5234d35aad3, type: 2}
-  width: 25
-  height: 25
+  width: 60
+  height: 55
   mapSetting: {fileID: 11400000, guid: 4f8f9db741539ab43834170d360b72d4, type: 2}
 --- !u!4 &490710558
 Transform:

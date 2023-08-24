@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -53,22 +54,19 @@ public class MapFunctions
         }
 
 
-
-
         for (int x = 0; x < map.GetUpperBound(0); x++) //Loop through the width of the map
         {
             for (int y = 0; y < map.GetUpperBound(1); y++) //Loop through the height of the map
             {
-                if (map[x, y] == 0 || map[x, y]==3) // 1 = tile, 0 = no tile,
+                if (map[x, y] == 0 || map[x, y] == 3) // 1 = tile, 0 = no tile,
                 {
-                    tilemap.SetTile(new Vector3Int(x, y, 0), null);
                     tilemap.SetTile(new Vector3Int(x, y, 0), null);
                 }
 
                 else if (map[x, y] == 2)
                 {
-                    //tilemap.SetTile(new Vector3Int(x, y, 0), tileSpawner);
-                    tilemap.SetTile(new Vector3Int(x, y, 0), null);
+                    tilemap.SetTile(new Vector3Int(x, y, 0), tileSpawner);
+                    //   tilemap.SetTile(new Vector3Int(x, y, 0), null);
                 }
             }
         }
@@ -221,7 +219,6 @@ public class MapFunctions
                             map[floorX, floorY] = 0;
                             //Increase the floor count
                             floorCount++;
-
                         }
                     }
                     break;
@@ -238,13 +235,9 @@ public class MapFunctions
                             map[floorX, floorY] = 0;
                             //Increase the floor count
                             floorCount++;
-
                         }
-
                     }
                     break;
-
-
             }
 
         }
@@ -314,26 +307,46 @@ public class MapFunctions
         }
 
         return map;
-    } 
-
-
-/// <summary>
-/// Same as the Render function but finds spawners and add them in correct spots
-/// </summary>
-/// <param name="map">Map that we want to draw</param>
-static private bool CheckSurroundedByZeroes(int x, int y, int[,] map)
-{
-    int numRows = map.GetUpperBound(0);
-    int numCols = map.GetUpperBound(1);
-
-    // Check if the element is at a border position
-    if (x == 0 || y == 0 || x == numRows - 1 || y == numCols - 1)
-    {
-        return false;
     }
 
-    // Check if the element is surrounded by zeroes
-    return (map[x - 1, y] == 0 && map[x + 1, y] == 0 && map[x, y - 1] == 0 && map[x, y + 1] == 0 &&
-            map[x - 1, y - 1] == 0 && map[x - 1, y + 1] == 0 && map[x + 1, y + 1] == 0 && map[x + 1, y - 1] == 0);
+
+    /// <summary>
+    /// Same as the Render function but finds spawners and add them in correct spots
+    /// </summary>
+    /// <param name="map">Map that we want to draw</param>
+    static private bool CheckSurroundedByZeroes(int x, int y, int[,] map)
+    {
+        int numRows = map.GetUpperBound(0);
+        int numCols = map.GetUpperBound(1);
+
+        // Check if the element is at a border position
+        if (x == 0 || y == 0 || x == numRows - 1 || y == numCols - 1)
+        {
+            return false;
+        }
+
+        // Check if the element is surrounded by zeroes
+        return (map[x - 1, y] == 0 && map[x + 1, y] == 0 && map[x, y - 1] == 0 && map[x, y + 1] == 0 &&
+                map[x - 1, y - 1] == 0 && map[x - 1, y + 1] == 0 && map[x + 1, y + 1] == 0 && map[x + 1, y - 1] == 0);
+    }
+
+
+    static private int[,] ChangeValuesInRadius(int x, int y, int radius, int[,] matrix, int changeValue)
+    {
+        int rows = matrix.GetLength(0);
+        int cols = matrix.GetLength(1);
+
+        for (int i = Math.Max(0, x - radius); i <= Math.Min(rows - 1, x + radius); i++)
+        {
+            for (int j = Math.Max(0, y - radius); j <= Math.Min(cols - 1, y + radius); j++)
+            {
+                if (Math.Pow(i - x, 2) + Math.Pow(j - y, 2) <= radius * radius)
+                {
+                    matrix[i, j] += changeValue;
+                }
+            }
+        }
+        return matrix;
+    }
+
 }
-} 
