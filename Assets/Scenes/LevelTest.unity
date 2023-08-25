@@ -3946,6 +3946,8 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 7f7733948466264438c7541ec58fcecb, type: 2}
   - m_RefCount: 9
     m_Data: {fileID: 11400000, guid: 73bbac109978e9f48944e8a07b29cd91, type: 2}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   m_TileSpriteArray:
   - m_RefCount: 12
     m_Data: {fileID: 1723046161, guid: cf780dcdbadf3dd4f8120d8c04572e1b, type: 3}
@@ -4072,8 +4074,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71e450ccf4e56ca47ab0b2e8e5915989, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tilemap: {fileID: 1547520407}
-  tile: {fileID: 11400000, guid: 5f31cf9d496c0044aba8144dc0af2bf6, type: 2}
+  tilemapWall: {fileID: 1547520407}
+  tilemapFloor: {fileID: 177448341}
+  tileWall: {fileID: 11400000, guid: 5f31cf9d496c0044aba8144dc0af2bf6, type: 2}
+  tileFloor: {fileID: 11400000, guid: 8ac102ddf2973d3409fc01c1ed776d6c, type: 2}
   tileSpawner: {fileID: 11400000, guid: 6ce7057b9c6bb114793dd5234d35aad3, type: 2}
   width: 60
   height: 55

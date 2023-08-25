@@ -38,18 +38,18 @@ public class MapFunctions
     /// Draws the map to the screen
     /// </summary>
     /// <param name="map">Map that we want to draw</param>
-    /// <param name="tilemap">Tilemap we will draw onto</param>
-    /// <param name="tile">Tile we will draw with</para
+    /// <param name="tilemapWall">Tilemap we will draw onto</param>
+    /// <param name="tileWall">Tile we will draw with</param>
     /// <param name="tileSpawner">Tile that will be used as a spawnPoint</param>
 
-    public static void RenderMap(int[,] map, Tilemap tilemap, TileBase tile, TileBase tileSpawner)
+    public static void RenderMap(int[,] map, Tilemap tilemapWall, Tilemap tilemapFloor, TileBase tileWall, TileBase tileSpawner, TileBase tileFloor)
     {
         //Adding padding to the map 
         for (int x = (int)(map.GetUpperBound(0) * (-0.39)); x < map.GetUpperBound(0) * 1.39; x++)
         {
             for (int y = (int)(map.GetUpperBound(1) * (-0.39)); y < map.GetUpperBound(1) * 1.39; y++)
             {
-                tilemap.SetTile(new Vector3Int(x, y, 0), tile);
+                tilemapWall.SetTile(new Vector3Int(x, y, 0), tileWall);
             }
         }
 
@@ -58,15 +58,16 @@ public class MapFunctions
         {
             for (int y = 0; y < map.GetUpperBound(1); y++) //Loop through the height of the map
             {
-                if (map[x, y] == 0 || map[x, y] == 3) // 1 = tile, 0 = no tile,
+                if (map[x, y] == 0 || map[x, y] == 3) // 1 = wall, 0 = no wall, 2=spawnOriginEnemy, 3=spawnPlayer
                 {
-                    tilemap.SetTile(new Vector3Int(x, y, 0), null);
+                    tilemapWall.SetTile(new Vector3Int(x, y, 0), null);
+                    tilemapFloor.SetTile(new Vector3Int(x, y, 0), tileFloor);
                 }
 
                 else if (map[x, y] == 2)
                 {
-                    tilemap.SetTile(new Vector3Int(x, y, 0), tileSpawner);
-                    //   tilemap.SetTile(new Vector3Int(x, y, 0), null);
+                    // tilemapWall.SetTile(new Vector3Int(x, y, 0), tileSpawner);
+                    tilemapWall.SetTile(new Vector3Int(x, y, 0), null);
                 }
             }
         }
@@ -242,7 +243,7 @@ public class MapFunctions
 
         }
         //Finding places for enemySpawners
-        while (spawnerCount < 6)
+        while (spawnerCount < 11)
         {
             int x = rand.Next(map.GetUpperBound(0));
             int y = rand.Next(map.GetUpperBound(1));
@@ -288,8 +289,6 @@ public class MapFunctions
                         {
                             //Change it to not a tile
                             map[i, j] = 0;
-                            //Increase the floor count
-
                         }
                     }
 
@@ -297,7 +296,7 @@ public class MapFunctions
             }
         }
 
-        for (int i = 0; i < 9; i++)
+        for (int i = 0; i < 16; i++)
         {
             int xPointToRemove = rand.Next(map.GetUpperBound(0));
             int yPoitintToRemove = rand.Next(map.GetUpperBound(1));
@@ -340,13 +339,31 @@ public class MapFunctions
         {
             for (int j = Math.Max(0, y - radius); j <= Math.Min(cols - 1, y + radius); j++)
             {
-                if (Math.Pow(i - x, 2) + Math.Pow(j - y, 2) <= radius * radius)
-                {
-                    matrix[i, j] += changeValue;
-                }
+
+                if (matrix[i, j] == 0)
+                    matrix[i, j] = changeValue;
+
             }
         }
+
         return matrix;
     }
+    static private int[,] ChangeValuesInRadiusWithCenter(int x, int y, int radius, int[,] matrix, int changeValue, int centerValue)
+    {
+        int rows = matrix.GetLength(0);
+        int cols = matrix.GetLength(1);
+
+        for (int i = Math.Max(0, x - radius); i <= Math.Min(rows - 1, x + radius); i++)
+        {
+            for (int j = Math.Max(0, y - radius); j <= Math.Min(cols - 1, y + radius); j++)
+            {
+                if (matrix[i, j] == 0)
+                    matrix[i, j] = changeValue;
+            }
+        }
+
+        return matrix;
+    }
+
 
 }
