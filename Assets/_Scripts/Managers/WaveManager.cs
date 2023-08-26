@@ -75,24 +75,24 @@ namespace Assets._Scripts.Managers
 
         private void Start()
         {
-            waveName = GameManager.Instance.waveName;
-            enemyCounter = GameManager.Instance.enemyCounter;
+            //waveName = GameManager.Instance.waveName;
+            //enemyCounter = GameManager.Instance.enemyCounter;
         }
 
         private void Update()
         {
-            if (!gameOver && GameManager.map != null)
-            {
-                TrySpawn();
-                totalEnemies = GameManager.enemies.Count;
+            //if (!gameOver && GameManager.map != null)
+            //{
+            //    TrySpawn();
+            //    totalEnemies = GameManager.enemies.Count;
 
-                if (currentWaveNumber % 5 == 0)
-                    enemyCounter.text = "Enemies Left: \n" + totalEnemies;
-                else
-                    enemyCounter.text = "";
+            //    if (currentWaveNumber % 5 == 0)
+            //        enemyCounter.text = "Enemies Left: \n" + totalEnemies;
+            //    else
+            //        enemyCounter.text = "";
 
-                Debug.Log(currentWave.waveName);
-            }
+            //    Debug.Log(currentWave.waveName);
+            //}
         }
 
         void TrySpawn()

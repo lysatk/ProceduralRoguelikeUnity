@@ -167,4 +167,15 @@ public class UnitManager : StaticInstance<UnitManager>
     {
         return new(target.x * 1.6f, target.y * 1.6f);
     }
+
+    private void Update()
+    {
+        if(li)
+
+
+
+    }
+
+
+
 }

@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
+using Random = UnityEngine.Random;
 /// <summary>
 /// Manages the game behavior
 /// </summary>
@@ -168,6 +168,12 @@ public class GameManager : StaticInstance<GameManager>
     void HandleStarting()
     {
         FindObjectOfType<LevelGenerator>().GenerateMap();
+
+        for (int i = 0; i < 25; i++)
+        {
+            UnitManager.Instance.SpawnEnemy((ExampleEnemyType)Random.Range(0, 3),1);
+           
+        }
     }
 
     void HandleLose()
