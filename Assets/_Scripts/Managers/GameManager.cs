@@ -122,6 +122,12 @@ public class GameManager : StaticInstance<GameManager>
             case GameState.Lose:
                 HandleLose();
                 break;
+            case GameState.PostLevel:
+                HandlePostLevel();
+                break;
+            case GameState.BossReached:
+                HandleLose();
+                break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
         }
@@ -176,6 +182,19 @@ public class GameManager : StaticInstance<GameManager>
         }
     }
 
+    void HandlePostLevel()
+    {
+        FindObjectOfType<LevelGenerator>().GenerateMap();
+
+        for (int i = 0; i < 25; i++)
+        {
+            UnitManager.Instance.SpawnEnemy((ExampleEnemyType)Random.Range(0, 3), 1);
+
+        }
+
+
+    }
+    
     void HandleLose()
     {
         waveName.text = "YOU DIED!";
@@ -240,4 +259,6 @@ public class GameManager : StaticInstance<GameManager>
 
         base.OnApplicationQuit();
     }
+
+   
 }
