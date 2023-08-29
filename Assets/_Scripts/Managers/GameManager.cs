@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
+using Random = UnityEngine.Random;
 /// <summary>
 /// Manages the game behavior
 /// </summary>
@@ -68,6 +68,8 @@ public class GameManager : StaticInstance<GameManager>
     /// </summary>
     public bool ScoresWasSaved = false;
 
+    public static bool firstLevel=true;
+
     private List<HighScore> highScores;
     private HighScore highScore;
 
@@ -122,6 +124,12 @@ public class GameManager : StaticInstance<GameManager>
             case GameState.Lose:
                 HandleLose();
                 break;
+            case GameState.PostLevel:
+                HandlePostLevel();
+                break;
+            case GameState.BossReached:
+                HandleBossReached();
+                break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
         }
@@ -167,11 +175,45 @@ public class GameManager : StaticInstance<GameManager>
 
     void HandleStarting()
     {
+        waveName.text = "";
         FindObjectOfType<LevelGenerator>().GenerateMap();
+
+        for (int i = 0; i < 25; i++)
+        {
+            UnitManager.Instance.SpawnEnemy((ExampleEnemyType)Random.Range(0, 3),1);
+           
+        }
+        firstLevel = false;
+    }
+
+    void HandlePostLevel()
+    {
+        waveName.text = "";
+        FindObjectOfType<LevelGenerator>().GenerateMap(); 
+
+        for (int i = 0; i < 25; i++)
+        {
+            UnitManager.Instance.SpawnEnemy((ExampleEnemyType)Random.Range(0, 3), 1);
+        }
+        
+    }
+    void HandleBossReached()
+    {
+        waveName.text = "";
+        FindObjectOfType<LevelGenerator>().GenerateMap();
+
+        for (int i = 0; i < 25; i++)
+        {
+            UnitManager.Instance.SpawnEnemy((ExampleEnemyType)Random.Range(0, 3), 1);
+        }
+        
+            UnitManager.Instance.SpawnEnemy((ExampleEnemyType)3, 1);
+       
     }
 
     void HandleLose()
     {
+        firstLevel = true;
         waveName.text = "YOU DIED!";
         WaveManager.Instance.StopAllCoroutines();
 
@@ -179,12 +221,12 @@ public class GameManager : StaticInstance<GameManager>
         highScores.Add(highScore);
         scoreSO.Int = 0;
 
-        var _ = StartCoroutine(WaitSomeSecs());
+        var temp = StartCoroutine(PostLoseWait(3));
     }
 
-    IEnumerator WaitSomeSecs()
+    IEnumerator PostLoseWait(int delay)
     {
-        var end = Time.time + 3;
+        var end = Time.time + delay;
 
         while (Time.time < end)
         {
@@ -234,4 +276,6 @@ public class GameManager : StaticInstance<GameManager>
 
         base.OnApplicationQuit();
     }
+
+   
 }

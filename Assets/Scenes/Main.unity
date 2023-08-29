@@ -461,6 +461,7 @@ MonoBehaviour:
   - {fileID: 310522952}
   - {fileID: 1321944485}
   - {fileID: 1697687975}
+  ScoresWasSaved: 0
   scoreSO: {fileID: 11400000, guid: a537fb5d8087b124a8e1e8f4b21500ba, type: 2}
   mageNameSO: {fileID: 11400000, guid: 488fa0a66c85f7747b4582dc17b80341, type: 2}
 --- !u!1 &1300864754

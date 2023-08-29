@@ -7,5 +7,7 @@ public enum GameState
     ChangeLevel = 1,
     Starting = 2,
     Lose = 3,
+    PostLevel=4,
+    BossReached=5,
     Null = 99
 }
