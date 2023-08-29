@@ -75,8 +75,8 @@ namespace Assets._Scripts.Managers
 
         private void Start()
         {
-           waveName = GameManager.Instance.waveName;
-         enemyCounter = GameManager.Instance.enemyCounter;
+            waveName = GameManager.Instance.waveName;
+            enemyCounter = GameManager.Instance.enemyCounter;
             // TrySpawn();
             waveName.text = "";
 
@@ -88,7 +88,7 @@ namespace Assets._Scripts.Managers
             {
                 totalEnemies = GameManager.enemies.Count;
                 enemyCounter.text = "Enemies Left: \n" + totalEnemies;
-               // Debug.Log(currentLevel.levelName);
+                // Debug.Log(currentLevel.levelName);
             }
 
 
@@ -98,73 +98,74 @@ namespace Assets._Scripts.Managers
             }
 
         }
-            void TrySpawn()
-            {
-                if (_canSpawn && Time.time > nextSpawnTime)
-                {
-                    currentLevel = new Level("Wave: " + currentLevelNumber, currentLevelNumber + 4, currentLevelNumber + 4);
-
-                    if (currentLevelNumber % 5 == 0)
-                    {
-                        enemyCounter.text = "Enemies Left: \n" + totalEnemies;
-                        allEnemiesToSpawn = 1;
-                        _bossLevel = true;
-                    }
-                    else
-                        allEnemiesToSpawn = currentLevel.noOfEnemies;
-
-                    _ = StartCoroutine(SpawnWave());
-                    scaleMultiplier++;
-                    waveName.text = currentLevel.levelName;//set UI Text to waveName
-                }
-            }
-
-            IEnumerator SpawnWave()
-            {
-                _canSpawn = false;
-
-                while (allEnemiesToSpawn > 0)
-                {
-                    if (!_bossLevel)
-                    {
-                        EnemiesToSpawnSetter(allEnemiesToSpawn);
-
-                        for (int i = 0; i < spawnCountNow; i++)
-                        {
-                            UnitManager.Instance.SpawnEnemy((ExampleEnemyType)Random.Range(0, 3), scaleMultiplier);
-                            allEnemiesToSpawn--;
-                        }
-                    }
-                    else
-                    {
-                        if (!_bossSpawned)
-                        {
-                            UnitManager.Instance.SpawnEnemy(ExampleEnemyType.Boss, scaleMultiplier);
-                            _bossSpawned = true;
-                        }
-
-                        if (totalEnemies == 0)
-                        {
-                            allEnemiesToSpawn--;
-                            _bossLevel = false;
-                            _bossSpawned = false;
-                        }
-                    }
-
-                    yield return new WaitForSeconds(spawnInterval);
-                }
-
-                nextSpawnTime = Time.time + currentLevel.nextSpawnTime;
-                currentLevelNumber++;
-                _canSpawn = true;
-            }
-
-            void EnemiesToSpawnSetter(int enemyCount)
-            {
-                if (enemyCount < 5)
-                    spawnCountNow = enemyCount;
-                else
-                    spawnCountNow = 5;
-            }
-        }
     }
+}
+        //    void TrySpawn()
+        //    {
+        //        if (_canSpawn && Time.time > nextSpawnTime)
+        //        {
+        //            currentLevel = new Level("Wave: " + currentLevelNumber, currentLevelNumber + 4, currentLevelNumber + 4);
+
+//            if (currentLevelNumber % 5 == 0)
+//            {
+//                enemyCounter.text = "Enemies Left: \n" + totalEnemies;
+//                allEnemiesToSpawn = 1;
+//                _bossLevel = true;
+//            }
+//            else
+//                allEnemiesToSpawn = currentLevel.noOfEnemies;
+
+//            _ = StartCoroutine(SpawnWave());
+//            scaleMultiplier++;
+//            waveName.text = currentLevel.levelName;//set UI Text to waveName
+//        }
+//    }
+
+//    IEnumerator SpawnWave()
+//    {
+//        _canSpawn = false;
+
+//        while (allEnemiesToSpawn > 0)
+//        {
+//            if (!_bossLevel)
+//            {
+//                EnemiesToSpawnSetter(allEnemiesToSpawn);
+
+//                for (int i = 0; i < spawnCountNow; i++)
+//                {
+//                    UnitManager.Instance.SpawnEnemy((ExampleEnemyType)Random.Range(0, 3), scaleMultiplier);
+//                    allEnemiesToSpawn--;
+//                }
+//            }
+//            else
+//            {
+//                if (!_bossSpawned)
+//                {
+//                    UnitManager.Instance.SpawnEnemy(ExampleEnemyType.Boss, scaleMultiplier);
+//                    _bossSpawned = true;
+//                }
+
+//                if (totalEnemies == 0)
+//                {
+//                    allEnemiesToSpawn--;
+//                    _bossLevel = false;
+//                    _bossSpawned = false;
+//                }
+//            }
+
+//            yield return new WaitForSeconds(spawnInterval);
+//        }
+
+//        nextSpawnTime = Time.time + currentLevel.nextSpawnTime;
+//        currentLevelNumber++;
+//        _canSpawn = true;
+//    }
+
+//    void EnemiesToSpawnSetter(int enemyCount)
+//    {
+//        if (enemyCount < 5)
+//            spawnCountNow = enemyCount;
+//        else
+//            spawnCountNow = 5;
+//    }
+//}

@@ -173,6 +173,7 @@ public class GameManager : StaticInstance<GameManager>
 
     void HandleStarting()
     {
+        waveName.text = "";
         FindObjectOfType<LevelGenerator>().GenerateMap();
 
         for (int i = 0; i < 25; i++)
@@ -184,15 +185,14 @@ public class GameManager : StaticInstance<GameManager>
 
     void HandlePostLevel()
     {
-        FindObjectOfType<LevelGenerator>().GenerateMap();
+        waveName.text = "";
+        FindObjectOfType<LevelGenerator>().GenerateMap(); 
 
         for (int i = 0; i < 25; i++)
         {
             UnitManager.Instance.SpawnEnemy((ExampleEnemyType)Random.Range(0, 3), 1);
 
         }
-
-
     }
     
     void HandleLose()
