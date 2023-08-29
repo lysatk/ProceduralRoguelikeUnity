@@ -68,6 +68,8 @@ public class GameManager : StaticInstance<GameManager>
     /// </summary>
     public bool ScoresWasSaved = false;
 
+    public static bool firstLevel=true;
+
     private List<HighScore> highScores;
     private HighScore highScore;
 
@@ -126,7 +128,7 @@ public class GameManager : StaticInstance<GameManager>
                 HandlePostLevel();
                 break;
             case GameState.BossReached:
-                HandleLose();
+                HandleBossReached();
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
@@ -181,6 +183,7 @@ public class GameManager : StaticInstance<GameManager>
             UnitManager.Instance.SpawnEnemy((ExampleEnemyType)Random.Range(0, 3),1);
            
         }
+        firstLevel = false;
     }
 
     void HandlePostLevel()
@@ -191,12 +194,26 @@ public class GameManager : StaticInstance<GameManager>
         for (int i = 0; i < 25; i++)
         {
             UnitManager.Instance.SpawnEnemy((ExampleEnemyType)Random.Range(0, 3), 1);
-
         }
+        
     }
-    
+    void HandleBossReached()
+    {
+        waveName.text = "";
+        FindObjectOfType<LevelGenerator>().GenerateMap();
+
+        for (int i = 0; i < 25; i++)
+        {
+            UnitManager.Instance.SpawnEnemy((ExampleEnemyType)Random.Range(0, 3), 1);
+        }
+        
+            UnitManager.Instance.SpawnEnemy((ExampleEnemyType)3, 1);
+       
+    }
+
     void HandleLose()
     {
+        firstLevel = true;
         waveName.text = "YOU DIED!";
         WaveManager.Instance.StopAllCoroutines();
 
