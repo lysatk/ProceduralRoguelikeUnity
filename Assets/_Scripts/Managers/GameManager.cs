@@ -69,6 +69,7 @@ public class GameManager : StaticInstance<GameManager>
     public bool ScoresWasSaved = false;
 
     public static bool firstLevel=true;
+    public static bool gamePaused=false;
 
     private List<HighScore> highScores;
     private HighScore highScore;
