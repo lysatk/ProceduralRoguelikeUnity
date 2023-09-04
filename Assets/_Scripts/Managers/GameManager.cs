@@ -29,6 +29,11 @@ public class GameManager : StaticInstance<GameManager>
     public GameState State { get; private set; }
 
     /// <summary>
+    /// 
+    /// </summary>
+    public bool gamePaused = false; 
+
+    /// <summary>
     /// Reference to player
     /// </summary>
     public static GameObject Player;
