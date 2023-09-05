@@ -28,10 +28,6 @@ public class GameManager : StaticInstance<GameManager>
     /// </summary>
     public GameState State { get; private set; }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    public bool gamePaused = false; 
 
     /// <summary>
     /// Reference to player
@@ -74,6 +70,7 @@ public class GameManager : StaticInstance<GameManager>
     public bool ScoresWasSaved = false;
 
     public static bool firstLevel=true;
+
     public static bool gamePaused=false;
 
     private List<HighScore> highScores;
@@ -281,6 +278,13 @@ public class GameManager : StaticInstance<GameManager>
         }
 
         base.OnApplicationQuit();
+    }
+
+    public static void HandlePause()
+    { 
+        if (!gamePaused) { gamePaused = true; Time.timeScale = 0f; }
+        else { gamePaused = false; Time.timeScale = 1f; }
+
     }
 
    

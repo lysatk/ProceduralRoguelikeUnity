@@ -506,6 +506,11 @@ public class HeroUnitBase : UnitBase
     {
     }
 
+     void OnPause()
+    {
+        Debug.Log("pause");
+        GameManager.HandlePause();
+    }
     #endregion
 
     void CastSpell(Spell spell)
