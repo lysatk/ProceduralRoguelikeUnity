@@ -442,7 +442,7 @@ public class HeroUnitBase : UnitBase
 
     void OnPrimaryAttack()
     {
-        if (!_isDead)
+        if (!_isDead && !GameManager.gamePaused)
             if (Time.time > primaryCooldownCounter)
             {
                 CastSpell(PrimarySpell);
@@ -452,7 +452,7 @@ public class HeroUnitBase : UnitBase
 
     void OnSecondaryAttack()
     {
-        if (!_isDead)
+        if (!_isDead && !GameManager.gamePaused)
             if (Time.time > secondaryCooldownCounter)
             {
                 CastSpell(SecondarySpell);
@@ -462,7 +462,7 @@ public class HeroUnitBase : UnitBase
 
     void OnQSpell()
     {
-        if (!_isDead)
+        if (!_isDead && !GameManager.gamePaused)
             if (Time.time > QCooldownCounter)
             {
                 CastSpell(QSpell);
@@ -472,7 +472,7 @@ public class HeroUnitBase : UnitBase
 
     void OnESpell()
     {
-        if (!_isDead)
+        if (!_isDead && !GameManager.gamePaused)
             if (Time.time > ECooldownCounter)
             {
                 CastSpell(ESpell);
@@ -482,7 +482,7 @@ public class HeroUnitBase : UnitBase
 
     void OnDodge()
     {
-        if (!_isDead)
+        if (!_isDead && !GameManager.gamePaused)
             if (Time.time > DashCooldownCounter)
             {
                 CastSpell(DashSpell);
