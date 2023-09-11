@@ -508,7 +508,7 @@ public class HeroUnitBase : UnitBase
 
      void OnPause()
     {
-        Debug.Log("pause");
+        Debug.Log("OnPause");
         GameManager.HandlePause();
     }
     #endregion
@@ -520,12 +520,12 @@ public class HeroUnitBase : UnitBase
             if (spell.CastFromHeroeNoStaff)
             {
                 spell.caster = collider;
-                spell.Attack(transform.position, spellRotator.WizandStaffFirePint.transform.rotation);
+                spell.Attack(transform.position, spellRotator.StaffFirePoint.transform.rotation);
             }
             else
             {
                 spell.caster = collider;
-                spell.Attack(spellRotator.WizandStaffFirePint.transform.position, spellRotator.WizandStaffFirePint.transform.rotation);
+                spell.Attack(spellRotator.StaffFirePoint.transform.position, spellRotator.StaffFirePoint.transform.rotation);
             }
         }
         else
