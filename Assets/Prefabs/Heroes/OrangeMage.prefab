@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 473902858}
   - component: {fileID: 473902859}
   m_Layer: 8
-  m_Name: WizandStaffFirePint
+  m_Name: WizandStaffFirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -215,8 +215,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pfSpell: {fileID: 0}
-  spellTransform: {fileID: 473902858}
-  WizandStaffFirePint: {fileID: 473902858}
+  spellTransform: {fileID: 1675500400}
+  StaffFirePoint: {fileID: 473902858}
   mousePos: {x: 0, y: 0}
 --- !u!1 &1338906206425107030
 GameObject:

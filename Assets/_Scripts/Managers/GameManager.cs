@@ -4,6 +4,7 @@ using Assets.Resources.SOs;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -318,6 +319,36 @@ public class GameManager : StaticInstance<GameManager>
         }
 
     }
+
+    #region Menu
+
+    public void HandleMenuHubReturn()
+    {
+        LevelChangeToHub();
+        ChangeState(GameState.Hub);
+    }
+
+
+    public void HandleMenuQuit()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif
+
+        Application.Quit();
+    }
+
+    public void HandleMenuSettings()
+    {
+        //OPENS SETTINGS UI 
+    }
+    public void HandleMenuRestart()
+    {
+        //Logic for restarting levels ONLY FOR OUT OF HUB 
+    }
+
+
+    #endregion
 
 
 }
