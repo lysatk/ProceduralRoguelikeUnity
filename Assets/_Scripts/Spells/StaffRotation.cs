@@ -8,7 +8,7 @@ public class StaffRotation : MonoBehaviour
     private Transform spellTransform;
 
     /// <summary> Transformation of the spell casting place for player</summary>
-    public Transform WizandStaffFirePint;
+    public Transform StaffFirePoint;
 
     private Camera mainCam;
 

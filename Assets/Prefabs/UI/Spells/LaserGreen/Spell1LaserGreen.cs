@@ -25,7 +25,7 @@ public class Spell1LaserGreen : SpellProjectileBase
     private void TimeToShoot()
     {
         Debug.Log("UnitsInCllision " + "laserPointPref before spawn");
-        GameObject laserPointPref = Instantiate(laserPoint, staff.WizandStaffFirePint.transform.position, staff.WizandStaffFirePint.transform.rotation);
+        GameObject laserPointPref = Instantiate(laserPoint, staff.StaffFirePoint.transform.position, staff.StaffFirePoint.transform.rotation);
         Debug.Log("UnitsInCllision " + "laserPointPref after spawn");
         foreach (var unit in _unitsInCollision)
         {
