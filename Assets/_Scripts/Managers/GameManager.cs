@@ -324,9 +324,24 @@ public class GameManager : StaticInstance<GameManager>
 
     public void HandleMenuHubReturn()
     {
+        HandlePause();
+        firstLevel = true;
+        waveName.text = "";
+        WaveManager.Instance.StopAllCoroutines();
+
+        highScore.score = scoreSO.Int;
+        highScores.Add(highScore);
+        scoreSO.Int = 0;
+
+        waveName.text = "Press L To Start";
+
+        Destroy(WaveManager.Instance.gameObject);
         LevelChangeToHub();
         ChangeState(GameState.Hub);
+
+
     }
+
 
 
     public void HandleMenuQuit()

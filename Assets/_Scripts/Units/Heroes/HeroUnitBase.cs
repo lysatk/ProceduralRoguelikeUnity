@@ -38,17 +38,21 @@ public class HeroUnitBase : UnitBase
     [SerializeField]
     Spell DashSpell;
     float DashCooldownCounter = 0f;
+    float _dashMult=2f;
+    float _dashDur = 0.1f;
 
     [SerializeField]
-    private float _invincibilityDurationSeconds=1f;
-  //  [SerializeField]
+    private float _invincibilityDurationSeconds = 1f;
+    //  [SerializeField]
     private float _invincibilityDeltaTime = .2f;
 
-    private bool isInvincible=false;
+    private bool isInvincible = false;
 
     StaffRotation spellRotator;
 
     private Animator _anim;
+
+
 
     void Start()
     {
@@ -65,6 +69,7 @@ public class HeroUnitBase : UnitBase
         conditionsBar = gameObject.transform.GetChild(0);
 
         _conditionUI = conditionsBar.GetComponent<ConditionUI>();
+        _dashMult = stats.MovementSpeed * 2;
     }
 
     void FixedUpdate()
@@ -187,16 +192,16 @@ public class HeroUnitBase : UnitBase
 
     public override void TakeDamage(float dmgToTake, List<ConditionBase> conditions)
     {
-        if(isInvincible) { return; }
+        if (isInvincible) { return; }
         base.TakeDamage(dmgToTake, conditions);
         healthBar.SetHealth(stats.CurrentHp);
-       
-        iframeRoutine ??= StartCoroutine(BecomeTemporarilyInvincible()); 
+
+        iframeRoutine ??= StartCoroutine(BecomeTemporarilyInvincible());
     }
 
     #region Conditions
 
-    protected void  ConditionAffect(List<ConditionBase> conditions)
+    protected void ConditionAffect(List<ConditionBase> conditions)
     {
         if (conditions != null && conditions.Count > 0)
             foreach (ConditionBase condition in conditions)
@@ -487,12 +492,37 @@ public class HeroUnitBase : UnitBase
 
     void OnDodge()
     {
+        Debug.Log("dash");
         if (!_isDead && !GameManager.gamePaused)
+        {
             if (Time.time > DashCooldownCounter)
             {
-                CastSpell(DashSpell);
-                DashCooldownCounter = Time.time + DashSpell.cooldown * stats.CooldownModifier;
+                // Stop any existing dash coroutine before starting a new one
+                if (dashCorutine != null)
+                {
+                    StopCoroutine(dashCorutine);
+                    dashCorutine = null;
+                }
+                dashCorutine ??= StartCoroutine(Dashing()); DashCooldownCounter = Time.time + _dashDur + 2 * stats.CooldownModifier;
             }
+            
+        }
+    }
+
+    private IEnumerator Dashing()
+    {
+        Debug.Log("Player turned invincible!");
+        isInvincible = true;
+        stats.MovementSpeed = stats.MovementSpeed * _dashMult;
+
+        spriteBlink(0.5f);
+        yield return new WaitForSeconds(_dashDur);
+        spriteBlink(1);
+        Debug.Log("Player is no longer invincible!");
+
+        isInvincible = false;
+        stats.MovementSpeed = stats.MovementSpeed / _dashMult;
+        dashCorutine = null; // Set the coroutine reference to null when it finishes
     }
 
     void OnStart()
@@ -511,7 +541,7 @@ public class HeroUnitBase : UnitBase
     {
     }
 
-     void OnPause()
+    void OnPause()
     {
         Debug.Log("OnPause");
         GameManager.HandlePause();
@@ -585,11 +615,12 @@ public class HeroUnitBase : UnitBase
         }
         spriteBlink(1);
         Debug.Log("Player is no longer invincible!");
-        
+
         isInvincible = false;
         iframeRoutine = null;
 
     }
+   
 
 
 }
