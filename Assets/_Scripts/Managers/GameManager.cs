@@ -4,10 +4,11 @@ using Assets.Resources.SOs;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
+using Random = UnityEngine.Random;
 /// <summary>
 /// Manages the game behavior
 /// </summary>
@@ -27,6 +28,7 @@ public class GameManager : StaticInstance<GameManager>
     /// Current game state
     /// </summary>
     public GameState State { get; private set; }
+
 
     /// <summary>
     /// Reference to player
@@ -63,10 +65,27 @@ public class GameManager : StaticInstance<GameManager>
     /// </summary>
     public List<GameObject> gameObjects;
 
+
+    /// <summary>
+    /// ?????
+    /// </summary>
+    public CanvasGroup uiCanvasGroup;
+
+    /// <summary>
+    /// ?????
+    /// </summary>
+    public CanvasGroup pauseCanvasGroup;
+
+
+
     /// <summary>
     /// flag that shows if the Scores were saved
     /// </summary>
     public bool ScoresWasSaved = false;
+
+    public static bool firstLevel = true;
+
+    public static bool gamePaused = false;
 
     private List<HighScore> highScores;
     private HighScore highScore;
@@ -86,6 +105,8 @@ public class GameManager : StaticInstance<GameManager>
         var _ = StartCoroutine(LoadScoresAsync());
 
         ChangeState(GameState.Hub);
+        GameManager.Instance.pauseCanvasGroup.alpha = 0f;
+        GameManager.Instance.pauseCanvasGroup.interactable = false;
     }
 
     IEnumerator LoadScoresAsync()
@@ -121,6 +142,12 @@ public class GameManager : StaticInstance<GameManager>
                 break;
             case GameState.Lose:
                 HandleLose();
+                break;
+            case GameState.PostLevel:
+                HandlePostLevel();
+                break;
+            case GameState.BossReached:
+                HandleBossReached();
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
@@ -167,11 +194,45 @@ public class GameManager : StaticInstance<GameManager>
 
     void HandleStarting()
     {
+        waveName.text = "";
         FindObjectOfType<LevelGenerator>().GenerateMap();
+
+        for (int i = 0; i < 25; i++)
+        {
+            UnitManager.Instance.SpawnEnemy((ExampleEnemyType)Random.Range(0, 3), 1);
+
+        }
+        firstLevel = false;
+    }
+
+    void HandlePostLevel()
+    {
+        waveName.text = "";
+        FindObjectOfType<LevelGenerator>().GenerateMap();
+
+        for (int i = 0; i < 40; i++)
+        {
+            UnitManager.Instance.SpawnEnemy((ExampleEnemyType)Random.Range(0, 3), 1);
+        }
+
+    }
+    void HandleBossReached()
+    {
+        waveName.text = "";
+        FindObjectOfType<LevelGenerator>().GenerateMap();
+
+        for (int i = 0; i < 25; i++)
+        {
+            UnitManager.Instance.SpawnEnemy((ExampleEnemyType)Random.Range(0, 3), 1);
+        }
+
+        UnitManager.Instance.SpawnEnemy((ExampleEnemyType)3, 1);
+
     }
 
     void HandleLose()
     {
+        firstLevel = true;
         waveName.text = "YOU DIED!";
         WaveManager.Instance.StopAllCoroutines();
 
@@ -179,12 +240,12 @@ public class GameManager : StaticInstance<GameManager>
         highScores.Add(highScore);
         scoreSO.Int = 0;
 
-        var _ = StartCoroutine(WaitSomeSecs());
+        var temp = StartCoroutine(PostLoseWait(3));
     }
 
-    IEnumerator WaitSomeSecs()
+    IEnumerator PostLoseWait(int delay)
     {
-        var end = Time.time + 3;
+        var end = Time.time + delay;
 
         while (Time.time < end)
         {
@@ -234,4 +295,75 @@ public class GameManager : StaticInstance<GameManager>
 
         base.OnApplicationQuit();
     }
+
+    public static void HandlePause()
+    {
+        if (!gamePaused)
+        {
+            gamePaused = true;
+            Time.timeScale = 0f;
+            GameManager.Instance.uiCanvasGroup.alpha = 0f;
+
+            GameManager.Instance.pauseCanvasGroup.alpha = 1f;
+            GameManager.Instance.pauseCanvasGroup.interactable = true;
+        }
+
+        else
+        {
+            gamePaused = false;
+            Time.timeScale = 1f;
+            GameManager.Instance.uiCanvasGroup.alpha = 1f;
+
+            GameManager.Instance.pauseCanvasGroup.alpha = 0f;
+            GameManager.Instance.pauseCanvasGroup.interactable = false;
+        }
+
+    }
+
+    #region Menu
+
+    public void HandleMenuHubReturn()
+    {
+        HandlePause();
+        firstLevel = true;
+        waveName.text = "";
+        WaveManager.Instance.StopAllCoroutines();
+
+        highScore.score = scoreSO.Int;
+        highScores.Add(highScore);
+        scoreSO.Int = 0;
+
+        waveName.text = "Press L To Start";
+
+        Destroy(WaveManager.Instance.gameObject);
+        LevelChangeToHub();
+        ChangeState(GameState.Hub);
+
+
+    }
+
+
+
+    public void HandleMenuQuit()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif
+
+        Application.Quit();
+    }
+
+    public void HandleMenuSettings()
+    {
+        //OPENS SETTINGS UI 
+    }
+    public void HandleMenuRestart()
+    {
+        //Logic for restarting levels ONLY FOR OUT OF HUB 
+    }
+
+
+    #endregion
+
+
 }

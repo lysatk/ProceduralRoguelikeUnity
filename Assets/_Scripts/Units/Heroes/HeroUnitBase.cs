@@ -1,5 +1,4 @@
 using Assets._Scripts.Utilities;
-using Assets.Resources.SOs;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -39,14 +38,21 @@ public class HeroUnitBase : UnitBase
     [SerializeField]
     Spell DashSpell;
     float DashCooldownCounter = 0f;
+    float _dashMult=2f;
+    float _dashDur = 0.1f;
+
+    [SerializeField]
+    private float _invincibilityDurationSeconds = 1f;
+    //  [SerializeField]
+    private float _invincibilityDeltaTime = .2f;
+
+    private bool isInvincible = false;
 
     StaffRotation spellRotator;
 
-    //Component conditionsBar;
-
-   // ConditionUI _conditionUI;
-
     private Animator _anim;
+
+
 
     void Start()
     {
@@ -63,6 +69,7 @@ public class HeroUnitBase : UnitBase
         conditionsBar = gameObject.transform.GetChild(0);
 
         _conditionUI = conditionsBar.GetComponent<ConditionUI>();
+        _dashMult = stats.MovementSpeed * 2;
     }
 
     void FixedUpdate()
@@ -185,13 +192,16 @@ public class HeroUnitBase : UnitBase
 
     public override void TakeDamage(float dmgToTake, List<ConditionBase> conditions)
     {
+        if (isInvincible) { return; }
         base.TakeDamage(dmgToTake, conditions);
         healthBar.SetHealth(stats.CurrentHp);
+
+        iframeRoutine ??= StartCoroutine(BecomeTemporarilyInvincible());
     }
 
     #region Conditions
 
-    protected void  ConditionAffect(List<ConditionBase> conditions)
+    protected void ConditionAffect(List<ConditionBase> conditions)
     {
         if (conditions != null && conditions.Count > 0)
             foreach (ConditionBase condition in conditions)
@@ -442,7 +452,7 @@ public class HeroUnitBase : UnitBase
 
     void OnPrimaryAttack()
     {
-        if (!_isDead)
+        if (!_isDead && !GameManager.gamePaused)
             if (Time.time > primaryCooldownCounter)
             {
                 CastSpell(PrimarySpell);
@@ -452,7 +462,7 @@ public class HeroUnitBase : UnitBase
 
     void OnSecondaryAttack()
     {
-        if (!_isDead)
+        if (!_isDead && !GameManager.gamePaused)
             if (Time.time > secondaryCooldownCounter)
             {
                 CastSpell(SecondarySpell);
@@ -462,7 +472,7 @@ public class HeroUnitBase : UnitBase
 
     void OnQSpell()
     {
-        if (!_isDead)
+        if (!_isDead && !GameManager.gamePaused)
             if (Time.time > QCooldownCounter)
             {
                 CastSpell(QSpell);
@@ -472,7 +482,7 @@ public class HeroUnitBase : UnitBase
 
     void OnESpell()
     {
-        if (!_isDead)
+        if (!_isDead && !GameManager.gamePaused)
             if (Time.time > ECooldownCounter)
             {
                 CastSpell(ESpell);
@@ -482,12 +492,37 @@ public class HeroUnitBase : UnitBase
 
     void OnDodge()
     {
-        if (!_isDead)
+        Debug.Log("dash");
+        if (!_isDead && !GameManager.gamePaused)
+        {
             if (Time.time > DashCooldownCounter)
             {
-                CastSpell(DashSpell);
-                DashCooldownCounter = Time.time + DashSpell.cooldown * stats.CooldownModifier;
+                // Stop any existing dash coroutine before starting a new one
+                if (dashCorutine != null)
+                {
+                    StopCoroutine(dashCorutine);
+                    dashCorutine = null;
+                }
+                dashCorutine ??= StartCoroutine(Dashing()); DashCooldownCounter = Time.time + _dashDur + 2 * stats.CooldownModifier;
             }
+            
+        }
+    }
+
+    private IEnumerator Dashing()
+    {
+        Debug.Log("Player turned invincible!");
+        isInvincible = true;
+        stats.MovementSpeed = stats.MovementSpeed * _dashMult;
+
+        spriteBlink(0.5f);
+        yield return new WaitForSeconds(_dashDur);
+        spriteBlink(1);
+        Debug.Log("Player is no longer invincible!");
+
+        isInvincible = false;
+        stats.MovementSpeed = stats.MovementSpeed / _dashMult;
+        dashCorutine = null; // Set the coroutine reference to null when it finishes
     }
 
     void OnStart()
@@ -506,6 +541,11 @@ public class HeroUnitBase : UnitBase
     {
     }
 
+    void OnPause()
+    {
+        Debug.Log("OnPause");
+        GameManager.HandlePause();
+    }
     #endregion
 
     void CastSpell(Spell spell)
@@ -515,12 +555,12 @@ public class HeroUnitBase : UnitBase
             if (spell.CastFromHeroeNoStaff)
             {
                 spell.caster = collider;
-                spell.Attack(transform.position, spellRotator.WizandStaffFirePint.transform.rotation);
+                spell.Attack(transform.position, spellRotator.StaffFirePoint.transform.rotation);
             }
             else
             {
                 spell.caster = collider;
-                spell.Attack(spellRotator.WizandStaffFirePint.transform.position, spellRotator.WizandStaffFirePint.transform.rotation);
+                spell.Attack(spellRotator.StaffFirePoint.transform.position, spellRotator.StaffFirePoint.transform.rotation);
             }
         }
         else
@@ -548,4 +588,39 @@ public class HeroUnitBase : UnitBase
         HideWand();
         GameManager.Instance.ChangeState(GameState.Lose);
     }
+
+    private void spriteBlink(float alpha)
+    {
+        spriteRenderer.color = new Color(1, 1, 1, alpha);
+    }
+
+
+    private IEnumerator BecomeTemporarilyInvincible()
+    {
+        Debug.Log("Player turned invincible!");
+        isInvincible = true;
+
+        for (float i = 0; i < _invincibilityDurationSeconds; i += _invincibilityDeltaTime)
+        {
+            // Alternate between 0 and 1 scale to simulate flashing
+            if (spriteRenderer.color.a == 1)
+            {
+                spriteBlink(0.5f);
+            }
+            else
+            {
+                spriteBlink(1f);
+            }
+            yield return new WaitForSeconds(_invincibilityDeltaTime);
+        }
+        spriteBlink(1);
+        Debug.Log("Player is no longer invincible!");
+
+        isInvincible = false;
+        iframeRoutine = null;
+
+    }
+   
+
+
 }

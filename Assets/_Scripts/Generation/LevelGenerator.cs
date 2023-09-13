@@ -8,13 +8,19 @@ using UnityEditor;
 
 public class LevelGenerator : MonoBehaviour {
 
-	[Tooltip("The Tilemap to draw onto")]
-	public Tilemap tilemap;
+	[Tooltip("The Tilemap to draw walls onto")]
+	public Tilemap tilemapWall;
 
-	[Tooltip("The Tile to draw (use a RuleTile for best results)")]
-	public TileBase tile;
+    [Tooltip("The Tilemap to draw walls onto")]
+    public Tilemap tilemapFloor;
 
-	[Tooltip("The Tile to be used as a spawnerPoint")]
+    [Tooltip("The Tile to draw walls with")]
+	public TileBase tileWall;
+
+    [Tooltip("The Tile to draw floor with")]
+    public TileBase tileFloor;
+
+    [Tooltip("The Tile to be used as a spawnerPoint")]
 	public TileBase tileSpawner;
 
 	[Tooltip("Width of our map")]
@@ -58,7 +64,7 @@ public class LevelGenerator : MonoBehaviour {
 				//Next generate the random walk cave
 				map = MapFunctions.RandomWalkCave(map, seed, mapSetting.clearAmount);		
 		//Render the result
-		MapFunctions.RenderMap(map, tilemap, tile,tileSpawner);
+		MapFunctions.RenderMap(map, tilemapWall,tilemapFloor,tileWall,tileSpawner,tileFloor);
 
 		GameManager.map = map;
 
@@ -67,7 +73,8 @@ public class LevelGenerator : MonoBehaviour {
 
 	public void ClearMap()
 	{
-		tilemap.ClearAllTiles();
+		tilemapWall.ClearAllTiles();
+		tilemapFloor.ClearAllTiles();
 	}
 }
 
@@ -90,7 +97,7 @@ public class LevelGeneratorEditor : Editor
 
 			if (GUILayout.Button("Generate"))
 			{
-				//levelGen.GenerateMap();
+				levelGen.GenerateMap();
 			}
 
 			if (GUILayout.Button("Clear"))
