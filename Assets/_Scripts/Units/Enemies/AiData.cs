@@ -21,7 +21,7 @@ public class AiData : MonoBehaviour
     public Transform currentTarget;
 
     /// <summary>
-    /// Available directions for context
+    /// Available directions for context steering
     /// </summary>
     public Vector2[] direction = new Vector2[8]
     {
