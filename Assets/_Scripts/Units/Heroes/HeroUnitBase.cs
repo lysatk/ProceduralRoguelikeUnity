@@ -1,5 +1,4 @@
 using Assets._Scripts.Utilities;
-using Assets.Resources.SOs;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -40,11 +39,14 @@ public class HeroUnitBase : UnitBase
     Spell DashSpell;
     float DashCooldownCounter = 0f;
 
+    [SerializeField]
+    private float _invincibilityDurationSeconds=1f;
+    [SerializeField]
+    private float _invincibilityDeltaTime = .005f;
+
+    private bool isInvincible=false;
+
     StaffRotation spellRotator;
-
-    //Component conditionsBar;
-
-   // ConditionUI _conditionUI;
 
     private Animator _anim;
 
@@ -185,8 +187,11 @@ public class HeroUnitBase : UnitBase
 
     public override void TakeDamage(float dmgToTake, List<ConditionBase> conditions)
     {
+        if(isInvincible) { return; }
         base.TakeDamage(dmgToTake, conditions);
         healthBar.SetHealth(stats.CurrentHp);
+       
+        iframeRoutine ??= StartCoroutine(BecomeTemporarilyInvincible()); 
     }
 
     #region Conditions
@@ -553,4 +558,38 @@ public class HeroUnitBase : UnitBase
         HideWand();
         GameManager.Instance.ChangeState(GameState.Lose);
     }
+
+    private void spriteBlink(float alpha)
+    {
+        spriteRenderer.color = new Color(1, 1, 1, alpha);
+    }
+
+
+    private IEnumerator BecomeTemporarilyInvincible()
+    {
+        Debug.Log("Player turned invincible!");
+        isInvincible = true;
+
+        for (float i = 0; i < _invincibilityDurationSeconds; i += _invincibilityDeltaTime)
+        {
+            // Alternate between 0 and 1 scale to simulate flashing
+            if (spriteRenderer.color.a == 0.5f)
+            {
+                spriteBlink(1);
+            }
+            else
+            {
+                spriteBlink(0.5f);
+            }
+            yield return new WaitForSeconds(_invincibilityDeltaTime);
+        }
+
+        Debug.Log("Player is no longer invincible!");
+        spriteBlink(1);
+        isInvincible = false;
+        iframeRoutine = null;
+
+    }
+
+
 }

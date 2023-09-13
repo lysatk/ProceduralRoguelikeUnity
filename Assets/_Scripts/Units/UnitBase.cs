@@ -23,7 +23,7 @@ public abstract class UnitBase : MonoBehaviour
     public GameObject healthBarManagerObj;
     protected HealthBarManager healthBar;
 
-    protected Coroutine changeRoutine, burnRoutine, freezeRoutine, slowRoutine, speedUpRoutine, poisonRoutine, armorUpRoutine, armorDownRoutine, hasteRoutine, dmgUpRoutine;
+    protected Coroutine changeRoutine, burnRoutine, freezeRoutine, slowRoutine, speedUpRoutine, poisonRoutine, armorUpRoutine, armorDownRoutine, hasteRoutine, dmgUpRoutine, iframeRoutine;
     public abstract bool TryMove(Vector2 direction);
 
     /// <summary>
