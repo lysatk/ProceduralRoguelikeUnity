@@ -123,6 +123,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Fireball
+  DMG: 3
+  conditions: []
+  speed: 0
+  destroyTime: 0
 --- !u!96 &-5179455020467653721
 TrailRenderer:
   serializedVersion: 2
@@ -131,7 +135,7 @@ TrailRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 639514538004180302}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

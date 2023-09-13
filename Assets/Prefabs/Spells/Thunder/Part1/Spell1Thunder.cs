@@ -14,7 +14,7 @@ public class Spell1Thunder : SpellProjectileBase
 
     protected void Awake()
     {
-        MyAwake();
+        SpellAwake();
         InvokeRepeating("SpawnThunder", 0.1f, interval);
     }
 

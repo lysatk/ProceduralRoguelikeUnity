@@ -7,7 +7,7 @@ namespace Assets._Scripts.Spells
     {
         protected Rigidbody2D rb;
 
-        protected void MyAwake()
+        protected void SpellAwake()
         {
             SetSpellStats();
             rb = GetComponent<Rigidbody2D>();
@@ -21,6 +21,16 @@ namespace Assets._Scripts.Spells
         protected virtual bool BeforeDestroy()
         {
             return true;
+        }
+
+        protected virtual void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.gameObject.TryGetComponent(out AttackHandler attack))
+            {
+                attack.DealDamage(DMG, conditions);
+
+                Destroy(gameObject);
+            }
         }
     }
 }

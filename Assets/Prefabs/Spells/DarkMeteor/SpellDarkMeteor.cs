@@ -12,14 +12,14 @@ public class SpellDarkMeteor : SpellProjectileBase
 
     protected void Awake()
     {
-        MyAwake();
+        SpellAwake();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.TryGetComponent(out AttackHandler unit))
         {
-            unit.DAMAGE(3, conditions);
+            unit.DealDamage(3, conditions);
 
             BeforeDestroy();
         }
@@ -62,7 +62,7 @@ public class SpellDarkMeteor : SpellProjectileBase
         foreach (var collider in hitColliders)
         {
             if (collider.TryGetComponent(out AttackHandler unit))
-                unit.DAMAGE(DMG, new List<ConditionBase>());
+                unit.DealDamage(DMG, new List<ConditionBase>());
         }
     }
 }

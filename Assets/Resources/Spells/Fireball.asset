@@ -21,7 +21,7 @@ MonoBehaviour:
   - Condition: 0
     AffectTime: 5
     AffectOnTick: 4
-  speed: 8
+  speed: 100
   destroyTime: 4
   caster: {fileID: 0}
   CastFromHeroeNoStaff: 0

@@ -6,16 +6,8 @@ public class SpellPoison : SpellProjectileBase
     protected void Awake()
     {
         SetSpellStats();
-        MyAwake();
+        SpellAwake();
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.TryGetComponent(out AttackHandler attack))
-        {
-            attack.DAMAGE(DMG, conditions);
 
-            Destroy(gameObject);
-        }
-    }
 }

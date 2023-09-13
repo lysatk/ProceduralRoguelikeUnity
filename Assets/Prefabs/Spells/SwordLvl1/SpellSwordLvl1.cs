@@ -40,7 +40,7 @@ public class SpellSwordLvl1 : SpellBase
         foreach (var collider in hitColliders)
         {
             if (collider.TryGetComponent(out AttackHandler unit))
-                unit.DAMAGE(DMG, conditions);
+                unit.DealDamage(DMG, conditions);
         }
     }
 }

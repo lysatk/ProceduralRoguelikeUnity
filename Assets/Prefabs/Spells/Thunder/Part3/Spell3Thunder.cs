@@ -13,7 +13,7 @@ public class Spell3Thunder : SpellBase
     {
         if (collision.gameObject.TryGetComponent(out AttackHandler unit))
         {
-            unit.DAMAGE(DMG, conditions);
+            unit.DealDamage(DMG, conditions);
         }
     }
     void TimeOut()

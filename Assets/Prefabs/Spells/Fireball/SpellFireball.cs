@@ -5,16 +5,16 @@ public class SpellFireball : SpellProjectileBase
 {
     protected void Awake()
     {
-        MyAwake();
+        SpellAwake();
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.TryGetComponent(out AttackHandler attack))
-        {
-            attack.DAMAGE(DMG, conditions);
+    //void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    if (collision.gameObject.TryGetComponent(out AttackHandler attack))
+    //    {
+    //        attack.DealDamage(DMG, conditions);
 
-            Destroy(gameObject);
-        }
-    }
+    //        Destroy(gameObject);
+    //    }
+    //}
 }

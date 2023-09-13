@@ -47,7 +47,7 @@ public class SpellMagicSword : SpellBase
     {
         if (collision.gameObject.TryGetComponent(out AttackHandler unit))
         {
-            unit.DAMAGE(DMG, conditions);
+            unit.DealDamage(DMG, conditions);
             Destroy(spellCore); // Destroy the spellCore when collided with an object
         }
     }

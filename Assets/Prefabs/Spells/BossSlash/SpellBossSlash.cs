@@ -11,7 +11,7 @@ public class SpellBossSlash : SpellProjectileBase
 
     protected void Awake()
     {
-        MyAwake();
+        SpellAwake();
         Animation();
     }
 
@@ -42,7 +42,7 @@ public class SpellBossSlash : SpellProjectileBase
         foreach (var collider in hitColliders)
         {
             if (collider.TryGetComponent(out AttackHandler unit))
-                unit.DAMAGE(DMG, conditions);
+                unit.DealDamage(DMG, conditions);
         }
     }
 }
