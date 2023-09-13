@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Tilemaps;
 using System;
+using NavMeshPlus.Components;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -32,7 +33,9 @@ public class LevelGenerator : MonoBehaviour {
 	[Tooltip("The settings of our map")]
 	public MapSettings mapSetting;
 
-    void Update()
+    public NavMeshSurface Surface2D;
+
+        void Update()
 	{
 		if (Input.GetKeyDown(KeyCode.N))
 		{
@@ -68,7 +71,8 @@ public class LevelGenerator : MonoBehaviour {
 
 		GameManager.map = map;
 
-		return map;
+        Surface2D.BuildNavMeshAsync();
+        return map;
     }
 
 	public void ClearMap()

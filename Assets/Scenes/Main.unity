@@ -839,7 +839,19 @@ PrefabInstance:
     - target: {fileID: 7719011190136187119, guid: 0ff81acdfe25c7b4bafc7528270801b2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1274520782}
+      objectReference: {fileID: 1274520784}
+    - target: {fileID: 7719011190136187119, guid: 0ff81acdfe25c7b4bafc7528270801b2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: HandleMenuRestart
+      objectReference: {fileID: 0}
+    - target: {fileID: 7719011190136187119, guid: 0ff81acdfe25c7b4bafc7528270801b2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GameManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7719011190136187119, guid: 0ff81acdfe25c7b4bafc7528270801b2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7916989875598768385, guid: 0ff81acdfe25c7b4bafc7528270801b2, type: 3}
       propertyPath: m_Name
       value: PauseUI
