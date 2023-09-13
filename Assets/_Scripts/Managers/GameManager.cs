@@ -140,6 +140,9 @@ public class GameManager : StaticInstance<GameManager>
             case GameState.Starting:
                 HandleStarting();
                 break;
+            case GameState.Restarting:
+                HandleStarting();
+                break;
             case GameState.Lose:
                 HandleLose();
                 break;
@@ -203,6 +206,17 @@ public class GameManager : StaticInstance<GameManager>
 
         }
         firstLevel = false;
+    }
+    void HandleRestarting()
+    {
+        enemies.Clear();
+        foreach (Transform children in UnitManager.Instance.transform)
+        {
+            Destroy(children.gameObject);
+        }
+        HandleStarting();
+
+
     }
 
     void HandlePostLevel()
@@ -359,8 +373,10 @@ public class GameManager : StaticInstance<GameManager>
     }
     public void HandleMenuRestart()
     {
-        //Logic for restarting levels ONLY FOR OUT OF HUB 
+        HandlePause();
+        ChangeState(GameState.Restarting); // Change GameState.Starting to the appropriate state
     }
+
 
 
     #endregion
