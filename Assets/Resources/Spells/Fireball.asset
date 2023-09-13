@@ -16,14 +16,14 @@ MonoBehaviour:
   Description: simple ball of fire
   image: {fileID: 0}
   Prefab: {fileID: 4769410748247290066, guid: c137b1f385cd7164c8d9298ca0837c26, type: 3}
-  DMG: 0
+  spellDamage: 100
   conditions:
   - Condition: 0
     AffectTime: 5
     AffectOnTick: 4
-  speed: 100
+  speed: 10
   destroyTime: 4
   caster: {fileID: 0}
   CastFromHeroeNoStaff: 0
-  cooldown: 0.6
+  cooldown: 0.06
   spellSlot: 0

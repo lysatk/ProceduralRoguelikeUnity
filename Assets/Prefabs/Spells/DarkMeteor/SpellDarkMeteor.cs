@@ -19,13 +19,13 @@ public class SpellDarkMeteor : SpellProjectileBase
     {
         if (collision.gameObject.TryGetComponent(out AttackHandler unit))
         {
-            unit.DealDamage(3, conditions);
+            unit.DealDamage(spellDamage, conditions);
 
-            BeforeDestroy();
+            BeforeDestory();
         }
     }
 
-    protected override bool BeforeDestroy()
+    protected override bool BeforeDestory()
     {
         StartCoroutine(AnimateTextureChange());
         rb.velocity = Vector2.zero;
@@ -36,33 +36,23 @@ public class SpellDarkMeteor : SpellProjectileBase
     {
         if (!hasPlayedAnimation)
         {
-            darkMeteorAnimator.enabled = true; // Włącz Animator 
-
-            //darkMeteorAnimator.Play("YourAnimationName"); // Odtwórz animację o konkretnej nazwie 
-
-            ExplosiveDamage();
-
-            // Poczekaj na zakończenie animacji
+            darkMeteorAnimator.enabled = true; 
+            ExplosiveDamageCircle();
             yield return new WaitForSeconds(darkMeteorAnimator.GetCurrentAnimatorStateInfo(0).length);
-
-            // Wyłącz Animator 
             darkMeteorAnimator.enabled = false;
-
             hasPlayedAnimation = true;
-
-            // Zniszczenie obiektu darkMeteor
             Destroy(gameObject);
         }
     }
 
-    private void ExplosiveDamage()
-    {
-        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y), 4.5f);
+    //private void ExplosiveDamage()
+    //{
+    //    Collider2D[] hitColliders = Physics2D.OverlapCircleAll(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y), 4.5f);
 
-        foreach (var collider in hitColliders)
-        {
-            if (collider.TryGetComponent(out AttackHandler unit))
-                unit.DealDamage(DMG, new List<ConditionBase>());
-        }
-    }
+    //    foreach (var collider in hitColliders)
+    //    {
+    //        if (collider.TryGetComponent(out AttackHandler unit))
+    //            unit.DealDamage(spellDamage, new List<ConditionBase>());
+    //    }
+    //}
 }

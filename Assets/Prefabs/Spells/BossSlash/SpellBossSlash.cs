@@ -42,7 +42,7 @@ public class SpellBossSlash : SpellProjectileBase
         foreach (var collider in hitColliders)
         {
             if (collider.TryGetComponent(out AttackHandler unit))
-                unit.DealDamage(DMG, conditions);
+                unit.DealDamage(spellDamage, conditions);
         }
     }
 }

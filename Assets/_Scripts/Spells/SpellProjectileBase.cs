@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Assets._Scripts.Utilities;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace Assets._Scripts.Spells
 {
@@ -13,12 +15,12 @@ namespace Assets._Scripts.Spells
             rb = GetComponent<Rigidbody2D>();
             rb.velocity = transform.right * speed;
 
-            if (BeforeDestroy())
+            if (BeforeDestory())
                 Destroy(gameObject, destroyTime);
         }
 
         /// <summary>the last function called before the spell prefab is destroyed</summary>
-        protected virtual bool BeforeDestroy()
+        protected virtual bool BeforeDestory()
         {
             return true;
         }
@@ -27,10 +29,22 @@ namespace Assets._Scripts.Spells
         {
             if (collision.gameObject.TryGetComponent(out AttackHandler attack))
             {
-                attack.DealDamage(DMG, conditions);
+                attack.DealDamage(spellDamage, conditions);
 
                 Destroy(gameObject);
             }
         }
+   
+        protected virtual void ExplosiveDamageCircle()
+        {
+            Collider2D[] hitColliders = Physics2D.OverlapCircleAll(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y), 4.5f);
+
+            foreach (var collider in hitColliders)
+            {
+                if (collider.TryGetComponent(out AttackHandler unit))
+                    unit.DealDamage(spellDamage, new List<ConditionBase>());
+            }
+        }
+     
     }
 }

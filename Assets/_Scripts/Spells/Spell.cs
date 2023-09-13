@@ -11,11 +11,11 @@ public class Spell : ScriptableObject
     public string Description;
     /// <summary> Spell icon </summary>
     public Sprite image;
-    /// <summary> Spell prefab</summary>
-    public SpellBase Prefab; //MonoBehaviour
+    /// <summary> Spell prefab (MonoBehaviour)</summary>
+    public SpellBase Prefab; 
 
     /// <summary> Spell damage</summary>
-    public float DMG;
+    public float spellDamage;
     /// <summary> Spell conditions for example burn enemy </summary>
     public List<ConditionBase> conditions;
     /// <summary> Spell Speed </summary>
@@ -25,7 +25,7 @@ public class Spell : ScriptableObject
     /// <summary> Spell caster</summary>
     public Collider2D caster;
 
-    /// <summary> Cast from heroe or from magic staff</summary>
+    /// <summary> Cast from playerCharacter or from staffPoint</summary>
     public bool CastFromHeroeNoStaff = false;
     /// <summary> Spell cooldown </summary>
     public float cooldown;

@@ -12,7 +12,7 @@ public class Arrow : SpellProjectileBase
     {
         if (collision.gameObject.TryGetComponent(out AttackHandler attack))
         {
-            attack.DealDamage(DMG, conditions);
+            attack.DealDamage(spellDamage, conditions);
 
             Destroy(gameObject);
         }
