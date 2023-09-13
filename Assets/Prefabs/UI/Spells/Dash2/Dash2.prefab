@@ -148,6 +148,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Clone Dash
+  DMG: 0
+  conditions: []
+  speed: 0
+  destroyTime: 0
 --- !u!1 &8542653625506293307
 GameObject:
   m_ObjectHideFlags: 0

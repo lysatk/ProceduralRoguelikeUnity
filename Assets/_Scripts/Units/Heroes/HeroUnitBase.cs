@@ -41,8 +41,8 @@ public class HeroUnitBase : UnitBase
 
     [SerializeField]
     private float _invincibilityDurationSeconds=1f;
-    [SerializeField]
-    private float _invincibilityDeltaTime = .005f;
+  //  [SerializeField]
+    private float _invincibilityDeltaTime = .2f;
 
     private bool isInvincible=false;
 
@@ -573,19 +573,19 @@ public class HeroUnitBase : UnitBase
         for (float i = 0; i < _invincibilityDurationSeconds; i += _invincibilityDeltaTime)
         {
             // Alternate between 0 and 1 scale to simulate flashing
-            if (spriteRenderer.color.a == 0.5f)
-            {
-                spriteBlink(1);
-            }
-            else
+            if (spriteRenderer.color.a == 1)
             {
                 spriteBlink(0.5f);
             }
+            else
+            {
+                spriteBlink(1f);
+            }
             yield return new WaitForSeconds(_invincibilityDeltaTime);
         }
-
-        Debug.Log("Player is no longer invincible!");
         spriteBlink(1);
+        Debug.Log("Player is no longer invincible!");
+        
         isInvincible = false;
         iframeRoutine = null;
 
