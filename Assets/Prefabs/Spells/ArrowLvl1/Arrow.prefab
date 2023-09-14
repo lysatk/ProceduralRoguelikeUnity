@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 639514538004180303}
   - component: {fileID: -766159839102585204}
   - component: {fileID: 1343789464}
-  - component: {fileID: 4314082280570956856}
+  - component: {fileID: -4894605583950019718}
   m_Layer: 6
   m_Name: Arrow
   m_TagString: Untagged
@@ -134,7 +134,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!114 &4314082280570956856
+--- !u!114 &-4894605583950019718
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -143,7 +143,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 639514538004180302}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4a276eba286e4b4fb93a483889361cc, type: 3}
+  m_Script: {fileID: 11500000, guid: 1388aac0ff6cf9a4ca707822eb67cf9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Arrow
+  spellDamage: 0
+  conditions: []
+  speed: 0
+  destroyTime: 0

@@ -1,5 +1,6 @@
 ﻿using Assets._Scripts.Utilities;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Assets._Scripts.Spells
@@ -46,5 +47,9 @@ namespace Assets._Scripts.Spells
             }
         }
      
+       protected virtual void Awake()
+        {
+            SpellAwake();
+        }
     }
 }

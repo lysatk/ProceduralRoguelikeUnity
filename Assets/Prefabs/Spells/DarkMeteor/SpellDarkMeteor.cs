@@ -10,7 +10,7 @@ public class SpellDarkMeteor : SpellProjectileBase
     private Animator darkMeteorAnimator;
     private bool hasPlayedAnimation = false;
 
-    protected void Awake()
+    protected override void Awake()
     {
         SpellAwake();
     }

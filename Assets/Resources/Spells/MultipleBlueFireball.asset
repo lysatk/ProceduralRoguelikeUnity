@@ -16,7 +16,7 @@ MonoBehaviour:
   Description: 
   image: {fileID: 0}
   Prefab: {fileID: 5680514342300321887, guid: bc906d649cf5e3d40807f1de74ff71ef, type: 3}
-  DMG: 0
+  spellDamage: 0
   conditions: []
   speed: 3
   destroyTime: 4

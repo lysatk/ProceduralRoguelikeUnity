@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 639514538004180303}
   - component: {fileID: -766159839102585204}
   - component: {fileID: 1343789464}
-  - component: {fileID: 1305789690271010945}
   - component: {fileID: 6446294594402300159}
+  - component: {fileID: 18035464751372906}
   m_Layer: 6
   m_Name: SpellFrost
   m_TagString: Untagged
@@ -135,23 +135,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!114 &1305789690271010945
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 639514538004180302}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc7dc6302ae6e3646a320fa7008cf672, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: Frost
-  DMG: 0
-  conditions: []
-  speed: 0
-  destroyTime: 0
 --- !u!95 &6446294594402300159
 Animator:
   serializedVersion: 5
@@ -173,3 +156,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &18035464751372906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 639514538004180302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1388aac0ff6cf9a4ca707822eb67cf9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Frost
+  spellDamage: 0
+  conditions: []
+  speed: 0
+  destroyTime: 0

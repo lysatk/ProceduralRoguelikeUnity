@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -766159839102585204}
   - component: {fileID: 1343789464}
   - component: {fileID: 6446294594402300159}
-  - component: {fileID: 7698074129301163778}
+  - component: {fileID: -9027111475609337005}
   m_Layer: 6
   m_Name: SpellPoisonBall
   m_TagString: Untagged
@@ -156,7 +156,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &7698074129301163778
+--- !u!114 &-9027111475609337005
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -165,11 +165,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 639514538004180302}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b30104667b3633244b5b5cc78bc7b242, type: 3}
+  m_Script: {fileID: 11500000, guid: 1388aac0ff6cf9a4ca707822eb67cf9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Posion Ball
-  DMG: 0
+  spellDamage: 0
   conditions: []
   speed: 0
   destroyTime: 0
