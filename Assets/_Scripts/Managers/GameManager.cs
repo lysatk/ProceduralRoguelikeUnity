@@ -76,6 +76,11 @@ public class GameManager : StaticInstance<GameManager>
     /// </summary>
     public CanvasGroup pauseCanvasGroup;
 
+    /// <summary>
+    /// ?????
+    /// </summary>
+    public CanvasGroup loadingCanvasGroup;
+
 
 
     /// <summary>
