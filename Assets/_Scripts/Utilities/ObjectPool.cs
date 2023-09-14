@@ -1,83 +1,32 @@
+using Assets._Scripts.Spells;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 
-public class ObjectPool : MonoBehaviour
+public class ObjectPool : StaticInstance<GameManager>
 {
-    [SerializeField]
-    protected GameObject objectToPool;
-    [SerializeField]
-    protected int poolSize = 10;
+    [SerializeField] private SpellProjectileBase _gameObject;
+    [SerializeField] private int _poolSize = 20;
 
-    protected Queue<GameObject> objectPool;
+    private ObjectPool<SpellProjectileBase> _pool;
 
-    public Transform spawnedObjectsParent;
-
-    private void Awake()
+    private void Start()
     {
-        objectPool = new Queue<GameObject>();
-
-    }
-
-    public void Initialize(GameObject objectToPool, int poolSize = 10)
-    {
-        this.objectToPool = objectToPool;
-        this.poolSize = poolSize;
-
-    }
-
-    public GameObject CreateObject()
-    {
-        CreateObjectParentIfNeeded();
-
-        GameObject spawnedObject = null;
-
-
-        if (objectPool.Count < poolSize)
+        _pool = new ObjectPool<SpellProjectileBase>(() =>
         {
-            spawnedObject = Instantiate(objectToPool, transform.position, Quaternion.identity);
-            spawnedObject.name = transform.root.name + "_" + objectToPool.name + "_" + objectPool.Count;
-            spawnedObject.transform.SetParent(spawnedObjectsParent);
-            spawnedObject.AddComponent<DestroyIfDisabled>();
-        }
-        else
+            return Instantiate(_gameObject);
+        }, spell =>
         {
-            spawnedObject = objectPool.Dequeue();
-            spawnedObject.transform.position = transform.position;
-            spawnedObject.transform.rotation = Quaternion.identity;
-            spawnedObject.SetActive(true);
-        }
-
-        objectPool.Enqueue(spawnedObject);
-        return spawnedObject;
+            spell.gameObject.SetActive(true);
+        }, spell =>
+        {
+            spell.gameObject.SetActive(false);
+        }, spell =>
+        {
+            Destroy(spell.gameObject);
+        }, false, 100, 1000);
     }
 
-    private void CreateObjectParentIfNeeded()
-    {
-        if (spawnedObjectsParent == null)
-        {
-            string name = "ObjectPool_" + objectToPool.name;
-            var parentObject = GameObject.Find(name);
-            if (parentObject != null)
-                spawnedObjectsParent = parentObject.transform;
-            else
-            {
-                spawnedObjectsParent = new GameObject(name).transform;
-            }
 
-        }
-    }
-
-    private void OnDestroy()
-    {
-        foreach (var item in objectPool)
-        {
-            if (item == null)
-                continue;
-            else if (item.activeSelf == false)
-                Destroy(item);
-            else
-                item.GetComponent<DestroyIfDisabled>().SelfDestructionEnabled = true;
-        }
-    }
 }
