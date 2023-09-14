@@ -15,8 +15,8 @@ MonoBehaviour:
   Name: Toxin Ball
   Description: 
   image: {fileID: 0}
-  Prefab: {fileID: -5791720838747138197, guid: 829aaf36111d6a747a0f42d20fe7c44f, type: 3}
-  DMG: 0
+  Prefab: {fileID: 8448325664599715051, guid: 829aaf36111d6a747a0f42d20fe7c44f, type: 3}
+  spellDamage: 0
   conditions:
   - Condition: 3
     AffectTime: 3
