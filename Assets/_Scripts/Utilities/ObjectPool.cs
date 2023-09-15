@@ -7,9 +7,9 @@ using UnityEngine.Pool;
 public class ObjectPool : StaticInstance<GameManager>
 {
     [SerializeField] private SpellProjectileBase _gameObject;
-    [SerializeField] private int _poolSize = 20;
+   // [SerializeField] private int _poolSize = 20;
 
-    private ObjectPool<SpellProjectileBase> _pool;
+    public ObjectPool<SpellProjectileBase> _pool;
 
     private void Start()
     {

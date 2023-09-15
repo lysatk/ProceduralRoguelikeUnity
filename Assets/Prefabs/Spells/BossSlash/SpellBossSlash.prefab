@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 4
-  m_Sprite: {fileID: -1736209344, guid: 81bf015180083ad4eb05ff62baaf6cbd, type: 3}
+  m_Sprite: {fileID: 1777210045, guid: 4f9a7276274ae6942b4ac5c70173bd0a, type: 3}
   m_Color: {r: 0.6886792, g: 0.10720008, b: 0.10720008, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_Size: {x: 0.32, y: 0.32}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!50 &1343789464
@@ -169,5 +169,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Boss Slash
+  spellDamage: 0
+  conditions: []
+  speed: 0
+  destroyTime: 0
   radius: 4.5
   animator: {fileID: 9032830588418902039}
