@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.SocialPlatforms.Impl;
 using Random = UnityEngine.Random;
 using Stats = Assets._Scripts.Utilities.Stats;
@@ -64,11 +65,29 @@ public abstract class EnemyBase : UnitBase
     [SerializeField]
     private intSO scoreSO;
 
+    NavMeshAgent navMeshAgent;
+
     void Awake()
     {
         conditionsBar = gameObject.transform.GetChild(0);
 
         _conditionUI = conditionsBar.GetComponent<ConditionUI>();
+
+        // Check if the GameObject already has a NavMeshAgent component
+        navMeshAgent = GetComponent<NavMeshAgent>();
+
+        // If the NavMeshAgent component doesn't exist, add it
+        if (navMeshAgent == null)
+        {
+            navMeshAgent = gameObject.AddComponent<NavMeshAgent>();
+            // You can configure the NavMeshAgent's properties here if needed
+            navMeshAgent.speed = stats.MovementSpeed; // Example: Set the speed
+            navMeshAgent.stoppingDistance = 1.0f; // Example: Set the stopping distance
+            // Set the destination or other NavMeshAgent settings as needed
+            navMeshAgent.updateRotation = false;
+            navMeshAgent.updateUpAxis= false;   
+        }
+
     }
     /// <summary>
     /// Add Score, play death animation and remove enity form enemies list 
@@ -177,6 +196,8 @@ public abstract class EnemyBase : UnitBase
             return;
 
         Vector3 pos = rb.position + stats.MovementSpeed * Time.fixedDeltaTime * heading;
+        _anim.CrossFade("Walk", 0, 0);
+
         rb.MovePosition(pos);
         if (heading.x <= 0.1)
         {
@@ -187,24 +208,4 @@ public abstract class EnemyBase : UnitBase
             spriteRenderer.flipX = true;
         }
     }
-
-    //private Vector2 GetClosestEnemy()
-    //{
-    //    Vector2 pos = rb.position;
-    //    Vector2 closestEnemy = rb.position;
-    //    float closestDist = float.MaxValue;
-    //    foreach (GameObject e in GameManager.enemies)
-    //    {
-    //        float tempDist = Vector2.Distance((Vector2)e.transform.position, pos);
-    //        if (tempDist == 0)
-    //            continue;
-    //        if (tempDist < closestDist)
-    //        {
-    //            closestDist = tempDist;
-    //            closestEnemy = e.transform.position;
-    //        }
-    //    }
-
-    //    return closestEnemy;
-    //}
 }

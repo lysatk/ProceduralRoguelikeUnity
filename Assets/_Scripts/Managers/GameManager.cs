@@ -205,7 +205,7 @@ public class GameManager : StaticInstance<GameManager>
         waveName.text = "";
         FindObjectOfType<LevelGenerator>().GenerateMap();
 
-        for (int i = 0; i < 1; i++)
+        for (int i = 0; i < 30; i++)
         {
             UnitManager.Instance.SpawnEnemy((ExampleEnemyType)Random.Range(0, 3), 1);
 

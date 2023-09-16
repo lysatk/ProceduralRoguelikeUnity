@@ -151,8 +151,8 @@ public class BasicEnemy : EnemyBase
         if (Vector2.Distance(transform.position, player.position) <= rangeOfRest)
             if (onCooldown)
                 ChangeState(States.Rest);
-        //if (Vector2.Distance(transform.position, player.position) <= rangeOfRest)
-        //    ChangeState(States.Rest);
+        if (Vector2.Distance(transform.position, player.position) <= rangeOfRest)
+            ChangeState(States.Rest);
         if (_isDead)
             ChangeState(States.Die);
     }
