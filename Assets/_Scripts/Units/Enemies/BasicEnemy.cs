@@ -53,31 +53,26 @@ public class BasicEnemy : EnemyBase
     {
         Gizmos.color = dotColor;
         Gizmos.DrawSphere(transform.position, dotSize);
-        //float halfFOV = coneAngle / 2.0f;
+        float halfFOV = coneAngle / 2.0f;
 
-        //Quaternion upRayRotation = Quaternion.AngleAxis(-halfFOV + coneDirection, Vector3.forward);
-        //Quaternion downRayRotation = Quaternion.AngleAxis(halfFOV + coneDirection, Vector3.forward);
+        Quaternion upRayRotation = Quaternion.AngleAxis(-halfFOV + coneDirection, Vector3.forward);
+        Quaternion downRayRotation = Quaternion.AngleAxis(halfFOV + coneDirection, Vector3.forward);
 
-        //Vector3 upRayDirection = upRayRotation * transform.right * coneDistance;
-        //Vector3 downRayDirection = downRayRotation * transform.right * coneDistance;
+        Vector3 upRayDirection = upRayRotation * transform.right * coneDistance;
+        Vector3 downRayDirection = downRayRotation * transform.right * coneDistance;
 
-        //Gizmos.DrawRay(transform.position, upRayDirection);
-        //Gizmos.DrawRay(transform.position, downRayDirection);
-        //Gizmos.DrawLine(transform.position + downRayDirection, transform.position + upRayDirection);
+        Gizmos.DrawRay(transform.position, upRayDirection);
+        Gizmos.DrawRay(transform.position, downRayDirection);
+        Gizmos.DrawLine(transform.position + downRayDirection, transform.position + upRayDirection);
 
-        //Gizmos.color = Color.red;
+        Gizmos.color = Color.red;
 
-        //foreach (Collider2D e in avoid)
-        //{
-        //    if (e == null)
-        //        continue;
-        //    Gizmos.DrawSphere(e.transform.position, dotSize);
-        //}
 
     }
 
     void Update()
     {
+
         switch (currentState)
         {
             case States.Idle:

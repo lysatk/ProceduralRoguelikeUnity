@@ -81,19 +81,22 @@ public abstract class EnemyBase : UnitBase
         {
             navMeshAgent = gameObject.AddComponent<NavMeshAgent>();
             // You can configure the NavMeshAgent's properties here if needed
-            navMeshAgent.speed = stats.MovementSpeed; // Example: Set the speed
-            navMeshAgent.stoppingDistance = 1.0f; // Example: Set the stopping distance
+            
             // Set the destination or other NavMeshAgent settings as needed
-            navMeshAgent.updateRotation = false;
-            navMeshAgent.updateUpAxis= false;   
+         
         }
-
+       //  navMeshAgent.speed = stats.MovementSpeed; // Example: Set the speed
+      //  navMeshAgent.speed = 1.0f;
+        navMeshAgent.stoppingDistance = 5.0f; // Example: Set the stopping distance
+        navMeshAgent.updateRotation = false;
+        navMeshAgent.updateUpAxis = false;
     }
     /// <summary>
     /// Add Score, play death animation and remove enity form enemies list 
     /// </summary>
     public override void Die()
     {
+        navMeshAgent.isStopped=true;
         base.Die();
         scoreSO.Int++;
         _anim.CrossFade("Death", 0, 0);
@@ -113,99 +116,68 @@ public abstract class EnemyBase : UnitBase
     /// <returns></returns>
     public override bool TryMove(Vector2 direction)
     {
-        if (!_canMove)
-        {
-            if(_isDead)
-                return false;
-            StopAnimation();
-            return false;
-        }
+        //if (!_canMove)
+        //{
+        //    if(_isDead)
+        //        return false;
+        //    StopAnimation();
+        //    return false;
+        //}
 
-        _anim.CrossFade("Walk", 0, 0);
-        direction.Normalize();
+        //_anim.CrossFade("Walk", 0, 0);
+        //direction.Normalize();
 
-        if (direction != Vector2.zero)
-        {
-            // Check for potential collisions
-            int count = rb.Cast(
-                direction, // X and Y values between -1 and 1 that represent the direction from the body to look for collisions
-                movementFilter, // The settings that determine where a collision can occur on such as layers to collide with
-                castCollisions, // List of collisions to store the found collisions into after the Cast is finished
-                stats.MovementSpeed * Time.fixedDeltaTime + collisionOffset); // The amount to cast equal to the movement plus an offset
+        //if (direction != Vector2.zero)
+        //{
+        //    // Check for potential collisions
+        //    int count = rb.Cast(
+        //        direction, // X and Y values between -1 and 1 that represent the direction from the body to look for collisions
+        //        movementFilter, // The settings that determine where a collision can occur on such as layers to collide with
+        //        castCollisions, // List of collisions to store the found collisions into after the Cast is finished
+        //        stats.MovementSpeed * Time.fixedDeltaTime + collisionOffset); // The amount to cast equal to the movement plus an offset
 
-            if (count == 0)
-            {
-                //Debug.Log(direction);
-                return true;
-            }
-            return false;
-        }
-        else
-        {
-            _anim.CrossFade("Idle", 0, 0);
-        }
+        //    if (count == 0)
+        //    {
+        //        //Debug.Log(direction);
+        //        return true;
+        //    }
+        //    return false;
+        //}
+        //else
+        //{
+        //    _anim.CrossFade("Idle", 0, 0);
+        //}
 
 
         return false;
     }
 
-    protected void Patrol()
-    {
-        TryMove(randomDestination);
-
-        if (Time.time - lastPatrol <= 1)
-            return;
-
-        randomDestination = Random.insideUnitCircle * PatrolRadius;//new Vector2(Random.Range(-1, 2), Random.Range(-1, 2));
-        randomDestination += PatrolPoint;
-
-        //Debug.Log(randomDestination);
-        lastPatrol = Time.time;
-    }
-
-    protected bool SeeSense(float heading)
-    {
-        if (Vector2.Distance(player.position, transform.position) >= seeDistance)
-            return false;
-        Vector2 dir = (Vector2)player.position - (Vector2)transform.position;
-        coneDirection = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        Vector2 directionToPosition = (Vector2)player.position - (Vector2)transform.position;
-        Vector2 headingVector = new Vector2(Mathf.Cos(heading * Mathf.Deg2Rad), Mathf.Sin(heading * Mathf.Deg2Rad));
-        float angleToPosition = Vector2.Angle(headingVector, directionToPosition);
-
-        if (angleToPosition <= coneAngle / 2f && directionToPosition.magnitude <= coneDistance)
-            return true;
-        else
-            return false;
-    }
+  
 
     protected void Move()
     {
-        heading = contextSolver.ChooseDirection();
-        if (!TryMove(heading))
+        // Assuming you have a reference to the NavMeshAgent component
+        if (navMeshAgent == null)
         {
-            for (int i = 0; i < 8; i++)
-            {
-                heading = aiData.direction[i];
-                if (TryMove(heading))
-                    break;
-            }
-        }
-
-        if (!TryMove(heading))
+            // If the NavMeshAgent component is not assigned, you should handle this error.
+            Debug.LogError("NavMeshAgent not assigned.");
             return;
-
-        Vector3 pos = rb.position + stats.MovementSpeed * Time.fixedDeltaTime * heading;
-        _anim.CrossFade("Walk", 0, 0);
-
-        rb.MovePosition(pos);
-        if (heading.x <= 0.1)
-        {
-            spriteRenderer.flipX = false;
         }
-        else if (heading.x > 0.1)
+
+        // Set the destination for the NavMeshAgent
+        Vector3 newDestination = player.transform.position; // Replace this with your logic for choosing a destination.
+        navMeshAgent.SetDestination(newDestination);
+
+        // If the NavMeshAgent is close to its destination, stop walking animation
+        if (navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
         {
-            spriteRenderer.flipX = true;
+            _anim.CrossFade("Idle", 0, 0);
         }
+        else
+        {
+            _anim.CrossFade("Walk", 0, 0);
+        }
+
+        // You don't need to manually handle flipping the sprite, NavMeshAgent should handle it automatically.
     }
 }
