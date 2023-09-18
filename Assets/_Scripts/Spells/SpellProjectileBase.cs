@@ -10,6 +10,7 @@ namespace Assets._Scripts.Spells
     {
         protected Rigidbody2D rb;
 
+
         protected void SpellAwake()
         {
             SetSpellStats();
@@ -20,7 +21,6 @@ namespace Assets._Scripts.Spells
                 Destroy(gameObject, destroyTime);
         }
 
-        /// <summary>the last function called before the spell prefab is destroyed</summary>
         protected virtual bool BeforeDestory()
         {
             return true;

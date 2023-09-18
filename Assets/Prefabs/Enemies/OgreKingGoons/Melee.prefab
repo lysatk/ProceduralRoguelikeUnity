@@ -134,7 +134,7 @@ MonoBehaviour:
   attackFromCenter: 0
   rangeOfAttack: 2
   rangeOfRest: 5
-  rangeOfChase: 7
+  rangeOfChase: 15
   attackCooldown: 2
   spell: {fileID: 11400000, guid: d49a602c786428d46b04ff35ff2963d7, type: 2}
 --- !u!114 &800590843184558351

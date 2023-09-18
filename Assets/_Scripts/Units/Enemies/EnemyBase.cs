@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SocialPlatforms.Impl;
 using Random = UnityEngine.Random;
-using Stats = Assets._Scripts.Utilities.Stats;
+//using Stats = Assets._Scripts.Utilities.Stats;
 
 /// <summary>
 /// Base logic for enemy
@@ -27,7 +27,7 @@ public abstract class EnemyBase : UnitBase
 
     protected Rigidbody2D rb;
     List<RaycastHit2D> castCollisions = new();
-  // bool _canMove = true;
+    // bool _canMove = true;
     protected Vector2 heading;
     protected float[] wages = new float[8];
 
@@ -65,44 +65,36 @@ public abstract class EnemyBase : UnitBase
     [SerializeField]
     private intSO scoreSO;
 
-    NavMeshAgent navMeshAgent;
+    protected NavMeshAgent navMeshAgent;
 
     void Awake()
     {
         conditionsBar = gameObject.transform.GetChild(0);
-
         _conditionUI = conditionsBar.GetComponent<ConditionUI>();
 
-        // Check if the GameObject already has a NavMeshAgent component
         navMeshAgent = GetComponent<NavMeshAgent>();
-
-        // If the NavMeshAgent component doesn't exist, add it
         if (navMeshAgent == null)
         {
             navMeshAgent = gameObject.AddComponent<NavMeshAgent>();
-            // You can configure the NavMeshAgent's properties here if needed
-            
-            // Set the destination or other NavMeshAgent settings as needed
-         
         }
-       //  navMeshAgent.speed = stats.MovementSpeed; // Example: Set the speed
-      //  navMeshAgent.speed = 1.0f;
-        navMeshAgent.stoppingDistance = 5.0f; // Example: Set the stopping distance
-        navMeshAgent.updateRotation = false;
-        navMeshAgent.updateUpAxis = false;
+
+
     }
+
+
+
     /// <summary>
     /// Add Score, play death animation and remove enity form enemies list 
     /// </summary>
     public override void Die()
     {
-        navMeshAgent.isStopped=true;
+        navMeshAgent.enabled = false;
         base.Die();
         scoreSO.Int++;
         _anim.CrossFade("Death", 0, 0);
         _isDead = true;
         GameManager.enemies.Remove(this.gameObject);
-        Destroy(gameObject, 3f);
+        Destroy(gameObject, 0.8f);
     }
     protected void StopAnimation()
     {
@@ -116,46 +108,15 @@ public abstract class EnemyBase : UnitBase
     /// <returns></returns>
     public override bool TryMove(Vector2 direction)
     {
-        //if (!_canMove)
-        //{
-        //    if(_isDead)
-        //        return false;
-        //    StopAnimation();
-        //    return false;
-        //}
 
-        //_anim.CrossFade("Walk", 0, 0);
-        //direction.Normalize();
-
-        //if (direction != Vector2.zero)
-        //{
-        //    // Check for potential collisions
-        //    int count = rb.Cast(
-        //        direction, // X and Y values between -1 and 1 that represent the direction from the body to look for collisions
-        //        movementFilter, // The settings that determine where a collision can occur on such as layers to collide with
-        //        castCollisions, // List of collisions to store the found collisions into after the Cast is finished
-        //        stats.MovementSpeed * Time.fixedDeltaTime + collisionOffset); // The amount to cast equal to the movement plus an offset
-
-        //    if (count == 0)
-        //    {
-        //        //Debug.Log(direction);
-        //        return true;
-        //    }
-        //    return false;
-        //}
-        //else
-        //{
-        //    _anim.CrossFade("Idle", 0, 0);
-        //}
-
-
-        return false;
+        return true;
     }
 
-  
 
-    protected void Move()
+
+    protected void Move(Vector3 target)
     {
+        if (_isDead) { return; }
         // Assuming you have a reference to the NavMeshAgent component
         if (navMeshAgent == null)
         {
@@ -164,20 +125,29 @@ public abstract class EnemyBase : UnitBase
             return;
         }
 
-        // Set the destination for the NavMeshAgent
-        Vector3 newDestination = player.transform.position; // Replace this with your logic for choosing a destination.
-        navMeshAgent.SetDestination(newDestination);
-
-        // If the NavMeshAgent is close to its destination, stop walking animation
-        if (navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
+        if (_canMove)
         {
-            _anim.CrossFade("Idle", 0, 0);
+            navMeshAgent.isStopped = false;
+            // Set the destination for the NavMeshAgent
+      
+            navMeshAgent.SetDestination(target);
+
+            // If the NavMeshAgent is close to its destination, stop walking animation
+            if (navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
+            {
+                StopAnimation();
+            }
+            else
+            {
+                _anim.CrossFade("Walk", 0, 0);
+            }
+
         }
         else
         {
-            _anim.CrossFade("Walk", 0, 0);
+            navMeshAgent.isStopped = true;
+            StopAnimation();
         }
 
-        // You don't need to manually handle flipping the sprite, NavMeshAgent should handle it automatically.
     }
 }

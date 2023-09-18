@@ -10,8 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8275289018769346798}
   - component: {fileID: 7858032816570600379}
-  - component: {fileID: 8324945444546159093}
-  - component: {fileID: 7061813054309352363}
   - component: {fileID: 8109268066809691}
   - component: {fileID: -5191531559772631539}
   - component: {fileID: -8138470197479937915}
@@ -98,53 +96,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!50 &8324945444546159093
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6262015385233187950}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!61 &7061813054309352363
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6262015385233187950}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.060000002, y: -0.013031006}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.1229706}
-    oldSize: {x: 1.8, y: 2.5}
-    newSize: {x: 0.15, y: 0.18}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.7, y: 0.36663818}
-  m_EdgeRadius: 0
 --- !u!114 &8109268066809691
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183,7 +134,7 @@ MonoBehaviour:
   attackFromCenter: 0
   rangeOfAttack: 1
   rangeOfRest: 10
-  rangeOfChase: 15
+  rangeOfChase: 30
   attackCooldown: 2
   spell: {fileID: 11400000, guid: e1fb58d9855315c4290acf3c2bed5924, type: 2}
 --- !u!114 &-5191531559772631539
