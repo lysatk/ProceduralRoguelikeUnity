@@ -15,8 +15,8 @@ MonoBehaviour:
   Name: Piss Frost
   Description: 
   image: {fileID: 0}
-  Prefab: {fileID: 235982382515569504, guid: 55f7cd3278042b44f9f04d1633ab8e1d, type: 3}
-  DMG: 0
+  Prefab: {fileID: 3216717982057350014, guid: 55f7cd3278042b44f9f04d1633ab8e1d, type: 3}
+  spellDamage: 0
   conditions: []
   speed: 8
   destroyTime: 4

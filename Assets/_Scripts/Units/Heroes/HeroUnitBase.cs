@@ -46,7 +46,7 @@ public class HeroUnitBase : UnitBase
     //  [SerializeField]
     private float _invincibilityDeltaTime = .2f;
 
-    private bool isInvincible = false;
+    public bool isInvincible = false;
 
     StaffRotation spellRotator;
 

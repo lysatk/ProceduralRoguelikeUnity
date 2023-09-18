@@ -82,31 +82,13 @@ public class UnitManager : StaticInstance<UnitManager>
             stats.DmgModifier *= scaleMultiplier;
 
             enemySpawned.SetStats(stats);
+            
             return enemySpawned.gameObject;
         }
         return null;
     }
 
-    Vector3 GetRandomVector()
-    {
-        int width = GameManager.map.GetLength(1) - 1;
-        int height = GameManager.map.GetLength(0) - 1;
-
-        int randomX = Random.Range(0, width);
-        int randomY = Random.Range(0, height);
-
-        while (GameManager.map[randomY, randomX] != 0 ||
-            GameManager.map[randomY - 1, randomX] != 0 ||
-            GameManager.map[randomY + 1, randomX] != 0 ||
-            GameManager.map[randomY, randomX - 1] != 0 ||
-            GameManager.map[randomY, randomX + 1] != 0)
-        {
-            randomX = Random.Range(1, width);
-            randomY = Random.Range(1, height);
-        }
-        return new Vector3(randomX * 1.6f, randomY * 1.6f, 0);
-    }
-
+  
     Vector3 GetRandomSpawner()
     {
         List<Vector2Int> spawners = new();

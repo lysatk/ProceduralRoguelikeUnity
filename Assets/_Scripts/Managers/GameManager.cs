@@ -76,6 +76,11 @@ public class GameManager : StaticInstance<GameManager>
     /// </summary>
     public CanvasGroup pauseCanvasGroup;
 
+    /// <summary>
+    /// ?????
+    /// </summary>
+    public CanvasGroup loadingCanvasGroup;
+
 
 
     /// <summary>
@@ -200,7 +205,7 @@ public class GameManager : StaticInstance<GameManager>
         waveName.text = "";
         FindObjectOfType<LevelGenerator>().GenerateMap();
 
-        for (int i = 0; i < 25; i++)
+        for (int i = 0; i < 30; i++)
         {
             UnitManager.Instance.SpawnEnemy((ExampleEnemyType)Random.Range(0, 3), 1);
 
@@ -224,7 +229,7 @@ public class GameManager : StaticInstance<GameManager>
         waveName.text = "";
         FindObjectOfType<LevelGenerator>().GenerateMap();
 
-        for (int i = 0; i < 40; i++)
+        for (int i = 0; i < 25; i++)
         {
             UnitManager.Instance.SpawnEnemy((ExampleEnemyType)Random.Range(0, 3), 1);
         }

@@ -15,8 +15,8 @@ MonoBehaviour:
   Name: Posion Ball
   Description: Ball of poisonous fluid
   image: {fileID: 0}
-  Prefab: {fileID: 7698074129301163778, guid: 90712f16b9d483a43aceff43e05a1eed, type: 3}
-  DMG: 5
+  Prefab: {fileID: -9027111475609337005, guid: 90712f16b9d483a43aceff43e05a1eed, type: 3}
+  spellDamage: 0
   conditions:
   - Condition: 3
     AffectTime: 5

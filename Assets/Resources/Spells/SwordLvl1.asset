@@ -16,7 +16,7 @@ MonoBehaviour:
   Description: Simlpe sword attack
   image: {fileID: 0}
   Prefab: {fileID: 1099537924596150824, guid: 7c76460e93cc5a74f8e79051c3332587, type: 3}
-  DMG: 0
+  spellDamage: 8
   conditions: []
   speed: 3
   destroyTime: 4

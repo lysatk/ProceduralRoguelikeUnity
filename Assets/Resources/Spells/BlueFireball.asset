@@ -15,8 +15,8 @@ MonoBehaviour:
   Name: Blue Fireball
   Description: Blue fireball... that's it
   image: {fileID: -1782053002, guid: ce7e133b0845cdd4683a8674f032139f, type: 3}
-  Prefab: {fileID: 7406320687217791227, guid: 4a1089971e99df1459a4b3e5379a551d, type: 3}
-  DMG: 7
+  Prefab: {fileID: -983292841010923464, guid: 4a1089971e99df1459a4b3e5379a551d, type: 3}
+  spellDamage: 0
   conditions: []
   speed: 7
   destroyTime: 4

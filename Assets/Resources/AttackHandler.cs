@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AttackHandler : MonoBehaviour
 {
-    public void DAMAGE(float dmg, List<ConditionBase> list)
+    public void DealDamage(float dmg, List<ConditionBase> list)
     {
         var unit = gameObject.GetComponentInParent<UnitBase>();
         unit.TakeDamage(dmg, list);
