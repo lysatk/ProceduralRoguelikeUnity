@@ -10,10 +10,11 @@ public class SpellDarkMeteor : SpellProjectileBase
     private Animator darkMeteorAnimator;
     private bool hasPlayedAnimation = false;
 
-    protected override void Awake()
+    protected override void OnEnable()
     {
         SpellAwake();
     }
+  
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

@@ -1,4 +1,5 @@
 ﻿using Assets._Scripts.Utilities;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -9,7 +10,7 @@ namespace Assets._Scripts.Spells
     public class SpellProjectileBase : SpellBase
     {
         protected Rigidbody2D rb;
-
+      //  private Coroutine _returnToPool;
 
         protected void SpellAwake()
         {
@@ -18,8 +19,19 @@ namespace Assets._Scripts.Spells
             rb.velocity = transform.right * speed;
 
             if (BeforeDestory())
-                Destroy(gameObject, destroyTime);
+            {
+                StartCoroutine(WaitForSecondsCoroutine(destroyTime)); 
+               
+            }
+                // Destroy(gameObject, destroyTime);
+            }
+
+            IEnumerator WaitForSecondsCoroutine(float secondsToWait)
+        {
+            yield return new WaitForSeconds(secondsToWait);
+            ObjectPool.ReturnObject(gameObject);
         }
+
 
         protected virtual bool BeforeDestory()
         {
@@ -32,7 +44,7 @@ namespace Assets._Scripts.Spells
             {
                 attack.DealDamage(spellDamage, conditions);
 
-                Destroy(gameObject);
+                ObjectPool.ReturnObject(gameObject);
             }
         }
    
@@ -47,9 +59,14 @@ namespace Assets._Scripts.Spells
             }
         }
      
-       protected virtual void Awake()
+       protected virtual void OnEnable()
         {
             SpellAwake();
+        }
+        protected void Awake()
+        {
+            SpellAwake();
+
         }
     }
 }

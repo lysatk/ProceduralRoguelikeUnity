@@ -6,8 +6,7 @@ using UnityEngine.UI;
 public class CooldownUI: MonoBehaviour
 {
     [SerializeField]
-    private Slider[] sliders; 
-   
+    private Slider[] sliders;
 
     public void SetMaxCooldowns(int[] maxCooldowns)
     {
