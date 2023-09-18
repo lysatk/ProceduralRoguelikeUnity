@@ -76,6 +76,11 @@ public class GameManager : StaticInstance<GameManager>
     /// </summary>
     public CanvasGroup pauseCanvasGroup;
 
+    /// <summary>
+    /// ?????
+    /// </summary>
+    public CanvasGroup loadingCanvasGroup;
+
 
 
     /// <summary>
@@ -140,6 +145,9 @@ public class GameManager : StaticInstance<GameManager>
             case GameState.Starting:
                 HandleStarting();
                 break;
+            case GameState.Restarting:
+                HandleStarting();
+                break;
             case GameState.Lose:
                 HandleLose();
                 break;
@@ -197,12 +205,23 @@ public class GameManager : StaticInstance<GameManager>
         waveName.text = "";
         FindObjectOfType<LevelGenerator>().GenerateMap();
 
-        for (int i = 0; i < 25; i++)
+        for (int i = 0; i < 30; i++)
         {
             UnitManager.Instance.SpawnEnemy((ExampleEnemyType)Random.Range(0, 3), 1);
 
         }
         firstLevel = false;
+    }
+    void HandleRestarting()
+    {
+        enemies.Clear();
+        foreach (Transform children in UnitManager.Instance.transform)
+        {
+            Destroy(children.gameObject);
+        }
+        HandleStarting();
+
+
     }
 
     void HandlePostLevel()
@@ -210,7 +229,7 @@ public class GameManager : StaticInstance<GameManager>
         waveName.text = "";
         FindObjectOfType<LevelGenerator>().GenerateMap();
 
-        for (int i = 0; i < 40; i++)
+        for (int i = 0; i < 25; i++)
         {
             UnitManager.Instance.SpawnEnemy((ExampleEnemyType)Random.Range(0, 3), 1);
         }
@@ -359,8 +378,10 @@ public class GameManager : StaticInstance<GameManager>
     }
     public void HandleMenuRestart()
     {
-        //Logic for restarting levels ONLY FOR OUT OF HUB 
+        HandlePause();
+        ChangeState(GameState.Restarting); // Change GameState.Starting to the appropriate state
     }
+
 
 
     #endregion

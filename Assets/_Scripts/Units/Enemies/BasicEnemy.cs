@@ -1,5 +1,6 @@
-using Assets._Scripts.Utilities;
+﻿using Assets._Scripts.Utilities;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -23,10 +24,27 @@ public class BasicEnemy : EnemyBase
     private Spell spell;
     bool onCooldown = false;
 
-    private float dotSize = 0.2f;
-    private Color dotColor = Color.green;
 
     private float lastAttack = 0;
+
+
+
+    private float attackPhaseTimer = 0f;
+    private float attackPhaseDuration = 5f;  
+    private float attackCooldownRamp = 1.5f; 
+    private float lastPlayerDamageTime = 0f;
+    private float movementBiasTimer = 0f;
+    private float movementBiasDuration = 5f; 
+    private float maxAttackRate = 1f; 
+    private float minAttackRate = 0.1f; 
+    private float currentAttackRate = 0.1f;
+
+
+    private float restMovementTimer = 0f;
+    private float restMovementDuration = 1f;
+    private float restMovementRange = 2f; 
+    private Vector3 restTargetPosition;
+
 
     private enum States
     {
@@ -47,159 +65,149 @@ public class BasicEnemy : EnemyBase
         currentState = States.Moving;
         _anim = GetComponent<Animator>();
         aiData.currentTarget = player.transform;
+        ConfigureNavmeshAgent();
     }
-
-    private void OnDrawGizmos()
+    public void ConfigureNavmeshAgent()
     {
-        Gizmos.color = dotColor;
-        Gizmos.DrawSphere(transform.position, dotSize);
-        //float halfFOV = coneAngle / 2.0f;
-
-        //Quaternion upRayRotation = Quaternion.AngleAxis(-halfFOV + coneDirection, Vector3.forward);
-        //Quaternion downRayRotation = Quaternion.AngleAxis(halfFOV + coneDirection, Vector3.forward);
-
-        //Vector3 upRayDirection = upRayRotation * transform.right * coneDistance;
-        //Vector3 downRayDirection = downRayRotation * transform.right * coneDistance;
-
-        //Gizmos.DrawRay(transform.position, upRayDirection);
-        //Gizmos.DrawRay(transform.position, downRayDirection);
-        //Gizmos.DrawLine(transform.position + downRayDirection, transform.position + upRayDirection);
-
-        //Gizmos.color = Color.red;
-
-        //foreach (Collider2D e in avoid)
-        //{
-        //    if (e == null)
-        //        continue;
-        //    Gizmos.DrawSphere(e.transform.position, dotSize);
-        //}
-
+        navMeshAgent.speed = stats.MovementSpeed;
+        navMeshAgent.stoppingDistance = rangeOfAttack;
+        navMeshAgent.updateRotation = false;
+        navMeshAgent.updateUpAxis = false;
+        navMeshAgent.obstacleAvoidanceType = UnityEngine.AI.ObstacleAvoidanceType.LowQualityObstacleAvoidance;
     }
+
+
 
     void Update()
     {
         switch (currentState)
         {
             case States.Idle:
-                Idle();
-                break;
-            case States.Moving:
-                Moving();
-                break;
-            case States.Attacking:
-                Attacking();
-                break;
-            case States.Rest:
-                Resting();
-                break;
-            case States.Die:
-                Death();
-                break;
-            default:
-                Debug.LogWarning($"Invalid state: {currentState}");
-                break;
-        }
-    }
-
-    private void Death()
-    {
-        dotColor = Color.black;
-    }
-
-    #region states
-    private void Resting()
-    {
-        dotColor = Color.yellow;
-
-        if (Time.time - lastAttack > attackCooldown)
-            onCooldown = false;
-        if (!onCooldown)
-            ChangeState(States.Moving);
-        if (Vector2.Distance(transform.position, player.position) < rangeOfRest)
-            Escape();
-        else
-            ChangeState(States.Idle);
-        if (_isDead)
-            ChangeState(States.Die);
-    }
-    private void Idle()
-    {
-        if (Time.time - lastAttack > attackCooldown)
-        {
-            //Debug.Log($"Time: {Time.time}| Last Attack: {lastAttack}");
-            onCooldown = false;
-            ChangeState(States.Attacking);
-        }
-        dotColor = Color.blue;
-        StopAnimation();
-        //Patrol();
-        if (Vector2.Distance(transform.position, player.position) > rangeOfChase)
-            ChangeState(States.Moving);
-        if (Vector2.Distance(transform.position, player.position) < rangeOfRest)
-            ChangeState(States.Rest);
-        if (!onCooldown)
-            ChangeState(States.Moving);
-        if (_isDead)
-            ChangeState(States.Die);
-    }
-    private void Moving()
-    {
-        dotColor = Color.green;
-        Move();
-        if (Vector2.Distance(transform.position, player.position) <= rangeOfAttack)
-            ChangeState(States.Attacking);
-        if (Vector2.Distance(transform.position, player.position) <= rangeOfRest)
-            if (onCooldown)
                 ChangeState(States.Rest);
-        //if (Vector2.Distance(transform.position, player.position) <= rangeOfRest)
-        //    ChangeState(States.Rest);
-        if (_isDead)
-            ChangeState(States.Die);
+                break;
+
+            case States.Moving:
+                if (IsPlayerInRange(rangeOfAttack))
+                {
+                    ChangeState(States.Attacking);
+                }
+                else if (IsPlayerInRange(rangeOfChase))
+                {
+                    Chasing();
+                }
+                else
+                {
+                    ChangeState(States.Rest);
+                }
+                break;
+
+            case States.Attacking:
+                if (IsPlayerInRange(rangeOfAttack))
+                {
+
+                    if (!onCooldown && Time.time - lastAttack >= currentAttackRate)
+                    {
+                        Attack();
+                    }
+                }
+                else
+                {
+                    ChangeState(States.Moving);
+                }
+
+
+                attackPhaseTimer += Time.deltaTime;
+
+
+                currentAttackRate = Mathf.Lerp(minAttackRate, maxAttackRate, attackPhaseTimer / attackPhaseDuration);
+
+                if (Time.time - lastPlayerDamageTime >= movementBiasDuration)
+                {
+                    Vector3 dirToPlayer = (player.position - transform.position).normalized;
+                    Move(transform.position + dirToPlayer);
+                }
+                break;
+
+            case States.Rest:
+                StopAnimation();
+
+                restMovementTimer += Time.deltaTime;
+
+                if (restMovementTimer >= restMovementDuration)
+                {
+
+                    Vector2 randomOffset = UnityEngine.Random.insideUnitCircle * restMovementRange;
+                    restTargetPosition = transform.position + new Vector3(randomOffset.x, randomOffset.y, 0f);
+
+
+                    restMovementTimer = 0f;
+                }
+
+                Move(restTargetPosition);
+
+
+                if (Time.time - lastAttack >= rangeOfRest)
+                {
+
+                    ChangeState(States.Moving);
+                }
+                break;
+
+            case States.Die:
+                //TO DO
+                break;
+        }
     }
 
-    private void Attacking()
+
+    private bool IsPlayerInRange(float range)
     {
-        dotColor = Color.red;
-        Attack();
-        if (onCooldown)
-            ChangeState(States.Rest);
-        if (Vector2.Distance(transform.position, player.position) > rangeOfAttack)
-            ChangeState(States.Moving);
-        if (_isDead)
-            ChangeState(States.Die);
+        float distance = Vector3.Distance(transform.position, player.position);
+        return distance <= range;
     }
+
 
     private void ChangeState(States newState)
     {
         currentState = newState;
     }
-    #endregion
 
-    /// <summary>
-    /// Execute attached spell in direction of player
-    /// </summary>
-    public void Attack()
+
+    private void Attack()
     {
         if (onCooldown)
             return;
 
         onCooldown = true;
         lastAttack = Time.time;
+        lastPlayerDamageTime = Time.time;
         if (attackFromCenter)
         {
             spell.Attack(transform.position, Quaternion.identity);
             return;
         }
 
+
+
         Vector3 dirToPlayer = (player.position - transform.position);
         dirToPlayer.Normalize();
         dirToPlayer *= 2;
         float angle = Mathf.Atan2(dirToPlayer.y, dirToPlayer.x) * Mathf.Rad2Deg;
         spell.Attack(transform.position + dirToPlayer, Quaternion.AngleAxis(angle, Vector3.forward));
+        StartCoroutine(ResetCooldownAfterAnimation());
     }
 
-    private void Escape()
+    // Example coroutine to reset cooldown after an animation or spell cast
+    private IEnumerator ResetCooldownAfterAnimation()
     {
-        Move();//need to find trasform of running away
+        // Wait for the attack animation or spell to finish
+        yield return new WaitForSeconds(attackCooldown); // Replace attackDuration with the actual duration
+        onCooldown = false;
+    }
+
+    private void Chasing()
+    {
+        Move(player.position);
     }
 }
+

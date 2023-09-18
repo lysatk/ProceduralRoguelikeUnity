@@ -8,7 +8,7 @@ public abstract class SpellBase : MonoBehaviour
     [SerializeField]
     protected string Name;
     [SerializeField]
-    protected float DMG;
+    protected float spellDamage;
     [SerializeField]
     protected List<ConditionBase> conditions;
     [SerializeField]
@@ -19,7 +19,7 @@ public abstract class SpellBase : MonoBehaviour
     protected void SetSpellStats()
     {
         var spell = ResourceSystem.Instance.GetExampleSpell(Name);
-        DMG = spell.DMG;
+        spellDamage = spell.spellDamage;
         conditions = spell.conditions;
         speed = spell.speed;
         destroyTime = spell.destroyTime;
