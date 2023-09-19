@@ -10,7 +10,6 @@ namespace Assets._Scripts.Spells
     public class SpellProjectileBase : SpellBase
     {
         protected Rigidbody2D rb;
-      //  private Coroutine _returnToPool;
 
         protected void SpellAwake()
         {
@@ -20,13 +19,11 @@ namespace Assets._Scripts.Spells
 
             if (BeforeDestory())
             {
-                StartCoroutine(WaitForSecondsCoroutine(destroyTime)); 
-               
+                StartCoroutine(WaitForSecondsCoroutine(destroyTime));
             }
-                // Destroy(gameObject, destroyTime);
-            }
+        }
 
-            IEnumerator WaitForSecondsCoroutine(float secondsToWait)
+        IEnumerator WaitForSecondsCoroutine(float secondsToWait)
         {
             yield return new WaitForSeconds(secondsToWait);
             ObjectPool.ReturnObject(gameObject);
@@ -40,14 +37,14 @@ namespace Assets._Scripts.Spells
 
         protected virtual void OnTriggerEnter2D(Collider2D collision)
         {
-            if (collision.gameObject.TryGetComponent(out AttackHandler attack))
+            if (collision.gameObject.TryGetComponent(out AttackHandler attack) )
             {
                 attack.DealDamage(spellDamage, conditions);
-
-                ObjectPool.ReturnObject(gameObject);
             }
+            ObjectPool.ReturnObject(gameObject);
+
         }
-   
+
         protected virtual void ExplosiveDamageCircle()
         {
             Collider2D[] hitColliders = Physics2D.OverlapCircleAll(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y), 4.5f);
@@ -58,8 +55,18 @@ namespace Assets._Scripts.Spells
                     unit.DealDamage(spellDamage, new List<ConditionBase>());
             }
         }
-     
-       protected virtual void OnEnable()
+        protected virtual void ExplosiveDamageCircle(float radius)
+        {
+            Collider2D[] hitColliders = Physics2D.OverlapCircleAll(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y), radius);
+
+            foreach (var collider in hitColliders)
+            {
+                if (collider.TryGetComponent(out AttackHandler unit))
+                    unit.DealDamage(spellDamage, new List<ConditionBase>());
+            }
+        }
+
+        protected virtual void OnEnable()
         {
             SpellAwake();
         }

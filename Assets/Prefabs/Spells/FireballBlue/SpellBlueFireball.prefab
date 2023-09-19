@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -3072488751813295857}
   - component: {fileID: -983292841010923464}
   m_Layer: 6
-  m_Name: SpellFireball
+  m_Name: SpellBlueFireball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

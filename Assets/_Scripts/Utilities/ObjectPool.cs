@@ -57,10 +57,12 @@ public class ObjectPool : StaticInstance<GameManager>
 
     }
 
+    public static void ClearPools()
+    {
+        objectPools= new List<PooledSpellInfo>();
+    }
 
-
-   
-}
+ }
 
 
 
