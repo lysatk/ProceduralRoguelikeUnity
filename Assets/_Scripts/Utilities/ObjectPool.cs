@@ -1,60 +1,73 @@
-using Assets._Scripts.Spells;
-using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.Pool;
-using UnityEngine.UIElements;
+using System.Linq;
+using System.Collections;
 
 public class ObjectPool : StaticInstance<GameManager>
 {
-    [SerializeField] private SpellProjectileBase _gameObject;
-
-
-    static public ObjectPool<SpellProjectileBase> _pool;
-
-    private void Start()
-    {
-   
-        _pool = new ObjectPool<SpellProjectileBase>(CreateSpell, OnBorrowSpell, OnReturnSpell, OnDestroySpell, false, 100, 1000);
-    }
-
-    static public void BorrowSpellFromPool(Vector3 position, Quaternion rotation)
-    {
-        SpellProjectileBase spell = _pool.Get();
-
-      
-        spell.transform.position = position;
-        spell.transform.rotation = rotation;
-    }
-
-    private SpellProjectileBase CreateSpell()
-    {
-        
-        var spell = Instantiate(_gameObject);
-
-      
-        // spell.SpellAwake(); 
-
-        return spell;
-    }
-
-    private void OnBorrowSpell(SpellProjectileBase spell)
+    public static List<PooledSpellInfo> objectPools = new List<PooledSpellInfo>();
+    public static GameObject SpawnObject(GameObject obj, Vector3 pos, quaternion rot)
     {
 
-        // spell.transform.position = position;
-        // spell.transform.rotation = rotation;
 
-        spell.gameObject.SetActive(true);
+        PooledSpellInfo pool = objectPools.Find(p => p.lookupString == obj.name);
+
+
+
+        if (pool == null)
+        {
+            pool = new PooledSpellInfo() { lookupString = obj.name };
+            objectPools.Add(pool);
+        }
+
+        GameObject spawnableObj = pool.InactiveObjects.FirstOrDefault();
+
+        if (spawnableObj == null)
+        {
+            spawnableObj = Instantiate(obj, pos, rot);
+        }
+        else
+        {
+            spawnableObj.transform.position = pos;
+            spawnableObj.transform.rotation = rot;
+            pool.InactiveObjects.Remove(spawnableObj);
+            spawnableObj.SetActive(true);
+        }
+        return spawnableObj;
     }
 
-    private void OnReturnSpell(SpellProjectileBase spell)
+
+    public static void ReturnObject(GameObject obj)
     {
- 
-        spell.gameObject.SetActive(false);
+
+        string name = obj.name.Substring(0, obj.name.Length - 7); //removing "(Clone)" from obj.name
+        PooledSpellInfo pool = objectPools.Find(p => p.lookupString == name);
+
+        if (pool == null)
+        {
+            Debug.Log("trying to release an non-pooled obj:" + obj.name);
+        }
+        else
+        {
+            obj.SetActive(false);
+            pool.InactiveObjects.Add(obj);
+        }
+
+
     }
 
-    private void OnDestroySpell(SpellProjectileBase spell)
+    public static void ClearPools()
     {
-        Destroy(spell.gameObject);
+        objectPools= new List<PooledSpellInfo>();
     }
+
+ }
+
+
+
+public class PooledSpellInfo
+{
+    public string lookupString;
+    public List<GameObject> InactiveObjects = new List<GameObject>();
 }

@@ -1,13 +1,15 @@
-﻿using System.Collections;
+﻿using Assets._Scripts.Spells;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class SpellSwordLvl1 : SpellBase
+public class SpellSwordLvl1 : SpellProjectileBase
 {
     [SerializeField]
     float radius;
     [SerializeField]
     Animator animator;
-    protected void Awake()
+    protected void OnEnable()
     {
         SetSpellStats();
         Animation();
@@ -18,8 +20,9 @@ public class SpellSwordLvl1 : SpellBase
         animator.speed *= 2.5f;
         animator.enabled = true; // Enable the Animator
         StartCoroutine(WaitForAnimationToEnd());
-        ExplosiveDamage();
+        ExplosiveDamageCircle(radius);
     }
+
 
     IEnumerator WaitForAnimationToEnd()
     {
@@ -30,7 +33,7 @@ public class SpellSwordLvl1 : SpellBase
         }
 
         // Animation has finished playing, destroy the object
-        Destroy(gameObject);
+        ObjectPool.ReturnObject(gameObject);
     }
 
     private void ExplosiveDamage()

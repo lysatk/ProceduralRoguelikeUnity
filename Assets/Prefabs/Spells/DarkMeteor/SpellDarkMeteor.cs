@@ -10,11 +10,12 @@ public class SpellDarkMeteor : SpellProjectileBase
     private Animator darkMeteorAnimator;
     private bool hasPlayedAnimation = false;
 
-    protected override void Awake()
+    protected override void OnEnable()
     {
         SpellAwake();
+        hasPlayedAnimation = false;
     }
-
+    
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.TryGetComponent(out AttackHandler unit))
@@ -41,18 +42,9 @@ public class SpellDarkMeteor : SpellProjectileBase
             yield return new WaitForSeconds(darkMeteorAnimator.GetCurrentAnimatorStateInfo(0).length);
             darkMeteorAnimator.enabled = false;
             hasPlayedAnimation = true;
-            Destroy(gameObject);
+            ObjectPool.ReturnObject(gameObject);
         }
     }
 
-    //private void ExplosiveDamage()
-    //{
-    //    Collider2D[] hitColliders = Physics2D.OverlapCircleAll(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y), 4.5f);
-
-    //    foreach (var collider in hitColliders)
-    //    {
-    //        if (collider.TryGetComponent(out AttackHandler unit))
-    //            unit.DealDamage(spellDamage, new List<ConditionBase>());
-    //    }
-    //}
+ 
 }
