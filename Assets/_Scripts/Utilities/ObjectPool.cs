@@ -9,11 +9,7 @@ public class ObjectPool : StaticInstance<GameManager>
     public static List<PooledSpellInfo> objectPools = new List<PooledSpellInfo>();
     public static GameObject SpawnObject(GameObject obj, Vector3 pos, quaternion rot)
     {
-
-
         PooledSpellInfo pool = objectPools.Find(p => p.lookupString == obj.name);
-
-
 
         if (pool == null)
         {
@@ -40,7 +36,6 @@ public class ObjectPool : StaticInstance<GameManager>
 
     public static void ReturnObject(GameObject obj)
     {
-
         string name = obj.name.Substring(0, obj.name.Length - 7); //removing "(Clone)" from obj.name
         PooledSpellInfo pool = objectPools.Find(p => p.lookupString == name);
 
@@ -53,18 +48,13 @@ public class ObjectPool : StaticInstance<GameManager>
             obj.SetActive(false);
             pool.InactiveObjects.Add(obj);
         }
-
-
     }
 
     public static void ClearPools()
     {
-        objectPools= new List<PooledSpellInfo>();
+        objectPools = new List<PooledSpellInfo>();
     }
-
- }
-
-
+}
 
 public class PooledSpellInfo
 {

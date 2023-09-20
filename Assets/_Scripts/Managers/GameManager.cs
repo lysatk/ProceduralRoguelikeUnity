@@ -241,12 +241,16 @@ public class GameManager : StaticInstance<GameManager>
         waveName.text = "";
         FindObjectOfType<LevelGenerator>().GenerateMap();
 
-        for (int i = 0; i < 25; i++)
+        for (int i = 0; i < 10; i++)
         {
             UnitManager.Instance.SpawnEnemy((ExampleEnemyType)Random.Range(0, 3), 1);
         }
 
-        UnitManager.Instance.SpawnEnemy((ExampleEnemyType)3, 1);
+        for (int i = 0; i < 4; i++)
+        {
+            UnitManager.Instance.SpawnEnemy((ExampleEnemyType)3, 1);
+        }
+        UnitManager.Instance.SpawnEnemy((ExampleEnemyType)30, 1);
 
        Player.transform.position = UnitManager.Instance.GetPlayerSpawner();
 
