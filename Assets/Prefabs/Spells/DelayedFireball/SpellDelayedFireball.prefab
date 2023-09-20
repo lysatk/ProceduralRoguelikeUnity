@@ -67,6 +67,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 639514538004180302, guid: c137b1f385cd7164c8d9298ca0837c26, type: 3}
-  numOfProjectiles: 10900
-  rotAngle: 90
+  numOfProjectiles: 5000
+  rotAngle: 506
   spawnDelay: 0.001
