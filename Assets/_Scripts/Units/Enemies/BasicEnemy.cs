@@ -64,7 +64,6 @@ public class BasicEnemy : EnemyBase
         spriteRenderer = GetComponent<SpriteRenderer>();
         currentState = States.Moving;
         _anim = GetComponent<Animator>();
-        aiData.currentTarget = player.transform;
         ConfigureNavmeshAgent();
     }
     public void ConfigureNavmeshAgent()

@@ -110,8 +110,8 @@ public class GameManager : StaticInstance<GameManager>
         var _ = StartCoroutine(LoadScoresAsync());
 
         ChangeState(GameState.Hub);
-        GameManager.Instance.pauseCanvasGroup.alpha = 0f;
-        GameManager.Instance.pauseCanvasGroup.interactable = false;
+        Instance.pauseCanvasGroup.alpha = 0f;
+        Instance.pauseCanvasGroup.interactable = false;
     }
 
     IEnumerator LoadScoresAsync()
