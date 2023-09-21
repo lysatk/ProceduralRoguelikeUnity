@@ -12,7 +12,7 @@ public class Spell : ScriptableObject
     /// <summary> Spell icon </summary>
     public Sprite image;
     /// <summary> Spell prefab (MonoBehaviour)</summary>
-    public SpellBase Prefab; 
+    public GameObject Prefab; 
 
     /// <summary> Spell damage</summary>
     public float spellDamage;
@@ -37,7 +37,6 @@ public class Spell : ScriptableObject
     /// <param name="rotation">Spawn rotation</param>
     public void Attack(Vector3 position, Quaternion rotation)
     {
-        Instantiate(Prefab, position, rotation);
-       // ObjectPool.BorrowSpellFromPool(position,rotation);
+        ObjectPool.SpawnObject(Prefab, position, rotation);
     }
 }

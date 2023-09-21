@@ -15,12 +15,12 @@ MonoBehaviour:
   Name: Fireball
   Description: simple ball of fire
   image: {fileID: 0}
-  Prefab: {fileID: -8756765138513874019, guid: c137b1f385cd7164c8d9298ca0837c26, type: 3}
-  spellDamage: 100
+  Prefab: {fileID: 639514538004180302, guid: c137b1f385cd7164c8d9298ca0837c26, type: 3}
+  spellDamage: 20
   conditions:
   - Condition: 0
     AffectTime: 5
-    AffectOnTick: 4
+    AffectOnTick: 5
   speed: 10
   destroyTime: 4
   caster: {fileID: 0}

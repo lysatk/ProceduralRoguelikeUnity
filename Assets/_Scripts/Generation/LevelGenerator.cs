@@ -2,6 +2,7 @@
 using UnityEngine.Tilemaps;
 using System;
 using NavMeshPlus.Components;
+using System.Collections.Generic;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -15,14 +16,9 @@ public class LevelGenerator : MonoBehaviour {
     [Tooltip("The Tilemap to draw walls onto")]
     public Tilemap tilemapFloor;
 
-    [Tooltip("The Tile to draw walls with")]
-	public TileBase tileWall;
-
-    [Tooltip("The Tile to draw floor with")]
-    public TileBase tileFloor;
-
-    [Tooltip("The Tile to be used as a spawnerPoint")]
-	public TileBase tileSpawner;
+    [Tooltip("The Tiles to draw walls with")]
+	[SerializeField]
+    public List<TileSet> tileSets = new List<TileSet>();
 
 	[Tooltip("Width of our map")]
 	public int width;
@@ -35,7 +31,17 @@ public class LevelGenerator : MonoBehaviour {
 
     public NavMeshSurface Surface2D;
 
-        void Update()
+	static int tileIndex =0;
+
+	static public void SetTileIndex(int _)
+	{
+		tileIndex = _;
+	}
+    static public int GetTileIndex()
+    {
+        return tileIndex;
+    }
+    void Update()
 	{
 		if (Input.GetKeyDown(KeyCode.N))
 		{
@@ -45,31 +51,31 @@ public class LevelGenerator : MonoBehaviour {
 	}
 
 	[ExecuteInEditMode]
-	public int[,] GenerateMap()
-	{
-		ClearMap();
+    public int[,] GenerateMap()
+    {
+        ClearMap();
 
         int[,] map = new int[width, height];
-		float seed;
+        float seed;
 
-		if (mapSetting.randomSeed)
-		{
-			seed = Time.time;
-		}
-		else
-		{
-			seed = mapSetting.seed;
-		}
+        if (mapSetting.randomSeed)
+        {
+            seed = Time.time;
+        }
+        else
+        {
+            seed = mapSetting.seed;
+        }
 
-		//Generate the map depending omapSen the algorithm selected
-				//First generate our array
-				map = MapFunctions.GenerateArray(width, height, false);
-				//Next generate the random walk cave
-				map = MapFunctions.RandomWalkCave(map, seed, mapSetting.clearAmount);		
-		//Render the result
-		MapFunctions.RenderMap(map, tilemapWall,tilemapFloor,tileWall,tileSpawner,tileFloor);
+        // Generate the map depending on the algorithm selected
+        // First generate our array
+        map = MapFunctions.GenerateArray(width, height, false);
+        // Next generate the random walk cave
+        map = MapFunctions.RandomWalkCave(map, seed, mapSetting.clearAmount);
+        // Render the result
+        MapFunctions.RenderMap(map, tilemapWall, tilemapFloor, tileSets[tileIndex].wallTile, tileSets[tileIndex].obstacleTile, tileSets[tileIndex].floorTile);
 
-		GameManager.map = map;
+        GameManager.map = map;
 
         Surface2D.BuildNavMeshAsync();
         return map;

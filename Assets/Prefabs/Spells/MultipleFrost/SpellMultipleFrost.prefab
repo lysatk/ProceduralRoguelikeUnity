@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 639514538004180300}
   - component: {fileID: 1343789464}
-  - component: {fileID: -6438123666561493070}
+  - component: {fileID: 6935771052778084632}
   m_Layer: 6
   m_Name: SpellMultipleFrost
   m_TagString: Untagged
@@ -54,7 +54,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!114 &-6438123666561493070
+--- !u!114 &6935771052778084632
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -63,8 +63,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 639514538004180302}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b37944e3a24a5e34b8e583f71215ff8b, type: 3}
+  m_Script: {fileID: 11500000, guid: 0000e033bd356854285db20764c02d95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Multiple Frost Spike
   prefab: {fileID: 639514538004180302, guid: 4a0d019563540db40a47577db9de39c7, type: 3}
+  numOfProjectiles: 5
+  rotAngle: 20

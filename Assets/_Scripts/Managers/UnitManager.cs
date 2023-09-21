@@ -133,7 +133,7 @@ public class UnitManager : StaticInstance<UnitManager>
         }
         return TileToPosition(tempPoint);
     }
-    Vector3 GetPlayerSpawner()
+   public Vector3 GetPlayerSpawner()
     {
         for (int i = 0; i < GameManager.map.GetLength(0); i++)
         {

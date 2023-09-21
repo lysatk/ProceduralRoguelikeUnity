@@ -64,7 +64,6 @@ public class BasicEnemy : EnemyBase
         spriteRenderer = GetComponent<SpriteRenderer>();
         currentState = States.Moving;
         _anim = GetComponent<Animator>();
-        aiData.currentTarget = player.transform;
         ConfigureNavmeshAgent();
     }
     public void ConfigureNavmeshAgent()
@@ -191,7 +190,7 @@ public class BasicEnemy : EnemyBase
 
         Vector3 dirToPlayer = (player.position - transform.position);
         dirToPlayer.Normalize();
-        dirToPlayer *= 2;
+        dirToPlayer *= 4;
         float angle = Mathf.Atan2(dirToPlayer.y, dirToPlayer.x) * Mathf.Rad2Deg;
         spell.Attack(transform.position + dirToPlayer, Quaternion.AngleAxis(angle, Vector3.forward));
         StartCoroutine(ResetCooldownAfterAnimation());

@@ -52,11 +52,8 @@ public abstract class EnemyBase : UnitBase
 
     [SerializeField]
     private LayerMask layerMask;
-
-    [SerializeField]
-    protected AiData aiData = new();
-    [SerializeField]
-    private ContextSolver contextSolver = new();
+     
+    
 
     protected Transform player;
     protected Animator _anim;
@@ -66,6 +63,8 @@ public abstract class EnemyBase : UnitBase
     private intSO scoreSO;
 
     protected NavMeshAgent navMeshAgent;
+
+    protected Collider2D hitbox;
 
     void Awake()
     {
@@ -77,7 +76,11 @@ public abstract class EnemyBase : UnitBase
         {
             navMeshAgent = gameObject.AddComponent<NavMeshAgent>();
         }
-
+        hitbox=GetComponentInChildren<Collider2D>();
+        //if (hitbox == null)
+        //{
+        //    Debug.Log("Hitbox Null!");
+        //}
 
     }
 
@@ -88,7 +91,9 @@ public abstract class EnemyBase : UnitBase
     /// </summary>
     public override void Die()
     {
+        hitbox.enabled = false;
         navMeshAgent.enabled = false;
+
         base.Die();
         scoreSO.Int++;
         _anim.CrossFade("Death", 0, 0);

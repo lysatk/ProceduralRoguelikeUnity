@@ -110,8 +110,8 @@ public class GameManager : StaticInstance<GameManager>
         var _ = StartCoroutine(LoadScoresAsync());
 
         ChangeState(GameState.Hub);
-        GameManager.Instance.pauseCanvasGroup.alpha = 0f;
-        GameManager.Instance.pauseCanvasGroup.interactable = false;
+        Instance.pauseCanvasGroup.alpha = 0f;
+        Instance.pauseCanvasGroup.interactable = false;
     }
 
     IEnumerator LoadScoresAsync()
@@ -160,7 +160,7 @@ public class GameManager : StaticInstance<GameManager>
             default:
                 throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
         }
-
+        ObjectPool.ClearPools();
         OnAfterStateChanged?.Invoke(newState);
 
         Debug.Log($"New state: {newState}");
@@ -211,6 +211,7 @@ public class GameManager : StaticInstance<GameManager>
 
         }
         firstLevel = false;
+        Player.transform.position = UnitManager.Instance.GetPlayerSpawner();
     }
     void HandleRestarting()
     {
@@ -233,19 +234,25 @@ public class GameManager : StaticInstance<GameManager>
         {
             UnitManager.Instance.SpawnEnemy((ExampleEnemyType)Random.Range(0, 3), 1);
         }
-
+        Player.transform.position = UnitManager.Instance.GetPlayerSpawner();
     }
     void HandleBossReached()
     {
         waveName.text = "";
         FindObjectOfType<LevelGenerator>().GenerateMap();
 
-        for (int i = 0; i < 25; i++)
+        for (int i = 0; i < 10; i++)
         {
             UnitManager.Instance.SpawnEnemy((ExampleEnemyType)Random.Range(0, 3), 1);
         }
 
-        UnitManager.Instance.SpawnEnemy((ExampleEnemyType)3, 1);
+        for (int i = 0; i < 4; i++)
+        {
+            UnitManager.Instance.SpawnEnemy((ExampleEnemyType)3, 1);
+        }
+        UnitManager.Instance.SpawnEnemy((ExampleEnemyType)30, 1);
+
+       Player.transform.position = UnitManager.Instance.GetPlayerSpawner();
 
     }
 
@@ -258,7 +265,7 @@ public class GameManager : StaticInstance<GameManager>
         highScore.score = scoreSO.Int;
         highScores.Add(highScore);
         scoreSO.Int = 0;
-
+        ObjectPool.ClearPools();
         var temp = StartCoroutine(PostLoseWait(3));
     }
 
@@ -273,6 +280,7 @@ public class GameManager : StaticInstance<GameManager>
 
         waveName.text = "Press L To Start";
         Destroy(WaveManager.Instance.gameObject);
+
         LevelChangeToHub();
         ChangeState(GameState.Hub);
     }
@@ -357,8 +365,6 @@ public class GameManager : StaticInstance<GameManager>
         Destroy(WaveManager.Instance.gameObject);
         LevelChangeToHub();
         ChangeState(GameState.Hub);
-
-
     }
 
 
@@ -379,7 +385,7 @@ public class GameManager : StaticInstance<GameManager>
     public void HandleMenuRestart()
     {
         HandlePause();
-        ChangeState(GameState.Restarting); // Change GameState.Starting to the appropriate state
+        ChangeState(GameState.Restarting);
     }
 
 
