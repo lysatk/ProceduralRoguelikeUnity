@@ -65,6 +65,7 @@ public abstract class EnemyBase : UnitBase
     protected NavMeshAgent navMeshAgent;
 
     protected Collider2D hitbox;
+    protected static string projectileLayerName = "EnemySpell";
 
     void Awake()
     {

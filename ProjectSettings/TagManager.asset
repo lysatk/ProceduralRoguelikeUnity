@@ -16,14 +16,14 @@ TagManager:
   - Water
   - UI
   - Spell
-  - Water
+  - Walls
   - Player
   - Enemy
   - Floor
   - ToAttack
-  - 
-  - 
-  - 
+  - PlayerSpell
+  - EnemySpell
+  - AOESpell
   - 
   - 
   - 

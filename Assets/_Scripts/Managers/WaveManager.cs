@@ -55,7 +55,7 @@ namespace Assets._Scripts.Managers
             Debug.Log(currentLevelNum);
             if (totalEnemies == 0 && !GameManager.firstLevel)
             {
-                LevelGenerator.SetTileIndex(currentLevelNum/2);
+                LevelGenerator.SetTileIndex(currentLevelNum/2, FindObjectOfType<LevelGenerator>());
                 currentLevelNum++;
                 if (currentLevelNum % 2 == 0)  //2 is temporary for testing purpouses !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                     GameManager.Instance.ChangeState(GameState.BossReached);

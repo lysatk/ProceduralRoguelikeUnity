@@ -11,10 +11,12 @@ public class SpellBossBasic : MonoBehaviour
     [SerializeField]
     float rotAngle = 0f;
     [SerializeField]
-    float spawnDelay = 0.5f; // Adjust this to control the delay between spawns
-
+    float spawnDelay = 0.5f;
+    string layerName;
     private void Awake()
     {
+        layerName = gameObject.layer.ToString();
+        Debug.Log("LayerString"+layerName);
         StartCoroutine(SpawnWithDelay(numOfProjectiles));
     }
 
@@ -25,12 +27,13 @@ public class SpellBossBasic : MonoBehaviour
 
         for (int i = 0; i < n; i++)
         {
-            ObjectPool.SpawnObject(RandSpellFromList(), transform.position, transform.rotation);
+            ObjectPool.SpawnObject(RandSpellFromList(), transform.position, transform.rotation, layerName);
+
             transform.Rotate(0f, 0f, rotAngle);
-            yield return new WaitForSeconds(spawnDelay); // Delay between spawns
+            yield return new WaitForSeconds(spawnDelay);
         }
 
-        Destroy(this.gameObject);
+        ObjectPool.ReturnObject(gameObject);
     }
     GameObject RandSpellFromList()
     {

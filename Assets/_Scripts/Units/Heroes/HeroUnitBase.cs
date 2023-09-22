@@ -52,6 +52,7 @@ public class HeroUnitBase : UnitBase
 
     private Animator _anim;
 
+    protected static string projectileLayerName = "PlayerSpell";
 
 
     void Start()
@@ -556,12 +557,12 @@ public class HeroUnitBase : UnitBase
             if (spell.CastFromHeroeNoStaff)
             {
                 spell.caster = collider;
-                spell.Attack(transform.position, spellRotator.StaffFirePoint.transform.rotation);
+                spell.Attack(transform.position, spellRotator.StaffFirePoint.transform.rotation, projectileLayerName);
             }
             else
             {
                 spell.caster = collider;
-                spell.Attack(spellRotator.StaffFirePoint.transform.position, spellRotator.StaffFirePoint.transform.rotation);
+                spell.Attack(spellRotator.StaffFirePoint.transform.position, spellRotator.StaffFirePoint.transform.rotation, projectileLayerName);
             }
         }
         else

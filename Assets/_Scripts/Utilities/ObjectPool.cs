@@ -7,7 +7,7 @@ using System.Collections;
 public class ObjectPool : StaticInstance<GameManager>
 {
     public static List<PooledSpellInfo> objectPools = new List<PooledSpellInfo>();
-    public static GameObject SpawnObject(GameObject obj, Vector3 pos, quaternion rot)
+    public static GameObject SpawnObject(GameObject obj, Vector3 pos, quaternion rot,string layerString)
     {
         PooledSpellInfo pool = objectPools.Find(p => p.lookupString == obj.name);
 
@@ -30,6 +30,7 @@ public class ObjectPool : StaticInstance<GameManager>
             pool.InactiveObjects.Remove(spawnableObj);
             spawnableObj.SetActive(true);
         }
+        spawnableObj.layer = LayerMask.NameToLayer(layerString);
         return spawnableObj;
     }
 

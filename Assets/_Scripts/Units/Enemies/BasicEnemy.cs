@@ -182,7 +182,7 @@ public class BasicEnemy : EnemyBase
         lastPlayerDamageTime = Time.time;
         if (attackFromCenter)
         {
-            spell.Attack(transform.position, Quaternion.identity);
+            spell.Attack(transform.position, Quaternion.identity, projectileLayerName);
             return;
         }
 
@@ -190,9 +190,9 @@ public class BasicEnemy : EnemyBase
 
         Vector3 dirToPlayer = (player.position - transform.position);
         dirToPlayer.Normalize();
-        dirToPlayer *= 4;
+      //  dirToPlayer *= 4;
         float angle = Mathf.Atan2(dirToPlayer.y, dirToPlayer.x) * Mathf.Rad2Deg;
-        spell.Attack(transform.position + dirToPlayer, Quaternion.AngleAxis(angle, Vector3.forward));
+        spell.Attack(transform.position + dirToPlayer, Quaternion.AngleAxis(angle, Vector3.forward),projectileLayerName);
         StartCoroutine(ResetCooldownAfterAnimation());
     }
 
