@@ -36,12 +36,14 @@ namespace Assets._Scripts.Managers
         int spawnCountNow;
         int totalEnemies;
         int currentLevelNum = 1;
+        LevelGenerator levelGenerator;
 
         private void Start()
         {
             waveName = GameManager.Instance.waveName;
             enemyCounter = GameManager.Instance.enemyCounter;
             waveName.text = "";
+            levelGenerator = FindObjectOfType<LevelGenerator>();
         }
         private void Update()
         {
@@ -55,7 +57,7 @@ namespace Assets._Scripts.Managers
             Debug.Log(currentLevelNum);
             if (totalEnemies == 0 && !GameManager.firstLevel)
             {
-                LevelGenerator.SetTileIndex(currentLevelNum/2, FindObjectOfType<LevelGenerator>());
+                LevelGenerator.SetTileIndex(currentLevelNum/2,levelGenerator );
                 currentLevelNum++;
                 if (currentLevelNum % 2 == 0)  //2 is temporary for testing purpouses !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                     GameManager.Instance.ChangeState(GameState.BossReached);

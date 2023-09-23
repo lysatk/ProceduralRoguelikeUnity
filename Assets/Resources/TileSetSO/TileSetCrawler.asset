@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78b4a15a9a47b264baa4770115a38288, type: 3}
   m_Name: TileSetCrawler
   m_EditorClassIdentifier: 
-  floorTile: {fileID: 11400000, guid: 8ac102ddf2973d3409fc01c1ed776d6c, type: 2}
-  wallTile: {fileID: 11400000, guid: 3c2e80fd0720f1747ab228fe73c0fcae, type: 2}
+  floorTile: {fileID: 11400000, guid: 5bcdd97df180be740b31048e7caabed3, type: 2}
+  wallTile: {fileID: 11400000, guid: df8956dba8e796e4ba33e7c07f5d29e8, type: 2}
   obstacleTile: {fileID: 0}
+  cameraBackgroundColor: {r: 0.3647059, g: 0.34117648, b: 0.3921569, a: 0}

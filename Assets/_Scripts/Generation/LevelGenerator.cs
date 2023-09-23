@@ -37,7 +37,7 @@ public class LevelGenerator : MonoBehaviour
     static public void SetTileIndex(int _,LevelGenerator lg)
     {
 
-        if (lg.tileSets[_] != null)
+        if (lg.tileSets.Count >_ )
             tileIndex = _;
     }
     static public int GetTileIndex()
@@ -76,7 +76,7 @@ public class LevelGenerator : MonoBehaviour
         // Next generate the random walk cave
         map = MapFunctions.RandomWalkCave(map, seed, mapSetting.clearAmount);
         // Render the result
-        MapFunctions.RenderMap(map, tilemapWall, tilemapFloor, tileSets[tileIndex].wallTile, tileSets[tileIndex].obstacleTile, tileSets[tileIndex].floorTile);
+        MapFunctions.RenderMap(map, tilemapWall, tilemapFloor, tileSets[tileIndex].wallTile, tileSets[tileIndex].obstacleTile, tileSets[tileIndex].floorTile, tileSets[tileIndex].cameraBackgroundColor);
 
         GameManager.map = map;
 
