@@ -15,9 +15,11 @@ public class SpellBossBasic : MonoBehaviour
     string layerName;
     private void Awake()
     {
-        layerName = gameObject.layer.ToString();
-        Debug.Log("LayerString"+layerName);
+        layerName = LayerMask.LayerToName(gameObject.layer);
+        Debug.Log("LayerString " + layerName);
         StartCoroutine(SpawnWithDelay(numOfProjectiles));
+
+
     }
 
     IEnumerator SpawnWithDelay(int n)
@@ -30,10 +32,11 @@ public class SpellBossBasic : MonoBehaviour
             ObjectPool.SpawnObject(RandSpellFromList(), transform.position, transform.rotation, layerName);
 
             transform.Rotate(0f, 0f, rotAngle);
+
             yield return new WaitForSeconds(spawnDelay);
         }
-
         ObjectPool.ReturnObject(gameObject);
+
     }
     GameObject RandSpellFromList()
     {
