@@ -692,8 +692,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   smoothing: 0.1
-  minPos: {x: -100, y: -100}
-  maxPos: {x: 100, y: 100}
+  minPos: {x: -1000, y: -1000}
+  maxPos: {x: 1000, y: 1000}
 --- !u!114 &1263446456
 MonoBehaviour:
   m_ObjectHideFlags: 0

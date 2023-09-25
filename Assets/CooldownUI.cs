@@ -8,6 +8,8 @@ public class CooldownUI: MonoBehaviour
     [SerializeField]
     private Slider[] sliders;
 
+    private Coroutine[] cooldownCoroutines= new Coroutine[5];
+
     public void SetMaxCooldowns(int[] maxCooldowns)
     {
         if (maxCooldowns.Length != sliders.Length)
@@ -23,7 +25,7 @@ public class CooldownUI: MonoBehaviour
         }
     }
 
-    public void UpdateCooldown(int cooldownIndex, int cooldownValue)
+    public void UpdateCooldown(int cooldownIndex, float cooldownValue)
     {
         if (cooldownIndex < 0 || cooldownIndex >= sliders.Length)
         {
@@ -31,6 +33,32 @@ public class CooldownUI: MonoBehaviour
             return;
         }
 
-        sliders[cooldownIndex].value = cooldownValue;
+        // Stop any existing coroutine for the same slider before starting a new one
+        if (cooldownCoroutines[cooldownIndex] != null)
+        {
+            StopCoroutine(cooldownCoroutines[cooldownIndex]);
+        }
+
+        cooldownCoroutines[cooldownIndex] = StartCoroutine(UpdateCooldownCoroutine(cooldownIndex,cooldownValue));
+    }
+
+    private IEnumerator UpdateCooldownCoroutine(int cooldownIndex,float cooldownDuration)
+    {
+        Slider slider = sliders[cooldownIndex];
+        slider.value = 0.0f;
+
+        float timer = 0.0f;
+
+        while (timer < cooldownDuration)
+        {
+            timer += Time.deltaTime;
+            slider.value = Mathf.Lerp(0.0f, 1.0f, timer / cooldownDuration);
+            yield return null;
+        }
+
+        slider.value = 1.0f;
+
+        // Reset the coroutine reference
+        cooldownCoroutines[cooldownIndex] = null;
     }
 }

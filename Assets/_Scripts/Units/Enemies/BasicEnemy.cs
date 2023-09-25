@@ -27,13 +27,13 @@ public class BasicEnemy : EnemyBase
     #region biasVariables
     // ????????????????????
     private float attackPhaseTimer = 0f;
-    private float attackPhaseDuration = 5f;
+    private float attackPhaseDuration = 1f;
     private float attackCooldownRamp = 1.5f;
     private float lastPlayerDamageTime = 0f;
     private float movementBiasTimer = 0f;
     private float movementBiasDuration = 5f;
     private float maxAttackRate = 1f;
-    private float minAttackRate = 0.1f;
+    private float minAttackRate = 0.3f;
     private float currentAttackRate = 0.1f;
     #endregion
 
