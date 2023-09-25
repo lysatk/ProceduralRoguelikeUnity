@@ -103,6 +103,8 @@ public class GameManager : StaticInstance<GameManager>
 
     private Scene _currentScene;
 
+    private static int enemyIdRange=0;
+
     void Start()
     {
         enemies = new();
@@ -204,10 +206,10 @@ public class GameManager : StaticInstance<GameManager>
     {
         waveName.text = "";
         FindObjectOfType<LevelGenerator>().GenerateMap();
-
+        UnitManager.Instance.SpawnEnemy((ExampleEnemyType)6, 1);
         for (int i = 0; i < 30; i++)
         {
-            UnitManager.Instance.SpawnEnemy((ExampleEnemyType)Random.Range(0, 3), 1);
+            UnitManager.Instance.SpawnEnemy((ExampleEnemyType)Random.Range(enemyIdRange, enemyIdRange+3), 1);
 
         }
         firstLevel = false;
@@ -232,7 +234,7 @@ public class GameManager : StaticInstance<GameManager>
 
         for (int i = 0; i < 25; i++)
         {
-            UnitManager.Instance.SpawnEnemy((ExampleEnemyType)Random.Range(0, 3), 1);
+            UnitManager.Instance.SpawnEnemy((ExampleEnemyType)Random.Range(enemyIdRange, enemyIdRange + 3), 1);
         }
         Player.transform.position = UnitManager.Instance.GetPlayerSpawner();
     }
@@ -243,7 +245,7 @@ public class GameManager : StaticInstance<GameManager>
 
         for (int i = 0; i < 10; i++)
         {
-            UnitManager.Instance.SpawnEnemy((ExampleEnemyType)Random.Range(0, 3), 1);
+            UnitManager.Instance.SpawnEnemy((ExampleEnemyType)Random.Range(enemyIdRange, enemyIdRange + 3), 1);
         }
 
         for (int i = 0; i < 4; i++)
@@ -253,6 +255,7 @@ public class GameManager : StaticInstance<GameManager>
         UnitManager.Instance.SpawnEnemy((ExampleEnemyType)30, 1);
 
        Player.transform.position = UnitManager.Instance.GetPlayerSpawner();
+        enemyIdRange += 3;
 
     }
 

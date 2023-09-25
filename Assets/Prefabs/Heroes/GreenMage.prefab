@@ -422,6 +422,7 @@ MonoBehaviour:
   ESpell: {fileID: 11400000, guid: 4e001c705f74f744f9bbafa477f29eae, type: 2}
   DashSpell: {fileID: 11400000, guid: 73bad2014ba9fc4468bb4c527dc55f3d, type: 2}
   _invincibilityDurationSeconds: 1
+  isInvincible: 0
 --- !u!95 &8531856476346468769
 Animator:
   serializedVersion: 5
@@ -454,7 +455,7 @@ GameObject:
   - component: {fileID: 996343441049783506}
   - component: {fileID: 5721721695472732800}
   - component: {fileID: 8196260185533056340}
-  m_Layer: 11
+  m_Layer: 8
   m_Name: HitBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}

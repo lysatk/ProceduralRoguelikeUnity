@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f070beb36af68014e95ebef8d9f629eb, type: 3}
-  m_Name: Boss
+  m_Name: BigSpider
   m_EditorClassIdentifier: 
   _stats:
-    _MaxHp: 200
+    _MaxHp: 40
     _Armor: 1
-    _MovementSpeed: 5.2
+    _MovementSpeed: 0
     _DmgModifier: 1
     _CooldownModifier: 1
-  Prefab: {fileID: 8109268066809691, guid: 1e0182bae0f28554392b4b8f570a5002, type: 3}
+  Prefab: {fileID: 8109268066809691, guid: 1b71f5778c712284e9e667db25c31a98, type: 3}
   Description: 
   MenuSprite: {fileID: 0}
   EnemyName: 
-  EnemyType: 3
+  EnemyType: 4

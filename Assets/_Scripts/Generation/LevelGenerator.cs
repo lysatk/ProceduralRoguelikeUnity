@@ -19,7 +19,7 @@ public class LevelGenerator : MonoBehaviour
 
     [Tooltip("The Tiles to draw walls with")]
     [SerializeField]
-     public List<TileSet> tileSets = new List<TileSet>();
+    public List<TileSet> tileSets = new List<TileSet>();
 
     [Tooltip("Width of our map")]
     public int width;
@@ -34,10 +34,10 @@ public class LevelGenerator : MonoBehaviour
 
     static int tileIndex = 0;
 
-    static public void SetTileIndex(int _,LevelGenerator lg)
+    static public void SetTileIndex(int _, LevelGenerator lg)
     {
 
-        if (lg.tileSets.Count >_ )
+        if (lg.tileSets.Count > _)
             tileIndex = _;
     }
     static public int GetTileIndex()
@@ -70,12 +70,10 @@ public class LevelGenerator : MonoBehaviour
             seed = mapSetting.seed;
         }
 
-        // Generate the map depending on the algorithm selected
-        // First generate our array
         map = MapFunctions.GenerateArray(width, height, false);
-        // Next generate the random walk cave
+
         map = MapFunctions.RandomWalkCave(map, seed, mapSetting.clearAmount);
-        // Render the result
+
         MapFunctions.RenderMap(map, tilemapWall, tilemapFloor, tileSets[tileIndex].wallTile, tileSets[tileIndex].obstacleTile, tileSets[tileIndex].floorTile, tileSets[tileIndex].cameraBackgroundColor);
 
         GameManager.map = map;
@@ -98,11 +96,7 @@ public class LevelGeneratorEditor : Editor
     public override void OnInspectorGUI()
     {
         base.OnInspectorGUI();
-
-        //Reference to our script
         LevelGenerator levelGen = (LevelGenerator)target;
-
-        //Only show the mapsettings UI if we have a reference set up in the editor
         if (levelGen.mapSetting != null)
         {
             Editor mapSettingEditor = CreateEditor(levelGen.mapSetting);

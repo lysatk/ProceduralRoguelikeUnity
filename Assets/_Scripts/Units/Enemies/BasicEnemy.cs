@@ -1,8 +1,4 @@
-﻿using Assets._Scripts.Utilities;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+﻿using System.Collections;
 using UnityEngine;
 
 /// <summary>
@@ -28,21 +24,22 @@ public class BasicEnemy : EnemyBase
     private float lastAttack = 0;
 
 
-
+    #region biasVariables
+    // ????????????????????
     private float attackPhaseTimer = 0f;
-    private float attackPhaseDuration = 5f;  
-    private float attackCooldownRamp = 1.5f; 
+    private float attackPhaseDuration = 5f;
+    private float attackCooldownRamp = 1.5f;
     private float lastPlayerDamageTime = 0f;
     private float movementBiasTimer = 0f;
-    private float movementBiasDuration = 5f; 
-    private float maxAttackRate = 1f; 
-    private float minAttackRate = 0.1f; 
+    private float movementBiasDuration = 5f;
+    private float maxAttackRate = 1f;
+    private float minAttackRate = 0.1f;
     private float currentAttackRate = 0.1f;
-
+    #endregion
 
     private float restMovementTimer = 0f;
     private float restMovementDuration = 1f;
-    private float restMovementRange = 2f; 
+    private float restMovementRange = 2f;
     private Vector3 restTargetPosition;
 
 
@@ -135,7 +132,7 @@ public class BasicEnemy : EnemyBase
                 if (restMovementTimer >= restMovementDuration)
                 {
 
-                    Vector2 randomOffset = UnityEngine.Random.insideUnitCircle * restMovementRange;
+                    Vector2 randomOffset = Random.insideUnitCircle * restMovementRange;
                     restTargetPosition = transform.position + new Vector3(randomOffset.x, randomOffset.y, 0f);
 
 
@@ -144,10 +141,8 @@ public class BasicEnemy : EnemyBase
 
                 Move(restTargetPosition);
 
-
                 if (Time.time - lastAttack >= rangeOfRest)
                 {
-
                     ChangeState(States.Moving);
                 }
                 break;
@@ -190,13 +185,11 @@ public class BasicEnemy : EnemyBase
 
         Vector3 dirToPlayer = (player.position - transform.position);
         dirToPlayer.Normalize();
-      //  dirToPlayer *= 4;
         float angle = Mathf.Atan2(dirToPlayer.y, dirToPlayer.x) * Mathf.Rad2Deg;
-        spell.Attack(transform.position + dirToPlayer, Quaternion.AngleAxis(angle, Vector3.forward),projectileLayerName);
+        spell.Attack(transform.position + dirToPlayer, Quaternion.AngleAxis(angle, Vector3.forward), projectileLayerName);
         StartCoroutine(ResetCooldownAfterAnimation());
     }
 
-    // Example coroutine to reset cooldown after an animation or spell cast
     private IEnumerator ResetCooldownAfterAnimation()
     {
         // Wait for the attack animation or spell to finish
