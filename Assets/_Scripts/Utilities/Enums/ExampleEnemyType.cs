@@ -3,7 +3,7 @@
 [Serializable]
 public enum ExampleEnemyType
 {
-    //Normal Enemies
+    //Normal Enemies//Grunts//Goons
     Melee = 0,
     Ranged = 1,
     Boss = 2,
