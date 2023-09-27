@@ -38,13 +38,13 @@ public class HeroUnitBase : UnitBase
     [SerializeField]
     Spell DashSpell;
     float DashCooldownCounter = 0f;
-    float _dashMult=2f;
+    float _dashMult = 2f;
     float _dashDur = 0.1f;
 
     [SerializeField]
-    private float _invincibilityDurationSeconds = 1f;
+    private float _invincibilityDurationSeconds = 0.5f;
     //  [SerializeField]
-    private float _invincibilityDeltaTime = .2f;
+    private float _invincibilityDeltaTime = .1f;
 
     public bool isInvincible = false;
 
@@ -52,7 +52,12 @@ public class HeroUnitBase : UnitBase
 
     private Animator _anim;
 
+    protected static string projectileLayerName = "PlayerSpell";
+    CooldownUI cooldownUI;
 
+    private bool canChangeMage = false;
+
+    private string nameToChangeMage = null;
 
     void Start()
     {
@@ -63,6 +68,8 @@ public class HeroUnitBase : UnitBase
 
         healthBar = FindObjectOfType<HealthBarManager>();
         healthBar.SetMaxHealth(stats.MaxHp);
+
+        cooldownUI = FindObjectOfType<CooldownUI>();
 
         _anim = GetComponent<Animator>();
 
@@ -76,6 +83,11 @@ public class HeroUnitBase : UnitBase
     {
         if (!_isDead)
             TryMove();
+    }
+
+    public void SetNameToChangeMage(string _)
+    {
+        nameToChangeMage = _;
     }
 
     public void ChangeMage(string mageName)
@@ -455,8 +467,11 @@ public class HeroUnitBase : UnitBase
         if (!_isDead && !GameManager.gamePaused)
             if (Time.time > primaryCooldownCounter)
             {
+
                 CastSpell(PrimarySpell);
+                cooldownUI.UpdateCooldown(0, PrimarySpell.cooldown * stats.CooldownModifier);
                 primaryCooldownCounter = Time.time + PrimarySpell.cooldown * stats.CooldownModifier;
+
             }
     }
 
@@ -465,6 +480,7 @@ public class HeroUnitBase : UnitBase
         if (!_isDead && !GameManager.gamePaused)
             if (Time.time > secondaryCooldownCounter)
             {
+                cooldownUI.UpdateCooldown(1, SecondarySpell.cooldown * stats.CooldownModifier);
                 CastSpell(SecondarySpell);
                 secondaryCooldownCounter = Time.time + SecondarySpell.cooldown * stats.CooldownModifier;
             }
@@ -476,6 +492,7 @@ public class HeroUnitBase : UnitBase
             if (Time.time > QCooldownCounter)
             {
                 CastSpell(QSpell);
+                cooldownUI.UpdateCooldown(2, QSpell.cooldown * stats.CooldownModifier);
                 QCooldownCounter = Time.time + QSpell.cooldown * stats.CooldownModifier;
             }
     }
@@ -486,6 +503,7 @@ public class HeroUnitBase : UnitBase
             if (Time.time > ECooldownCounter)
             {
                 CastSpell(ESpell);
+                cooldownUI.UpdateCooldown(3, ESpell.cooldown * stats.CooldownModifier);
                 ECooldownCounter = Time.time + ESpell.cooldown * stats.CooldownModifier;
             }
     }
@@ -497,16 +515,18 @@ public class HeroUnitBase : UnitBase
         {
             if (Time.time > DashCooldownCounter)
             {
-                // Stop any existing dash coroutine before starting a new one
+                //stop existing dash coroutines
                 if (dashCorutine != null)
                 {
                     StopCoroutine(dashCorutine);
                     dashCorutine = null;
                 }
-                dashCorutine ??= StartCoroutine(Dashing()); 
+                dashCorutine ??= StartCoroutine(Dashing());
+                cooldownUI.UpdateCooldown(4, _dashDur + 2 * stats.CooldownModifier);
                 DashCooldownCounter = Time.time + _dashDur + 2 * stats.CooldownModifier;
+
             }
-            
+
         }
     }
 
@@ -540,6 +560,10 @@ public class HeroUnitBase : UnitBase
 
     void OnInteraction()
     {
+        if (nameToChangeMage != null && !GameManager.gamePaused)
+        {
+            ChangeMage(nameToChangeMage);
+        };
     }
 
     void OnPause()
@@ -556,12 +580,12 @@ public class HeroUnitBase : UnitBase
             if (spell.CastFromHeroeNoStaff)
             {
                 spell.caster = collider;
-                spell.Attack(transform.position, spellRotator.StaffFirePoint.transform.rotation);
+                spell.Attack(transform.position, spellRotator.StaffFirePoint.transform.rotation, projectileLayerName);
             }
             else
             {
                 spell.caster = collider;
-                spell.Attack(spellRotator.StaffFirePoint.transform.position, spellRotator.StaffFirePoint.transform.rotation);
+                spell.Attack(spellRotator.StaffFirePoint.transform.position, spellRotator.StaffFirePoint.transform.rotation, projectileLayerName);
             }
         }
         else
@@ -603,7 +627,6 @@ public class HeroUnitBase : UnitBase
 
         for (float i = 0; i < _invincibilityDurationSeconds; i += _invincibilityDeltaTime)
         {
-            // Alternate between 0 and 1 scale to simulate flashing
             if (spriteRenderer.color.a == 1)
             {
                 spriteBlink(0.5f);
@@ -619,9 +642,8 @@ public class HeroUnitBase : UnitBase
 
         isInvincible = false;
         iframeRoutine = null;
-
     }
-   
+
 
 
 }

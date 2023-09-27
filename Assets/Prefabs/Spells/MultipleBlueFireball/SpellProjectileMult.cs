@@ -8,13 +8,16 @@ public class SpellProjectileMult : MonoBehaviour
     int numOfProjectiles;
     [SerializeField]
     float rotAngle = 0f;
-    private void Awake()
+    string layerName;
+    private void OnEnable()
     {
-        Spawn(numOfProjectiles);
-        Destroy(this.gameObject);
+        layerName = LayerMask.LayerToName(gameObject.layer);
+        Spawn(numOfProjectiles,layerName);
+        
+        ObjectPool.ReturnObject(this.gameObject);
     }
 
-    void Spawn(int n)
+    void Spawn(int n, string layer)
     {
         if (n % 2 == 0) transform.Rotate(0f, 0f, -rotAngle);
 
@@ -23,7 +26,7 @@ public class SpellProjectileMult : MonoBehaviour
         for (int i = 0; i < n; i++)
         {
 
-            ObjectPool.SpawnObject(prefab, transform.position, transform.rotation);
+            ObjectPool.SpawnObject(prefab, transform.position, transform.rotation,layer);
             transform.Rotate(0f, 0f, rotAngle);
         }
     }

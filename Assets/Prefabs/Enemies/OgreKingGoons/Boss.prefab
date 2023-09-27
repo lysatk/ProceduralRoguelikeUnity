@@ -11,8 +11,6 @@ GameObject:
   - component: {fileID: 8275289018769346798}
   - component: {fileID: 7858032816570600379}
   - component: {fileID: 8109268066809691}
-  - component: {fileID: -5191531559772631539}
-  - component: {fileID: -8138470197479937915}
   - component: {fileID: 3214218647730200590}
   - component: {fileID: -290538977117715901}
   m_Layer: 9
@@ -128,8 +126,6 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 16
-  aiData: {fileID: -5191531559772631539}
-  contextSolver: {fileID: -8138470197479937915}
   scoreSO: {fileID: 11400000, guid: a537fb5d8087b124a8e1e8f4b21500ba, type: 2}
   attackFromCenter: 0
   rangeOfAttack: 1
@@ -137,43 +133,6 @@ MonoBehaviour:
   rangeOfChase: 30
   attackCooldown: 2
   spell: {fileID: 11400000, guid: e1fb58d9855315c4290acf3c2bed5924, type: 2}
---- !u!114 &-5191531559772631539
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6262015385233187950}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4bd51ddf360aca489f30e0335e40f03, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targets: []
-  obstacles: []
-  currentTarget: {fileID: 0}
-  direction:
-  - {x: 0, y: 1}
-  - {x: 0.70710677, y: 0.70710677}
-  - {x: 1, y: 0}
-  - {x: 0.70710677, y: -0.70710677}
-  - {x: 0, y: -1}
-  - {x: -0.70710677, y: -0.70710677}
-  - {x: -1, y: 0}
-  - {x: -0.70710677, y: 0.70710677}
---- !u!114 &-8138470197479937915
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6262015385233187950}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84ce78120740c324aa675ad1f87a539f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  aiData: {fileID: -5191531559772631539}
 --- !u!95 &3214218647730200590
 Animator:
   serializedVersion: 5

@@ -31,7 +31,6 @@ public class SpellBossSlash : SpellProjectileBase
             yield return null;
         }
 
-        // Animation has finished playing, destroy the object
         Destroy(gameObject);
     }
 

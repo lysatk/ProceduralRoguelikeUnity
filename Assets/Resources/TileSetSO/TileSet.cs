@@ -8,4 +8,5 @@ public class TileSet : ScriptableObject
     public TileBase floorTile;
     public TileBase wallTile;
     public TileBase obstacleTile;
+    public Color cameraBackgroundColor=new Color();
 }

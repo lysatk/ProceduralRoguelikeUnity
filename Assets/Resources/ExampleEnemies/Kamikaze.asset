@@ -22,4 +22,4 @@ MonoBehaviour:
   Description: 
   MenuSprite: {fileID: 0}
   EnemyName: 
-  EnemyType: 1
+  EnemyType: 8

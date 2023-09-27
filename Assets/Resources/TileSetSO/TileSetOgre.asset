@@ -15,3 +15,4 @@ MonoBehaviour:
   floorTile: {fileID: 11400000, guid: 8ac102ddf2973d3409fc01c1ed776d6c, type: 2}
   wallTile: {fileID: 11400000, guid: 5f31cf9d496c0044aba8144dc0af2bf6, type: 2}
   obstacleTile: {fileID: 0}
+  cameraBackgroundColor: {r: 0.21568629, g: 0.62352943, b: 0.30980393, a: 0}

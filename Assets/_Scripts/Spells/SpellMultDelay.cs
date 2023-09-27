@@ -12,9 +12,13 @@ public class SpellMultDelay : MonoBehaviour
     float rotAngle = 0f;
     [SerializeField]
     float spawnDelay = 0.5f; // Adjust this to control the delay between spawns
+    string layerName;
 
-    private void Awake()
+    private void OnEnable()
     {
+        layerName = LayerMask.LayerToName(gameObject.layer);
+        Debug.Log(layerName);
+   
         StartCoroutine(SpawnWithDelay(numOfProjectiles));
     }
 
@@ -25,11 +29,11 @@ public class SpellMultDelay : MonoBehaviour
 
         for (int i = 0; i < n; i++)
         {
-            ObjectPool.SpawnObject(prefab, transform.position, transform.rotation);
+            ObjectPool.SpawnObject(prefab, transform.position, transform.rotation, layerName);
             transform.Rotate(0f, 0f, rotAngle);
             yield return new WaitForSeconds(spawnDelay); // Delay between spawns
         }
 
-        Destroy(this.gameObject);
+        ObjectPool.ReturnObject(gameObject);
     }
 }

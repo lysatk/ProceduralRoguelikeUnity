@@ -103,6 +103,8 @@ public class GameManager : StaticInstance<GameManager>
 
     private Scene _currentScene;
 
+    private static int enemyIdRange=0;
+
     void Start()
     {
         enemies = new();
@@ -168,6 +170,7 @@ public class GameManager : StaticInstance<GameManager>
 
     void HandleHub()
     {
+        
         var _ = StartCoroutine(LoadAsync("LevelHub", GameState.Null));
 
         Player = UnitManager.Instance.SpawnHero(mageNameSO.String, new Vector2(27, 42));
@@ -204,10 +207,10 @@ public class GameManager : StaticInstance<GameManager>
     {
         waveName.text = "";
         FindObjectOfType<LevelGenerator>().GenerateMap();
-
+       
         for (int i = 0; i < 30; i++)
         {
-            UnitManager.Instance.SpawnEnemy((ExampleEnemyType)Random.Range(0, 3), 1);
+            UnitManager.Instance.SpawnEnemy((ExampleEnemyType)Random.Range(enemyIdRange, enemyIdRange+3), 1);
 
         }
         firstLevel = false;
@@ -232,7 +235,7 @@ public class GameManager : StaticInstance<GameManager>
 
         for (int i = 0; i < 25; i++)
         {
-            UnitManager.Instance.SpawnEnemy((ExampleEnemyType)Random.Range(0, 3), 1);
+            UnitManager.Instance.SpawnEnemy((ExampleEnemyType)Random.Range(enemyIdRange, enemyIdRange + 3), 1);
         }
         Player.transform.position = UnitManager.Instance.GetPlayerSpawner();
     }
@@ -243,7 +246,7 @@ public class GameManager : StaticInstance<GameManager>
 
         for (int i = 0; i < 10; i++)
         {
-            UnitManager.Instance.SpawnEnemy((ExampleEnemyType)Random.Range(0, 3), 1);
+            UnitManager.Instance.SpawnEnemy((ExampleEnemyType)Random.Range(enemyIdRange, enemyIdRange + 3), 1);
         }
 
         for (int i = 0; i < 4; i++)
@@ -253,6 +256,7 @@ public class GameManager : StaticInstance<GameManager>
         UnitManager.Instance.SpawnEnemy((ExampleEnemyType)30, 1);
 
        Player.transform.position = UnitManager.Instance.GetPlayerSpawner();
+        enemyIdRange += 3;
 
     }
 
@@ -289,6 +293,7 @@ public class GameManager : StaticInstance<GameManager>
     {
         SceneManager.SetActiveScene(SceneManager.GetSceneAt(0));
 
+        enemyIdRange = 0;
         enemies.Clear();
 
         foreach (Transform children in UnitManager.Instance.transform)

@@ -6,7 +6,14 @@ public class ManekinLogic : MonoBehaviour
     {
         if (collision.gameObject.TryGetComponent(out HeroUnitBase unit))
         {
-            unit.ChangeMage(name);
+            unit.SetNameToChangeMage(name);
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.TryGetComponent(out HeroUnitBase unit))
+        {
+            unit.SetNameToChangeMage(null);
         }
     }
 }

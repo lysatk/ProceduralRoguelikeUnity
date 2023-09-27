@@ -42,8 +42,10 @@ public class MapFunctions
     /// <param name="tileWall">Tile we will draw with</param>
     /// <param name="tileSpawner">Tile that will be used as a spawnPoint</param>
 
-    public static void RenderMap(int[,] map, Tilemap tilemapWall, Tilemap tilemapFloor, TileBase tileWall, TileBase tileSpawner, TileBase tileFloor)
+    public static void RenderMap(int[,] map, Tilemap tilemapWall, Tilemap tilemapFloor, TileBase tileWall, TileBase tileSpawner, TileBase tileFloor,Color cameraBackgroundColor)
     {
+        Camera.main.backgroundColor = cameraBackgroundColor;
+
         //Adding padding to the map 
         for (int x = (int)(map.GetUpperBound(0) * (-0.39)); x < map.GetUpperBound(0) * 1.39; x++)
         {

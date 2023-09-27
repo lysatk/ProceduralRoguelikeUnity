@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Boss
   m_EditorClassIdentifier: 
   _stats:
-    _MaxHp: 450
+    _MaxHp: 200
     _Armor: 1
     _MovementSpeed: 5.2
     _DmgModifier: 1
@@ -22,4 +22,4 @@ MonoBehaviour:
   Description: 
   MenuSprite: {fileID: 0}
   EnemyName: 
-  EnemyType: 3
+  EnemyType: 2
