@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1343789464}
   - component: {fileID: 5680514342300321887}
   m_Layer: 6
-  m_Name: SpellMultipleFireball
+  m_Name: SpellMultipleBlueFireball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

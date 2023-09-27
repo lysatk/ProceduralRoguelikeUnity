@@ -43,6 +43,7 @@ public class ObjectPool : StaticInstance<GameManager>
         if (pool == null)
         {
             Debug.Log("trying to release an non-pooled obj:" + obj.name);
+
         }
         else
         {

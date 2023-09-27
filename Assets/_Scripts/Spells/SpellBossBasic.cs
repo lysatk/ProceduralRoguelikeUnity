@@ -13,14 +13,15 @@ public class SpellBossBasic : MonoBehaviour
     [SerializeField]
     float spawnDelay = 0.5f;
     string layerName;
-    private void Awake()
+    private void OnEnable()
     {
+       // Debug.Log("enabled");
         layerName = LayerMask.LayerToName(gameObject.layer);
-        Debug.Log("LayerString " + layerName);
+      //  Debug.Log("LayerString " + layerName);
         StartCoroutine(SpawnWithDelay(numOfProjectiles));
 
-
     }
+
 
     IEnumerator SpawnWithDelay(int n)
     {
@@ -35,7 +36,7 @@ public class SpellBossBasic : MonoBehaviour
 
             yield return new WaitForSeconds(spawnDelay);
         }
-        ObjectPool.ReturnObject(gameObject);
+       ObjectPool.ReturnObject(gameObject);
 
     }
     GameObject RandSpellFromList()

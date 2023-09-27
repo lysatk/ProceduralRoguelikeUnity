@@ -170,6 +170,7 @@ public class GameManager : StaticInstance<GameManager>
 
     void HandleHub()
     {
+        
         var _ = StartCoroutine(LoadAsync("LevelHub", GameState.Null));
 
         Player = UnitManager.Instance.SpawnHero(mageNameSO.String, new Vector2(27, 42));
@@ -206,7 +207,7 @@ public class GameManager : StaticInstance<GameManager>
     {
         waveName.text = "";
         FindObjectOfType<LevelGenerator>().GenerateMap();
-        UnitManager.Instance.SpawnEnemy((ExampleEnemyType)6, 1);
+       
         for (int i = 0; i < 30; i++)
         {
             UnitManager.Instance.SpawnEnemy((ExampleEnemyType)Random.Range(enemyIdRange, enemyIdRange+3), 1);
@@ -292,6 +293,7 @@ public class GameManager : StaticInstance<GameManager>
     {
         SceneManager.SetActiveScene(SceneManager.GetSceneAt(0));
 
+        enemyIdRange = 0;
         enemies.Clear();
 
         foreach (Transform children in UnitManager.Instance.transform)

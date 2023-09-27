@@ -19,6 +19,7 @@ public abstract class SpellBase : MonoBehaviour
     protected void SetSpellStats()
     {
         var spell = ResourceSystem.Instance.GetExampleSpell(Name);
+        
         spellDamage = spell.spellDamage;
         conditions = spell.conditions;
         speed = spell.speed;

@@ -9,9 +9,9 @@ public class SpellProjectileMult : MonoBehaviour
     [SerializeField]
     float rotAngle = 0f;
     string layerName;
-    private void Awake()
+    private void OnEnable()
     {
-        layerName = gameObject.layer.ToString();
+        layerName = LayerMask.LayerToName(gameObject.layer);
         Spawn(numOfProjectiles,layerName);
         
         ObjectPool.ReturnObject(this.gameObject);

@@ -14,10 +14,11 @@ public class SpellMultDelay : MonoBehaviour
     float spawnDelay = 0.5f; // Adjust this to control the delay between spawns
     string layerName;
 
-    private void Awake()
+    private void OnEnable()
     {
-        layerName = gameObject.layer.ToString();
+        layerName = LayerMask.LayerToName(gameObject.layer);
         Debug.Log(layerName);
+   
         StartCoroutine(SpawnWithDelay(numOfProjectiles));
     }
 
