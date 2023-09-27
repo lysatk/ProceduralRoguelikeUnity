@@ -55,6 +55,9 @@ public class HeroUnitBase : UnitBase
     protected static string projectileLayerName = "PlayerSpell";
     CooldownUI cooldownUI;
 
+    private bool canChangeMage = false;
+
+    private string nameToChangeMage = null;
 
     void Start()
     {
@@ -80,6 +83,11 @@ public class HeroUnitBase : UnitBase
     {
         if (!_isDead)
             TryMove();
+    }
+
+    public void SetNameToChangeMage(string _)
+    {
+        nameToChangeMage = _;
     }
 
     public void ChangeMage(string mageName)
@@ -459,11 +467,11 @@ public class HeroUnitBase : UnitBase
         if (!_isDead && !GameManager.gamePaused)
             if (Time.time > primaryCooldownCounter)
             {
-                
+
                 CastSpell(PrimarySpell);
                 cooldownUI.UpdateCooldown(0, PrimarySpell.cooldown * stats.CooldownModifier);
                 primaryCooldownCounter = Time.time + PrimarySpell.cooldown * stats.CooldownModifier;
-               
+
             }
     }
 
@@ -552,6 +560,10 @@ public class HeroUnitBase : UnitBase
 
     void OnInteraction()
     {
+        if (nameToChangeMage != null && !GameManager.gamePaused)
+        {
+            ChangeMage(nameToChangeMage);
+        };
     }
 
     void OnPause()
