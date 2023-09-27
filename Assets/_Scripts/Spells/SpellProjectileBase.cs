@@ -9,8 +9,9 @@ namespace Assets._Scripts.Spells
     /// <summary></summary>
     public class SpellProjectileBase : SpellBase
     {
+   
         protected Rigidbody2D rb;
-
+        bool _objReturned=false;
         protected void SpellAwake()
         {
             SetSpellStats();
@@ -26,6 +27,7 @@ namespace Assets._Scripts.Spells
         IEnumerator WaitForSecondsCoroutine(float secondsToWait)
         {
             yield return new WaitForSeconds(secondsToWait);
+         
             ObjectPool.ReturnObject(gameObject);
         }
 
@@ -35,13 +37,23 @@ namespace Assets._Scripts.Spells
             return true;
         }
 
-        protected virtual void OnTriggerEnter2D(Collider2D collision)
+        protected  void OnTriggerEnter2D(Collider2D collision)
         {
+           // Debug.Log("coll");
             if (collision.gameObject.TryGetComponent(out AttackHandler attack) )
             {
                 attack.DealDamage(spellDamage, conditions);
             }
-            ObjectPool.ReturnObject(gameObject);
+            // Debug.Log("BackToPoolAfterColl");
+
+            if (!_objReturned)
+            {
+                ObjectPool.ReturnObject(gameObject);
+                _objReturned = true;
+            }
+            StopAllCoroutines();
+
+
 
         }
 
@@ -69,11 +81,13 @@ namespace Assets._Scripts.Spells
         protected virtual void OnEnable()
         {
             SpellAwake();
+            _objReturned = false;
+           
         }
-        protected void Awake()
-        {
-            SpellAwake();
+        //protected void Awake()
+        //{
+        //    SpellAwake();
 
-        }
+        //}
     }
 }

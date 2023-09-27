@@ -13,7 +13,9 @@ public class ObjectPool : StaticInstance<GameManager>
 
         if (pool == null)
         {
+            Debug.Log("1");
             pool = new PooledSpellInfo() { lookupString = obj.name };
+            Debug.Log("2");
             objectPools.Add(pool);
         }
 
@@ -21,14 +23,18 @@ public class ObjectPool : StaticInstance<GameManager>
 
         if (spawnableObj == null)
         {
+            Debug.Log("3");
             spawnableObj = Instantiate(obj, pos, rot);
+
         }
         else
         {
-            spawnableObj.transform.position = pos;
+            
             spawnableObj.transform.rotation = rot;
-            pool.InactiveObjects.Remove(spawnableObj);
+            spawnableObj.transform.position = pos;
             spawnableObj.SetActive(true);
+            pool.InactiveObjects.Remove(spawnableObj);
+
         }
         spawnableObj.layer = LayerMask.NameToLayer(layerString);
         return spawnableObj;
@@ -37,7 +43,9 @@ public class ObjectPool : StaticInstance<GameManager>
 
     public static void ReturnObject(GameObject obj)
     {
+        Debug.Log("9");
         string name = obj.name.Substring(0, obj.name.Length - 7); //removing "(Clone)" from obj.name
+        Debug.Log("10");
         PooledSpellInfo pool = objectPools.Find(p => p.lookupString == name);
 
         if (pool == null)
@@ -47,14 +55,18 @@ public class ObjectPool : StaticInstance<GameManager>
         }
         else
         {
+            Debug.Log("11");
             obj.SetActive(false);
+            Debug.Log("BackInPool"+name+": "+ pool.InactiveObjects.Count.ToString());
             pool.InactiveObjects.Add(obj);
         }
     }
 
     public static void ClearPools()
     {
-        objectPools = new List<PooledSpellInfo>();
+
+        objectPools.Clear();
+         
     }
 }
 
