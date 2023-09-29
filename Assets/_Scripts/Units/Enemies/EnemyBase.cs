@@ -92,6 +92,7 @@ public abstract class EnemyBase : UnitBase
     /// </summary>
     public override void Die()
     {
+        
         hitbox.enabled = false;
         navMeshAgent.enabled = false;
 

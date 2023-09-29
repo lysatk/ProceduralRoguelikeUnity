@@ -35,9 +35,9 @@ public class Spell : ScriptableObject
     /// <summary>position and rotation to create spell prefab</summary>
     /// <param name="position">Spawn position</param>
     /// <param name="rotation">Spawn rotation</param>
-    public void Attack(Vector3 position, Quaternion rotation,string layerString)
+    public void Attack(Vector3 position, Quaternion rotation,string layerString,ObjectPool.SpellSource spellSource=ObjectPool.SpellSource.None)
     {
-       ObjectPool.SpawnObject(Prefab, position, rotation,layerString); 
+       ObjectPool.SpawnObject(Prefab, position, rotation,layerString,spellSource); 
       
     }
 }
