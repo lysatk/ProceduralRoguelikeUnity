@@ -22,7 +22,7 @@ MonoBehaviour:
     AffectTime: 2
     AffectOnTick: 0.5
   speed: 3
-  destroyTime: 4
+  destroyTime: 1
   caster: {fileID: 0}
   CastFromHeroeNoStaff: 0
   cooldown: 1
