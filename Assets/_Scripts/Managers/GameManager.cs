@@ -216,18 +216,7 @@ public class GameManager : StaticInstance<GameManager>
         firstLevel = false;
         Player.transform.position = UnitManager.Instance.GetPlayerSpawner();
     }
-    void HandleRestarting()
-    {
-        enemies.Clear();
-        foreach (Transform children in UnitManager.Instance.transform)
-        {
-            Destroy(children.gameObject);
-        }
-        HandleStarting();
-
-
-    }
-
+ 
     void HandlePostLevel()
     {
         waveName.text = "";
@@ -251,7 +240,7 @@ public class GameManager : StaticInstance<GameManager>
 
         for (int i = 0; i < 4; i++)
         {
-            UnitManager.Instance.SpawnEnemy((ExampleEnemyType)3, 1);
+            UnitManager.Instance.SpawnEnemy((ExampleEnemyType)enemyIdRange+3, 1);
         }
         UnitManager.Instance.SpawnEnemy((ExampleEnemyType)30, 1);
 
@@ -295,7 +284,7 @@ public class GameManager : StaticInstance<GameManager>
 
         enemyIdRange = 0;
         enemies.Clear();
-
+     
         foreach (Transform children in UnitManager.Instance.transform)
         {
             Destroy(children.gameObject);
@@ -372,8 +361,6 @@ public class GameManager : StaticInstance<GameManager>
         ChangeState(GameState.Hub);
     }
 
-
-
     public void HandleMenuQuit()
     {
 #if UNITY_EDITOR
@@ -392,9 +379,6 @@ public class GameManager : StaticInstance<GameManager>
         HandlePause();
         ChangeState(GameState.Restarting);
     }
-
-
-
     #endregion
 
 

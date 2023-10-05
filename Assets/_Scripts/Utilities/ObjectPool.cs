@@ -118,16 +118,13 @@ public class ObjectPool : MonoBehaviour
 
             default:
                 return null;
-
         }
 
     }
 
     public static void ClearPools()
     {
-
         objectPools.Clear();
-
     }
 }
 

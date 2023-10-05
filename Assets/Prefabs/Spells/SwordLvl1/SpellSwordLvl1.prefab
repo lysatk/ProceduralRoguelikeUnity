@@ -191,5 +191,5 @@ MonoBehaviour:
   Name: Sword
   spellDamage: 0
   conditions: []
-  speed: 0
+  speed: 1
   destroyTime: 0

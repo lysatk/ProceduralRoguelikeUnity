@@ -171,5 +171,5 @@ MonoBehaviour:
   Name: BossSlash
   spellDamage: 10
   conditions: []
-  speed: 0
+  speed: 1
   destroyTime: 1
