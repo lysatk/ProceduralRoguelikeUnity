@@ -4,18 +4,43 @@ using UnityEngine;
 using System.Linq;
 using System.Collections;
 
-public class ObjectPool : StaticInstance<GameManager>
+
+
+
+public class ObjectPool : MonoBehaviour
 {
+
+    public enum SpellSource
+    {
+        Player,
+        Enemy,
+        None
+    }
+
+    public static SpellSource spellSource;
     public static List<PooledSpellInfo> objectPools = new List<PooledSpellInfo>();
-    public static GameObject SpawnObject(GameObject obj, Vector3 pos, quaternion rot,string layerString)
+
+    private static GameObject _projectileParent;
+
+    private static GameObject _projectilePlayer;
+    private static GameObject _projectileEnemy;
+
+    private void Awake()
+    {
+        CreateParentObjects();
+    }
+
+
+
+    #region SpawnReturn
+    public static GameObject SpawnObject(GameObject obj, Vector3 pos, quaternion rot, string layerString, SpellSource spellSource = SpellSource.None)
     {
         PooledSpellInfo pool = objectPools.Find(p => p.lookupString == obj.name);
 
         if (pool == null)
         {
-            Debug.Log("1");
+
             pool = new PooledSpellInfo() { lookupString = obj.name };
-            Debug.Log("2");
             objectPools.Add(pool);
         }
 
@@ -23,16 +48,22 @@ public class ObjectPool : StaticInstance<GameManager>
 
         if (spawnableObj == null)
         {
-            Debug.Log("3");
+            GameObject parentObject = SetParentObjectSourceType(spellSource);
+
             spawnableObj = Instantiate(obj, pos, rot);
 
+            if (parentObject != null)
+            {
+                spawnableObj.transform.SetParent(parentObject.transform);
+            }
         }
         else
         {
-            
+
             spawnableObj.transform.rotation = rot;
             spawnableObj.transform.position = pos;
             spawnableObj.SetActive(true);
+
             pool.InactiveObjects.Remove(spawnableObj);
 
         }
@@ -43,30 +74,57 @@ public class ObjectPool : StaticInstance<GameManager>
 
     public static void ReturnObject(GameObject obj)
     {
-        Debug.Log("9");
         string name = obj.name.Substring(0, obj.name.Length - 7); //removing "(Clone)" from obj.name
-        Debug.Log("10");
         PooledSpellInfo pool = objectPools.Find(p => p.lookupString == name);
 
         if (pool == null)
         {
             Debug.Log("trying to release an non-pooled obj:" + obj.name);
-
         }
         else
         {
-            Debug.Log("11");
             obj.SetActive(false);
-            Debug.Log("BackInPool"+name+": "+ pool.InactiveObjects.Count.ToString());
             pool.InactiveObjects.Add(obj);
         }
     }
 
-    public static void ClearPools()
+    #endregion
+
+    public void CreateParentObjects()
+    {
+        _projectileParent = new GameObject("PooledObjects");
+
+        _projectilePlayer = new GameObject("playerSpells");
+        _projectilePlayer.transform.SetParent(_projectileParent.transform);
+
+        _projectileEnemy = new GameObject("enemySpells");
+        _projectileEnemy.transform.SetParent(_projectileParent.transform);
+    }
+
+    private static GameObject SetParentObjectSourceType(SpellSource spellSource)
     {
 
+        switch (spellSource)
+        {
+            case SpellSource.Player:
+
+                return _projectilePlayer;
+
+            case SpellSource.Enemy:
+                return _projectileEnemy;
+
+            case SpellSource.None:
+                return null;
+
+            default:
+                return null;
+        }
+
+    }
+
+    public static void ClearPools()
+    {
         objectPools.Clear();
-         
     }
 }
 

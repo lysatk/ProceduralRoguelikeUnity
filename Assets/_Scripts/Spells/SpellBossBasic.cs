@@ -15,13 +15,9 @@ public class SpellBossBasic : MonoBehaviour
     string layerName;
     private void OnEnable()
     {
-       // Debug.Log("enabled");
-        layerName = LayerMask.LayerToName(gameObject.layer);
-      //  Debug.Log("LayerString " + layerName);
+        layerName = LayerMask.LayerToName(gameObject.layer);    
         StartCoroutine(SpawnWithDelay(numOfProjectiles));
-
     }
-
 
     IEnumerator SpawnWithDelay(int n)
     {

@@ -17,8 +17,7 @@ public class SpellMultDelay : MonoBehaviour
     private void OnEnable()
     {
         layerName = LayerMask.LayerToName(gameObject.layer);
-        Debug.Log(layerName);
-   
+
         StartCoroutine(SpawnWithDelay(numOfProjectiles));
     }
 

@@ -42,7 +42,7 @@ public class MapFunctions
     /// <param name="tileWall">Tile we will draw with</param>
     /// <param name="tileSpawner">Tile that will be used as a spawnPoint</param>
 
-    public static void RenderMap(int[,] map, Tilemap tilemapWall, Tilemap tilemapFloor, TileBase tileWall, TileBase tileSpawner, TileBase tileFloor,Color cameraBackgroundColor)
+    public static void RenderMap(int[,] map, Tilemap tilemapWall, Tilemap tilemapFloor, TileBase tileWall, TileBase tileSpawner, TileBase tileShadow, TileBase tileFloor,Color cameraBackgroundColor)
     {
         Camera.main.backgroundColor = cameraBackgroundColor;
 
@@ -60,10 +60,18 @@ public class MapFunctions
         {
             for (int y = 0; y < map.GetUpperBound(1); y++) //Loop through the height of the map
             {
+
+               
+
                 if (map[x, y] == 0 || map[x, y] == 3) // 1 = wall, 0 = no wall, 2=spawnOriginEnemy, 3=spawnPlayer
                 {
                     tilemapWall.SetTile(new Vector3Int(x, y, 0), null);
                     tilemapFloor.SetTile(new Vector3Int(x, y, 0), tileFloor);
+
+                    if (map[x, y+1] == 1) 
+                    {
+                        tilemapFloor.SetTile(new Vector3Int(x, y , 0), tileShadow);  
+                    }
                 }
 
                 else if (map[x, y] == 2)
@@ -71,6 +79,7 @@ public class MapFunctions
                     // tilemapWall.SetTile(new Vector3Int(x, y, 0), tileSpawner);
                     tilemapWall.SetTile(new Vector3Int(x, y, 0), null);
                 }
+
             }
         }
     }
@@ -152,13 +161,11 @@ public class MapFunctions
         //Seed our random
         System.Random rand = new System.Random(seed.GetHashCode());
 
-        //Define our start x position
         int floorX = rand.Next(1, map.GetUpperBound(0) - 1);
-        //Define our start y position
         int floorY = rand.Next(1, map.GetUpperBound(1) - 1);
-        //Determine our required floorAmount
+      
         int reqFloorAmount = ((map.GetUpperBound(1) * map.GetUpperBound(0)) * requiredFloorPercent) / 100;
-        //Used for our while loop, when this reaches our reqFloorAmount we will stop tunneling
+      
         int floorCount = 0;
 
         //Set our start position to not be a tile (0 = no tile, 1 = tile)
@@ -170,7 +177,6 @@ public class MapFunctions
         while (floorCount < reqFloorAmount)
         {
 
-            //Determine our next direction
             int randDir = rand.Next(4);
 
             switch (randDir)

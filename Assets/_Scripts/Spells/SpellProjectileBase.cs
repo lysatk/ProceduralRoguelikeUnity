@@ -52,9 +52,6 @@ namespace Assets._Scripts.Spells
                 _objReturned = true;
             }
             StopAllCoroutines();
-
-
-
         }
 
         protected virtual void ExplosiveDamageCircle()
@@ -84,10 +81,6 @@ namespace Assets._Scripts.Spells
             _objReturned = false;
            
         }
-        //protected void Awake()
-        //{
-        //    SpellAwake();
-
-        //}
+     
     }
 }

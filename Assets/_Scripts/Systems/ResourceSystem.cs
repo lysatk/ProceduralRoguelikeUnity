@@ -60,7 +60,7 @@ public class ResourceSystem : StaticInstance<ResourceSystem>
     /// <summary>
     /// Returns some spell
     /// </summary>
-    /// <param name="spellName">mane of spell to get</param>
+    /// <param name="spellName">name of spell to get</param>
     /// <returns>reference to spell</returns>
     public Spell GetExampleSpell(string spellName) => _AllSpellsDict[spellName];
 

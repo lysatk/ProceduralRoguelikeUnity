@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1343789464}
   - component: {fileID: 1959568447677229900}
   - component: {fileID: 9032830588418902039}
-  - component: {fileID: 3826924771597330631}
+  - component: {fileID: 1820142299680253947}
   m_Layer: 6
   m_Name: SpellBossSlash
   m_TagString: Untagged
@@ -156,7 +156,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &3826924771597330631
+--- !u!114 &1820142299680253947
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -165,13 +165,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 639514538004180302}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 251b46b7ad3be474eb49a56e7b5a468c, type: 3}
+  m_Script: {fileID: 11500000, guid: 1388aac0ff6cf9a4ca707822eb67cf9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Boss Slash
-  spellDamage: 0
+  Name: BossSlash
+  spellDamage: 10
   conditions: []
-  speed: 0
-  destroyTime: 0
-  radius: 4.5
-  animator: {fileID: 9032830588418902039}
+  speed: 1
+  destroyTime: 1

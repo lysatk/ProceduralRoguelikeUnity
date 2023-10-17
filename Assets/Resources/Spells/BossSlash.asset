@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cacbea3919a5c3d42ac537197be2b9c1, type: 3}
   m_Name: BossSlash
   m_EditorClassIdentifier: 
-  Name: Boss Slash
+  Name: BossSlash
   Description: 
   image: {fileID: 0}
   Prefab: {fileID: 639514538004180302, guid: 8ca5ad1d908b88044ac029039f121606, type: 3}
@@ -22,7 +22,7 @@ MonoBehaviour:
     AffectTime: 2
     AffectOnTick: 0.5
   speed: 3
-  destroyTime: 4
+  destroyTime: 1
   caster: {fileID: 0}
   CastFromHeroeNoStaff: 0
   cooldown: 1

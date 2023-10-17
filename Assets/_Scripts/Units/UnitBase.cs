@@ -23,7 +23,9 @@ public abstract class UnitBase : MonoBehaviour
     public GameObject healthBarManagerObj;
     protected HealthBarManager healthBar;
 
-    protected Coroutine changeRoutine, burnRoutine, freezeRoutine, slowRoutine, speedUpRoutine, poisonRoutine, armorUpRoutine, armorDownRoutine, hasteRoutine, dmgUpRoutine, iframeRoutine,dashCorutine;
+    protected Coroutine changeRoutine, burnRoutine, freezeRoutine, slowRoutine,
+                        speedUpRoutine, poisonRoutine, armorUpRoutine, armorDownRoutine,
+                        hasteRoutine, dmgUpRoutine, iframeRoutine, dashCorutine;
     public abstract bool TryMove(Vector2 direction);
 
     /// <summary>
@@ -134,8 +136,8 @@ public abstract class UnitBase : MonoBehaviour
         while (Time.time < end)
         {
             stats.CurrentHp -= Convert.ToInt32(condition.AffectOnTick);
-          //  if(healthBar!=null)
-        //    healthBar.SetHealth(stats.CurrentHp);
+            //  if(healthBar!=null)
+            //    healthBar.SetHealth(stats.CurrentHp);
 
             if (stats.CurrentHp <= 0)
                 Die();
@@ -175,7 +177,7 @@ public abstract class UnitBase : MonoBehaviour
         {
             stats.CurrentHp -= Convert.ToInt32(condition.AffectOnTick);
 
-         //   healthBar.SetHealth(stats.CurrentHp);
+            //   healthBar.SetHealth(stats.CurrentHp);
 
             if (stats.CurrentHp <= 0)
                 Die();

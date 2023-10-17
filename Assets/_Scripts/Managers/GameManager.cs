@@ -69,17 +69,17 @@ public class GameManager : StaticInstance<GameManager>
     /// <summary>
     /// ?????
     /// </summary>
-    public CanvasGroup uiCanvasGroup;
+    public GameObject uiObject;
 
     /// <summary>
     /// ?????
     /// </summary>
-    public CanvasGroup pauseCanvasGroup;
+    public GameObject pauseMenuObject;
 
     /// <summary>
     /// ?????
     /// </summary>
-    public CanvasGroup loadingCanvasGroup;
+    public GameObject loadingCanvasObject;
 
 
 
@@ -112,8 +112,7 @@ public class GameManager : StaticInstance<GameManager>
         var _ = StartCoroutine(LoadScoresAsync());
 
         ChangeState(GameState.Hub);
-        Instance.pauseCanvasGroup.alpha = 0f;
-        Instance.pauseCanvasGroup.interactable = false;
+        Instance.pauseMenuObject.SetActive(false);
     }
 
     IEnumerator LoadScoresAsync()
@@ -216,18 +215,7 @@ public class GameManager : StaticInstance<GameManager>
         firstLevel = false;
         Player.transform.position = UnitManager.Instance.GetPlayerSpawner();
     }
-    void HandleRestarting()
-    {
-        enemies.Clear();
-        foreach (Transform children in UnitManager.Instance.transform)
-        {
-            Destroy(children.gameObject);
-        }
-        HandleStarting();
-
-
-    }
-
+ 
     void HandlePostLevel()
     {
         waveName.text = "";
@@ -251,7 +239,7 @@ public class GameManager : StaticInstance<GameManager>
 
         for (int i = 0; i < 4; i++)
         {
-            UnitManager.Instance.SpawnEnemy((ExampleEnemyType)3, 1);
+            UnitManager.Instance.SpawnEnemy((ExampleEnemyType)enemyIdRange+3, 1);
         }
         UnitManager.Instance.SpawnEnemy((ExampleEnemyType)30, 1);
 
@@ -295,7 +283,7 @@ public class GameManager : StaticInstance<GameManager>
 
         enemyIdRange = 0;
         enemies.Clear();
-
+     
         foreach (Transform children in UnitManager.Instance.transform)
         {
             Destroy(children.gameObject);
@@ -334,20 +322,20 @@ public class GameManager : StaticInstance<GameManager>
         {
             gamePaused = true;
             Time.timeScale = 0f;
-            GameManager.Instance.uiCanvasGroup.alpha = 0f;
+            GameManager.Instance.uiObject.SetActive(false);
 
-            GameManager.Instance.pauseCanvasGroup.alpha = 1f;
-            GameManager.Instance.pauseCanvasGroup.interactable = true;
+            GameManager.Instance.pauseMenuObject.SetActive(true);
+            //GameManager.Instance.pauseMenuObject.interactable = true;
         }
 
         else
         {
             gamePaused = false;
             Time.timeScale = 1f;
-            GameManager.Instance.uiCanvasGroup.alpha = 1f;
+            GameManager.Instance.uiObject.SetActive(true);
 
-            GameManager.Instance.pauseCanvasGroup.alpha = 0f;
-            GameManager.Instance.pauseCanvasGroup.interactable = false;
+            GameManager.Instance.pauseMenuObject.SetActive(false);
+            //GameManager.Instance.pauseMenuObject.interactable = false;
         }
 
     }
@@ -372,8 +360,6 @@ public class GameManager : StaticInstance<GameManager>
         ChangeState(GameState.Hub);
     }
 
-
-
     public void HandleMenuQuit()
     {
 #if UNITY_EDITOR
@@ -390,11 +376,8 @@ public class GameManager : StaticInstance<GameManager>
     public void HandleMenuRestart()
     {
         HandlePause();
-        ChangeState(GameState.Restarting);
+        ChangeState(GameState.Starting);
     }
-
-
-
     #endregion
 
 
