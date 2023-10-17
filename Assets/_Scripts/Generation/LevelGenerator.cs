@@ -17,6 +17,9 @@ public class LevelGenerator : MonoBehaviour
     [Tooltip("The Tilemap to draw walls onto")]
     public Tilemap tilemapFloor;
 
+    [Tooltip("Tile to use as a shadow")]
+    public TileBase tileShadow;
+
     [Tooltip("The Tiles to draw walls with")]
     [SerializeField]
     public List<TileSet> tileSets = new List<TileSet>();
@@ -74,7 +77,7 @@ public class LevelGenerator : MonoBehaviour
 
         map = MapFunctions.RandomWalkCave(map, seed, mapSetting.clearAmount);
 
-        MapFunctions.RenderMap(map, tilemapWall, tilemapFloor, tileSets[tileIndex].wallTile, tileSets[tileIndex].obstacleTile, tileSets[tileIndex].floorTile, tileSets[tileIndex].cameraBackgroundColor);
+        MapFunctions.RenderMap(map, tilemapWall, tilemapFloor, tileSets[tileIndex].wallTile, tileSets[tileIndex].obstacleTile,tileShadow, tileSets[tileIndex].floorTile, tileSets[tileIndex].cameraBackgroundColor);
 
         GameManager.map = map;
 

@@ -16,4 +16,12 @@ public class ManekinLogic : MonoBehaviour
             unit.SetNameToChangeMage(null);
         }
     }
+    private void TogglePopUp()
+    {
+
+        
+
+
+
+    }    
 }

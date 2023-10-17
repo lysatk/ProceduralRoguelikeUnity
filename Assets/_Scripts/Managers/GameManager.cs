@@ -69,17 +69,17 @@ public class GameManager : StaticInstance<GameManager>
     /// <summary>
     /// ?????
     /// </summary>
-    public CanvasGroup uiCanvasGroup;
+    public GameObject uiObject;
 
     /// <summary>
     /// ?????
     /// </summary>
-    public CanvasGroup pauseCanvasGroup;
+    public GameObject pauseMenuObject;
 
     /// <summary>
     /// ?????
     /// </summary>
-    public CanvasGroup loadingCanvasGroup;
+    public GameObject loadingCanvasObject;
 
 
 
@@ -112,8 +112,7 @@ public class GameManager : StaticInstance<GameManager>
         var _ = StartCoroutine(LoadScoresAsync());
 
         ChangeState(GameState.Hub);
-        Instance.pauseCanvasGroup.alpha = 0f;
-        Instance.pauseCanvasGroup.interactable = false;
+        Instance.pauseMenuObject.SetActive(false);
     }
 
     IEnumerator LoadScoresAsync()
@@ -323,20 +322,20 @@ public class GameManager : StaticInstance<GameManager>
         {
             gamePaused = true;
             Time.timeScale = 0f;
-            GameManager.Instance.uiCanvasGroup.alpha = 0f;
+            GameManager.Instance.uiObject.SetActive(false);
 
-            GameManager.Instance.pauseCanvasGroup.alpha = 1f;
-            GameManager.Instance.pauseCanvasGroup.interactable = true;
+            GameManager.Instance.pauseMenuObject.SetActive(true);
+            //GameManager.Instance.pauseMenuObject.interactable = true;
         }
 
         else
         {
             gamePaused = false;
             Time.timeScale = 1f;
-            GameManager.Instance.uiCanvasGroup.alpha = 1f;
+            GameManager.Instance.uiObject.SetActive(true);
 
-            GameManager.Instance.pauseCanvasGroup.alpha = 0f;
-            GameManager.Instance.pauseCanvasGroup.interactable = false;
+            GameManager.Instance.pauseMenuObject.SetActive(false);
+            //GameManager.Instance.pauseMenuObject.interactable = false;
         }
 
     }
@@ -377,7 +376,7 @@ public class GameManager : StaticInstance<GameManager>
     public void HandleMenuRestart()
     {
         HandlePause();
-        ChangeState(GameState.Restarting);
+        ChangeState(GameState.Starting);
     }
     #endregion
 

@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &284298444 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7916989875598768385, guid: 0ff81acdfe25c7b4bafc7528270801b2, type: 3}
+  m_PrefabInstance: {fileID: 7823478310127301148}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &310522952
 GameObject:
   m_ObjectHideFlags: 0
@@ -158,6 +163,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &808637243 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 93546767448373356, guid: 5839fd94658f5d8478df7c081c688f01, type: 3}
+  m_PrefabInstance: {fileID: 921583891}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &921583891
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -638,11 +648,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d23033e3b31d7f449ec778b3f43fb02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!225 &1171821407 stripped
-CanvasGroup:
-  m_CorrespondingSourceObject: {fileID: 7823478311128195395, guid: 0ff81acdfe25c7b4bafc7528270801b2, type: 3}
-  m_PrefabInstance: {fileID: 7823478310127301148}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1263446453
 GameObject:
   m_ObjectHideFlags: 0
@@ -815,9 +820,9 @@ MonoBehaviour:
   - {fileID: 310522952}
   - {fileID: 1321944485}
   - {fileID: 1697687975}
-  uiCanvasGroup: {fileID: 1393561922}
-  pauseCanvasGroup: {fileID: 1171821407}
-  loadingCanvasGroup: {fileID: 0}
+  uiObject: {fileID: 808637243}
+  pauseMenuObject: {fileID: 284298444}
+  loadingCanvasObject: {fileID: 0}
   ScoresWasSaved: 0
   scoreSO: {fileID: 11400000, guid: a537fb5d8087b124a8e1e8f4b21500ba, type: 2}
   mageNameSO: {fileID: 11400000, guid: 488fa0a66c85f7747b4582dc17b80341, type: 2}
@@ -976,11 +981,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _musicSource: {fileID: 0}
   _soundsSource: {fileID: 0}
---- !u!225 &1393561922 stripped
-CanvasGroup:
-  m_CorrespondingSourceObject: {fileID: 4922924388537431675, guid: 5839fd94658f5d8478df7c081c688f01, type: 3}
-  m_PrefabInstance: {fileID: 921583891}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1697687975
 GameObject:
   m_ObjectHideFlags: 0
@@ -1201,6 +1201,10 @@ PrefabInstance:
     - target: {fileID: 7916989875598768385, guid: 0ff81acdfe25c7b4bafc7528270801b2, type: 3}
       propertyPath: m_Name
       value: PauseUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 7916989875598768385, guid: 0ff81acdfe25c7b4bafc7528270801b2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7916989875598768397, guid: 0ff81acdfe25c7b4bafc7528270801b2, type: 3}
       propertyPath: m_Pivot.x
