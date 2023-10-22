@@ -204,6 +204,8 @@ public class GameManager : StaticInstance<GameManager>
 
     void HandleStarting()
     {
+        enemyIdRange = 0;
+
         waveName.text = "";
         FindObjectOfType<LevelGenerator>().GenerateMap();
        
