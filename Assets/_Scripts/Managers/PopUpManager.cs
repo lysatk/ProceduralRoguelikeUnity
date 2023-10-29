@@ -22,9 +22,7 @@ public class PopUpManager : MonoBehaviour
             Instantiate(popUpModel.popUpObject);
         }
     }
-
-
-}
+ }
 
 public class PopUpModel
 {

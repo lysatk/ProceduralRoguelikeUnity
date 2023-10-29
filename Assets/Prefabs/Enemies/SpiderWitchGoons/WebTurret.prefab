@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7858032816570600379}
   - component: {fileID: 8109268066809691}
   - component: {fileID: 3214218647730200590}
+  - component: {fileID: -1611874823226611623}
   m_Layer: 9
   m_Name: WebTurret
   m_TagString: Enemy
@@ -121,7 +122,6 @@ MonoBehaviour:
     minNormalAngle: 0
     maxNormalAngle: 0
   collisionOffset: 0.05
-  seeDistance: 1
   layerMask:
     serializedVersion: 2
     m_Bits: 16
@@ -132,6 +132,10 @@ MonoBehaviour:
   rangeOfChase: 0
   attackCooldown: 0.1
   spell: {fileID: 11400000, guid: 1f0162c5b87b3554b9c32f934adc2386, type: 2}
+  attackPhaseDuration: 1
+  movementBiasDuration: 5
+  maxAttackRate: 1
+  minAttackRate: 0.3
 --- !u!95 &3214218647730200590
 Animator:
   serializedVersion: 5
@@ -153,6 +157,41 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-1611874823226611623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6262015385233187950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 276bdd88861f9114e8ffaba7e04b58c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBarManagerObj: {fileID: 0}
+  movementFilter:
+    useTriggers: 0
+    useLayerMask: 0
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 0
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
+  collisionOffset: 0.05
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 128
+  scoreSO: {fileID: 11400000, guid: a537fb5d8087b124a8e1e8f4b21500ba, type: 2}
+  rangeOfAttack: 10
+  attackCooldown: 2
+  spell: {fileID: 11400000, guid: f79d447ef08acea43af72903fcb6cde7, type: 2}
 --- !u!1 &7212438722113357005
 GameObject:
   m_ObjectHideFlags: 0
