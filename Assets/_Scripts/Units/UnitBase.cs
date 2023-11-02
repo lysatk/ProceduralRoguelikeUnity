@@ -10,7 +10,7 @@ using UnityEngine.Assertions.Must;
 /// </summary>
 public abstract class UnitBase : MonoBehaviour
 {
-    protected Assets._Scripts.Utilities.Stats stats;
+    public Assets._Scripts.Utilities.Stats stats;
 
     protected bool _canMove = true;
     protected bool _isDead = false;
