@@ -105,6 +105,8 @@ public class GameManager : StaticInstance<GameManager>
 
     private static int enemyIdRange = 0;
 
+    public CharacterStatsUI levelUpUI;
+
     void Start()
     {
         enemies = new();
@@ -220,6 +222,18 @@ public class GameManager : StaticInstance<GameManager>
 
     void HandlePostLevel()
     {
+        
+        if (levelUpUI != null)
+        {
+            levelUpUI.ShowUI();
+        }
+        else
+        {
+            Debug.LogError("LevelUpUI reference not set in the GameManager.");
+        }
+
+
+        PauseGame(); 
         waveName.text = "";
         FindObjectOfType<LevelGenerator>().GenerateMap();
 
@@ -231,6 +245,18 @@ public class GameManager : StaticInstance<GameManager>
     }
     void HandleBossReached()
     {
+        if (levelUpUI != null)
+        {
+            levelUpUI.ShowUI();
+        }
+        else
+        {
+            Debug.LogError("LevelUpUI reference not set in the GameManager.");
+        }
+
+
+        PauseGame();
+        
         waveName.text = "";
         FindObjectOfType<LevelGenerator>().GenerateMap();
 
@@ -259,7 +285,8 @@ public class GameManager : StaticInstance<GameManager>
         highScore.score = scoreSO.Int;
         highScores.Add(highScore);
         scoreSO.Int = 0;
-        ObjectPool.ClearPools();
+        ObjectPool.DestroySpellsByParent(ObjectPool.SpellSource.Enemy);
+        ObjectPool.DestroySpellsByParent(ObjectPool.SpellSource.Player);
         var temp = StartCoroutine(PostLoseWait(3));
     }
 
@@ -382,5 +409,33 @@ public class GameManager : StaticInstance<GameManager>
     }
     #endregion
 
+    public void ConfirmLevelUpAndContinue()
+    {
+       
+        if (levelUpUI != null)
+        {
+            levelUpUI.HideUI();
+        }
+        else
+        {
+            Debug.LogError("LevelUpUI reference not set in the GameManager.");
+        }
+
+       
+        ResumeGame();
+      
+    }
+
+    private void PauseGame()
+    {
+        Time.timeScale = 0f;
+        gamePaused = true;
+    }
+
+    private void ResumeGame()
+    {
+        Time.timeScale = 1f;
+        gamePaused = false;
+    }
 
 }
