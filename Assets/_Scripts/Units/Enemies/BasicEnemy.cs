@@ -1,48 +1,40 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.AI; // Required for NavMeshAgent
 
-/// <summary>
-/// State machine and its logic for enemy
-/// </summary>
 public class BasicEnemy : EnemyBase
 {
-    [SerializeField]
-    private bool attackFromCenter;
-    [SerializeField]
-    private float rangeOfAttack = 0.1f;
-    [SerializeField]
-    private float rangeOfRest = 2f;
-    [SerializeField]
-    private float rangeOfChase = 5f;
-    [SerializeField]
-    private float attackCooldown = 5;
-    [SerializeField]
-    private Spell spell;
-    bool onCooldown = false;
+    [Header("Settings")]
+    [SerializeField] private bool attackFromCenter;
+    [SerializeField] private float rangeOfAttack = 0.1f;
+    [SerializeField] private float rangeOfRest = 2f;
+    [SerializeField] private float rangeOfChase = 5f;
+    [SerializeField] private float attackCooldown = 5;
+    [SerializeField] private Spell spell;
 
-
+    [Header("State Management")]
+    private bool onCooldown = false;
     private float lastAttack = 0;
+    private States currentState;
 
-
-    #region biasVariables
-    // ????????????????????
+    // Movement and bias variables
+    [Header("Bias Variables")]
+    [SerializeField] private float attackPhaseDuration = 1f;
+    [SerializeField] private float movementBiasDuration = 5f;
+    [SerializeField] private float maxAttackRate = 1f;
+    [SerializeField] private float minAttackRate = 0.3f;
     private float attackPhaseTimer = 0f;
-    private float attackPhaseDuration = 1f;
-    private float attackCooldownRamp = 1.5f;
     private float lastPlayerDamageTime = 0f;
     private float movementBiasTimer = 0f;
-    private float movementBiasDuration = 5f;
-    private float maxAttackRate = 1f;
-    private float minAttackRate = 0.3f;
     private float currentAttackRate = 0.1f;
-    #endregion
 
+    // Resting state variables
     private float restMovementTimer = 0f;
-    private float restMovementDuration = 1f;
-    private float restMovementRange = 2f;
+    private const float restMovementDuration = 1f;
+    private const float restMovementRange = 2f;
     private Vector3 restTargetPosition;
 
-
+ 
     private enum States
     {
         Idle,
@@ -52,107 +44,115 @@ public class BasicEnemy : EnemyBase
         Die
     }
 
-    private States currentState;
+    private void Start()
+    {
+        InitializeComponents();
+        ConfigureNavmeshAgent();
+        currentState = States.Moving;
+    }
 
-    void Start()
+    private void InitializeComponents()
     {
         rb = GetComponent<Rigidbody2D>();
         player = GameManager.Player.transform;
         spriteRenderer = GetComponent<SpriteRenderer>();
-        currentState = States.Moving;
         _anim = GetComponent<Animator>();
-        ConfigureNavmeshAgent();
     }
-    public void ConfigureNavmeshAgent()
+
+    private void ConfigureNavmeshAgent()
     {
         navMeshAgent.speed = stats.MovementSpeed;
         navMeshAgent.stoppingDistance = rangeOfAttack;
         navMeshAgent.updateRotation = false;
         navMeshAgent.updateUpAxis = false;
-        navMeshAgent.obstacleAvoidanceType = UnityEngine.AI.ObstacleAvoidanceType.LowQualityObstacleAvoidance;
+        navMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.LowQualityObstacleAvoidance;
     }
 
+    private void Update()
+    {
+        HandleState();
+    }
 
-
-    void Update()
+    private void HandleState()
     {
         switch (currentState)
         {
             case States.Idle:
                 ChangeState(States.Rest);
                 break;
-
             case States.Moving:
-                if (IsPlayerInRange(rangeOfAttack))
-                {
-                    ChangeState(States.Attacking);
-                }
-                else if (IsPlayerInRange(rangeOfChase))
-                {
-                    Chasing();
-                }
-                else
-                {
-                    ChangeState(States.Rest);
-                }
+                ProcessMovingState();
                 break;
-
             case States.Attacking:
-                if (IsPlayerInRange(rangeOfAttack))
-                {
-
-                    if (!onCooldown && Time.time - lastAttack >= currentAttackRate)
-                    {
-                        Attack();
-                    }
-                }
-                else
-                {
-                    ChangeState(States.Moving);
-                }
-
-
-                attackPhaseTimer += Time.deltaTime;
-
-
-                currentAttackRate = Mathf.Lerp(minAttackRate, maxAttackRate, attackPhaseTimer / attackPhaseDuration);
-
-                if (Time.time - lastPlayerDamageTime >= movementBiasDuration)
-                {
-                    Vector3 dirToPlayer = (player.position - transform.position).normalized;
-                    Move(transform.position + dirToPlayer);
-                }
+                ProcessAttackingState();
                 break;
-
             case States.Rest:
-                StopAnimation();
-
-                restMovementTimer += Time.deltaTime;
-
-                if (restMovementTimer >= restMovementDuration)
-                {
-
-                    Vector2 randomOffset = Random.insideUnitCircle * restMovementRange;
-                    restTargetPosition = transform.position + new Vector3(randomOffset.x, randomOffset.y, 0f);
-
-
-                    restMovementTimer = 0f;
-                }
-
-                Move(restTargetPosition);
-
-                if (Time.time - lastAttack >= rangeOfRest)
-                {
-                    ChangeState(States.Moving);
-                }
+                ProcessRestingState();
                 break;
-
             case States.Die:
-                //TO DO
+                // Implement die behavior
                 break;
         }
     }
 
+    private void ProcessMovingState()
+    {
+        if (IsPlayerInRange(rangeOfAttack))
+        {
+            ChangeState(States.Attacking);
+            ResetAttackPhase();
+        }
+        else if (IsPlayerInRange(rangeOfChase))
+        {
+            Chasing();
+        }
+        else
+        {
+            ChangeState(States.Rest);
+        }
+    }
+
+    private void ProcessAttackingState()
+    {
+        if (IsPlayerInRange(rangeOfAttack) && !onCooldown && Time.time - lastAttack >= currentAttackRate)
+        {
+            Attack();
+        }
+        else if (!IsPlayerInRange(rangeOfAttack))
+        {
+            ChangeState(States.Moving);
+        }
+
+        attackPhaseTimer += Time.deltaTime;
+        currentAttackRate = Mathf.Lerp(minAttackRate, maxAttackRate, attackPhaseTimer / attackPhaseDuration);
+
+        if (Time.time - lastPlayerDamageTime >= movementBiasDuration)
+        {
+            Vector3 dirToPlayer = (player.position - transform.position).normalized;
+            Move(dirToPlayer);
+        }
+    }
+
+    private void ProcessRestingState()
+    {
+        StopAnimation();
+
+        restMovementTimer += Time.deltaTime;
+
+        if (restMovementTimer >= restMovementDuration)
+        {
+            Vector2 randomOffset = Random.insideUnitCircle * restMovementRange;
+            restTargetPosition = transform.position + new Vector3(randomOffset.x, randomOffset.y, 0f);
+            restMovementTimer = 0f;
+        }
+
+        Move(restTargetPosition);
+
+        if (Time.time - lastAttack >= rangeOfRest)
+        {
+            ChangeState(States.Moving);
+        }
+    }
 
     private bool IsPlayerInRange(float range)
     {
@@ -160,39 +160,42 @@ public class BasicEnemy : EnemyBase
         return distance <= range;
     }
 
-
     private void ChangeState(States newState)
     {
         currentState = newState;
     }
 
+    private void ResetAttackPhase()
+    {
+        attackPhaseTimer = 0f;
+    }
 
     private void Attack()
     {
-        if (onCooldown)
-            return;
+        if (onCooldown) return;
 
         onCooldown = true;
         lastAttack = Time.time;
         lastPlayerDamageTime = Time.time;
+
+        Vector3 dirToPlayer = (player.position - transform.position).normalized;
+
         if (attackFromCenter)
         {
-            spell.Attack(transform.position, Quaternion.identity, projectileLayerName,ObjectPool.SpellSource.Enemy);
-            return;
+            spell.Attack(transform.position, Quaternion.identity, projectileLayerName, ObjectPool.SpellSource.Enemy);
+        }
+        else
+        {
+            float angle = Mathf.Atan2(dirToPlayer.y, dirToPlayer.x) * Mathf.Rad2Deg;
+            spell.Attack(transform.position + dirToPlayer, Quaternion.AngleAxis(angle, Vector3.forward), projectileLayerName, ObjectPool.SpellSource.Enemy);
         }
 
-
-
-        Vector3 dirToPlayer = (player.position - transform.position);
-        dirToPlayer.Normalize();
-        float angle = Mathf.Atan2(dirToPlayer.y, dirToPlayer.x) * Mathf.Rad2Deg;
-        spell.Attack(transform.position + dirToPlayer, Quaternion.AngleAxis(angle, Vector3.forward), projectileLayerName, ObjectPool.SpellSource.Enemy);
         StartCoroutine(ResetCooldownAfterAnimation());
     }
 
     private IEnumerator ResetCooldownAfterAnimation()
     {
-        yield return new WaitForSeconds(attackCooldown); 
+        yield return new WaitForSeconds(attackCooldown);
         onCooldown = false;
     }
 

@@ -2,6 +2,7 @@ using Assets._Scripts.Utilities;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.Design.Serialization;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -585,7 +586,7 @@ public class HeroUnitBase : UnitBase
             else
             {
                 spell.caster = collider;
-                spell.Attack(spellRotator.StaffFirePoint.transform.position, spellRotator.StaffFirePoint.transform.rotation, projectileLayerName,ObjectPool.SpellSource.Player);
+                spell.Attack(spellRotator.StaffFirePoint.transform.position, spellRotator.StaffFirePoint.transform.rotation, projectileLayerName, ObjectPool.SpellSource.Player);
             }
         }
         else
@@ -618,7 +619,6 @@ public class HeroUnitBase : UnitBase
     {
         spriteRenderer.color = new Color(1, 1, 1, alpha);
     }
-
 
     private IEnumerator BecomeTemporarilyInvincible()
     {

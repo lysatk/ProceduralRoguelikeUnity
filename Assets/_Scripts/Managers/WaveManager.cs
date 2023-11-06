@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 
 namespace Assets._Scripts.Managers
 {
-   
+
     /// <summary>
     /// Class that handle waves
     /// </summary>
@@ -21,19 +21,9 @@ namespace Assets._Scripts.Managers
         /// text that contains number of enemies alive
         /// </summary>
         public Text enemyCounter;
-
-        bool _canSpawn = true;
-        bool _bossLevel = false;
-        bool _bossSpawned = false;
         public bool gameOver = false;
 
-        int scaleMultiplier = 1;
-        //Level currentLevel;
-        int currentLevelNumber = 1;
-        float nextSpawnTime = 0;
-        readonly float spawnInterval = 0.1f;
-        int allEnemiesToSpawn;
-        int spawnCountNow;
+
         int totalEnemies;
         int currentLevelNum = 1;
         LevelGenerator levelGenerator;
@@ -57,7 +47,7 @@ namespace Assets._Scripts.Managers
             Debug.Log(currentLevelNum);
             if (totalEnemies == 0 && !GameManager.firstLevel)
             {
-                LevelGenerator.SetTileIndex(currentLevelNum/2,levelGenerator );
+                LevelGenerator.SetTileIndex(currentLevelNum / 2, levelGenerator);
                 currentLevelNum++;
                 if (currentLevelNum % 2 == 0)  //2 is temporary for testing purpouses !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                     GameManager.Instance.ChangeState(GameState.BossReached);

@@ -1,24 +1,49 @@
 using UnityEngine;
 
-/// <summary>
-/// Insanely basic audio system which supports 3D sound.
-/// Ensure you change the 'Sounds' audio source to use 3D spatial blend if you intend to use 3D sounds.
-/// </summary>
-public class AudioSystem : StaticInstance<AudioSystem> {
-    [SerializeField] private AudioSource _musicSource;
-    [SerializeField] private AudioSource _soundsSource;
+public class AudioSystem : MonoBehaviour
+{
+    public static AudioSystem Instance;
 
-    public void PlayMusic(AudioClip clip) {
-        _musicSource.clip = clip;
-        _musicSource.Play();
+    [SerializeField] private AudioSource musicSource;
+    [SerializeField] private AudioSource sfxSource;
+
+    [SerializeField] private AudioClip musicClip;
+    [SerializeField] private AudioClip enemyDeathClip;
+    [SerializeField] private AudioClip playerDeathClip;
+    [SerializeField] private AudioClip projectileCollisionClip;
+
+    private void Awake()
+    {
+        // Ensure there is only one instance of this object in the game
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
+        // Start the background music
+        PlayMusic(musicClip);
     }
 
-    public void PlaySound(AudioClip clip, Vector3 pos, float vol = 1) {
-        _soundsSource.transform.position = pos;
-        PlaySound(clip, vol);
+    public void PlayMusic(AudioClip clip)
+    {
+        musicSource.clip = clip;
+        musicSource.loop = true; // Music typically loops
+        musicSource.Play();
     }
 
-    public void PlaySound(AudioClip clip, float vol = 1) {
-        _soundsSource.PlayOneShot(clip, vol);
+    public void PlaySFX(AudioClip clip)
+    {
+        sfxSource.PlayOneShot(clip);
+    }
+
+    public void ChangeVolume(float musicVolume, float sfxVolume)
+    {
+        musicSource.volume = musicVolume;
+        sfxSource.volume = sfxVolume;
     }
 }

@@ -126,6 +126,50 @@ public class ObjectPool : MonoBehaviour
     {
         objectPools.Clear();
     }
+
+    public static void ReturnSpellsByParent(SpellSource spellSource)
+    {
+        GameObject parentObject = SetParentObjectSourceType(spellSource);
+        if (parentObject != null)
+        {
+          
+            var spellsToReturn = new List<GameObject>();
+            foreach (Transform spellTransform in parentObject.transform)
+            {
+                if (spellTransform.gameObject.activeSelf)
+                {
+                    spellsToReturn.Add(spellTransform.gameObject);
+                }
+            }
+
+           
+            foreach (var spell in spellsToReturn)
+            {
+                ReturnObject(spell);
+            }
+        }
+    }
+
+    public static void DestroySpellsByParent(SpellSource spellSource)
+    {
+        GameObject parentObject = SetParentObjectSourceType(spellSource);
+        if (parentObject != null)
+        {
+            
+            var spellsToDestroy = new List<GameObject>();
+            foreach (Transform spellTransform in parentObject.transform)
+            {
+                spellsToDestroy.Add(spellTransform.gameObject);
+            }
+
+           
+            foreach (var spell in spellsToDestroy)
+            {
+                Destroy(spell);
+            }
+        }
+    }
+
 }
 
 public class PooledSpellInfo

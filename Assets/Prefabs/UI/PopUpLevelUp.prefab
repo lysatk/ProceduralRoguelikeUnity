@@ -3851,7 +3851,7 @@ GameObject:
   - component: {fileID: 4207010569073102547}
   - component: {fileID: 2905043609193296975}
   m_Layer: 5
-  m_Name: PopUpManekin
+  m_Name: PopUpLevelUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
