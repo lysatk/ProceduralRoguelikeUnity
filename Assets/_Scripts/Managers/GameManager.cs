@@ -232,6 +232,8 @@ public class GameManager : StaticInstance<GameManager>
             Debug.LogError("LevelUpUI reference not set in the GameManager.");
         }
 
+        ObjectPool.ReturnSpellsByParent(ObjectPool.SpellSource.Player); 
+        ObjectPool.ReturnSpellsByParent(ObjectPool.SpellSource.Enemy);
 
         PauseGame(); 
         waveName.text = "";

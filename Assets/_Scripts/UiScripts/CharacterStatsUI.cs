@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro; // Add this namespace to use TextMeshPro
 using UnityEngine.UI;
+using static System.Net.WebRequestMethods;
 
 public class CharacterStatsUI : MonoBehaviour
 {
@@ -141,7 +142,7 @@ public class CharacterStatsUI : MonoBehaviour
     private int hpBeforeHeal;
     public void FullHeal()
     {
-        if (!isHealToggled && player.stats.CurrentHp < player.stats.MaxHp)
+        if (!isHealToggled && player.stats.CurrentHp < player.stats.MaxHp && availablePoints <= 0)
         {
             hpBeforeHeal = player.stats.CurrentHp; 
             player.stats.CurrentHp = player.stats.MaxHp;
