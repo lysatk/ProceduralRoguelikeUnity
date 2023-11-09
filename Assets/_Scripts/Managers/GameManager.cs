@@ -200,7 +200,7 @@ public class GameManager : StaticInstance<GameManager>
         SceneManager.SetActiveScene(SceneManager.GetSceneAt(0));
 
         SceneManager.UnloadScene("LevelHub");
-
+        
         var _ = StartCoroutine(LoadAsync("LevelTest", GameState.Starting));
     }
 
@@ -232,8 +232,7 @@ public class GameManager : StaticInstance<GameManager>
             Debug.LogError("LevelUpUI reference not set in the GameManager.");
         }
 
-        ObjectPool.ReturnSpellsByParent(ObjectPool.SpellSource.Player); 
-        ObjectPool.ReturnSpellsByParent(ObjectPool.SpellSource.Enemy);
+        ObjectPool.ReturnAllObjects();
 
         PauseGame(); 
         waveName.text = "";
@@ -275,7 +274,7 @@ public class GameManager : StaticInstance<GameManager>
 
         Player.transform.position = UnitManager.Instance.GetPlayerSpawner();
         enemyIdRange += 3;
-
+        
     }
 
     void HandleLose()
@@ -287,8 +286,7 @@ public class GameManager : StaticInstance<GameManager>
         highScore.score = scoreSO.Int;
         highScores.Add(highScore);
         scoreSO.Int = 0;
-        ObjectPool.DestroySpellsByParent(ObjectPool.SpellSource.Enemy);
-        ObjectPool.DestroySpellsByParent(ObjectPool.SpellSource.Player);
+        ObjectPool.DestroySpellsAll();
         var temp = StartCoroutine(PostLoseWait(3));
     }
 
@@ -319,6 +317,7 @@ public class GameManager : StaticInstance<GameManager>
         {
             Destroy(children.gameObject);
         }
+        ObjectPool.DestroySpellsAll();
 
         SceneManager.UnloadScene("LevelTest");
     }

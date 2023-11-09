@@ -132,7 +132,7 @@ public class ObjectPool : MonoBehaviour
         GameObject parentObject = SetParentObjectSourceType(spellSource);
         if (parentObject != null)
         {
-          
+
             var spellsToReturn = new List<GameObject>();
             foreach (Transform spellTransform in parentObject.transform)
             {
@@ -142,7 +142,7 @@ public class ObjectPool : MonoBehaviour
                 }
             }
 
-           
+
             foreach (var spell in spellsToReturn)
             {
                 ReturnObject(spell);
@@ -155,17 +155,77 @@ public class ObjectPool : MonoBehaviour
         GameObject parentObject = SetParentObjectSourceType(spellSource);
         if (parentObject != null)
         {
-            
+
             var spellsToDestroy = new List<GameObject>();
             foreach (Transform spellTransform in parentObject.transform)
             {
                 spellsToDestroy.Add(spellTransform.gameObject);
             }
 
-           
+
             foreach (var spell in spellsToDestroy)
             {
                 Destroy(spell);
+            }
+        }
+    }
+
+    public static void DestroySpellsAll()
+    {
+
+        var spellsToReturn = new List<GameObject>();
+
+        foreach (var pool in objectPools)
+        {
+            foreach (var activeSpell in pool.InactiveObjects.Where(obj => obj.activeSelf))
+            {
+                if (activeSpell.transform.parent == null)
+                {
+                    spellsToReturn.Add(activeSpell);
+                }
+            }
+        }
+
+        foreach (var spell in spellsToReturn)
+        {
+            Destroy(spell);
+        }
+    }
+
+
+    public static void ReturnSpellsWithoutSource()
+    {
+
+        var spellsToReturn = new List<GameObject>();
+
+        foreach (var pool in objectPools)
+        {
+            foreach (var activeSpell in pool.InactiveObjects.Where(obj => obj.activeSelf))
+            {
+                if (activeSpell.transform.parent == null)
+                {
+                    spellsToReturn.Add(activeSpell);
+                }
+            }
+        }
+
+        foreach (var spell in spellsToReturn)
+        {
+            ReturnObject(spell);
+        }
+    }
+
+    public static void ReturnAllObjects()
+    {
+        foreach (var pool in objectPools)
+        {
+            var allObjects = new List<GameObject>();
+
+            allObjects.AddRange(pool.InactiveObjects.Where(obj => obj.activeSelf));
+
+            foreach (var obj in allObjects)
+            {
+                ReturnObject(obj);
             }
         }
     }
