@@ -124,6 +124,13 @@ public class ObjectPool : MonoBehaviour
 
     public static void ClearPools()
     {
+        foreach (var pool in objectPools)
+        {
+            foreach (var obj in pool.InactiveObjects)
+            {
+                Destroy(obj);
+            }
+        }
         objectPools.Clear();
     }
 
@@ -229,6 +236,7 @@ public class ObjectPool : MonoBehaviour
             }
         }
     }
+   
 
 }
 

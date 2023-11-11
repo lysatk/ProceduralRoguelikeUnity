@@ -286,7 +286,9 @@ public class GameManager : StaticInstance<GameManager>
         highScore.score = scoreSO.Int;
         highScores.Add(highScore);
         scoreSO.Int = 0;
-        ObjectPool.DestroySpellsAll();
+        ObjectPool.ReturnAllObjects();
+        ObjectPool.ClearPools();
+
         var temp = StartCoroutine(PostLoseWait(3));
     }
 
