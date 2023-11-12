@@ -25,6 +25,7 @@ public class CharacterStatsUI : MonoBehaviour
     private bool isHealToggled = false;
     private void OnEnable()
     {
+        GameManager.gamePaused = true;
         fullhealButtonText = fullHealButton.GetComponentInChildren<TextMeshProUGUI>();
         availablePoints = 5;
         if (GameManager.Player != null)

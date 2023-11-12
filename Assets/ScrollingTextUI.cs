@@ -13,10 +13,10 @@ public class ScrollingTextUI : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetAxis("Mouse ScrollWheel") != 0)
-        {
-            isAutoScrolling = false;
-        }
+        //if (Input.GetAxis("Mouse ScrollWheel") != 0)
+        //{
+        //    isAutoScrolling = false;
+        //}
 
         if (isAutoScrolling)
         {

@@ -339,37 +339,32 @@ public class GameManager : StaticInstance<GameManager>
         base.OnApplicationQuit();
     }
 
-    public static void HandlePause()
+    public static void HandlePause() //needs FIXING turining on the pauseMenu during a level up makes player unable to hide it 
     {
         bool isLevelUpUIActive = Instance.levelUpUI != null && Instance.levelUpUI.isActiveAndEnabled;
 
-        // If levelUpUI is active, handle the pause menu visibility differently
         if (isLevelUpUIActive)
         {
-            // If the game is already paused (pause menu is open), close the pause menu
-            // but keep the game in a paused state.
+          
             if (gamePaused)
             {
                 Instance.pauseMenuObject.SetActive(false);
             }
             else
             {
-                // If the game is not paused and levelUpUI is active, open the pause menu
-                // but do not change the game's paused state (remain paused due to levelUpUI).
+                
                 Instance.pauseMenuObject.SetActive(true);
             }
-            // Do not toggle the gamePaused flag as the game remains paused due to levelUpUI.
+           
         }
         else
         {
-            // If levelUpUI is not active, toggle the game's pause state.
+           
             gamePaused = !gamePaused;
             Time.timeScale = gamePaused ? 0f : 1f;
 
-            // Update the visibility of the pause menu based on the game's pause state.
+         
             Instance.pauseMenuObject.SetActive(gamePaused);
-
-            // If the game is unpaused, ensure uiObject is active.
             if (!gamePaused)
             {
                 Instance.uiObject.SetActive(true);
