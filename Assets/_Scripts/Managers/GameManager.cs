@@ -178,23 +178,17 @@ public class GameManager : StaticInstance<GameManager>
 
         highScore = new() { score = 0 };
     }
-
     IEnumerator LoadAsync(string SceneName, GameState state)
     {
-        SceneManager.LoadScene(SceneName, LoadSceneMode.Additive);
-        _currentScene = SceneManager.GetSceneAt(1);
+        var loadScene = SceneManager.LoadSceneAsync(SceneName, LoadSceneMode.Additive);
+        yield return new WaitUntil(() => loadScene.isDone);
 
-        while (!_currentScene.isLoaded)
-        {
-            yield return null;
-        }
-
+        _currentScene = SceneManager.GetSceneAt(SceneManager.sceneCount - 1);
         SceneManager.SetActiveScene(_currentScene);
 
         if (state != GameState.Null)
             ChangeState(state);
     }
-
     void HandleLevelChange()
     {
         SceneManager.SetActiveScene(SceneManager.GetSceneAt(0));
@@ -204,77 +198,51 @@ public class GameManager : StaticInstance<GameManager>
         var _ = StartCoroutine(LoadAsync("LevelTest", GameState.Starting));
     }
 
+  
+
+    // Merged enemy spawning and player positioning logic
+    private void PrepareLevel(int enemyCount, int enemyIdOffset, bool isBossLevel = false)
+    {
+        for (int i = 0; i < enemyCount; i++)
+        {
+            UnitManager.Instance.SpawnEnemy((ExampleEnemyType)Random.Range(enemyIdRange, enemyIdRange + enemyIdOffset), 1);
+        }
+
+        if (isBossLevel)
+        {
+            UnitManager.Instance.SpawnEnemy((ExampleEnemyType)30, 1); // Spawn boss
+        }
+
+        Player.transform.position = UnitManager.Instance.GetPlayerSpawner();
+    }
+
     void HandleStarting()
     {
         enemyIdRange = 0;
-
         waveName.text = "";
         FindObjectOfType<LevelGenerator>().GenerateMap();
-
-        for (int i = 0; i < 30; i++)
-        {
-            UnitManager.Instance.SpawnEnemy((ExampleEnemyType)Random.Range(enemyIdRange, enemyIdRange + 2), 1);
-
-        }
+        PrepareLevel(30, 2);
         firstLevel = false;
-        Player.transform.position = UnitManager.Instance.GetPlayerSpawner();
     }
 
     void HandlePostLevel()
     {
-        
-        if (levelUpUI != null)
-        {
-            levelUpUI.ShowUI();
-        }
-        else
-        {
-            Debug.LogError("LevelUpUI reference not set in the GameManager.");
-        }
-
+        levelUpUI?.ShowUI(); // Null check for levelUpUI
         ObjectPool.ReturnAllObjects();
-
-        PauseGame(); 
+        TogglePauseGame();
         waveName.text = "";
         FindObjectOfType<LevelGenerator>().GenerateMap();
-
-        for (int i = 0; i < 25; i++)
-        {
-            UnitManager.Instance.SpawnEnemy((ExampleEnemyType)Random.Range(enemyIdRange, enemyIdRange + 2), 1);
-        }
-        Player.transform.position = UnitManager.Instance.GetPlayerSpawner();
+        PrepareLevel(25, 2);
     }
+
     void HandleBossReached()
     {
-        if (levelUpUI != null)
-        {
-            levelUpUI.ShowUI();
-        }
-        else
-        {
-            Debug.LogError("LevelUpUI reference not set in the GameManager.");
-        }
-
-
-        PauseGame();
-        
+        levelUpUI?.ShowUI(); // Null check for levelUpUI
+        TogglePauseGame();
         waveName.text = "";
         FindObjectOfType<LevelGenerator>().GenerateMap();
-
-        for (int i = 0; i < 10; i++)
-        {
-            UnitManager.Instance.SpawnEnemy((ExampleEnemyType)Random.Range(enemyIdRange, enemyIdRange + 2), 1);
-        }
-
-        for (int i = 0; i < 4; i++)
-        {
-            UnitManager.Instance.SpawnEnemy((ExampleEnemyType)enemyIdRange + 2, 1);
-        }
-        UnitManager.Instance.SpawnEnemy((ExampleEnemyType)30, 1);
-
-        Player.transform.position = UnitManager.Instance.GetPlayerSpawner();
+        PrepareLevel(10, 2, true);
         enemyIdRange += 3;
-        
     }
 
     void HandleLose()
@@ -441,4 +409,11 @@ public class GameManager : StaticInstance<GameManager>
         gamePaused = false;
     }
 
+    public void TogglePauseGame()
+    {
+        gamePaused = !gamePaused;
+        Time.timeScale = gamePaused ? 0f : 1f;
+        Instance.uiObject.SetActive(!gamePaused);
+        Instance.pauseMenuObject.SetActive(gamePaused);
+    }
 }
