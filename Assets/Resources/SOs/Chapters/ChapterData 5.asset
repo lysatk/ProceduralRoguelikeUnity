@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3caeb177cb0891248baf0814d9827f32, type: 3}
+  m_Name: ChapterData 5
+  m_EditorClassIdentifier: 
+  chapterText: 'Entry 5: The Witch Defeated
+
+    
+
+    The battle was grueling,
+    but the Crawler Witch is no more. Her minions have retreated into the shadows
+    of the cavern. I now stand at the threshold of the Crystal Caverns, the lair
+    of the Crystal Daemon. I can feel the pulsating power emanating from within,
+    a siren call to the final confrontation. My resolve is unwavering; the daemon
+    and its cultists shall fall by my hand.
+
+
+'

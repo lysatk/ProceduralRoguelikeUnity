@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3caeb177cb0891248baf0814d9827f32, type: 3}
+  m_Name: ChapterData 2
+  m_EditorClassIdentifier: 
+  chapterText: 'Entry 2: The Ogre King''s Lair
+
+    
+
+    I now stand at the mouth
+    of the Ogre King''s domain. The air is thick with the stench of brimstone and
+    the clamor of his minions. My magic will be tested here, and my resolve must
+    be unyielding. Tonight, I prepare my spells and steel my mind for tomorrow''s
+    battle. I am resolved to defeat the Ogre King and his horde to move forward in
+    my quest.
+
+'

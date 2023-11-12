@@ -81,7 +81,10 @@ public class GameManager : StaticInstance<GameManager>
     /// </summary>
     public GameObject loadingCanvasObject;
 
-
+    /// <summary>
+    /// Value used for selecting a chapter scriptableObject displayed in levelUpUI
+    /// </summary>
+    public int currentChapterIndex = 0;
 
     /// <summary>
     /// flag that shows if the Scores were saved
@@ -107,15 +110,16 @@ public class GameManager : StaticInstance<GameManager>
 
     public CharacterStatsUI levelUpUI;
 
+
     void Start()
     {
-        enemies = new();
-
+        enemies = new List<GameObject>();
+        highScores = new List<HighScore>(); // Initialize highScores here
         var _ = StartCoroutine(LoadScoresAsync());
-
         ChangeState(GameState.Hub);
         Instance.pauseMenuObject.SetActive(false);
     }
+
 
     IEnumerator LoadScoresAsync()
     {
@@ -194,11 +198,11 @@ public class GameManager : StaticInstance<GameManager>
         SceneManager.SetActiveScene(SceneManager.GetSceneAt(0));
 
         SceneManager.UnloadScene("LevelHub");
-        
+
         var _ = StartCoroutine(LoadAsync("LevelTest", GameState.Starting));
     }
 
-  
+
 
     // Merged enemy spawning and player positioning logic
     private void PrepareLevel(int enemyCount, int enemyIdOffset, bool isBossLevel = false)
@@ -227,18 +231,35 @@ public class GameManager : StaticInstance<GameManager>
 
     void HandlePostLevel()
     {
-        levelUpUI?.ShowUI(); // Null check for levelUpUI
+        currentChapterIndex++;
+        if (levelUpUI != null)
+        {
+            levelUpUI.ShowUI();
+        }
+        else
+        {
+            Debug.LogError("LevelUpUI reference not set in the GameManager.");
+        }
+
         ObjectPool.ReturnAllObjects();
-        TogglePauseGame();
         waveName.text = "";
         FindObjectOfType<LevelGenerator>().GenerateMap();
         PrepareLevel(25, 2);
+
     }
 
     void HandleBossReached()
     {
-        levelUpUI?.ShowUI(); // Null check for levelUpUI
-        TogglePauseGame();
+        currentChapterIndex++;
+        if (levelUpUI != null)
+        {
+            levelUpUI.ShowUI();
+        }
+        else
+        {
+            Debug.LogError("LevelUpUI reference not set in the GameManager.");
+        }
+
         waveName.text = "";
         FindObjectOfType<LevelGenerator>().GenerateMap();
         PrepareLevel(10, 2, true);
@@ -256,6 +277,8 @@ public class GameManager : StaticInstance<GameManager>
         scoreSO.Int = 0;
         ObjectPool.ReturnAllObjects();
         ObjectPool.ClearPools();
+
+        currentChapterIndex = 0;
 
         var temp = StartCoroutine(PostLoseWait(3));
     }
@@ -318,27 +341,45 @@ public class GameManager : StaticInstance<GameManager>
 
     public static void HandlePause()
     {
-        if (!gamePaused)
+        bool isLevelUpUIActive = Instance.levelUpUI != null && Instance.levelUpUI.isActiveAndEnabled;
+
+        // If levelUpUI is active, handle the pause menu visibility differently
+        if (isLevelUpUIActive)
         {
-            gamePaused = true;
-            Time.timeScale = 0f;
-            GameManager.Instance.uiObject.SetActive(false);
-
-            GameManager.Instance.pauseMenuObject.SetActive(true);
-            //GameManager.Instance.pauseMenuObject.interactable = true;
+            // If the game is already paused (pause menu is open), close the pause menu
+            // but keep the game in a paused state.
+            if (gamePaused)
+            {
+                Instance.pauseMenuObject.SetActive(false);
+            }
+            else
+            {
+                // If the game is not paused and levelUpUI is active, open the pause menu
+                // but do not change the game's paused state (remain paused due to levelUpUI).
+                Instance.pauseMenuObject.SetActive(true);
+            }
+            // Do not toggle the gamePaused flag as the game remains paused due to levelUpUI.
         }
-
         else
         {
-            gamePaused = false;
-            Time.timeScale = 1f;
-            GameManager.Instance.uiObject.SetActive(true);
+            // If levelUpUI is not active, toggle the game's pause state.
+            gamePaused = !gamePaused;
+            Time.timeScale = gamePaused ? 0f : 1f;
 
-            GameManager.Instance.pauseMenuObject.SetActive(false);
-            //GameManager.Instance.pauseMenuObject.interactable = false;
+            // Update the visibility of the pause menu based on the game's pause state.
+            Instance.pauseMenuObject.SetActive(gamePaused);
+
+            // If the game is unpaused, ensure uiObject is active.
+            if (!gamePaused)
+            {
+                Instance.uiObject.SetActive(true);
+            }
         }
-
     }
+
+
+
+
 
     #region Menu
 
@@ -382,7 +423,7 @@ public class GameManager : StaticInstance<GameManager>
 
     public void ConfirmLevelUpAndContinue()
     {
-       
+
         if (levelUpUI != null)
         {
             levelUpUI.HideUI();
@@ -392,9 +433,9 @@ public class GameManager : StaticInstance<GameManager>
             Debug.LogError("LevelUpUI reference not set in the GameManager.");
         }
 
-       
+
         ResumeGame();
-      
+
     }
 
     private void PauseGame()
@@ -409,11 +450,5 @@ public class GameManager : StaticInstance<GameManager>
         gamePaused = false;
     }
 
-    public void TogglePauseGame()
-    {
-        gamePaused = !gamePaused;
-        Time.timeScale = gamePaused ? 0f : 1f;
-        Instance.uiObject.SetActive(!gamePaused);
-        Instance.pauseMenuObject.SetActive(gamePaused);
-    }
+  
 }

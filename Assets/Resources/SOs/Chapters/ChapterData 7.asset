@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3caeb177cb0891248baf0814d9827f32, type: 3}
+  m_Name: ChapterData 7
+  m_EditorClassIdentifier: 
+  chapterText: 'Entry 7: The Crystal Caverns
+
+
+    Navigating through this labyrinthine
+    cave, the air grows colder, the atmosphere heavier with the palpable magic of
+    the daemon. I can feel its presence now, a dark star at the center of this subterranean
+    universe. Tonight, as I prepare for the final confrontation, I fortify myself
+    with magic and resolve. Tomorrow, I face the Crystal Daemon in a battle that
+    will determine the fate of our world.'
