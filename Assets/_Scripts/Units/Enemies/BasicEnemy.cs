@@ -23,6 +23,11 @@ public class BasicEnemy : EnemyBase
     [SerializeField] private float movementBiasDuration = 5f;
     [SerializeField] private float maxAttackRate = 1f;
     [SerializeField] private float minAttackRate = 0.3f;
+    [Header("Wandering Variables")]
+    [SerializeField] private float wanderingRange = 3f;
+    [SerializeField] private float wanderingDuration = 2f;
+    private float wanderingTimer = 0f;
+    private Vector3 wanderingTargetPosition;
     private float attackPhaseTimer = 0f;
     private float lastPlayerDamageTime = 0f;
     private float movementBiasTimer = 0f;
@@ -33,7 +38,6 @@ public class BasicEnemy : EnemyBase
     private const float restMovementDuration = 1f;
     private const float restMovementRange = 2f;
     private Vector3 restTargetPosition;
-
  
     private enum States
     {
@@ -48,7 +52,7 @@ public class BasicEnemy : EnemyBase
     {
         InitializeComponents();
         ConfigureNavmeshAgent();
-        currentState = States.Moving;
+        currentState = States.Idle;
     }
 
     private void InitializeComponents()
@@ -78,7 +82,7 @@ public class BasicEnemy : EnemyBase
         switch (currentState)
         {
             case States.Idle:
-                ChangeState(States.Rest);
+                ProcessIdleState();
                 break;
             case States.Moving:
                 ProcessMovingState();
@@ -95,6 +99,33 @@ public class BasicEnemy : EnemyBase
         }
     }
 
+    private void ProcessIdleState()
+    {
+        Debug.Log("Processing Idle State"); // Debugging log
+
+        wanderingTimer += Time.deltaTime;
+
+        if (wanderingTimer >= wanderingDuration)
+        {
+            wanderingTargetPosition = GetRandomWanderDestination();
+            Debug.Log($"New Wandering Target: {wanderingTargetPosition}"); // Debugging log
+            wanderingTimer = 0f;
+        }
+
+        Move(wanderingTargetPosition);
+
+        if (IsPlayerInRange(rangeOfChase))
+        {
+            ChangeState(States.Moving);
+        }
+    }
+
+
+    private Vector3 GetRandomWanderDestination()
+    {
+        Vector2 randomOffset = Random.insideUnitCircle * wanderingRange;
+        return transform.position + new Vector3(randomOffset.x, randomOffset.y, 0f);
+    }
     private void ProcessMovingState()
     {
         if (IsPlayerInRange(rangeOfAttack))
