@@ -106,8 +106,6 @@ public class GameManager : StaticInstance<GameManager>
 
     private Scene _currentScene;
 
-    private static int enemyIdRange = 0;
-
     public CharacterStatsUI levelUpUI;
 
 
@@ -293,6 +291,7 @@ public class GameManager : StaticInstance<GameManager>
 
     void HandleLose()
     {
+
         firstLevel = true;
         waveName.text = "YOU DIED!";
         WaveManager.Instance.StopAllCoroutines();
@@ -328,7 +327,6 @@ public class GameManager : StaticInstance<GameManager>
     {
         SceneManager.SetActiveScene(SceneManager.GetSceneAt(0));
 
-        enemyIdRange = 0;
         enemies.Clear();
 
         foreach (Transform children in UnitManager.Instance.transform)
