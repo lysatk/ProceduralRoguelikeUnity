@@ -81,7 +81,10 @@ public class GameManager : StaticInstance<GameManager>
     /// </summary>
     public GameObject loadingCanvasObject;
 
-
+    /// <summary>
+    /// Value used for selecting a chapter scriptableObject displayed in levelUpUI
+    /// </summary>
+    public int currentChapterIndex = 0;
 
     /// <summary>
     /// flag that shows if the Scores were saved
@@ -107,15 +110,16 @@ public class GameManager : StaticInstance<GameManager>
 
     public CharacterStatsUI levelUpUI;
 
+
     void Start()
     {
-        enemies = new();
-
+        enemies = new List<GameObject>();
+        highScores = new List<HighScore>(); // Initialize highScores here
         var _ = StartCoroutine(LoadScoresAsync());
-
         ChangeState(GameState.Hub);
         Instance.pauseMenuObject.SetActive(false);
     }
+
 
     IEnumerator LoadScoresAsync()
     {
@@ -178,23 +182,17 @@ public class GameManager : StaticInstance<GameManager>
 
         highScore = new() { score = 0 };
     }
-
     IEnumerator LoadAsync(string SceneName, GameState state)
     {
-        SceneManager.LoadScene(SceneName, LoadSceneMode.Additive);
-        _currentScene = SceneManager.GetSceneAt(1);
+        var loadScene = SceneManager.LoadSceneAsync(SceneName, LoadSceneMode.Additive);
+        yield return new WaitUntil(() => loadScene.isDone);
 
-        while (!_currentScene.isLoaded)
-        {
-            yield return null;
-        }
-
+        _currentScene = SceneManager.GetSceneAt(SceneManager.sceneCount - 1);
         SceneManager.SetActiveScene(_currentScene);
 
         if (state != GameState.Null)
             ChangeState(state);
     }
-
     void HandleLevelChange()
     {
         SceneManager.SetActiveScene(SceneManager.GetSceneAt(0));
@@ -204,78 +202,93 @@ public class GameManager : StaticInstance<GameManager>
         var _ = StartCoroutine(LoadAsync("LevelTest", GameState.Starting));
     }
 
+
+
     void HandleStarting()
     {
-        enemyIdRange = 0;
-
         waveName.text = "";
         FindObjectOfType<LevelGenerator>().GenerateMap();
-
-        for (int i = 0; i < 30; i++)
-        {
-            UnitManager.Instance.SpawnEnemy((ExampleEnemyType)Random.Range(enemyIdRange, enemyIdRange + 2), 1);
-
-        }
+        PrepareLevel(30); 
         firstLevel = false;
-        Player.transform.position = UnitManager.Instance.GetPlayerSpawner();
     }
 
     void HandlePostLevel()
     {
-        
-        if (levelUpUI != null)
-        {
-            levelUpUI.ShowUI();
-        }
-        else
-        {
-            Debug.LogError("LevelUpUI reference not set in the GameManager.");
-        }
+        UpdateUIForLevelUp();
 
-        ObjectPool.ReturnSpellsByParent(ObjectPool.SpellSource.Player); 
-        ObjectPool.ReturnSpellsByParent(ObjectPool.SpellSource.Enemy);
-
-        PauseGame(); 
+        ObjectPool.ReturnAllObjects();
         waveName.text = "";
         FindObjectOfType<LevelGenerator>().GenerateMap();
-
-        for (int i = 0; i < 25; i++)
-        {
-            UnitManager.Instance.SpawnEnemy((ExampleEnemyType)Random.Range(enemyIdRange, enemyIdRange + 2), 1);
-        }
-        Player.transform.position = UnitManager.Instance.GetPlayerSpawner();
+        PrepareLevel(25);
     }
+
+    private static int levelSetIndex = 0;
+
+    // Rest of your GameManager...
+
     void HandleBossReached()
     {
-        if (levelUpUI != null)
+        UpdateUIForLevelUp();
+        waveName.text = "";
+        FindObjectOfType<LevelGenerator>().GenerateMap();
+        PrepareLevel(10, true); // Spawn boss level
+        levelSetIndex++; // Increment after boss is defeated
+    }
+
+    private void PrepareLevel(int enemyCount, bool isBossLevel = false)
+    {
+        if (isBossLevel)
         {
-            levelUpUI.ShowUI();
+            // Spawn boss based on level set index
+            var bossType = GetBossTypeForLevelSet(levelSetIndex);
+            UnitManager.Instance.SpawnEnemy(bossType, 1);
         }
         else
         {
-            Debug.LogError("LevelUpUI reference not set in the GameManager.");
+            // Spawn enemies based on level set index
+            var enemyIdStart = GetEnemyRangeStartForLevelSet(levelSetIndex);
+            var enemyIdEnd = GetEnemyRangeEndForLevelSet(levelSetIndex);
+
+            for (int i = 0; i < enemyCount; i++)
+            {
+                UnitManager.Instance.SpawnEnemy((ExampleEnemyType)Random.Range(enemyIdStart, enemyIdEnd + 1), 1);
+            }
         }
-
-
-        PauseGame();
-        
-        waveName.text = "";
-        FindObjectOfType<LevelGenerator>().GenerateMap();
-
-        for (int i = 0; i < 10; i++)
-        {
-            UnitManager.Instance.SpawnEnemy((ExampleEnemyType)Random.Range(enemyIdRange, enemyIdRange + 2), 1);
-        }
-
-        for (int i = 0; i < 4; i++)
-        {
-            UnitManager.Instance.SpawnEnemy((ExampleEnemyType)enemyIdRange + 2, 1);
-        }
-        UnitManager.Instance.SpawnEnemy((ExampleEnemyType)30, 1);
 
         Player.transform.position = UnitManager.Instance.GetPlayerSpawner();
-        enemyIdRange += 3;
+    }
 
+    private int GetEnemyRangeStartForLevelSet(int levelSetIndex)
+    {
+        switch (levelSetIndex)
+        {
+            case 0: return 0;
+            case 1: return 3;
+            case 2: return 6;
+            default: return 0; // Default or error handling
+        }
+    }
+
+    private int GetEnemyRangeEndForLevelSet(int levelSetIndex)
+    {
+        switch (levelSetIndex)
+        {
+            case 0: return 2;
+            case 1: return 5;
+            case 2: return 8;
+            default: return 2; // Default or error handling
+        }
+    }
+
+    private ExampleEnemyType GetBossTypeForLevelSet(int levelSetIndex)
+    {
+        switch (levelSetIndex)
+        {
+            case 0: return ExampleEnemyType.OgreKing;
+            case 1: return ExampleEnemyType.SpiderWitch;
+            case 2: return ExampleEnemyType.CrystalDeamon;
+            default: return ExampleEnemyType.OgreKing; // Default or error handling
+        }
     }
 
     void HandleLose()
@@ -287,8 +300,11 @@ public class GameManager : StaticInstance<GameManager>
         highScore.score = scoreSO.Int;
         highScores.Add(highScore);
         scoreSO.Int = 0;
-        ObjectPool.DestroySpellsByParent(ObjectPool.SpellSource.Enemy);
-        ObjectPool.DestroySpellsByParent(ObjectPool.SpellSource.Player);
+        ObjectPool.ReturnAllObjects();
+        ObjectPool.ClearPools();
+
+        currentChapterIndex = 0;
+
         var temp = StartCoroutine(PostLoseWait(3));
     }
 
@@ -319,6 +335,7 @@ public class GameManager : StaticInstance<GameManager>
         {
             Destroy(children.gameObject);
         }
+        ObjectPool.DestroySpellsAll();
 
         SceneManager.UnloadScene("LevelTest");
     }
@@ -347,29 +364,42 @@ public class GameManager : StaticInstance<GameManager>
         base.OnApplicationQuit();
     }
 
-    public static void HandlePause()
+    public static void HandlePause() //needs FIXING turining on the pauseMenu during a level up makes player unable to hide it 
     {
-        if (!gamePaused)
+        bool isLevelUpUIActive = Instance.levelUpUI != null && Instance.levelUpUI.isActiveAndEnabled;
+
+        if (isLevelUpUIActive)
         {
-            gamePaused = true;
-            Time.timeScale = 0f;
-            GameManager.Instance.uiObject.SetActive(false);
 
-            GameManager.Instance.pauseMenuObject.SetActive(true);
-            //GameManager.Instance.pauseMenuObject.interactable = true;
+            if (gamePaused)
+            {
+                Instance.pauseMenuObject.SetActive(false);
+            }
+            else
+            {
+
+                Instance.pauseMenuObject.SetActive(true);
+            }
+
         }
-
         else
         {
-            gamePaused = false;
-            Time.timeScale = 1f;
-            GameManager.Instance.uiObject.SetActive(true);
 
-            GameManager.Instance.pauseMenuObject.SetActive(false);
-            //GameManager.Instance.pauseMenuObject.interactable = false;
+            gamePaused = !gamePaused;
+            Time.timeScale = gamePaused ? 0f : 1f;
+
+
+            Instance.pauseMenuObject.SetActive(gamePaused);
+            if (!gamePaused)
+            {
+                Instance.uiObject.SetActive(true);
+            }
         }
-
     }
+
+
+
+
 
     #region Menu
 
@@ -413,7 +443,7 @@ public class GameManager : StaticInstance<GameManager>
 
     public void ConfirmLevelUpAndContinue()
     {
-       
+
         if (levelUpUI != null)
         {
             levelUpUI.HideUI();
@@ -423,9 +453,9 @@ public class GameManager : StaticInstance<GameManager>
             Debug.LogError("LevelUpUI reference not set in the GameManager.");
         }
 
-       
+
         ResumeGame();
-      
+
     }
 
     private void PauseGame()
@@ -439,5 +469,17 @@ public class GameManager : StaticInstance<GameManager>
         Time.timeScale = 1f;
         gamePaused = false;
     }
+    private void UpdateUIForLevelUp()
+    {
+        if (levelUpUI != null)
+        {
+            levelUpUI.ShowUI();
+        }
+        else
+        {
+            Debug.LogError("LevelUpUI reference not set in the GameManager.");
+        }
+    }
+
 
 }

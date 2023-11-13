@@ -102,9 +102,10 @@ public abstract class EnemyBase : UnitBase
     {
         if (_isDead) { return; }
   
-        if (navMeshAgent == null)
+        if (navMeshAgent == null && navMeshAgent.isActiveAndEnabled)
         {
             Debug.LogError("NavMeshAgent not assigned.");
+
             return;
         }
 

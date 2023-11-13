@@ -60,6 +60,8 @@ public class HeroUnitBase : UnitBase
 
     private string nameToChangeMage = null;
 
+    private float baseMovementSpeed; 
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -78,6 +80,7 @@ public class HeroUnitBase : UnitBase
 
         _conditionUI = conditionsBar.GetComponent<ConditionUI>();
         _dashMult = stats.MovementSpeed * 2;
+        baseMovementSpeed = stats.MovementSpeed;
     }
 
     void FixedUpdate()
@@ -302,7 +305,9 @@ public class HeroUnitBase : UnitBase
         _conditionUI.AddConditionSprite(1);
 
         var end = Time.time + condition.AffectTime;
-        var tempSpeed = stats.MovementSpeed;
+        Debug.Log("SlowTask coroutine started");
+        float tempSpeed = stats.MovementSpeed; // Store current speed
+        stats.MovementSpeed = baseMovementSpeed * (1f - condition.AffectOnTick); // Apply slow to base speed
 
         stats.MovementSpeed -= stats.MovementSpeed * condition.AffectOnTick;
 
@@ -312,7 +317,8 @@ public class HeroUnitBase : UnitBase
         }
 
         _conditionUI.RemoveConditionSprite(1);
-        stats.MovementSpeed = tempSpeed;
+        stats.MovementSpeed = tempSpeed; // Revert to previous speed
+        Debug.Log("SlowTask coroutine ended");
         slowRoutine = null;
     }
 
@@ -533,18 +539,20 @@ public class HeroUnitBase : UnitBase
 
     private IEnumerator Dashing()
     {
-        Debug.Log("Player turned invincible!");
+        Debug.Log("Dashing coroutine started");
         isInvincible = true;
-        stats.MovementSpeed = stats.MovementSpeed * _dashMult;
+        float tempSpeed = stats.MovementSpeed; // Store current speed
+        stats.MovementSpeed = baseMovementSpeed * _dashMult;
 
         spriteBlink(0.5f);
         yield return new WaitForSeconds(_dashDur);
         spriteBlink(1);
         Debug.Log("Player is no longer invincible!");
 
+        stats.MovementSpeed = tempSpeed; // Revert to previous speed
         isInvincible = false;
-        stats.MovementSpeed = stats.MovementSpeed / _dashMult;
-        dashCorutine = null; // Set the coroutine reference to null when it finishes
+        Debug.Log("Dashing coroutine ended");
+        dashCorutine = null;
     }
 
     void OnStart()

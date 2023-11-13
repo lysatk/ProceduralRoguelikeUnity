@@ -25,6 +25,7 @@ public class CharacterStatsUI : MonoBehaviour
     private bool isHealToggled = false;
     private void OnEnable()
     {
+        GameManager.gamePaused = true;
         fullhealButtonText = fullHealButton.GetComponentInChildren<TextMeshProUGUI>();
         availablePoints = 5;
         if (GameManager.Player != null)
@@ -142,9 +143,9 @@ public class CharacterStatsUI : MonoBehaviour
     private int hpBeforeHeal;
     public void FullHeal()
     {
-        if (!isHealToggled && player.stats.CurrentHp < player.stats.MaxHp && availablePoints <= 0)
+        if (!isHealToggled && player.stats.CurrentHp < player.stats.MaxHp && availablePoints > 0)
         {
-            hpBeforeHeal = player.stats.CurrentHp; 
+            hpBeforeHeal = player.stats.CurrentHp;
             player.stats.CurrentHp = player.stats.MaxHp;
             isHealToggled = true;
             fullhealButtonText.text = "Reset HP";
@@ -152,7 +153,7 @@ public class CharacterStatsUI : MonoBehaviour
         }
         else if (isHealToggled)
         {
-            player.stats.CurrentHp = hpBeforeHeal; 
+            player.stats.CurrentHp = hpBeforeHeal;
             isHealToggled = false; fullhealButtonText.text = "Heal";
             availablePoints++;
         }
@@ -166,10 +167,10 @@ public class CharacterStatsUI : MonoBehaviour
         dmgModText.text = "Damage Mod: " + player.stats.DmgModifier;
         cooldownText.text = "Cooldown: " + player.stats.CooldownModifier;
         pointsText.text = "Points: " + availablePoints;
-        
+
     }
 
-        public void HideUI()
+    public void HideUI()
     {
         gameObject.SetActive(false);
     }

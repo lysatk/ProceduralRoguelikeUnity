@@ -14,7 +14,6 @@ public class AudioSystem : MonoBehaviour
 
     private void Awake()
     {
-        // Ensure there is only one instance of this object in the game
         if (Instance == null)
         {
             Instance = this;
@@ -25,14 +24,13 @@ public class AudioSystem : MonoBehaviour
             Destroy(gameObject);
         }
 
-        // Start the background music
         PlayMusic(musicClip);
     }
 
     public void PlayMusic(AudioClip clip)
     {
         musicSource.clip = clip;
-        musicSource.loop = true; // Music typically loops
+        musicSource.loop = true; 
         musicSource.Play();
     }
 
