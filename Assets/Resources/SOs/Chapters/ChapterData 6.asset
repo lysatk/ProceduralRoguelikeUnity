@@ -12,17 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3caeb177cb0891248baf0814d9827f32, type: 3}
   m_Name: ChapterData 6
   m_EditorClassIdentifier: 
-  chapterText: 'Entry 6: The Crystal Caverns
+  chapterText: 'Entry 6: The Witch Defeated
 
 
-    As I step into the Crystal Caverns,
-    I am struck by the eerie beauty that surrounds me. The walls glisten with a thousand
-    shades, reflecting my torchlight in a kaleidoscope of colors. Yet, this beauty
-    masks a deadly danger. The cultists of the Crystal Daemon are unlike any foe
-    I have faced; they are zealots, driven by a dark purpose. I can sense their presence
-    all around, lurking in the shadows, whispering incantations in a language as
-    old as time.
 
-    
+    The battle was grueling, but the
+    Crawler Witch is no more. Her minions have retreated into the shadows of the
+    cavern. I now stand at the threshold of the Crystal Caverns, the lair of the
+    Crystal Daemon. I can feel the pulsating power emanating from within, a siren
+    call to the final confrontation. My resolve is unwavering; the daemon and its
+    cultists shall fall by my hand.
+
 
 '

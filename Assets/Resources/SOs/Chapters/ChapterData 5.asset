@@ -12,16 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3caeb177cb0891248baf0814d9827f32, type: 3}
   m_Name: ChapterData 5
   m_EditorClassIdentifier: 
-  chapterText: 'Entry 5: The Witch Defeated
-
-    
-
-    The battle was grueling,
-    but the Crawler Witch is no more. Her minions have retreated into the shadows
-    of the cavern. I now stand at the threshold of the Crystal Caverns, the lair
-    of the Crystal Daemon. I can feel the pulsating power emanating from within,
-    a siren call to the final confrontation. My resolve is unwavering; the daemon
-    and its cultists shall fall by my hand.
+  chapterText: 'Entry 5: Crawlers
 
 
-'
+    In the depths of the cavern, I encountered
+    the Crawlers, spider-like creatures with six elongated, spindly legs that moved
+    with unsettling agility. Their most daunting aspect was their ability to weave
+    magical webs, which they seemed to conjure out of thin air. These webs, shimmering
+    with an eerie light, were not just physical barriers but were imbued with a paralyzing
+    magic. As I navigated through the caverns, these webs were often flung towards
+    me, forcing me to constantly be on guard, ready to dispel their enchantments
+    or dodge their ensnaring grasp.'

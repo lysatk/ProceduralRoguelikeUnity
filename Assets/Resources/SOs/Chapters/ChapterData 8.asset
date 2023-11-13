@@ -12,14 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3caeb177cb0891248baf0814d9827f32, type: 3}
   m_Name: ChapterData 8
   m_EditorClassIdentifier: 
-  chapterText: 'Entry 8: The Crystal Daemon''s End
+  chapterText: 'Entry 8: The Crystal Caverns
 
-    
 
-    It is done. The Crystal
-    Daemon, a creature of unspeakable malice, has been vanquished. Its cultists,
-    lost without their master, fled into the darkness of the caverns. As I emerge
-    into the light of day, I reflect on the journey that has tested every fiber of
-    my being. This quest, though perilous, has shown the true extent of my power
-    and the resilience of my spirit. The lands are safe once more, and I, the Arcane
-    Wanderer, can finally rest.'
+    Navigating through this labyrinthine
+    cave, the air grows colder, the atmosphere heavier with the palpable magic of
+    the daemon. I can feel its presence now, a dark star at the center of this subterranean
+    universe. Tonight, as I prepare for the final confrontation, I fortify myself
+    with magic and resolve. Tomorrow, I face the Crystal Daemon in a battle that
+    will determine the fate of our world.'
