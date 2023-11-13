@@ -12,16 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3caeb177cb0891248baf0814d9827f32, type: 3}
   m_Name: ChapterData 7
   m_EditorClassIdentifier: 
-  chapterText: 'Entry 7: The Crystal Caverns
+  chapterText: '
 
+    Entry 7: The Crystal Caverns
 
-    As I step into the Crystal Caverns,
-    I am struck by the eerie beauty that surrounds me. The walls glisten with a thousand
-    shades, reflecting my torchlight in a kaleidoscope of colors. Yet, this beauty
-    masks a deadly danger. The cultists of the Crystal Daemon are unlike any foe
-    I have faced; they are zealots, driven by a dark purpose. I can sense their presence
-    all around, lurking in the shadows, whispering incantations in a language as
-    old as time.
+    As I step into the Crystal
+    Caverns, I am struck by the eerie beauty that surrounds me. The walls glisten
+    with a thousand shades, reflecting my torchlight in a kaleidoscope of colors.
+    Yet, this beauty masks a deadly danger. The cultists of the Crystal Daemon are
+    unlike any foe I have faced; they are zealots, driven by a dark purpose. I can
+    sense their presence all around, lurking in the shadows, whispering incantations
+    in a language as old as time.
 
 
 

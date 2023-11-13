@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3caeb177cb0891248baf0814d9827f32, type: 3}
   m_Name: ChapterData 5
   m_EditorClassIdentifier: 
-  chapterText: 'Entry 5: Crawlers
+  chapterText: '
 
+    Entry 5: Crawlers
 
     In the depths of the cavern, I encountered
     the Crawlers, spider-like creatures with six elongated, spindly legs that moved

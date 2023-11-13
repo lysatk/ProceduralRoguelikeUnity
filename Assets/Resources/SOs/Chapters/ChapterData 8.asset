@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3caeb177cb0891248baf0814d9827f32, type: 3}
   m_Name: ChapterData 8
   m_EditorClassIdentifier: 
-  chapterText: 'Entry 8: The Crystal Caverns
+  chapterText: '
 
+    Entry 8: The Crystal Caverns
 
     Navigating through this labyrinthine
     cave, the air grows colder, the atmosphere heavier with the palpable magic of

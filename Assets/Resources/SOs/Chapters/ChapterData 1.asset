@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3caeb177cb0891248baf0814d9827f32, type: 3}
   m_Name: ChapterData 1
   m_EditorClassIdentifier: 
-  chapterText: 'Entry 1: The Journey Begins
+  chapterText: '
 
-    
+    Entry 1: The Journey Begins
 
     Today marks the beginning
     of a daunting quest. As a wizard, I''ve been tasked with slaying a malevolent

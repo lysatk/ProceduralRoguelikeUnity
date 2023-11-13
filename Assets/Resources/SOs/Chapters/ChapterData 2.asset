@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3caeb177cb0891248baf0814d9827f32, type: 3}
   m_Name: ChapterData 2
   m_EditorClassIdentifier: 
-  chapterText: 'Entry 2: The Ogre King''s Lair
+  chapterText: '
 
-    
+    Entry 2: The Ogre King''s Lair
 
     I now stand at the mouth
     of the Ogre King''s domain. The air is thick with the stench of brimstone and

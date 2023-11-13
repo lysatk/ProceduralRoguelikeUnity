@@ -998,8 +998,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.030866956, y: 0}
   m_AnchorMax: {x: 1, y: 0.9846644}
-  m_AnchoredPosition: {x: -6.013298, y: 0.000015258789}
-  m_SizeDelta: {x: 6.0134, y: 0.000091553}
+  m_AnchoredPosition: {x: -23.7728, y: 0.000015258789}
+  m_SizeDelta: {x: 43.9005, y: 0.000091553}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &8159322091653920781
 CanvasRenderer:
@@ -1173,8 +1173,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6296184746928933637}
   m_HandleRect: {fileID: 0}
   m_Direction: 0
-  m_Value: 0.0000028165236
-  m_Size: 0.93101007
+  m_Value: 0.49020958
+  m_Size: 0.89253825
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2158,8 +2158,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 277.59213, y: 71.391655}
-  m_SizeDelta: {x: 201.6517, y: 262.0467}
+  m_AnchoredPosition: {x: 256.2807, y: 70.79967}
+  m_SizeDelta: {x: 244.2747, y: 263.2307}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8086021277356613981
 CanvasRenderer:
@@ -3547,8 +3547,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 4.1439, y: 0}
+  m_SizeDelta: {x: -8.2878, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4019165399826712491
 CanvasRenderer:
@@ -3903,8 +3903,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8232751120707018836}
   m_HandleRect: {fileID: 0}
   m_Direction: 2
-  m_Value: 0.9959933
-  m_Size: 0.1776498
+  m_Value: 0.99490815
+  m_Size: 0.17749058
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4077,8 +4077,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000020345, y: 4.3499}
-  m_SizeDelta: {x: 13.544, y: 1320.1697}
+  m_AnchoredPosition: {x: -13.0237, y: 5.5339}
+  m_SizeDelta: {x: 26.5677, y: 1321.3538}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &6694621026120586061
 GameObject:
