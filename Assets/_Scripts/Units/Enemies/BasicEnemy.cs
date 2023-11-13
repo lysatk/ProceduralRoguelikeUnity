@@ -108,7 +108,7 @@ public class BasicEnemy : EnemyBase
         if (wanderingTimer >= wanderingDuration)
         {
             wanderingTargetPosition = GetRandomWanderDestination();
-            Debug.Log($"New Wandering Target: {wanderingTargetPosition}"); // Debugging log
+          //  Debug.Log($"New Wandering Target: {wanderingTargetPosition}"); // Debugging log
             wanderingTimer = 0f;
         }
 

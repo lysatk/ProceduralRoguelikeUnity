@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78b4a15a9a47b264baa4770115a38288, type: 3}
   m_Name: TileSetCrystalDemon
   m_EditorClassIdentifier: 
-  floorTile: {fileID: 0}
-  wallTile: {fileID: 0}
+  floorTile: {fileID: 11400000, guid: 1ee21fbd15d515a4aa57b88eb96eae98, type: 2}
+  wallTile: {fileID: 11400000, guid: e395f173a733a704083c4c47af600b71, type: 2}
   obstacleTile: {fileID: 0}
-  cameraBackgroundColor: {r: 0, g: 0, b: 0, a: 0}
+  cameraBackgroundColor: {r: 0.1764706, g: 0.20000002, b: 0.2784314, a: 0}
