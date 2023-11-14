@@ -194,7 +194,7 @@ public class GameManager : StaticInstance<GameManager>
     }
     void HandleLevelChange()
     {
-        ObjectPool.DestroyAllPooledObjects();
+        ObjectPool.ReturnAllObjects();
         SceneManager.SetActiveScene(SceneManager.GetSceneAt(0));
 
         SceneManager.UnloadScene("LevelHub");
