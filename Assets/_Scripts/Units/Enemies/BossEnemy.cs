@@ -12,7 +12,7 @@ public class BossEnemy : EnemyBase
     {
         Idle,
         Attacking,
-        Transitioning, // Animation or behavior when moving to the next phase
+        Transitioning, 
         Die
     }
 
