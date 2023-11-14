@@ -111,6 +111,7 @@ public class GameManager : StaticInstance<GameManager>
 
     void Start()
     {
+        currentChapterIndex = 0;
         enemies = new List<GameObject>();
         highScores = new List<HighScore>(); // Initialize highScores here
         var _ = StartCoroutine(LoadScoresAsync());
@@ -193,6 +194,7 @@ public class GameManager : StaticInstance<GameManager>
     }
     void HandleLevelChange()
     {
+        ObjectPool.DestroyAllPooledObjects();
         SceneManager.SetActiveScene(SceneManager.GetSceneAt(0));
 
         SceneManager.UnloadScene("LevelHub");
@@ -217,20 +219,18 @@ public class GameManager : StaticInstance<GameManager>
         ObjectPool.ReturnAllObjects();
         waveName.text = "";
         FindObjectOfType<LevelGenerator>().GenerateMap();
-        PrepareLevel(25);
+        PrepareLevel(2);
+        currentChapterIndex++; 
     }
 
     private static int levelSetIndex = 0;
-
-    // Rest of your GameManager...
-
     void HandleBossReached()
     {
         UpdateUIForLevelUp();
         waveName.text = "";
         FindObjectOfType<LevelGenerator>().GenerateMap();
         PrepareLevel(10, true); // Spawn boss level
-        levelSetIndex++; // Increment after boss is defeated
+        levelSetIndex++; 
     }
 
     private void PrepareLevel(int enemyCount, bool isBossLevel = false)
@@ -285,13 +285,12 @@ public class GameManager : StaticInstance<GameManager>
             case 0: return ExampleEnemyType.OgreKing;
             case 1: return ExampleEnemyType.SpiderWitch;
             case 2: return ExampleEnemyType.CrystalDeamon;
-            default: return ExampleEnemyType.OgreKing; // Default or error handling
+            default: return ExampleEnemyType.OgreKing; //  error handling
         }
     }
 
     void HandleLose()
     {
-
         firstLevel = true;
         waveName.text = "YOU DIED!";
         WaveManager.Instance.StopAllCoroutines();
@@ -299,13 +298,16 @@ public class GameManager : StaticInstance<GameManager>
         highScore.score = scoreSO.Int;
         highScores.Add(highScore);
         scoreSO.Int = 0;
-        ObjectPool.ReturnAllObjects();
+
+        ObjectPool.DestroySpellsAll();
         ObjectPool.ClearPools();
 
-        currentChapterIndex = 0;
+        levelSetIndex = 0;
+        currentChapterIndex = 0; 
 
         var temp = StartCoroutine(PostLoseWait(3));
     }
+
 
     IEnumerator PostLoseWait(int delay)
     {
@@ -325,6 +327,7 @@ public class GameManager : StaticInstance<GameManager>
 
     void LevelChangeToHub()
     {
+        ObjectPool.DestroyAllPooledObjects();
         SceneManager.SetActiveScene(SceneManager.GetSceneAt(0));
 
         enemies.Clear();
@@ -333,7 +336,7 @@ public class GameManager : StaticInstance<GameManager>
         {
             Destroy(children.gameObject);
         }
-        ObjectPool.DestroySpellsAll();
+        
 
         SceneManager.UnloadScene("LevelTest");
     }
@@ -415,6 +418,7 @@ public class GameManager : StaticInstance<GameManager>
         waveName.text = "Press L To Start";
 
         Destroy(WaveManager.Instance.gameObject);
+        ObjectPool.DestroyAllPooledObjects();
         LevelChangeToHub();
         ChangeState(GameState.Hub);
     }

@@ -34,6 +34,8 @@ namespace Assets._Scripts.Managers
             enemyCounter = GameManager.Instance.enemyCounter;
             waveName.text = "";
             levelGenerator = FindObjectOfType<LevelGenerator>();
+            currentLevelNum = 1;
+            LevelGenerator.SetTileIndex(0,levelGenerator);
         }
         private void Update()
         {
