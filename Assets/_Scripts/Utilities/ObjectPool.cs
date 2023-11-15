@@ -49,25 +49,29 @@ public class ObjectPool : MonoBehaviour
         if (spawnableObj == null)
         {
             GameObject parentObject = SetParentObjectSourceType(spellSource);
-
+            //if (parentObject == _projectileOther)
+            //{
+            //    parentObject = GetParentObjectByLayerName(layerString);
+            //}
             spawnableObj = Instantiate(obj, pos, rot);
-
+            spawnableObj.layer = LayerMask.NameToLayer(layerString);
             if (parentObject != null)
             {
                 spawnableObj.transform.SetParent(parentObject.transform);
+                SetLayerBasedOnParent(spawnableObj);
             }
         }
         else
         {
-
+            spawnableObj.layer = LayerMask.NameToLayer(layerString);
             spawnableObj.transform.rotation = rot;
             spawnableObj.transform.position = pos;
             spawnableObj.SetActive(true);
-
             pool.InactiveObjects.Remove(spawnableObj);
 
         }
         spawnableObj.layer = LayerMask.NameToLayer(layerString);
+        Debug.Log("finally set as:" + layerString);
         return spawnableObj;
     }
 
@@ -125,146 +129,181 @@ public class ObjectPool : MonoBehaviour
                 return null;
         }
     }
-
-
-public static void ClearPools()
-{
-    ReturnAllObjects(); // First return all active objects to the pool
-
-    foreach (var pool in objectPools)
+    private static GameObject GetParentObjectByLayerName(string layerName)
     {
-        foreach (var obj in pool.InactiveObjects)
+        // Logic to determine parent based on layer name
+        switch (layerName)
         {
-            Destroy(obj);
+            case "PlayerSpell":
+                return _projectilePlayer;
+            case "EnemySpell":
+                return _projectileEnemy;
+            case "Spell":
+                return _projectileOther;
+            default:
+                return _projectileParent; // Default parent
         }
     }
-    objectPools.Clear(); // Clear the pools after destroying all objects
-}
+
+    public static void ClearPools()
+    {
+        ReturnAllObjects(); // First return all active objects to the pool
+
+        foreach (var pool in objectPools)
+        {
+            foreach (var obj in pool.InactiveObjects)
+            {
+                Destroy(obj);
+            }
+        }
+        objectPools.Clear(); // Clear the pools after destroying all objects
+    }
 
 
-public static void ReturnSpellsByParent(SpellSource spellSource)
-{
-    GameObject parentObject = SetParentObjectSourceType(spellSource);
-    if (parentObject != null)
+    public static void ReturnSpellsByParent(SpellSource spellSource)
+    {
+        GameObject parentObject = SetParentObjectSourceType(spellSource);
+        if (parentObject != null)
+        {
+
+            var spellsToReturn = new List<GameObject>();
+            foreach (Transform spellTransform in parentObject.transform)
+            {
+                if (spellTransform.gameObject.activeSelf)
+                {
+                    spellsToReturn.Add(spellTransform.gameObject);
+                }
+            }
+
+
+            foreach (var spell in spellsToReturn)
+            {
+                ReturnObject(spell);
+            }
+        }
+    }
+
+    public static void DestroySpellsByParent(SpellSource spellSource)
+    {
+        GameObject parentObject = SetParentObjectSourceType(spellSource);
+        if (parentObject != null)
+        {
+
+            var spellsToDestroy = new List<GameObject>();
+            foreach (Transform spellTransform in parentObject.transform)
+            {
+                spellsToDestroy.Add(spellTransform.gameObject);
+            }
+
+
+            foreach (var spell in spellsToDestroy)
+            {
+                Destroy(spell);
+            }
+        }
+    }
+
+    public static void DestroySpellsAll()
+    {
+        foreach (var pool in objectPools)
+        {
+            foreach (var obj in pool.InactiveObjects)
+            {
+                Destroy(obj);
+            }
+            // Destroy active objects as well
+            var activeObjects = FindObjectsOfType<GameObject>().Where(obj => obj.name.StartsWith(pool.lookupString));
+            foreach (var activeObj in activeObjects)
+            {
+                Destroy(activeObj);
+            }
+        }
+        objectPools.Clear(); // Clear the pools after destroying all objects
+    }
+
+
+
+    public static void ReturnSpellsWithoutSource()
     {
 
         var spellsToReturn = new List<GameObject>();
-        foreach (Transform spellTransform in parentObject.transform)
+
+        foreach (var pool in objectPools)
         {
-            if (spellTransform.gameObject.activeSelf)
+            foreach (var activeSpell in pool.InactiveObjects.Where(obj => obj.activeSelf))
             {
-                spellsToReturn.Add(spellTransform.gameObject);
+                if (activeSpell.transform.parent == null)
+                {
+                    spellsToReturn.Add(activeSpell);
+                }
             }
         }
-
 
         foreach (var spell in spellsToReturn)
         {
             ReturnObject(spell);
         }
     }
-}
 
-public static void DestroySpellsByParent(SpellSource spellSource)
-{
-    GameObject parentObject = SetParentObjectSourceType(spellSource);
-    if (parentObject != null)
+    public static void ReturnAllObjects()
     {
-
-        var spellsToDestroy = new List<GameObject>();
-        foreach (Transform spellTransform in parentObject.transform)
+        // Iterate through each pool
+        foreach (var pool in objectPools)
         {
-            spellsToDestroy.Add(spellTransform.gameObject);
-        }
+            // Find all active objects in the scene that belong to this pool
+            var activeObjects = FindObjectsOfType<GameObject>().Where(obj => obj.activeSelf && obj.name.StartsWith(pool.lookupString + "(Clone)"));
 
-
-        foreach (var spell in spellsToDestroy)
-        {
-            Destroy(spell);
-        }
-    }
-}
-
-public static void DestroySpellsAll()
-{
-    foreach (var pool in objectPools)
-    {
-        foreach (var obj in pool.InactiveObjects)
-        {
-            Destroy(obj);
-        }
-        // Destroy active objects as well
-        var activeObjects = FindObjectsOfType<GameObject>().Where(obj => obj.name.StartsWith(pool.lookupString));
-        foreach (var activeObj in activeObjects)
-        {
-            Destroy(activeObj);
-        }
-    }
-    objectPools.Clear(); // Clear the pools after destroying all objects
-}
-
-
-
-public static void ReturnSpellsWithoutSource()
-{
-
-    var spellsToReturn = new List<GameObject>();
-
-    foreach (var pool in objectPools)
-    {
-        foreach (var activeSpell in pool.InactiveObjects.Where(obj => obj.activeSelf))
-        {
-            if (activeSpell.transform.parent == null)
+            // Return each active object to the pool
+            foreach (var activeObj in activeObjects)
             {
-                spellsToReturn.Add(activeSpell);
+                activeObj.SetActive(false);
+                pool.InactiveObjects.Add(activeObj);
             }
         }
     }
 
-    foreach (var spell in spellsToReturn)
-    {
-        ReturnObject(spell);
-    }
-}
 
-public static void ReturnAllObjects()
-{
-    // Iterate through each pool
-    foreach (var pool in objectPools)
+    public static void DestroyAllPooledObjects()
     {
-        // Find all active objects in the scene that belong to this pool
-        var activeObjects = FindObjectsOfType<GameObject>().Where(obj => obj.activeSelf && obj.name.StartsWith(pool.lookupString + "(Clone)"));
-
-        // Return each active object to the pool
-        foreach (var activeObj in activeObjects)
+        foreach (var pool in objectPools)
         {
-            activeObj.SetActive(false);
-            pool.InactiveObjects.Add(activeObj);
-        }
-    }
-}
+            // Destroy inactive objects in the pool
+            foreach (var inactiveObj in pool.InactiveObjects)
+            {
+                Destroy(inactiveObj);
+            }
 
-
-public static void DestroyAllPooledObjects()
-{
-    foreach (var pool in objectPools)
-    {
-        // Destroy inactive objects in the pool
-        foreach (var inactiveObj in pool.InactiveObjects)
-        {
-            Destroy(inactiveObj);
+            // Destroy active objects that belong to this pool
+            var activeObjects = FindObjectsOfType<GameObject>().Where(obj => obj.name.StartsWith(pool.lookupString + "(Clone)"));
+            foreach (var activeObj in activeObjects)
+            {
+                Destroy(activeObj);
+            }
         }
 
-        // Destroy active objects that belong to this pool
-        var activeObjects = FindObjectsOfType<GameObject>().Where(obj => obj.name.StartsWith(pool.lookupString + "(Clone)"));
-        foreach (var activeObj in activeObjects)
-        {
-            Destroy(activeObj);
-        }
+        objectPools.Clear(); // Clear the list of pools after destroying all objects
     }
 
-    objectPools.Clear(); // Clear the list of pools after destroying all objects
-}
+    public static void SetLayerBasedOnParent(GameObject child)
+    {
+        if (child != null && child.transform.parent != null)
+        {
+            GameObject parent = child.transform.parent.gameObject;
+
+            if (parent == _projectilePlayer)
+            {
+                child.layer = LayerMask.NameToLayer("PlayerSpell");
+            }
+            else if (parent == _projectileEnemy)
+            {
+                child.layer = LayerMask.NameToLayer("EnemySpell");
+            }
+            else
+            {
+                child.layer = LayerMask.NameToLayer("Spell");
+            }
+        }
+    }
 
 
 }

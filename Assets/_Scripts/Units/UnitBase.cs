@@ -56,6 +56,14 @@ public abstract class UnitBase : MonoBehaviour
 
         ConditionAffect(conditions);
     }
+    public virtual void TakeDamage(float dmgToTake)
+    {
+        //stats.CurrentHp -= Convert.ToInt32(dmgToTake * stats.Armor); DMG UP
+        stats.CurrentHp -= Convert.ToInt32(dmgToTake / stats.Armor); //Armor up
+
+        if (stats.CurrentHp <= 0)
+            Die();
+    }
     /// <summary>
     /// Attach stats structure to unit
     /// </summary>
@@ -135,7 +143,7 @@ public abstract class UnitBase : MonoBehaviour
 
         while (Time.time < end)
         {
-            stats.CurrentHp -= Convert.ToInt32(condition.AffectOnTick);
+            TakeDamage(Convert.ToInt32(condition.AffectOnTick));
             //  if(healthBar!=null)
             //    healthBar.SetHealth(stats.CurrentHp);
 
@@ -175,7 +183,7 @@ public abstract class UnitBase : MonoBehaviour
 
         while (Time.time < end)
         {
-            stats.CurrentHp -= Convert.ToInt32(condition.AffectOnTick);
+            TakeDamage(Convert.ToInt32(condition.AffectOnTick));
 
             //   healthBar.SetHealth(stats.CurrentHp);
 

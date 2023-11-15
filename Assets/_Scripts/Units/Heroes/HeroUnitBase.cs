@@ -582,13 +582,14 @@ public class HeroUnitBase : UnitBase
     }
     #endregion
 
-    void CastSpell(Spell spell)
+    void CastSpell(Spell spell)//KURWA DEBILU TO nie ten gówien u¿ywany
     {
         if (spellRotator != null)
         {
             if (spell.CastFromHeroeNoStaff)
             {
                 spell.caster = collider;
+                Debug.Log("From player:"+projectileLayerName);
                 spell.Attack(transform.position, spellRotator.StaffFirePoint.transform.rotation, projectileLayerName, ObjectPool.SpellSource.Player);
             }
             else

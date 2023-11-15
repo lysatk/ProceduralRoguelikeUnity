@@ -37,7 +37,9 @@ public class Spell : ScriptableObject
     /// <param name="rotation">Spawn rotation</param>
     public void Attack(Vector3 position, Quaternion rotation,string layerString,ObjectPool.SpellSource spellSource=ObjectPool.SpellSource.None)
     {
-       ObjectPool.SpawnObject(Prefab, position, rotation,layerString,spellSource); 
-      
+        Debug.LogWarning("Initial:"+layerString);
+      var obj= ObjectPool.SpawnObject(Prefab, position, rotation,layerString,spellSource); 
+      obj.layer=LayerMask.NameToLayer(layerString);
+        Debug.Log("Layer of the object final:"+obj.layer);
     }
 }

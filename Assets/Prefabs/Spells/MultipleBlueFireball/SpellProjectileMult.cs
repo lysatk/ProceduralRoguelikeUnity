@@ -12,12 +12,12 @@ public class SpellProjectileMult : MonoBehaviour
     private void OnEnable()
     {
         layerName = LayerMask.LayerToName(gameObject.layer);
-        Spawn(numOfProjectiles,layerName);
+        Spawn(numOfProjectiles);
         
         ObjectPool.ReturnObject(this.gameObject);
     }
 
-    void Spawn(int n, string layer)
+    void Spawn(int n)
     {
         if (n % 2 == 0) transform.Rotate(0f, 0f, -rotAngle);
 
@@ -26,7 +26,7 @@ public class SpellProjectileMult : MonoBehaviour
         for (int i = 0; i < n; i++)
         {
 
-            ObjectPool.SpawnObject(prefab, transform.position, transform.rotation,layer);
+            ObjectPool.SpawnObject(prefab, transform.position, transform.rotation,layerName);
             transform.Rotate(0f, 0f, rotAngle);
         }
     }

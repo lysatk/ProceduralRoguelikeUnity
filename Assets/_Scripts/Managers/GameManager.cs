@@ -219,7 +219,7 @@ public class GameManager : StaticInstance<GameManager>
         ObjectPool.ReturnAllObjects();
         waveName.text = "";
         FindObjectOfType<LevelGenerator>().GenerateMap();
-        PrepareLevel(2);
+        PrepareLevel(10);
         currentChapterIndex++; 
     }
 

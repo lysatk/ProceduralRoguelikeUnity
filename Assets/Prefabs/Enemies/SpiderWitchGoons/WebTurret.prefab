@@ -106,6 +106,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ef9441cb3edd0647bdfd6214935e95c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stats:
+    _MaxHp: 0
+    _Armor: 0
+    _MovementSpeed: 0
+    _DmgModifier: 0
+    _CooldownModifier: 0
   healthBarManagerObj: {fileID: 0}
   movementFilter:
     useTriggers: 0
@@ -126,16 +132,18 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 16
   scoreSO: {fileID: 11400000, guid: a537fb5d8087b124a8e1e8f4b21500ba, type: 2}
-  attackFromCenter: 0
+  attackFromCenter: 1
   rangeOfAttack: 10
   rangeOfRest: 0
   rangeOfChase: 0
-  attackCooldown: 0.1
-  spell: {fileID: 11400000, guid: 1f0162c5b87b3554b9c32f934adc2386, type: 2}
+  attackCooldown: 0.05
+  spell: {fileID: 11400000, guid: 2f1dfc58f778d0c48933dd790cc58f60, type: 2}
   attackPhaseDuration: 1
   movementBiasDuration: 5
   maxAttackRate: 1
   minAttackRate: 0.3
+  wanderingRange: 3
+  wanderingDuration: 2
 --- !u!95 &3214218647730200590
 Animator:
   serializedVersion: 5
@@ -169,6 +177,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 276bdd88861f9114e8ffaba7e04b58c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stats:
+    _MaxHp: 0
+    _Armor: 0
+    _MovementSpeed: 0
+    _DmgModifier: 0
+    _CooldownModifier: 0
   healthBarManagerObj: {fileID: 0}
   movementFilter:
     useTriggers: 0
@@ -191,7 +205,7 @@ MonoBehaviour:
   scoreSO: {fileID: 11400000, guid: a537fb5d8087b124a8e1e8f4b21500ba, type: 2}
   rangeOfAttack: 10
   attackCooldown: 2
-  spell: {fileID: 11400000, guid: f79d447ef08acea43af72903fcb6cde7, type: 2}
+  spell: {fileID: 11400000, guid: 2f1dfc58f778d0c48933dd790cc58f60, type: 2}
 --- !u!1 &7212438722113357005
 GameObject:
   m_ObjectHideFlags: 0

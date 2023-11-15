@@ -33,8 +33,8 @@ public abstract class EnemyBase : UnitBase
 
     [SerializeField]
     private LayerMask layerMask;
-     
-    
+
+
 
     protected Transform player;
     protected Animator _anim;
@@ -59,7 +59,7 @@ public abstract class EnemyBase : UnitBase
             navMeshAgent = gameObject.AddComponent<NavMeshAgent>();
         }
 
-        hitbox=GetComponentInChildren<Collider2D>();
+        hitbox = GetComponentInChildren<Collider2D>();
     }
 
 
@@ -69,7 +69,7 @@ public abstract class EnemyBase : UnitBase
     /// </summary>
     public override void Die()
     {
-        
+
         hitbox.enabled = false;
         navMeshAgent.enabled = false;
 
@@ -101,7 +101,7 @@ public abstract class EnemyBase : UnitBase
     protected void Move(Vector3 target)
     {
         if (_isDead) { return; }
-  
+
         if (navMeshAgent == null && navMeshAgent.isActiveAndEnabled)
         {
             Debug.LogError("NavMeshAgent not assigned.");
@@ -112,11 +112,11 @@ public abstract class EnemyBase : UnitBase
         if (_canMove)
         {
             navMeshAgent.isStopped = false;
-            
-      
+
+
             navMeshAgent.SetDestination(target);
 
-          
+
             if (navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
             {
                 StopAnimation();
@@ -134,4 +134,35 @@ public abstract class EnemyBase : UnitBase
         }
 
     }
+    public override void TakeDamage(float dmgToTake, List<ConditionBase> conditions)
+    {
+        base.TakeDamage(dmgToTake, conditions);
+        StartCoroutine(FlashRed());
+    }
+    public override void TakeDamage(float dmgToTake)
+    {
+        base.TakeDamage(dmgToTake);
+        StartCoroutine(FlashRed());
+
+
+    }
+
+
+
+    private IEnumerator FlashRed()
+    {
+        Color originalColor = spriteRenderer.color;
+        int blinkCount = 4; 
+        float blinkDuration = 0.1f; 
+
+        for (int i = 0; i < blinkCount; i++)
+        {
+            spriteRenderer.color = i % 2 == 0 ? Color.red : Color.white;
+            yield return new WaitForSeconds(blinkDuration);
+        }
+
+       
+        spriteRenderer.color = originalColor;
+    }
+
 }
