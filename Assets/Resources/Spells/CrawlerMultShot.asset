@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cacbea3919a5c3d42ac537197be2b9c1, type: 3}
   m_Name: CrawlerMultShot
   m_EditorClassIdentifier: 
-  Name: 
+  Name: CrawlerMultShot
   Description: 
   image: {fileID: 0}
-  Prefab: {fileID: 0}
+  Prefab: {fileID: 6272193193329590730, guid: 8c51337edf77e5a41af8d872e896951c, type: 3}
   spellDamage: 0
   conditions: []
   speed: 0
-  destroyTime: 0
+  destroyTime: 3
   caster: {fileID: 0}
   CastFromHeroeNoStaff: 0
   cooldown: 0

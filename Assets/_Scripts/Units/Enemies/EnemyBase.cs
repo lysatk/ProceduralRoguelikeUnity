@@ -34,6 +34,7 @@ public abstract class EnemyBase : UnitBase
     [SerializeField]
     private LayerMask layerMask;
 
+    private Coroutine flashRoutine; 
 
 
     protected Transform player;
@@ -143,17 +144,24 @@ public abstract class EnemyBase : UnitBase
     {
         base.TakeDamage(dmgToTake);
         StartCoroutine(FlashRed());
-
-
+       spriteRenderer.color = Color.white;
+        flashRoutine = null; // Reset the reference when done
     }
 
+    protected virtual void TriggerFlash()
+    {
+        if (flashRoutine != null)
+            StopCoroutine(flashRoutine); // Stop the existing coroutine if it's running
+
+        flashRoutine = StartCoroutine(FlashRed()); // Start a new coroutine
+    }
 
 
     private IEnumerator FlashRed()
     {
         Color originalColor = spriteRenderer.color;
-        int blinkCount = 4; 
-        float blinkDuration = 0.1f; 
+        int blinkCount = 5; 
+        float blinkDuration = 0.08f; 
 
         for (int i = 0; i < blinkCount; i++)
         {
@@ -162,7 +170,7 @@ public abstract class EnemyBase : UnitBase
         }
 
        
-        spriteRenderer.color = originalColor;
+        spriteRenderer.color = Color.white;
     }
 
 }
