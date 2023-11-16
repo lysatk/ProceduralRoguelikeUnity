@@ -582,7 +582,7 @@ public class HeroUnitBase : UnitBase
     }
     #endregion
 
-    void CastSpell(Spell spell)//KURWA DEBILU TO nie ten gówien u¿ywany
+    void CastSpell(Spell spell)
     {
         if (spellRotator != null)
         {

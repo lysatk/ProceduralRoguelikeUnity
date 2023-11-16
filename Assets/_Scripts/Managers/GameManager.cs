@@ -365,7 +365,7 @@ public class GameManager : StaticInstance<GameManager>
         base.OnApplicationQuit();
     }
 
-    public static void HandlePause() //needs FIXING turining on the pauseMenu during a level up makes player unable to hide it 
+    public static void HandlePause() //pause not working when levelUpUi
     {
         bool isLevelUpUIActive = Instance.levelUpUI != null && Instance.levelUpUI.isActiveAndEnabled;
 
@@ -378,7 +378,6 @@ public class GameManager : StaticInstance<GameManager>
             }
             else
             {
-
                 Instance.pauseMenuObject.SetActive(true);
             }
 

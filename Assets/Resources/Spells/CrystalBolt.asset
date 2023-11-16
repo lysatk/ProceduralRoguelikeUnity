@@ -10,17 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cacbea3919a5c3d42ac537197be2b9c1, type: 3}
-  m_Name: BlueFireball
+  m_Name: CrystalBolt
   m_EditorClassIdentifier: 
-  Name: Blue Fireball
-  Description: Blue fireball... that's it
-  image: {fileID: -1782053002, guid: ce7e133b0845cdd4683a8674f032139f, type: 3}
-  Prefab: {fileID: 639514538004180302, guid: 4a1089971e99df1459a4b3e5379a551d, type: 3}
-  spellDamage: 20
-  conditions: []
-  speed: 7
-  destroyTime: 4
+  Name: CrystalBolt
+  Description: 
+  image: {fileID: 0}
+  Prefab: {fileID: 0}
+  spellDamage: 0
+  conditions:
+  - Condition: 6
+    AffectTime: 2
+    AffectOnTick: 0.3
+  speed: 50
+  destroyTime: 0
   caster: {fileID: 0}
   CastFromHeroeNoStaff: 0
-  cooldown: 8
-  spellSlot: 2
+  cooldown: 0
+  spellSlot: 0

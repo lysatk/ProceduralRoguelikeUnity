@@ -17,7 +17,10 @@ MonoBehaviour:
   image: {fileID: 0}
   Prefab: {fileID: 639514538004180302, guid: 657346b7f927305498256060f67e2eff, type: 3}
   spellDamage: 0
-  conditions: []
+  conditions:
+  - Condition: 1
+    AffectTime: 1
+    AffectOnTick: 0.8
   speed: 20
   destroyTime: 2
   caster: {fileID: 0}

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2203409023268211062}
   - component: {fileID: 7058178757205035307}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CrawlerMultShot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
