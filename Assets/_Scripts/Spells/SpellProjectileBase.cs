@@ -39,12 +39,11 @@ namespace Assets._Scripts.Spells
 
         protected  void OnTriggerEnter2D(Collider2D collision)
         {
-           // Debug.Log("coll");
+         
             if (collision.gameObject.TryGetComponent(out AttackHandler attack) )
             {
                 attack.DealDamage(spellDamage, conditions);
             }
-            // Debug.Log("BackToPoolAfterColl");
 
             if (!_objReturned)
             {
