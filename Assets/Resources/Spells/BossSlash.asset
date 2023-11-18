@@ -19,8 +19,8 @@ MonoBehaviour:
   spellDamage: 20
   conditions:
   - Condition: 1
-    AffectTime: 2
-    AffectOnTick: 0.5
+    AffectTime: 1
+    AffectOnTick: 0.23
   speed: 3
   destroyTime: 1
   caster: {fileID: 0}

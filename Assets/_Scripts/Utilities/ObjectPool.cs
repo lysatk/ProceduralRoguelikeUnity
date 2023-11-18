@@ -3,10 +3,6 @@ using Unity.Mathematics;
 using UnityEngine;
 using System.Linq;
 using System.Collections;
-
-
-
-
 public class ObjectPool : MonoBehaviour
 {
 
@@ -25,12 +21,11 @@ public class ObjectPool : MonoBehaviour
     private static GameObject _projectilePlayer;
     private static GameObject _projectileEnemy;
     private static GameObject _projectileOther;
+
     private void Awake()
     {
         CreateParentObjects();
     }
-
-
 
     #region SpawnReturn
     public static GameObject SpawnObject(GameObject obj, Vector3 pos, quaternion rot, string layerString, SpellSource spellSource = SpellSource.None)
@@ -39,7 +34,6 @@ public class ObjectPool : MonoBehaviour
 
         if (pool == null)
         {
-
             pool = new PooledSpellInfo() { lookupString = obj.name };
             objectPools.Add(pool);
         }
@@ -83,7 +77,7 @@ public class ObjectPool : MonoBehaviour
 
         if (pool == null)
         {
-            Debug.Log("trying to release an non-pooled obj:" + obj.name);
+            Debug.Log("trying to release an non-pooled spell:" + obj.name);
         }
         else
         {
@@ -131,7 +125,6 @@ public class ObjectPool : MonoBehaviour
     }
     private static GameObject GetParentObjectByLayerName(string layerName)
     {
-        // Logic to determine parent based on layer name
         switch (layerName)
         {
             case "PlayerSpell":
