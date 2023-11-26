@@ -1262,6 +1262,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d23033e3b31d7f449ec778b3f43fb02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1189973150 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4205326429302936713, guid: f953082eddb3d354ca7228b75e7c5bc2, type: 3}
+  m_PrefabInstance: {fileID: 1381821854}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1263446453
 GameObject:
   m_ObjectHideFlags: 0
@@ -1436,7 +1441,7 @@ MonoBehaviour:
   - {fileID: 1697687975}
   uiObject: {fileID: 808637243}
   pauseMenuObject: {fileID: 284298444}
-  loadingCanvasObject: {fileID: 0}
+  fadePanel: {fileID: 1189973150}
   currentChapterIndex: 1
   ScoresWasSaved: 0
   scoreSO: {fileID: 11400000, guid: a537fb5d8087b124a8e1e8f4b21500ba, type: 2}
@@ -1632,15 +1637,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4205326429212515693, guid: f953082eddb3d354ca7228b75e7c5bc2, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4205326429212515693, guid: f953082eddb3d354ca7228b75e7c5bc2, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4205326429212515693, guid: f953082eddb3d354ca7228b75e7c5bc2, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4205326429212515693, guid: f953082eddb3d354ca7228b75e7c5bc2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

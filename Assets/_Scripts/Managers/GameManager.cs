@@ -76,10 +76,12 @@ public class GameManager : StaticInstance<GameManager>
     /// </summary>
     public GameObject pauseMenuObject;
 
+   
+
     /// <summary>
-    /// ?????
+    /// GameObject used for a fade-in effect when scenes are changed
     /// </summary>
-    public GameObject loadingCanvasObject;
+    public GameObject fadePanel;
 
     /// <summary>
     /// Value used for selecting a chapter scriptableObject displayed in levelUpUI
@@ -174,7 +176,7 @@ public class GameManager : StaticInstance<GameManager>
 
     void HandleHub()
     {
-
+        fadePanel.SetActive(true);
         var _ = StartCoroutine(LoadAsync("LevelHub", GameState.Null));
 
         Player = UnitManager.Instance.SpawnHero(mageNameSO.String, new Vector2(27, 42));
@@ -196,7 +198,7 @@ public class GameManager : StaticInstance<GameManager>
     {
         ObjectPool.ReturnAllObjects();
         SceneManager.SetActiveScene(SceneManager.GetSceneAt(0));
-
+         fadePanel.SetActive(true);
         SceneManager.UnloadScene("LevelHub");
 
         var _ = StartCoroutine(LoadAsync("LevelTest", GameState.Starting));
@@ -229,21 +231,19 @@ public class GameManager : StaticInstance<GameManager>
         UpdateUIForLevelUp();
         waveName.text = "";
         FindObjectOfType<LevelGenerator>().GenerateMap();
-        PrepareLevel(10, true); // Spawn boss level
+        PrepareLevel(10, true);
         levelSetIndex++; 
     }
 
     private void PrepareLevel(int enemyCount, bool isBossLevel = false)
     {
         if (isBossLevel)
-        {
-            // Spawn boss based on level set index
+        { 
             var bossType = GetBossTypeForLevelSet(levelSetIndex);
             UnitManager.Instance.SpawnEnemy(bossType, 1);
         }
         else
-        {
-            // Spawn enemies based on level set index
+        {    
             var enemyIdStart = GetEnemyRangeStartForLevelSet(levelSetIndex);
             var enemyIdEnd = GetEnemyRangeEndForLevelSet(levelSetIndex);
 
@@ -329,7 +329,7 @@ public class GameManager : StaticInstance<GameManager>
     {
         ObjectPool.DestroyAllPooledObjects();
         SceneManager.SetActiveScene(SceneManager.GetSceneAt(0));
-
+        fadePanel.SetActive(true);
         enemies.Clear();
 
         foreach (Transform children in UnitManager.Instance.transform)
@@ -456,6 +456,7 @@ public class GameManager : StaticInstance<GameManager>
 
 
         ResumeGame();
+        fadePanel.gameObject.SetActive(true);
 
     }
 
@@ -465,7 +466,7 @@ public class GameManager : StaticInstance<GameManager>
         gamePaused = true;
     }
 
-    private void ResumeGame()
+    public void ResumeGame()
     {
         Time.timeScale = 1f;
         gamePaused = false;
