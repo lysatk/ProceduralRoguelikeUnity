@@ -38,7 +38,8 @@ public class BasicEnemy : EnemyBase
     private const float restMovementDuration = 1f;
     private const float restMovementRange = 2f;
     private Vector3 restTargetPosition;
- 
+
+    private bool _aiActive=false;
     private enum States
     {
         Idle,
@@ -48,12 +49,22 @@ public class BasicEnemy : EnemyBase
         Die
     }
 
+
     private void Start()
     {
         InitializeComponents();
         ConfigureNavmeshAgent();
+        
         currentState = States.Idle;
+        StartCoroutine(DelayedActivation(1.3f)); // Start the coroutine to delay AI activation
     }
+
+    private IEnumerator DelayedActivation(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        _aiActive = true; // Activate AI after the delay
+    }
+
 
     private void InitializeComponents()
     {
@@ -74,6 +85,7 @@ public class BasicEnemy : EnemyBase
 
     private void Update()
     {
+        if (_aiActive) 
         HandleState();
     }
 

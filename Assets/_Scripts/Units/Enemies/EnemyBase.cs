@@ -50,7 +50,7 @@ public abstract class EnemyBase : UnitBase
     protected static string projectileLayerName = "EnemySpell";
 
     void Awake()
-    {
+    {  
         conditionsBar = gameObject.transform.GetChild(0);
         _conditionUI = conditionsBar.GetComponent<ConditionUI>();
 
@@ -61,8 +61,14 @@ public abstract class EnemyBase : UnitBase
         }
 
         hitbox = GetComponentInChildren<Collider2D>();
-    }
 
+
+        StartCoroutine(StartBehaviorAfterDelay());
+    }
+    private IEnumerator StartBehaviorAfterDelay()
+    {
+        yield return new WaitForSeconds(2f);
+    }
 
 
     /// <summary>

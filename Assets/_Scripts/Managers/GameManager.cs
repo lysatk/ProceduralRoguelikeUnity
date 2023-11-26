@@ -406,6 +406,9 @@ public class GameManager : StaticInstance<GameManager>
     public void HandleMenuHubReturn()
     {
         HandlePause();
+
+        levelSetIndex = 0;
+        currentChapterIndex = 0;
         firstLevel = true;
         waveName.text = "";
         WaveManager.Instance.StopAllCoroutines();
