@@ -4,15 +4,29 @@ using UnityEngine;
 
 public class SettingsToggle : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public GameObject settingsPanel;
+    public GameObject mainView;
     void Start()
     {
-        
+        settingsPanel.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OpenSettings()
     {
-        
+
+        settingsPanel.SetActive(true);
+        mainView.SetActive(false );
+
+
+
+    }
+
+    public void HideSettings()
+    {
+
+        settingsPanel.SetActive(false);
+        mainView?.SetActive(true);
+
+
     }
 }
