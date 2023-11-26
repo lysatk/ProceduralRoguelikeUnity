@@ -49,9 +49,9 @@ namespace Assets._Scripts.Managers
             Debug.Log(currentLevelNum);
             if (totalEnemies == 0 && !GameManager.firstLevel)
             {
-                LevelGenerator.SetTileIndex(currentLevelNum / 2, levelGenerator);
+                LevelGenerator.SetTileIndex(currentLevelNum / 3, levelGenerator);
                 currentLevelNum++;
-                if (currentLevelNum % 2 == 0)  //2 is temporary for testing purpouses !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                if (currentLevelNum % 3 == 0)  //2 is temporary for testing purpouses !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                     GameManager.Instance.ChangeState(GameState.BossReached);
                 else
                     GameManager.Instance.ChangeState(GameState.PostLevel);
