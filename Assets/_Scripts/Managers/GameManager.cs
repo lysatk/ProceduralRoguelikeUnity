@@ -487,4 +487,14 @@ public class GameManager : StaticInstance<GameManager>
     }
 
 
+
+    void ActivateAI()
+    {
+        foreach(var enemy in enemies)
+        {
+           // enemy.activateAI();
+        }
+
+    }
+
 }

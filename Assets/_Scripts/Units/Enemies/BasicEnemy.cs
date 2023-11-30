@@ -64,10 +64,10 @@ public class BasicEnemy : EnemyBase
         yield return new WaitForSeconds(delay);
         _aiActive = true; // Activate AI after the delay
     }
-    public void Awake()
-    {
-        _aiActive = true;
-    }
+   // public void Awake()
+   // {
+   //     _aiActive = true;
+   // }
 
     private void InitializeComponents()
     {

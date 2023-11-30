@@ -49,6 +49,9 @@ public abstract class EnemyBase : UnitBase
     protected Collider2D hitbox;
     protected static string projectileLayerName = "EnemySpell";
 
+  //  protected bool _aiActive = true;
+
+
     void Awake()
     {  
         conditionsBar = gameObject.transform.GetChild(0);
