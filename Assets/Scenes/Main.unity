@@ -1853,7 +1853,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chapterTextUI: {fileID: 0}
   scrollRect: {fileID: 0}
-  scrollSpeed: 20
+  scrollSpeed: 25
   chapters: []
 --- !u!224 &93546767226882833 stripped
 RectTransform:

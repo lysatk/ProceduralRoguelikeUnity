@@ -118,7 +118,7 @@ public class ObjectPool : MonoBehaviour
 
             case SpellSource.None:
 
-                return _projectileOther; // Assign to 'Other' category
+                return _projectileOther; 
             default:
                 return null;
         }
@@ -134,13 +134,13 @@ public class ObjectPool : MonoBehaviour
             case "Spell":
                 return _projectileOther;
             default:
-                return _projectileParent; // Default parent
+                return _projectileParent; 
         }
     }
 
     public static void ClearPools()
     {
-        ReturnAllObjects(); // First return all active objects to the pool
+        ReturnAllObjects(); 
 
         foreach (var pool in objectPools)
         {
@@ -149,7 +149,7 @@ public class ObjectPool : MonoBehaviour
                 Destroy(obj);
             }
         }
-        objectPools.Clear(); // Clear the pools after destroying all objects
+        objectPools.Clear();
     }
 
 
@@ -204,14 +204,14 @@ public class ObjectPool : MonoBehaviour
             {
                 Destroy(obj);
             }
-            // Destroy active objects as well
+            
             var activeObjects = FindObjectsOfType<GameObject>().Where(obj => obj.name.StartsWith(pool.lookupString));
             foreach (var activeObj in activeObjects)
             {
                 Destroy(activeObj);
             }
         }
-        objectPools.Clear(); // Clear the pools after destroying all objects
+        objectPools.Clear();
     }
 
 
@@ -240,13 +240,13 @@ public class ObjectPool : MonoBehaviour
 
     public static void ReturnAllObjects()
     {
-        // Iterate through each pool
+       
         foreach (var pool in objectPools)
         {
-            // Find all active objects in the scene that belong to this pool
+            
             var activeObjects = FindObjectsOfType<GameObject>().Where(obj => obj.activeSelf && obj.name.StartsWith(pool.lookupString + "(Clone)"));
 
-            // Return each active object to the pool
+           
             foreach (var activeObj in activeObjects)
             {
                 activeObj.SetActive(false);
@@ -260,13 +260,12 @@ public class ObjectPool : MonoBehaviour
     {
         foreach (var pool in objectPools)
         {
-            // Destroy inactive objects in the pool
+            
             foreach (var inactiveObj in pool.InactiveObjects)
             {
                 Destroy(inactiveObj);
             }
 
-            // Destroy active objects that belong to this pool
             var activeObjects = FindObjectsOfType<GameObject>().Where(obj => obj.name.StartsWith(pool.lookupString + "(Clone)"));
             foreach (var activeObj in activeObjects)
             {
@@ -274,7 +273,7 @@ public class ObjectPool : MonoBehaviour
             }
         }
 
-        objectPools.Clear(); // Clear the list of pools after destroying all objects
+        objectPools.Clear(); 
     }
 
     public static void SetLayerBasedOnParent(GameObject child)
