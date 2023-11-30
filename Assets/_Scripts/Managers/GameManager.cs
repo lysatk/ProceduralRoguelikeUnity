@@ -238,18 +238,26 @@ public class GameManager : StaticInstance<GameManager>
     private void PrepareLevel(int enemyCount, bool isBossLevel = false)
     {
         if (isBossLevel)
-        { 
+        {
             var bossType = GetBossTypeForLevelSet(levelSetIndex);
             UnitManager.Instance.SpawnEnemy(bossType, 1);
         }
         else
-        {    
+        {
             var enemyIdStart = GetEnemyRangeStartForLevelSet(levelSetIndex);
             var enemyIdEnd = GetEnemyRangeEndForLevelSet(levelSetIndex);
 
             for (int i = 0; i < enemyCount; i++)
             {
-                UnitManager.Instance.SpawnEnemy((ExampleEnemyType)Random.Range(enemyIdStart, enemyIdEnd + 1), 1);
+                int enemyId = Random.Range(enemyIdStart, enemyIdEnd);
+
+                // Add a chance to spawn the last enemy in range
+                if (Random.value < 0.1f) // Adjust this value to control the probability
+                {
+                    enemyId = enemyIdEnd;
+                }
+
+                UnitManager.Instance.SpawnEnemy((ExampleEnemyType)enemyId, 1);
             }
         }
 
@@ -434,10 +442,7 @@ public class GameManager : StaticInstance<GameManager>
         Application.Quit();
     }
 
-    public void HandleMenuSettings()
-    {
-        //OPENS SETTINGS UI 
-    }
+    
     public void HandleMenuRestart()
     {
         HandlePause();
