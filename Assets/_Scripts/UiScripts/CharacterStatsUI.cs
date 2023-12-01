@@ -2,13 +2,14 @@ using UnityEngine;
 using TMPro; // Add this namespace to use TextMeshPro
 using UnityEngine.UI;
 using static System.Net.WebRequestMethods;
+using UnityEngine.UIElements;
 
 public class CharacterStatsUI : MonoBehaviour
 {
     public HeroUnitBase player;
     public TextMeshProUGUI pointsText;
     public TextMeshProUGUI hpText, armorText, speedText, dmgModText, cooldownText;
-    public Button fullHealButton;
+    public UnityEngine.UI.Button fullHealButton;
     private TextMeshProUGUI fullhealButtonText;
 
     private int availablePoints = 5;
@@ -23,6 +24,13 @@ public class CharacterStatsUI : MonoBehaviour
     private int initialHp;
 
     private bool isHealToggled = false;
+
+
+
+    private float cooldownSoftCap = 0.5f;
+    private float cooldownHardCap = 0.3f;
+    private float speedSoftCap = 9f;
+    private float speedHardCap = 14f;
     private void OnEnable()
     {
         GameManager.gamePaused = true;
@@ -75,8 +83,20 @@ public class CharacterStatsUI : MonoBehaviour
 
     public void IncreaseSpeed()
     {
-        if (availablePoints <= 0) return;
-        player.stats.MovementSpeed += 0.5f;
+        if (availablePoints <= 0 || player.stats.MovementSpeed >= speedHardCap)
+        {
+            player.stats.MovementSpeed = 14f;
+            return;
+        }
+        if (player.stats.MovementSpeed < speedSoftCap)
+        {
+            player.stats.MovementSpeed += 0.5f;
+        }
+        else 
+        {
+            player.stats.MovementSpeed += 0.25f;
+        }
+       
         availablePoints--;
         UpdateUI();
     }
@@ -92,7 +112,7 @@ public class CharacterStatsUI : MonoBehaviour
     public void IncreaseCooldown()
     {
         if (availablePoints <= 0) return;
-        player.stats.CooldownModifier++;
+        player.stats.CooldownModifier -= 0.05f;
         availablePoints--;
         UpdateUI();
     }
@@ -118,7 +138,14 @@ public class CharacterStatsUI : MonoBehaviour
     public void DecreaseSpeed()
     {
         if (availablePoints == maxPoints || player.stats.MovementSpeed <= initialSpeed) return;
-        player.stats.MovementSpeed--;
+        if (player.stats.MovementSpeed > speedSoftCap)
+        {
+            player.stats.MovementSpeed -= 0.5f;
+        }
+        else
+        {
+            player.stats.MovementSpeed -= 0.25f;
+        }
         availablePoints++;
         UpdateUI();
     }
@@ -134,7 +161,7 @@ public class CharacterStatsUI : MonoBehaviour
     public void DecreaseCooldown()
     {
         if (availablePoints == maxPoints || player.stats.CooldownModifier <= initialCooldown) return;
-        player.stats.CooldownModifier--;
+        player.stats.CooldownModifier += 0.2f;
         availablePoints++;
         UpdateUI();
     }
@@ -163,7 +190,12 @@ public class CharacterStatsUI : MonoBehaviour
     {
         hpText.text = $"HP: {player.stats.CurrentHp}/{player.stats.MaxHp}";
         armorText.text = "Armor: " + player.stats.Armor;
+
+        if (player.stats.MovementSpeed >= 14)
+            speedText.text = "Speed: " + player.stats.MovementSpeed +" (MAX)";
+        else
         speedText.text = "Speed: " + player.stats.MovementSpeed;
+
         dmgModText.text = "Damage Mod: " + player.stats.DmgModifier;
         cooldownText.text = "Cooldown: " + player.stats.CooldownModifier;
         pointsText.text = "Points: " + availablePoints;

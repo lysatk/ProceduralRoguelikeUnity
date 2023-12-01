@@ -18,6 +18,7 @@ public class SceneTransitionManager : MonoBehaviour
 
     public void OnFadeComplete()
     {
+        if(GameManager.Instance!=null)
         GameManager.Instance.ResumeGame();
         this.gameObject.SetActive(false);
     }
