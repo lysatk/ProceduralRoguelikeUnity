@@ -12,8 +12,8 @@ public class SpellProjectileMult : MonoBehaviour
     private void Awake()
     {
         gameObject.SetActive(false);
-        layerName = LayerMask.LayerToName(gameObject.layer);
 
+        layerName = LayerMask.LayerToName(gameObject.layer);
     }
     private void OnEnable()
     {
