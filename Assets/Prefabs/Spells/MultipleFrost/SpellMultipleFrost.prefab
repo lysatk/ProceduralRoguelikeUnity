@@ -66,6 +66,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0000e033bd356854285db20764c02d95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 639514538004180302, guid: 4a0d019563540db40a47577db9de39c7, type: 3}
+  prefab: {fileID: 11400000, guid: ec8e86ac708b4a343b47ed617f483fee, type: 2}
   numOfProjectiles: 5
   rotAngle: 20
+  layerName: 

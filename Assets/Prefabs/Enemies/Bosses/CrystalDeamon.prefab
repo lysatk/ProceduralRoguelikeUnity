@@ -132,12 +132,12 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 16
   scoreSO: {fileID: 11400000, guid: a537fb5d8087b124a8e1e8f4b21500ba, type: 2}
-  attackFromCenter: 0
+  attackFromCenter: 1
   rangeOfAttack: 10
   rangeOfRest: 15
   rangeOfChase: 35
   attackCooldown: 2
-  spell: {fileID: 11400000, guid: 1933132bc2351c5478089663e21c4745, type: 2}
+  spell: {fileID: 11400000, guid: 1c9568aaef6e6eb49bdd2f8f44e4b9ec, type: 2}
   attackPhaseDuration: 1
   movementBiasDuration: 5
   maxAttackRate: 1

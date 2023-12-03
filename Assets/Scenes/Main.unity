@@ -1854,7 +1854,16 @@ MonoBehaviour:
   chapterTextUI: {fileID: 0}
   scrollRect: {fileID: 0}
   scrollSpeed: 25
-  chapters: []
+  chapters:
+  - {fileID: 11400000, guid: 8a6e6efe4423bc74d8992f1ce78b3617, type: 2}
+  - {fileID: 11400000, guid: fa79421c52f343540b5c14087b3c3582, type: 2}
+  - {fileID: 11400000, guid: 8b1947675a6bd6d40818d6240c26b2e6, type: 2}
+  - {fileID: 11400000, guid: 3f8cc77548ab50f4aa58fe7181236609, type: 2}
+  - {fileID: 11400000, guid: b9e1cf4379f2c0949ac7b5b65097bcf5, type: 2}
+  - {fileID: 11400000, guid: 3cc752e6fbe4c9c4c9ef2f3b8e14ca11, type: 2}
+  - {fileID: 11400000, guid: 99cc00e65e7b1d44997e88d417a14167, type: 2}
+  - {fileID: 11400000, guid: da5f1fe245b5a7349895e1b7f40fcd70, type: 2}
+  - {fileID: 11400000, guid: 9e27cf68e658db4479fd136528255d1a, type: 2}
 --- !u!224 &93546767226882833 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7916989875598768397, guid: 0ff81acdfe25c7b4bafc7528270801b2, type: 3}

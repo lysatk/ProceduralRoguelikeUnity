@@ -496,7 +496,7 @@ MonoBehaviour:
   PrimarySpell: {fileID: 11400000, guid: 497e8287116868f439d223a737b3e764, type: 2}
   SecondarySpell: {fileID: 11400000, guid: ec8e86ac708b4a343b47ed617f483fee, type: 2}
   QSpell: {fileID: 11400000, guid: 7c97eee9b4e81bd49a1a279eb346c11e, type: 2}
-  ESpell: {fileID: 11400000, guid: 1933132bc2351c5478089663e21c4745, type: 2}
+  ESpell: {fileID: 11400000, guid: 1c9568aaef6e6eb49bdd2f8f44e4b9ec, type: 2}
   DashSpell: {fileID: 11400000, guid: 73bad2014ba9fc4468bb4c527dc55f3d, type: 2}
   _invincibilityDurationSeconds: 0.45
   isInvincible: 0

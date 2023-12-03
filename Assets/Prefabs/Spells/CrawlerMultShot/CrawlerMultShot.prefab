@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0000e033bd356854285db20764c02d95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 639514538004180302, guid: 657346b7f927305498256060f67e2eff, type: 3}
+  prefab: {fileID: 11400000, guid: 2f1dfc58f778d0c48933dd790cc58f60, type: 2}
   numOfProjectiles: 4
   rotAngle: 90
+  layerName: 

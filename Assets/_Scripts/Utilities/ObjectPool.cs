@@ -31,7 +31,7 @@ public class ObjectPool : MonoBehaviour
     public static GameObject SpawnObject(GameObject obj, Vector3 pos, quaternion rot, string layerString, SpellSource spellSource = SpellSource.None)
     {
         PooledSpellInfo pool = objectPools.Find(p => p.lookupString == obj.name);
-
+        Debug.LogWarning("RecivedLayer" + layerString);
         if (pool == null)
         {
             pool = new PooledSpellInfo() { lookupString = obj.name };
@@ -42,30 +42,31 @@ public class ObjectPool : MonoBehaviour
 
         if (spawnableObj == null)
         {
+
             GameObject parentObject = SetParentObjectSourceType(spellSource);
-            //if (parentObject == _projectileOther)
-            //{
-            //    parentObject = GetParentObjectByLayerName(layerString);
-            //}
             spawnableObj = Instantiate(obj, pos, rot);
+            spawnableObj.SetActive(false);
             spawnableObj.layer = LayerMask.NameToLayer(layerString);
+            spawnableObj.SetActive(true);
             if (parentObject != null)
             {
                 spawnableObj.transform.SetParent(parentObject.transform);
+
                 SetLayerBasedOnParent(spawnableObj);
             }
         }
         else
         {
-            spawnableObj.layer = LayerMask.NameToLayer(layerString);
-            spawnableObj.transform.rotation = rot;
             spawnableObj.transform.position = pos;
+            spawnableObj.transform.rotation = rot;
+            spawnableObj.layer = LayerMask.NameToLayer(layerString);
             spawnableObj.SetActive(true);
             pool.InactiveObjects.Remove(spawnableObj);
-
         }
         spawnableObj.layer = LayerMask.NameToLayer(layerString);
         Debug.Log("finally set as:" + layerString);
+        if (spawnableObj.GetComponent<SpellProjectileMult>() != null)
+        { var _ = spawnableObj.GetComponent<SpellProjectileMult>().layerName = layerString; }
         return spawnableObj;
     }
 
@@ -118,7 +119,7 @@ public class ObjectPool : MonoBehaviour
 
             case SpellSource.None:
 
-                return _projectileOther; 
+                return _projectileOther;
             default:
                 return null;
         }
@@ -134,13 +135,13 @@ public class ObjectPool : MonoBehaviour
             case "Spell":
                 return _projectileOther;
             default:
-                return _projectileParent; 
+                return _projectileParent;
         }
     }
 
     public static void ClearPools()
     {
-        ReturnAllObjects(); 
+        ReturnAllObjects();
 
         foreach (var pool in objectPools)
         {
@@ -204,7 +205,7 @@ public class ObjectPool : MonoBehaviour
             {
                 Destroy(obj);
             }
-            
+
             var activeObjects = FindObjectsOfType<GameObject>().Where(obj => obj.name.StartsWith(pool.lookupString));
             foreach (var activeObj in activeObjects)
             {
@@ -240,13 +241,13 @@ public class ObjectPool : MonoBehaviour
 
     public static void ReturnAllObjects()
     {
-       
+
         foreach (var pool in objectPools)
         {
-            
+
             var activeObjects = FindObjectsOfType<GameObject>().Where(obj => obj.activeSelf && obj.name.StartsWith(pool.lookupString + "(Clone)"));
 
-           
+
             foreach (var activeObj in activeObjects)
             {
                 activeObj.SetActive(false);
@@ -260,7 +261,7 @@ public class ObjectPool : MonoBehaviour
     {
         foreach (var pool in objectPools)
         {
-            
+
             foreach (var inactiveObj in pool.InactiveObjects)
             {
                 Destroy(inactiveObj);
@@ -273,7 +274,7 @@ public class ObjectPool : MonoBehaviour
             }
         }
 
-        objectPools.Clear(); 
+        objectPools.Clear();
     }
 
     public static void SetLayerBasedOnParent(GameObject child)
@@ -284,15 +285,15 @@ public class ObjectPool : MonoBehaviour
 
             if (parent == _projectilePlayer)
             {
-                child.layer = LayerMask.NameToLayer("PlayerSpell");
+                child.layer = 12;
             }
             else if (parent == _projectileEnemy)
             {
-                child.layer = LayerMask.NameToLayer("EnemySpell");
+                child.layer = 13;
             }
             else
             {
-                child.layer = LayerMask.NameToLayer("Spell");
+                child.layer = 6;
             }
         }
     }
