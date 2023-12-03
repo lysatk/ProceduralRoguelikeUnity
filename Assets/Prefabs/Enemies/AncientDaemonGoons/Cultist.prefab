@@ -204,8 +204,8 @@ MonoBehaviour:
     m_Bits: 128
   scoreSO: {fileID: 11400000, guid: a537fb5d8087b124a8e1e8f4b21500ba, type: 2}
   rangeOfAttack: 10
-  attackCooldown: 2
-  spell: {fileID: 11400000, guid: f79d447ef08acea43af72903fcb6cde7, type: 2}
+  attackCooldown: 1
+  spell: {fileID: 11400000, guid: b68d38da07ea2c74c8365d0bb3ade9ee, type: 2}
 --- !u!1 &7212438722113357005
 GameObject:
   m_ObjectHideFlags: 0

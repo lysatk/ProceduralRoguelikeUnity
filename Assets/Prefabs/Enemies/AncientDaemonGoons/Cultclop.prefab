@@ -107,7 +107,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats:
-    _MaxHp: 0
+    _MaxHp: 100
     _Armor: 0
     _MovementSpeed: 0
     _DmgModifier: 0

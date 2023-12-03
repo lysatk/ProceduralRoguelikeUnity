@@ -1664,6 +1664,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f953082eddb3d354ca7228b75e7c5bc2, type: 3}
+--- !u!114 &1404120891 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 438754810976214324, guid: db584bf63d102cd439f06a1b113ff6eb, type: 3}
+  m_PrefabInstance: {fileID: 240856301}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1aa08ab6e0800fa44ae55d278d1423e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1697687975
 GameObject:
   m_ObjectHideFlags: 0
@@ -1787,6 +1798,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbbb4df6f1ead9046a6d9c4b818d80a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2031120995 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1102093013186774549, guid: db584bf63d102cd439f06a1b113ff6eb, type: 3}
+  m_PrefabInstance: {fileID: 240856301}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2120752618
 GameObject:
   m_ObjectHideFlags: 0
@@ -1846,13 +1868,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2137865968}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a785631252ab2454a910f20b89ba1cf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chapterTextUI: {fileID: 0}
-  scrollRect: {fileID: 0}
+  chapterTextUI: {fileID: 2031120995}
+  scrollRect: {fileID: 1404120891}
   scrollSpeed: 25
   chapters:
   - {fileID: 11400000, guid: 8a6e6efe4423bc74d8992f1ce78b3617, type: 2}

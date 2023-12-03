@@ -405,10 +405,6 @@ public class GameManager : StaticInstance<GameManager>
         }
     }
 
-
-
-
-
     #region Menu
 
     public void HandleMenuHubReturn()

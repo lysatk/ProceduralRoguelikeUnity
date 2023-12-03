@@ -15,7 +15,7 @@ MonoBehaviour:
   Name: CrystalFireball
   Description: 
   image: {fileID: 0}
-  Prefab: {fileID: 0}
+  Prefab: {fileID: 639514538004180302, guid: 535893df606a58a4a8ddf1ca7fe3a1fa, type: 3}
   spellDamage: 20
   conditions:
   - Condition: 6
