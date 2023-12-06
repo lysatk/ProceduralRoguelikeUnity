@@ -105,70 +105,70 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Orange_Mage_IdleSheet_0
+      name: crawler_Witch_idle_0
       rect:
         serializedVersion: 2
         x: 0
         y: 94
         width: 27
-        height: 20
+        height: 19
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a3b83beb15989d446b418960355eb43c
-      internalID: 1296002414
+      spriteID: f5c8a4f2f9d99974e851ba697cadfb06
+      internalID: -854546835
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Orange_Mage_IdleSheet_1
+      name: crawler_Witch_idle_1
       rect:
         serializedVersion: 2
         x: 0
         y: 62
         width: 27
-        height: 20
+        height: 18
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b85f602ba5c0fdc459acd7fb2580d769
-      internalID: -2116838490
+      spriteID: f93bfd1e62d340045aea3d2a90082dea
+      internalID: 1803226381
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Orange_Mage_IdleSheet_2
+      name: crawler_Witch_idle_2
       rect:
         serializedVersion: 2
         x: 0
         y: 30
         width: 27
-        height: 20
+        height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7a86731f0192f0644909d79a281008d2
-      internalID: 149949885
+      spriteID: f19407bee17aabe4c8e8f5562fee8bb1
+      internalID: 702624019
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Orange_Mage_IdleSheet_3
+      name: crawler_Witch_idle_3
       rect:
         serializedVersion: 2
         x: 0
@@ -176,14 +176,14 @@ TextureImporter:
         width: 27
         height: 20
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1087ebce8336b83458c1aab10c0df6c3
-      internalID: 328171108
+      spriteID: 982809898a8e08447b1979a9536c80cc
+      internalID: -1833697149
       vertices: []
       indices: 
       edges: []
@@ -199,10 +199,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Orange_Mage_IdleSheet_0: 1296002414
-      Orange_Mage_IdleSheet_1: -2116838490
-      Orange_Mage_IdleSheet_2: 149949885
-      Orange_Mage_IdleSheet_3: 328171108
+      crawler_Witch_idle_0: -854546835
+      crawler_Witch_idle_1: 1803226381
+      crawler_Witch_idle_2: 702624019
+      crawler_Witch_idle_3: -1833697149
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -18,6 +18,7 @@ public class AudioSystem : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            LoadVolumeSettings();
         }
         else
         {
@@ -27,10 +28,25 @@ public class AudioSystem : MonoBehaviour
         PlayMusic(musicClip);
     }
 
+    private void LoadVolumeSettings()
+    {
+        float musicVolume = PlayerPrefs.GetFloat("MusicVolume", 1.0f);
+        float sfxVolume = PlayerPrefs.GetFloat("SFXVolume", 1.0f);
+        ChangeVolume(musicVolume, sfxVolume);
+    }
+
+    public void SaveVolumeSettings(float musicVolume, float sfxVolume)
+    {
+        PlayerPrefs.SetFloat("MusicVolume", musicVolume);
+        PlayerPrefs.SetFloat("SFXVolume", sfxVolume);
+        PlayerPrefs.Save();
+        ChangeVolume(musicVolume, sfxVolume);
+    }
+
     public void PlayMusic(AudioClip clip)
     {
         musicSource.clip = clip;
-        musicSource.loop = true; 
+        musicSource.loop = true;
         musicSource.Play();
     }
 

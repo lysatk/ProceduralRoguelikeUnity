@@ -3,6 +3,12 @@ using Unity.Mathematics;
 using UnityEngine;
 using System.Linq;
 using System.Collections;
+
+public class PooledSpellInfo
+{
+    public string lookupString;
+    public List<GameObject> InactiveObjects = new List<GameObject>();
+}
 public class ObjectPool : MonoBehaviour
 {
 
@@ -38,36 +44,36 @@ public class ObjectPool : MonoBehaviour
             objectPools.Add(pool);
         }
 
-        GameObject spawnableObj = pool.InactiveObjects.FirstOrDefault();
+        GameObject objSpawnable = pool.InactiveObjects.FirstOrDefault();
 
-        if (spawnableObj == null)
+        if (objSpawnable == null)
         {
 
             GameObject parentObject = SetParentObjectSourceType(spellSource);
-            spawnableObj = Instantiate(obj, pos, rot);
-            spawnableObj.SetActive(false);
-            spawnableObj.layer = LayerMask.NameToLayer(layerString);
-            spawnableObj.SetActive(true);
+            objSpawnable = Instantiate(obj, pos, rot);     
+            objSpawnable.layer = LayerMask.NameToLayer(layerString);
+
+            objSpawnable.SetActive(true);
             if (parentObject != null)
             {
-                spawnableObj.transform.SetParent(parentObject.transform);
+                objSpawnable.transform.SetParent(parentObject.transform);
 
-                SetLayerBasedOnParent(spawnableObj);
+                SetLayerBasedOnParent(objSpawnable);
             }
         }
         else
         {
-            spawnableObj.transform.position = pos;
-            spawnableObj.transform.rotation = rot;
-            spawnableObj.layer = LayerMask.NameToLayer(layerString);
-            spawnableObj.SetActive(true);
-            pool.InactiveObjects.Remove(spawnableObj);
+            objSpawnable.transform.position = pos;
+            objSpawnable.transform.rotation = rot;
+            objSpawnable.layer = LayerMask.NameToLayer(layerString);
+
+            objSpawnable.SetActive(true);
+            pool.InactiveObjects.Remove(objSpawnable);
         }
-        spawnableObj.layer = LayerMask.NameToLayer(layerString);
-        Debug.Log("finally set as:" + layerString);
-        if (spawnableObj.GetComponent<SpellProjectileMult>() != null)
-        { var _ = spawnableObj.GetComponent<SpellProjectileMult>().layerName = layerString; }
-        return spawnableObj;
+        objSpawnable.layer = LayerMask.NameToLayer(layerString);
+ 
+     
+        return objSpawnable;
     }
 
 
@@ -78,7 +84,7 @@ public class ObjectPool : MonoBehaviour
 
         if (pool == null)
         {
-            Debug.Log("trying to release an non-pooled spell:" + obj.name);
+            Debug.Log("Trying to return a spell with no Pool, Name:" + obj.name);
         }
         else
         {
@@ -301,8 +307,3 @@ public class ObjectPool : MonoBehaviour
 
 }
 
-public class PooledSpellInfo
-{
-    public string lookupString;
-    public List<GameObject> InactiveObjects = new List<GameObject>();
-}
