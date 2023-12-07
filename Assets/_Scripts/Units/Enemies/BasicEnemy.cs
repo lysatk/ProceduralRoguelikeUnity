@@ -30,7 +30,6 @@ public class BasicEnemy : EnemyBase
     private Vector3 wanderingTargetPosition;
     private float attackPhaseTimer = 0f;
     private float lastPlayerDamageTime = 0f;
-    private float movementBiasTimer = 0f;
     private float currentAttackRate = 0.1f;
 
     // Resting state variables

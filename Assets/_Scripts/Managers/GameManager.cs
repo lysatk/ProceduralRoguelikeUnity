@@ -221,7 +221,7 @@ public class GameManager : StaticInstance<GameManager>
         ObjectPool.ReturnAllObjects();
         waveName.text = "";
         FindObjectOfType<LevelGenerator>().GenerateMap();
-        PrepareLevel(10);
+        PrepareLevel(30);
         currentChapterIndex++; 
     }
 
@@ -241,6 +241,19 @@ public class GameManager : StaticInstance<GameManager>
         {
             var bossType = GetBossTypeForLevelSet(levelSetIndex);
             UnitManager.Instance.SpawnEnemy(bossType, 1);
+            var enemyIdStart = GetEnemyRangeStartForLevelSet(levelSetIndex);
+            var enemyIdEnd = GetEnemyRangeEndForLevelSet(levelSetIndex);
+            for (int i = 0; i < enemyCount; i++)
+            {
+                int enemyId = Random.Range(enemyIdStart, enemyIdEnd);
+
+                if (Random.value < 0.1f)
+                {
+                    enemyId = enemyIdEnd;
+                }
+
+                UnitManager.Instance.SpawnEnemy((ExampleEnemyType)enemyId, 1);
+            }
         }
         else
         {
@@ -251,8 +264,7 @@ public class GameManager : StaticInstance<GameManager>
             {
                 int enemyId = Random.Range(enemyIdStart, enemyIdEnd);
 
-                // Add a chance to spawn the last enemy in range
-                if (Random.value < 0.1f) // Adjust this value to control the probability
+                if (Random.value < 0.1f) 
                 {
                     enemyId = enemyIdEnd;
                 }
@@ -271,7 +283,7 @@ public class GameManager : StaticInstance<GameManager>
             case 0: return 0;
             case 1: return 3;
             case 2: return 6;
-            default: return 0; // Default or error handling
+            default: return 0; 
         }
     }
 
@@ -282,7 +294,7 @@ public class GameManager : StaticInstance<GameManager>
             case 0: return 2;
             case 1: return 5;
             case 2: return 8;
-            default: return 2; // Default or error handling
+            default: return 2;
         }
     }
 
@@ -293,7 +305,7 @@ public class GameManager : StaticInstance<GameManager>
             case 0: return ExampleEnemyType.OgreKing;
             case 1: return ExampleEnemyType.SpiderWitch;
             case 2: return ExampleEnemyType.CrystalDeamon;
-            default: return ExampleEnemyType.OgreKing; //  error handling
+            default: return ExampleEnemyType.OgreKing; 
         }
     }
 
@@ -480,6 +492,7 @@ public class GameManager : StaticInstance<GameManager>
         if (levelUpUI != null)
         {
             levelUpUI.ShowUI();
+            PauseGame();
         }
         else
         {

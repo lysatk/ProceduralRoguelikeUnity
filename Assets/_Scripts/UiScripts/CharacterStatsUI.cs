@@ -26,11 +26,19 @@ public class CharacterStatsUI : MonoBehaviour
     private bool isHealToggled = false;
 
 
+    // Soft and Hard caps for each stat
+    private const float hpSoftCap = 100f;
+    private const float hpHardCap = 150f;
+    private const float armorSoftCap = 5f;
+    private const float armorHardCap = 10f;
+    private const float dmgModSoftCap = 5f;
+    private const float dmgModHardCap = 10f;
+    private const float cooldownSoftCap = 0.5f;
+    private const float cooldownHardCap = 0.3f;
+    private const float speedSoftCap = 9f;
+    private const float speedHardCap = 14f;
 
-    private float cooldownSoftCap = 0.5f;
-    private float cooldownHardCap = 0.3f;
-    private float speedSoftCap = 9f;
-    private float speedHardCap = 14f;
+  
     private void OnEnable()
     {
         GameManager.gamePaused = true;
@@ -67,16 +75,17 @@ public class CharacterStatsUI : MonoBehaviour
 
     public void IncreaseHP()
     {
-        if (availablePoints <= 0) return;
-        player.stats.MaxHp += 5;
+        if (availablePoints <= 0 || player.stats.MaxHp >= hpHardCap) return;
+        player.stats.MaxHp = (int)Mathf.Min(player.stats.MaxHp + 5, hpHardCap);
         availablePoints--;
         UpdateUI();
     }
 
     public void IncreaseArmor()
     {
-        if (availablePoints <= 0) return;
-        player.stats.Armor += 0.1f;
+        if (availablePoints <= 0 || player.stats.Armor >= armorHardCap) return;
+        float increment = player.stats.Armor < armorSoftCap ? 0.1f : 0.05f;
+        player.stats.Armor = Mathf.Min(player.stats.Armor + increment, armorHardCap);
         availablePoints--;
         UpdateUI();
     }
@@ -103,16 +112,18 @@ public class CharacterStatsUI : MonoBehaviour
 
     public void IncreaseDmgMod()
     {
-        if (availablePoints <= 0) return;
-        player.stats.DmgModifier++;
+        if (availablePoints <= 0 || player.stats.DmgModifier >= dmgModHardCap) return;
+        player.stats.DmgModifier = Mathf.Min(player.stats.DmgModifier + 1, dmgModHardCap);
         availablePoints--;
         UpdateUI();
     }
 
+
     public void IncreaseCooldown()
     {
-        if (availablePoints <= 0) return;
-        player.stats.CooldownModifier -= 0.05f;
+        if (availablePoints <= 0 || player.stats.CooldownModifier <= cooldownHardCap) return;
+        float decrement = player.stats.CooldownModifier > cooldownSoftCap ? 0.05f : 0.025f;
+        player.stats.CooldownModifier = Mathf.Max(player.stats.CooldownModifier - decrement, cooldownHardCap);
         availablePoints--;
         UpdateUI();
     }
@@ -122,7 +133,7 @@ public class CharacterStatsUI : MonoBehaviour
     public void DecreaseHP()
     {
         if (availablePoints == maxPoints || player.stats.MaxHp <= initialMaxHp) return;
-        player.stats.MaxHp--;
+        player.stats.MaxHp = Mathf.Max(player.stats.MaxHp - 5, initialMaxHp);
         availablePoints++;
         UpdateUI();
     }
@@ -130,7 +141,8 @@ public class CharacterStatsUI : MonoBehaviour
     public void DecreaseArmor()
     {
         if (availablePoints == maxPoints || player.stats.Armor <= initialArmor) return;
-        player.stats.Armor--;
+        float decrement = player.stats.Armor > armorSoftCap ? 0.1f : 0.05f;
+        player.stats.Armor = Mathf.Max(player.stats.Armor - decrement, initialArmor);
         availablePoints++;
         UpdateUI();
     }
@@ -153,15 +165,16 @@ public class CharacterStatsUI : MonoBehaviour
     public void DecreaseDmgMod()
     {
         if (availablePoints == maxPoints || player.stats.DmgModifier <= initialDmgMod) return;
-        player.stats.DmgModifier--;
+        player.stats.DmgModifier = Mathf.Max(player.stats.DmgModifier - 1, initialDmgMod);
         availablePoints++;
         UpdateUI();
     }
 
     public void DecreaseCooldown()
     {
-        if (availablePoints == maxPoints || player.stats.CooldownModifier <= initialCooldown) return;
-        player.stats.CooldownModifier += 0.2f;
+        if (availablePoints == maxPoints || player.stats.CooldownModifier >= initialCooldown) return;
+        float increment = player.stats.CooldownModifier <= cooldownSoftCap ? 0.05f : 0.025f;
+        player.stats.CooldownModifier = Mathf.Min(player.stats.CooldownModifier + increment, initialCooldown);
         availablePoints++;
         UpdateUI();
     }

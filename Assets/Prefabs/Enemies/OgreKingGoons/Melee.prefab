@@ -11,8 +11,6 @@ GameObject:
   - component: {fileID: 8275289018769346798}
   - component: {fileID: 7858032816570600379}
   - component: {fileID: 8109268066809691}
-  - component: {fileID: 800590843184558351}
-  - component: {fileID: 1787044591234828858}
   - component: {fileID: 3214218647730200590}
   - component: {fileID: 7835177279806558819}
   m_Layer: 9
@@ -108,6 +106,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ef9441cb3edd0647bdfd6214935e95c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stats:
+    _MaxHp: 0
+    _Armor: 0
+    _MovementSpeed: 0
+    _DmgModifier: 0
+    _CooldownModifier: 0
   healthBarManagerObj: {fileID: 0}
   movementFilter:
     useTriggers: 0
@@ -124,56 +128,22 @@ MonoBehaviour:
     minNormalAngle: 0
     maxNormalAngle: 0
   collisionOffset: 0.05
-  seeDistance: 1
   layerMask:
     serializedVersion: 2
     m_Bits: 16
-  aiData: {fileID: 800590843184558351}
-  contextSolver: {fileID: 1787044591234828858}
   scoreSO: {fileID: 11400000, guid: a537fb5d8087b124a8e1e8f4b21500ba, type: 2}
   attackFromCenter: 0
   rangeOfAttack: 2
   rangeOfRest: 5
-  rangeOfChase: 15
+  rangeOfChase: 10
   attackCooldown: 2
   spell: {fileID: 11400000, guid: d49a602c786428d46b04ff35ff2963d7, type: 2}
---- !u!114 &800590843184558351
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6262015385233187950}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4bd51ddf360aca489f30e0335e40f03, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targets: []
-  obstacles: []
-  currentTarget: {fileID: 0}
-  direction:
-  - {x: 0, y: 1}
-  - {x: 0.70710677, y: 0.70710677}
-  - {x: 1, y: 0}
-  - {x: 0.70710677, y: -0.70710677}
-  - {x: 0, y: -1}
-  - {x: -0.70710677, y: -0.70710677}
-  - {x: -1, y: 0}
-  - {x: -0.70710677, y: 0.70710677}
---- !u!114 &1787044591234828858
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6262015385233187950}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84ce78120740c324aa675ad1f87a539f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  aiData: {fileID: 800590843184558351}
+  attackPhaseDuration: 1
+  movementBiasDuration: 5
+  maxAttackRate: 1
+  minAttackRate: 0.3
+  wanderingRange: 3
+  wanderingDuration: 2
 --- !u!95 &3214218647730200590
 Animator:
   serializedVersion: 5

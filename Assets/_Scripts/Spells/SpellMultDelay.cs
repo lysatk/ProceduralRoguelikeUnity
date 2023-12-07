@@ -13,7 +13,11 @@ public class SpellMultDelay : MonoBehaviour
     [SerializeField]
     float spawnDelay = 0.5f; // Adjust this to control the delay between spawns
     string layerName;
-
+    private void Awake()
+    {
+        gameObject.SetActive(false);
+        layerName = LayerMask.LayerToName(gameObject.layer);
+    }
     private void OnEnable()
     {
         layerName = LayerMask.LayerToName(gameObject.layer);
