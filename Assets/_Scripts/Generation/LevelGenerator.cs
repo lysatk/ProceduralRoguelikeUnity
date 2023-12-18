@@ -75,9 +75,9 @@ public class LevelGenerator : MonoBehaviour
 
         map = MapFunctions.GenerateArray(width, height, false);
 
-        map = MapFunctions.RandomWalkCave(map, seed, mapSetting.clearAmount);
+        map = MapFunctions.DrunkardWalk(map, seed, mapSetting.clearAmount);
 
-        MapFunctions.RenderMap(map, tilemapWall, tilemapFloor, tileSets[tileIndex].wallTile, tileSets[tileIndex].obstacleTile,tileShadow, tileSets[tileIndex].floorTile, tileSets[tileIndex].cameraBackgroundColor);
+        MapFunctions.RenderMap(map, tilemapWall, tilemapFloor, tileSets[tileIndex].wallTile, tileSets[tileIndex].obstacleTile, tileShadow, tileSets[tileIndex].floorTile, tileSets[tileIndex].cameraBackgroundColor);
 
         GameManager.map = map;
 

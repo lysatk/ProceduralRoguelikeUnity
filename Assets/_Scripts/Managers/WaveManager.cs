@@ -43,15 +43,14 @@ namespace Assets._Scripts.Managers
             {
                 totalEnemies = GameManager.enemies.Count;
                 enemyCounter.text = "Enemies Left: \n" + totalEnemies;
-                // Debug.Log(currentLevel.levelName);
             }
 
-            Debug.Log(currentLevelNum);
+           
             if (totalEnemies == 0 && !GameManager.firstLevel)
             {
                 LevelGenerator.SetTileIndex(currentLevelNum / 3, levelGenerator);
                 currentLevelNum++;
-                if (currentLevelNum % 3 == 0)  //2 is temporary for testing purpouses !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                if (currentLevelNum % 3 == 0) 
                     GameManager.Instance.ChangeState(GameState.BossReached);
                 else
                     GameManager.Instance.ChangeState(GameState.PostLevel);

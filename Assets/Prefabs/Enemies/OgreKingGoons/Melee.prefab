@@ -134,7 +134,7 @@ MonoBehaviour:
   scoreSO: {fileID: 11400000, guid: a537fb5d8087b124a8e1e8f4b21500ba, type: 2}
   attackFromCenter: 0
   rangeOfAttack: 2
-  rangeOfRest: 5
+  rangeOfRest: 6
   rangeOfChase: 10
   attackCooldown: 2
   spell: {fileID: 11400000, guid: d49a602c786428d46b04ff35ff2963d7, type: 2}

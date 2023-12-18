@@ -124,12 +124,12 @@ public class GameManager : StaticInstance<GameManager>
 
     IEnumerator LoadScoresAsync()
     {
-        while (XMLManager.Instance == null)
+        while (JSONManager .Instance == null)
         {
             yield return null;
         }
 
-        highScores = XMLManager.Instance.LoadScores();
+        highScores = JSONManager .Instance.LoadScores();
     }
 
     /// <summary>
@@ -385,7 +385,7 @@ public class GameManager : StaticInstance<GameManager>
         base.OnApplicationQuit();
     }
 
-    public static void HandlePause() //pause not working when levelUpUi
+    public static void HandlePause() 
     {
         bool isLevelUpUIActive = Instance.levelUpUI != null && Instance.levelUpUI.isActiveAndEnabled;
 

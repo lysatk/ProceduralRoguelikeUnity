@@ -46,7 +46,6 @@ public class MapFunctions
     {
         Camera.main.backgroundColor = cameraBackgroundColor;
 
-        //Adding padding to the map 
         for (int x = (int)(map.GetUpperBound(0) * (-0.39)); x < map.GetUpperBound(0) * 1.39; x++)
         {
             for (int y = (int)(map.GetUpperBound(1) * (-0.39)); y < map.GetUpperBound(1) * 1.39; y++)
@@ -54,15 +53,10 @@ public class MapFunctions
                 tilemapWall.SetTile(new Vector3Int(x, y, 0), tileWall);
             }
         }
-
-
-        for (int x = 0; x < map.GetUpperBound(0); x++) //Loop through the width of the map
+        for (int x = 0; x < map.GetUpperBound(0); x++) 
         {
-            for (int y = 0; y < map.GetUpperBound(1); y++) //Loop through the height of the map
-            {
-
-               
-
+            for (int y = 0; y < map.GetUpperBound(1); y++) 
+            {            
                 if (map[x, y] == 0 || map[x, y] == 3) // 1 = wall, 0 = no wall, 2=spawnOriginEnemy, 3=spawnPlayer
                 {
                     tilemapWall.SetTile(new Vector3Int(x, y, 0), null);
@@ -156,9 +150,9 @@ public class MapFunctions
     /// <param name="seed">The seed for the random</param>
     /// <param name="requiredFloorPercent">The amount of floor we want</param>
     /// <returns>The modified map array</returns>
-    public static int[,] RandomWalkCave(int[,] map, float seed, int requiredFloorPercent)
+    public static int[,] DrunkardWalk(int[,] map, float seed, int requiredFloorPercent)
     {
-        //Seed our random
+        //Seed
         System.Random rand = new System.Random(seed.GetHashCode());
 
         int floorX = rand.Next(1, map.GetUpperBound(0) - 1);
