@@ -212,7 +212,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1801165703344062728, guid: f64114b9a8a76264cb732f9eb77d52d0, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnAmbientVolumeChanged
+      value: OnMasterVolumeChanged
       objectReference: {fileID: 0}
     - target: {fileID: 1801165703344062728, guid: f64114b9a8a76264cb732f9eb77d52d0, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
