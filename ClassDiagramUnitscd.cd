@@ -1,0 +1,260 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="UnitBase">
+    <Position X="22" Y="9" Width="2.75" />
+    <Members>
+      <Field Name="healthBar" Hidden="true" />
+      <Field Name="healthBarManagerObj" Hidden="true" />
+      <Method Name="TryMove" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>mpABAAEQXAAQACAgEAUAygAAAAAAQACAAAAQhAAUEkA=</HashCode>
+      <FileName>Assets\_Scripts\Units\UnitBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EnemyBase">
+    <Position X="19" Y="9" Width="2.75" />
+    <Members>
+      <Field Name="_anim" Hidden="true" />
+      <Method Name="FlashRed" Hidden="true" />
+      <Method Name="StartBehaviorAfterDelay" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AEAAAAQAAIgAACAkAAABAAEAQACAAQAFBAACgEAAAkA=</HashCode>
+      <FileName>Assets\_Scripts\Units\Enemies\EnemyBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HeroUnitBase">
+    <Position X="25" Y="9" Width="2.75" />
+    <Members>
+      <Field Name="_anim" Hidden="true" />
+      <Field Name="_invincibilityDeltaTime" Hidden="true" />
+      <Method Name="Affect" Hidden="true" />
+      <Method Name="ArmorDownTask" Hidden="true" />
+      <Method Name="ArmorUpTask" Hidden="true" />
+      <Field Name="baseMovementSpeed" Hidden="true" />
+      <Method Name="BecomeTemporarilyInvincible" Hidden="true" />
+      <Method Name="BurnTask" Hidden="true" />
+      <Field Name="castCollisions" Hidden="true" />
+      <Method Name="ConditionAffect" Hidden="true" />
+      <Field Name="DashSpell" Hidden="true" />
+      <Method Name="DmgUpTask" Hidden="true" />
+      <Method Name="FreezeTask" Hidden="true" />
+      <Method Name="HasteTask" Hidden="true" />
+      <Method Name="HideWand" Hidden="true" />
+      <Field Name="movementFilter" Hidden="true" />
+      <Field Name="movementInput" Hidden="true" />
+      <Method Name="PoisonTask" Hidden="true" />
+      <Method Name="SetNameToChangeMage" Hidden="true" />
+      <Method Name="SlowTask" Hidden="true" />
+      <Method Name="SpeedUpTask" Hidden="true" />
+      <Field Name="spellRotator" Hidden="true" />
+      <Method Name="spriteBlink" Hidden="true" />
+      <Method Name="TakeDamage" Hidden="true" />
+      <Method Name="TryMove" Hidden="true" />
+      <Method Name="UnHideWand" Hidden="true" />
+      <Method Name="WaitAndChange" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>QBQYgIFAfqgABCImEgABCYkAQEEAgiCKAIMglBGMAgA=</HashCode>
+      <FileName>Assets\_Scripts\Units\Heroes\HeroUnitBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BasicEnemy">
+    <Position X="16.25" Y="9" Width="2.5" />
+    <Members>
+      <Field Name="attackFromCenter" Hidden="true" />
+      <Field Name="attackPhaseDuration" Hidden="true" />
+      <Field Name="attackPhaseTimer" Hidden="true" />
+      <Method Name="ConfigureNavmeshAgent" Hidden="true" />
+      <Field Name="currentAttackRate" Hidden="true" />
+      <Method Name="DelayedActivation" Hidden="true" />
+      <Method Name="GetEdgeRestPosition" Hidden="true" />
+      <Method Name="GetRandomWanderDestination" Hidden="true" />
+      <Field Name="maxAttackRate" Hidden="true" />
+      <Field Name="minAttackRate" Hidden="true" />
+      <Field Name="movementBiasDuration" Hidden="true" />
+      <Field Name="wanderingDuration" Hidden="true" />
+      <Field Name="wanderingRange" Hidden="true" />
+      <Field Name="wanderingTargetPosition" Hidden="true" />
+      <Field Name="wanderingTimer" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="BasicEnemy.States">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\_Scripts\Units\Enemies\BasicEnemy.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAQgEQBEAaAAFAAAoFgCIAAIBYUABgAKICGAAAgIIIg=</HashCode>
+      <FileName>Assets\_Scripts\Units\Enemies\BasicEnemy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TurretEnemy">
+    <Position X="19" Y="14.25" Width="2.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="TurretEnemy.States">
+        <Members>
+          <Field Name="Die" Hidden="true" />
+        </Members>
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\_Scripts\Units\Enemies\TurretEnemy.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <InheritanceLine Type="EnemyBase" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="19.812" Y="13.761" />
+        <Point X="19.812" Y="14.25" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAQgAAAAASAABAAAIEAAAAAIAIUABAAIAACAAAAAAAA=</HashCode>
+      <FileName>Assets\_Scripts\Units\Enemies\TurretEnemy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpellBase">
+    <Position X="1.5" Y="4.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAEAAAAAAAgAQAAAAAAQIAAAABAAAAAAA=</HashCode>
+      <FileName>Assets\_Scripts\Spells\SpellBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Spell">
+    <Position X="8" Y="4.5" Width="2.5" />
+    <Members>
+      <Field Name="spellSlot" Hidden="true" />
+    </Members>
+    <AssociationLine Name="conditions" Type="Assets._Scripts.Utilities.ConditionBase" FixedFromPoint="true">
+      <Path>
+        <Point X="8.875" Y="4.5" />
+        <Point X="8.875" Y="3.997" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-2.254" Y="0.11" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAwEAAAAgAAAAQAEKAAAQIAAAABAAAgAAA=</HashCode>
+      <FileName>Assets\_Scripts\Spells\Spell.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="conditions" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="SpellBossBasic">
+    <Position X="8" Y="9" Width="2.5" />
+    <AssociationLine Name="prefabList" Type="Spell" FixedFromPoint="true">
+      <Path>
+        <Point X="8.5" Y="9" />
+        <Point X="8.5" Y="7.915" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-1.662" Y="0.523" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>QAAAIAAAEAAAAAAAAAAAAAAAEAAAAgGAAAAAAAAACEA=</HashCode>
+      <FileName>Assets\_Scripts\Spells\SpellBossBasic.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="prefabList" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="SpellMultDelay">
+    <Position X="4.5" Y="4.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAAAAAAAAIAEAAAAgGAAAAAAAAACEA=</HashCode>
+      <FileName>Assets\_Scripts\Spells\SpellMultDelay.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Assets._Scripts.Spells.SpellProjectileBase">
+    <Position X="0.75" Y="7.75" Width="3.5" />
+    <Members>
+      <Method Name="ExplosiveDamageCircle" Hidden="true" />
+      <Method Name="WaitForSecondsCoroutine" Hidden="true" />
+    </Members>
+    <InheritanceLine Type="SpellBase" FixedToPoint="true">
+      <Path>
+        <Point X="2.75" Y="6.954" />
+        <Point X="2.75" Y="7.75" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAIEAAAAAIAAEAAAAAAAAAEAAAAAAAAAAAAhACAA=</HashCode>
+      <FileName>Assets\_Scripts\Spells\SpellProjectileBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PooledSpellInfo">
+    <Position X="0.75" Y="10.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\_Scripts\Utilities\ObjectPool.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ObjectPool">
+    <Position X="4.5" Y="7.75" Width="3.25" />
+    <Members>
+      <Method Name="GetParentObjectByLayerName" Hidden="true" />
+      <Method Name="ReturnSpellsWithoutSource" Hidden="true" />
+      <Method Name="SetParentObjectSourceType" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="ObjectPool.SpellSource">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\_Scripts\Utilities\ObjectPool.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <AssociationLine Name="objectPools" Type="PooledSpellInfo" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="4.5" Y="12.79" />
+        <Point X="2.125" Y="12.79" />
+        <Point X="2.125" Y="11.796" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="-3.219" Y="1.143" Height="0.182" Width="3.484" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>CAAAEAAABACBAAAAAAgCAECQAAAAACAkACAACAoAAFI=</HashCode>
+      <FileName>Assets\_Scripts\Utilities\ObjectPool.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="objectPools" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Struct Name="Assets._Scripts.Utilities.ConditionBase">
+    <Position X="8.5" Y="2.25" Width="1.75" />
+    <AssociationLine Name="Condition" Type="Conditions">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.689" Y="0.046" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAACAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\_Scripts\Utilities\ConditionBase.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="Condition" />
+    </ShowAsAssociation>
+  </Struct>
+  <Enum Name="Conditions">
+    <Position X="5.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAQAAAAAACCAAAAAAAAAAAAAAAAAAAAAAAQAAQABAM=</HashCode>
+      <FileName>Assets\_Scripts\Utilities\Enums\Conditions.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

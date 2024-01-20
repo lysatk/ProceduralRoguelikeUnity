@@ -209,6 +209,7 @@ public class HeroUnitBase : UnitBase
     public override void TakeDamage(float dmgToTake, List<ConditionBase> conditions)
     {
         if (isInvincible) { return; }
+        AudioSystem.Instance.PlayPlayerHitSound();
         base.TakeDamage(dmgToTake, conditions);
         healthBar.SetHealth(stats.CurrentHp);
 
@@ -619,6 +620,7 @@ public class HeroUnitBase : UnitBase
             return;
 
         base.Die();
+        AudioSystem.Instance.PlayPlayerDeathSound();
         _anim.CrossFade("Death", 0, 0);
         HideWand();
         GameManager.Instance.ChangeState(GameState.Lose);

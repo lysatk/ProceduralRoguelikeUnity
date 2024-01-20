@@ -85,6 +85,7 @@ public abstract class EnemyBase : UnitBase
 
         base.Die();
         scoreSO.Int++;
+        AudioSystem.Instance.PlayEnemyDeathSound();
         _anim.CrossFade("Death", 0, 0);
         _isDead = true;
         GameManager.enemies.Remove(this.gameObject);

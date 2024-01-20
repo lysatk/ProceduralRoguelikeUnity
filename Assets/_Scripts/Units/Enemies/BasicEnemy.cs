@@ -210,7 +210,7 @@ public class BasicEnemy : EnemyBase
     private void Attack()
     {
         if (onCooldown) return;
-
+        AudioSystem.Instance.PlayEnemyAttackSound();
         onCooldown = true;
         lastAttack = Time.time;
       

@@ -10,12 +10,12 @@ namespace Assets._Scripts.Managers
     /// <summary>
     /// Class that handle waves
     /// </summary>
-    public class WaveManager : StaticInstance<WaveManager>
+    public class LevelManager : StaticInstance<LevelManager>
     {
         /// <summary>
         /// name of the current wave
         /// </summary>
-        public Text waveName;
+        public Text levelName;
 
         /// <summary>
         /// text that contains number of enemies alive
@@ -30,9 +30,9 @@ namespace Assets._Scripts.Managers
 
         private void Start()
         {
-            waveName = GameManager.Instance.waveName;
+            levelName = GameManager.Instance.levelName;
             enemyCounter = GameManager.Instance.enemyCounter;
-            waveName.text = "";
+            levelName.text = "";
             levelGenerator = FindObjectOfType<LevelGenerator>();
             currentLevelNum = 1;
             LevelGenerator.SetTileIndex(0,levelGenerator);

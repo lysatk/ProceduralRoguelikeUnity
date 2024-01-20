@@ -7,11 +7,18 @@ public class AudioSystem : MonoBehaviour
     [SerializeField] private AudioSource musicSource;
     [SerializeField] private AudioSource sfxSource;
 
-    [SerializeField] private AudioClip musicClip;
+    [SerializeField] private AudioClip musicClipMenu;
+    [SerializeField] private AudioClip musicClipHub;
+    [SerializeField] private AudioClip musicClipLevel;
     [SerializeField] private AudioClip enemyDeathClip;
+   
     [SerializeField] private AudioClip playerDeathClip;
+
     [SerializeField] private AudioClip projectileCollisionClip;
 
+    [SerializeField] private AudioClip playerHitClip;
+
+    [SerializeField] private AudioClip enemyAttackClip;
     private void Awake()
     {
         if (Instance == null)
@@ -25,7 +32,7 @@ public class AudioSystem : MonoBehaviour
             Destroy(gameObject);
         }
 
-        PlayMusic(musicClip);
+        PlayMusic(musicClipMenu);
     }
 
     private void LoadVolumeSettings()
@@ -60,4 +67,26 @@ public class AudioSystem : MonoBehaviour
         musicSource.volume = musicVolume;
         sfxSource.volume = sfxVolume;
     }
+
+    public void PlayEnemyDeathSound()
+    {
+        PlaySFX(enemyDeathClip);
+    }
+
+    public void PlayPlayerDeathSound()
+    {
+        PlaySFX(playerDeathClip);
+    }
+
+    public void PlayPlayerHitSound()
+    {
+        PlaySFX(playerHitClip);
+    }
+
+    public void PlayEnemyAttackSound()
+    {
+        PlaySFX(enemyAttackClip);
+    }
 }
+
+

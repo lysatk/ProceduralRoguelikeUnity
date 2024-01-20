@@ -4,10 +4,7 @@
 using UnityEditor;
 #endif
 
-///<summary>
-///This script makes the MapLayer class a scriptable object
-///To create a new MapLayer, right click in the project view and select Map Layer Settings
-///You can then use this script with the LevelGenerator to generate your level
+
 
 public enum Algorithm
 {
