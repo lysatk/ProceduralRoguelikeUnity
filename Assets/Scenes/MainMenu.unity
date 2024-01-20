@@ -367,7 +367,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1088239195
+--- !u!1 &953280162
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -375,9 +375,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1088239198}
-  - component: {fileID: 1088239197}
-  - component: {fileID: 1088239196}
+  - component: {fileID: 953280165}
+  - component: {fileID: 953280164}
+  - component: {fileID: 953280163}
   m_Layer: 0
   m_Name: Audio
   m_TagString: Untagged
@@ -385,13 +385,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!82 &1088239196
+--- !u!82 &953280163
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1088239195}
+  m_GameObject: {fileID: 953280162}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
@@ -481,31 +481,35 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1088239197
+--- !u!114 &953280164
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1088239195}
+  m_GameObject: {fileID: 953280162}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3148edc559c581f4c990ce36bbdfb99b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  musicSource: {fileID: 1088239196}
-  sfxSource: {fileID: 1088239196}
-  musicClip: {fileID: 8300000, guid: 5681128601c7a5a46be997c6a4bd0aff, type: 3}
-  enemyDeathClip: {fileID: 0}
-  playerDeathClip: {fileID: 0}
+  musicSource: {fileID: 953280163}
+  sfxSource: {fileID: 953280163}
+  musicClipMenu: {fileID: 8300000, guid: 5681128601c7a5a46be997c6a4bd0aff, type: 3}
+  musicClipHub: {fileID: 8300000, guid: 7ab7073b7c756a041803e2b6ab96a17b, type: 3}
+  musicClipLevel: {fileID: 8300000, guid: 9bad3a99bc61e5045ae03e4ef5f8db3c, type: 3}
+  enemyDeathClip: {fileID: 8300000, guid: b3e8b63229fa8ad4091403f9a52f35d7, type: 3}
+  playerDeathClip: {fileID: 8300000, guid: 5562e176307f7254e869efb3ca8d05fd, type: 3}
   projectileCollisionClip: {fileID: 0}
---- !u!4 &1088239198
+  playerHitClip: {fileID: 8300000, guid: efd7a829c3c2b1749a4fce7a1900c029, type: 3}
+  enemyAttackClip: {fileID: 8300000, guid: b3e8b63229fa8ad4091403f9a52f35d7, type: 3}
+--- !u!4 &953280165
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1088239195}
+  m_GameObject: {fileID: 953280162}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 30.089354, y: 40.830547, z: 11.981654}
   m_LocalScale: {x: 1, y: 1, z: 1}

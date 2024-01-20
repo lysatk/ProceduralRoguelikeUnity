@@ -12,7 +12,7 @@ public class SettingsManager : MonoBehaviour
     public TextMeshProUGUI effectsVolumeText;
     public TextMeshProUGUI masterVolumeText;
 
-    private void Start()
+    private void Awake()
     {
         InitializeSettings();
     }
@@ -94,7 +94,8 @@ public class SettingsManager : MonoBehaviour
         if (AudioSystem.Instance != null)
         {
             AudioSystem.Instance.ChangeVolume(musicVolumeSlider.value, effectsVolumeSlider.value);
-            // For master volume, you might need to add additional logic in AudioSystem
+            AudioSystem.Instance.SetMasterVolume(masterVolumeSlider.value);
         }
     }
+
 }

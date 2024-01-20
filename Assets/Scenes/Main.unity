@@ -1432,7 +1432,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7efb1ae7a61b254489a4d92a2d5a7065, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waveName: {fileID: 921583894}
+  levelName: {fileID: 921583894}
   enemyCounter: {fileID: 921583893}
   gameObjects:
   - {fileID: 310522952}
@@ -1603,11 +1603,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   musicSource: {fileID: 1367334221}
-  sfxSource: {fileID: 0}
-  musicClip: {fileID: 8300000, guid: 5681128601c7a5a46be997c6a4bd0aff, type: 3}
-  enemyDeathClip: {fileID: 0}
-  playerDeathClip: {fileID: 0}
+  sfxSource: {fileID: 1367334221}
+  musicClipMenu: {fileID: 8300000, guid: 9bad3a99bc61e5045ae03e4ef5f8db3c, type: 3}
+  musicClipHub: {fileID: 8300000, guid: 7ab7073b7c756a041803e2b6ab96a17b, type: 3}
+  musicClipLevel: {fileID: 8300000, guid: 9bad3a99bc61e5045ae03e4ef5f8db3c, type: 3}
+  enemyDeathClip: {fileID: 8300000, guid: b3e8b63229fa8ad4091403f9a52f35d7, type: 3}
+  playerDeathClip: {fileID: 8300000, guid: 5562e176307f7254e869efb3ca8d05fd, type: 3}
   projectileCollisionClip: {fileID: 0}
+  playerHitClip: {fileID: 8300000, guid: efd7a829c3c2b1749a4fce7a1900c029, type: 3}
+  enemyAttackClip: {fileID: 8300000, guid: b3e8b63229fa8ad4091403f9a52f35d7, type: 3}
 --- !u!82 &1367334221
 AudioSource:
   m_ObjectHideFlags: 0

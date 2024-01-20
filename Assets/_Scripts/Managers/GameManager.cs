@@ -165,6 +165,9 @@ public class GameManager : StaticInstance<GameManager>
             case GameState.BossReached:
                 HandleBossReached();
                 break;
+            case GameState.Win:
+                HandleWin();
+                break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
         }
@@ -176,6 +179,7 @@ public class GameManager : StaticInstance<GameManager>
 
     void HandleHub()
     {
+        AudioSystem.Instance.PlayMusicHub();
         fadePanel.SetActive(true);
         var _ = StartCoroutine(LoadAsync("LevelHub", GameState.Null));
 
@@ -208,6 +212,7 @@ public class GameManager : StaticInstance<GameManager>
 
     void HandleStarting()
     {
+        AudioSystem.Instance.PlayMusicLevel();
         levelName.text = "";
         FindObjectOfType<LevelGenerator>().GenerateMap();
         PrepareLevel(30); 

@@ -10,5 +10,6 @@ public enum GameState
     PostLevel=4,
     BossReached=5,
     Restarting=6,
+    Win=7,
     Null = 99
 }
