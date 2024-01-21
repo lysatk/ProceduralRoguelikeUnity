@@ -132,6 +132,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 16
   scoreSO: {fileID: 11400000, guid: a537fb5d8087b124a8e1e8f4b21500ba, type: 2}
+  scoreValue: 200
   attackFromCenter: 0
   rangeOfAttack: 1
   rangeOfRest: 10
@@ -144,6 +145,7 @@ MonoBehaviour:
   minAttackRate: 0.3
   wanderingRange: 3
   wanderingDuration: 2
+  restMovementDuration: 1
 --- !u!95 &3214218647730200590
 Animator:
   serializedVersion: 5

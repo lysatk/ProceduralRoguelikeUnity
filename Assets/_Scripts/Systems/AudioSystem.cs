@@ -33,7 +33,7 @@ public class AudioSystem : MonoBehaviour
             Destroy(gameObject);
         }
 
-        PlayMusic(musicClipMenu);
+        PlayMusicMenu();
     }
 
     private void LoadVolumeSettings()

@@ -124,12 +124,12 @@ public class GameManager : StaticInstance<GameManager>
 
     IEnumerator LoadScoresAsync()
     {
-        while (JSONManager .Instance == null)
+        while (ScoreManager .Instance == null)
         {
             yield return null;
         }
 
-        highScores = JSONManager .Instance.LoadScores();
+        highScores = ScoreManager.Instance.LoadScores();
     }
 
     /// <summary>

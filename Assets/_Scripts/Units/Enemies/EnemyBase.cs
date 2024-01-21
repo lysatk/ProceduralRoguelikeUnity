@@ -43,13 +43,16 @@ public abstract class EnemyBase : UnitBase
 
     [SerializeField]
     private intSO scoreSO;
+    
 
     protected NavMeshAgent navMeshAgent;
 
     protected Collider2D hitbox;
     protected static string projectileLayerName = "EnemySpell";
 
-  //  protected bool _aiActive = true;
+    public int scoreValue;
+
+    
 
 
     void Awake()

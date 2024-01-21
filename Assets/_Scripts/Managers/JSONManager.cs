@@ -8,7 +8,7 @@ namespace Assets._Scripts.Managers
     /// <summary>
     /// Manages I/O of scores using JSON serialization
     /// </summary>
-    public class JSONManager : StaticInstance<JSONManager>
+    public class ScoreManager : StaticInstance<ScoreManager>
     {
         private string _filePath;
 
