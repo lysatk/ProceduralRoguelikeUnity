@@ -142,7 +142,7 @@ MonoBehaviour:
   attackPhaseDuration: 1
   movementBiasDuration: 5
   maxAttackRate: 1
-  minAttackRate: 0.3
+  minAttackRate: 0.8
   wanderingRange: 3
   wanderingDuration: 2
   restMovementDuration: 1

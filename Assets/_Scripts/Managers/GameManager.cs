@@ -478,6 +478,7 @@ public class GameManager : StaticInstance<GameManager>
 
 
         ResumeGame();
+        Player.GetComponent<HeroUnitBase>().healthBar.SetHealth(Player.GetComponent<HeroUnitBase>().stats.CurrentHp);
         fadePanel.gameObject.SetActive(true);
 
     }

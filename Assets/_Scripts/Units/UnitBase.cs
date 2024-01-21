@@ -21,7 +21,7 @@ public abstract class UnitBase : MonoBehaviour
     /// Health bar 
     /// </summary>
     public GameObject healthBarManagerObj;
-    protected HealthBarManager healthBar;
+    public HealthBarManager healthBar;
 
     protected Coroutine changeRoutine, burnRoutine, freezeRoutine, slowRoutine,
                         speedUpRoutine, poisonRoutine, armorUpRoutine, armorDownRoutine,
