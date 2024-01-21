@@ -22,15 +22,15 @@ public class ManekinLogic : MonoBehaviour
     }
     private void TogglePopUp(bool show)
     {
-        
+
         if (show)
         {
-            
-            Debug.Log("Description: " + description);
+            GameManager.Instance.levelName.text = "Press F to change mage";
+                
         }
         else
         {
-            
+            GameManager.Instance.levelName.text = "Press L To Start";
         }
     }
 }
