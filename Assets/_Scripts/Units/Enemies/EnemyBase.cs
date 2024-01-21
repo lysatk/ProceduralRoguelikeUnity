@@ -1,13 +1,13 @@
 using Assets._Scripts.Utilities;
 using Assets.Resources.SOs;
-using System;
+
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
+
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.SocialPlatforms.Impl;
-using Random = UnityEngine.Random;
+using Assets._Scripts.Managers;
+
 //using Stats = Assets._Scripts.Utilities.Stats;
 
 /// <summary>
@@ -85,7 +85,7 @@ public abstract class EnemyBase : UnitBase
 
         hitbox.enabled = false;
         navMeshAgent.enabled = false;
-
+        ScoreManager.Instance.AddValueToScore(scoreValue);
         base.Die();
         scoreSO.Int++;
         AudioSystem.Instance.PlayEnemyDeathSound();

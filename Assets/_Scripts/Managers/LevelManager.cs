@@ -48,8 +48,13 @@ namespace Assets._Scripts.Managers
            
             if (totalEnemies == 0 && !GameManager.firstLevel)
             {
-                LevelGenerator.SetTileIndex(currentLevelNum / 3, levelGenerator);
+                if (currentLevelNum == 9)
+                {
+                    GameManager.Instance.ChangeState(GameState.Win);
+                }
+                    LevelGenerator.SetTileIndex(currentLevelNum / 3, levelGenerator);
                 currentLevelNum++;
+                
                 if (currentLevelNum % 3 == 0) 
                     GameManager.Instance.ChangeState(GameState.BossReached);
                 else

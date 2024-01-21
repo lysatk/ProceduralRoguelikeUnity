@@ -76,7 +76,11 @@ public class GameManager : StaticInstance<GameManager>
     /// </summary>
     public GameObject pauseMenuObject;
 
-   
+    /// <summary>
+    /// ?????
+    /// </summary>
+    public GameObject winMenuObject;
+
 
     /// <summary>
     /// GameObject used for a fade-in effect when scenes are changed
@@ -92,6 +96,15 @@ public class GameManager : StaticInstance<GameManager>
     /// flag that shows if the Scores were saved
     /// </summary>
     public bool ScoresWasSaved = false;
+
+    /// <summary>
+    /// Value to store the start time of a current run in the game
+    /// </summary>
+    public float startTime;
+    /// <summary>
+    /// Value to store the end time of a current run in the game
+    /// </summary>
+    public float endTime;
 
     public static bool firstLevel = true;
 
@@ -116,21 +129,21 @@ public class GameManager : StaticInstance<GameManager>
         currentChapterIndex = 0;
         enemies = new List<GameObject>();
         highScores = new List<HighScore>(); // Initialize highScores here
-        var _ = StartCoroutine(LoadScoresAsync());
+                                            //   var _ = StartCoroutine(LoadScoresAsync());
         ChangeState(GameState.Hub);
         Instance.pauseMenuObject.SetActive(false);
     }
 
 
-    IEnumerator LoadScoresAsync()
-    {
-        while (ScoreManager .Instance == null)
-        {
-            yield return null;
-        }
+    // IEnumerator LoadScoresAsync()
+    //{
+    //   while (ScoreManager .Instance == null)
+    //   {
+    //       yield return null;
+    //  }
 
-        highScores = ScoreManager.Instance.LoadScores();
-    }
+    //highScores = ScoreManager.Instance.LoadHighScore();
+    //  }
 
     /// <summary>
     /// Method that allows to manage current game state
@@ -185,7 +198,9 @@ public class GameManager : StaticInstance<GameManager>
 
         Player = UnitManager.Instance.SpawnHero(mageNameSO.String, new Vector2(27, 42));
 
-        highScore = new() { score = 0 };
+        startTime = 0.0f;
+        endTime = 0.0f;
+        ScoreManager.Instance.currentScore = 0;
     }
     IEnumerator LoadAsync(string SceneName, GameState state)
     {
@@ -202,7 +217,7 @@ public class GameManager : StaticInstance<GameManager>
     {
         ObjectPool.ReturnAllObjects();
         SceneManager.SetActiveScene(SceneManager.GetSceneAt(0));
-         fadePanel.SetActive(true);
+        fadePanel.SetActive(true);
         SceneManager.UnloadScene("LevelHub");
 
         var _ = StartCoroutine(LoadAsync("LevelTest", GameState.Starting));
@@ -214,8 +229,9 @@ public class GameManager : StaticInstance<GameManager>
     {
         AudioSystem.Instance.PlayMusicLevel();
         levelName.text = "";
+        startTime = Time.time;
         FindObjectOfType<LevelGenerator>().GenerateMap();
-        PrepareLevel(30); 
+        PrepareLevel(30);
         firstLevel = false;
     }
 
@@ -227,7 +243,7 @@ public class GameManager : StaticInstance<GameManager>
         levelName.text = "";
         FindObjectOfType<LevelGenerator>().GenerateMap();
         PrepareLevel(30);
-        currentChapterIndex++; 
+        currentChapterIndex++;
     }
 
     private static int levelSetIndex = 0;
@@ -237,7 +253,7 @@ public class GameManager : StaticInstance<GameManager>
         levelName.text = "";
         FindObjectOfType<LevelGenerator>().GenerateMap();
         PrepareLevel(10, true);
-        levelSetIndex++; 
+        levelSetIndex++;
     }
 
     private void PrepareLevel(int enemyCount, bool isBossLevel = false)
@@ -269,7 +285,7 @@ public class GameManager : StaticInstance<GameManager>
             {
                 int enemyId = Random.Range(enemyIdStart, enemyIdEnd);
 
-                if (Random.value < 0.1f) 
+                if (Random.value < 0.1f)
                 {
                     enemyId = enemyIdEnd;
                 }
@@ -288,7 +304,7 @@ public class GameManager : StaticInstance<GameManager>
             case 0: return 0;
             case 1: return 3;
             case 2: return 6;
-            default: return 0; 
+            default: return 0;
         }
     }
 
@@ -310,7 +326,7 @@ public class GameManager : StaticInstance<GameManager>
             case 0: return ExampleEnemyType.OgreKing;
             case 1: return ExampleEnemyType.SpiderWitch;
             case 2: return ExampleEnemyType.CrystalDeamon;
-            default: return ExampleEnemyType.OgreKing; 
+            default: return ExampleEnemyType.OgreKing;
         }
     }
 
@@ -330,7 +346,7 @@ public class GameManager : StaticInstance<GameManager>
         levelSetIndex = 0;
         currentChapterIndex = 0;
 
-       
+
         var temp = StartCoroutine(PostLoseWait(3));
     }
 
@@ -353,6 +369,7 @@ public class GameManager : StaticInstance<GameManager>
 
     void LevelChangeToHub()
     {
+
         ObjectPool.DestroyAllPooledObjects();
         SceneManager.SetActiveScene(SceneManager.GetSceneAt(0));
         fadePanel.SetActive(true);
@@ -362,7 +379,7 @@ public class GameManager : StaticInstance<GameManager>
         {
             Destroy(children.gameObject);
         }
-        
+
 
         SceneManager.UnloadScene("LevelTest");
     }
@@ -391,7 +408,7 @@ public class GameManager : StaticInstance<GameManager>
         base.OnApplicationQuit();
     }
 
-    public static void HandlePause() 
+    public static void HandlePause()
     {
         bool isLevelUpUIActive = Instance.levelUpUI != null && Instance.levelUpUI.isActiveAndEnabled;
 
@@ -456,7 +473,7 @@ public class GameManager : StaticInstance<GameManager>
         Application.Quit();
     }
 
-    
+
     public void HandleMenuRestart()
     {
         HandlePause();
@@ -507,15 +524,17 @@ public class GameManager : StaticInstance<GameManager>
         }
     }
 
-    public void HandleWin(int score=0)
+    public void HandleWin(int score = 0)
     {
-        //(if=level=9+przeszedniêty
+        endTime = Time.time;
+        ScoreManager.Instance.CalculateScoreAndSave(startTime, endTime);
+        winMenuObject.SetActive(true);
         //Display wynik+Credits
         //LoadMainMenu
 
     }
 
 
-  
+
 
 }

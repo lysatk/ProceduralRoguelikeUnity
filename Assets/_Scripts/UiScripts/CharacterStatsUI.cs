@@ -229,7 +229,7 @@ public class CharacterStatsUI : MonoBehaviour
 
     
         GameManager.Instance.ConfirmLevelUpAndContinue();
-        player.healthBar.SetHealth(player.stats.CurrentHp);
+        
     }
 
 
