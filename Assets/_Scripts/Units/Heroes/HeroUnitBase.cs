@@ -36,8 +36,7 @@ public class HeroUnitBase : UnitBase
     Spell ESpell;
     float ECooldownCounter = 0f;
 
-    [SerializeField]
-    Spell DashSpell;
+    
     float DashCooldownCounter = 0f;
     float _dashMult = 2f;
     float _dashDur = 0.1f;
@@ -54,6 +53,7 @@ public class HeroUnitBase : UnitBase
     private Animator _anim;
 
     protected static string projectileLayerName = "PlayerSpell";
+
     CooldownUI cooldownUI;
 
     private bool canChangeMage = false;

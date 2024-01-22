@@ -135,15 +135,7 @@ public class GameManager : StaticInstance<GameManager>
     }
 
 
-    // IEnumerator LoadScoresAsync()
-    //{
-    //   while (ScoreManager .Instance == null)
-    //   {
-    //       yield return null;
-    //  }
 
-    //highScores = ScoreManager.Instance.LoadHighScore();
-    //  }
 
     /// <summary>
     /// Method that allows to manage current game state
@@ -231,7 +223,7 @@ public class GameManager : StaticInstance<GameManager>
         levelName.text = "";
         startTime = Time.time;
         FindObjectOfType<LevelGenerator>().GenerateMap();
-        PrepareLevel(30);
+        PrepareLevel(20);
         firstLevel = false;
     }
 
@@ -247,28 +239,28 @@ public class GameManager : StaticInstance<GameManager>
         ObjectPool.ReturnAllObjects();
         levelName.text = "";
         FindObjectOfType<LevelGenerator>().GenerateMap();
-        PrepareLevel(30);
+        PrepareLevel(22);
         currentChapterIndex++;
     }
 
-    private static int levelSetIndex = 0;
+    private static int _levelSetIndex = 0;
     void HandleBossReached()
     {
         UpdateUIForLevelUp();
         levelName.text = "";
         FindObjectOfType<LevelGenerator>().GenerateMap();
         PrepareLevel(10, true);
-        levelSetIndex++;
+        _levelSetIndex++;
     }
 
     private void PrepareLevel(int enemyCount, bool isBossLevel = false)
     {
         if (isBossLevel)
         {
-            var bossType = GetBossTypeForLevelSet(levelSetIndex);
+            var bossType = GetBossTypeForLevelSet(_levelSetIndex);
             UnitManager.Instance.SpawnEnemy(bossType, 1);
-            var enemyIdStart = GetEnemyRangeStartForLevelSet(levelSetIndex);
-            var enemyIdEnd = GetEnemyRangeEndForLevelSet(levelSetIndex);
+            var enemyIdStart = GetEnemyRangeStartForLevelSet(_levelSetIndex);
+            var enemyIdEnd = GetEnemyRangeEndForLevelSet(_levelSetIndex);
             for (int i = 0; i < enemyCount; i++)
             {
                 int enemyId = Random.Range(enemyIdStart, enemyIdEnd);
@@ -283,8 +275,8 @@ public class GameManager : StaticInstance<GameManager>
         }
         else
         {
-            var enemyIdStart = GetEnemyRangeStartForLevelSet(levelSetIndex);
-            var enemyIdEnd = GetEnemyRangeEndForLevelSet(levelSetIndex);
+            var enemyIdStart = GetEnemyRangeStartForLevelSet(_levelSetIndex);
+            var enemyIdEnd = GetEnemyRangeEndForLevelSet(_levelSetIndex);
 
             for (int i = 0; i < enemyCount; i++)
             {
@@ -340,15 +332,12 @@ public class GameManager : StaticInstance<GameManager>
         firstLevel = true;
         levelName.text = "YOU DIED!";
         LevelManager.Instance.StopAllCoroutines();
-
-        highScore.score = scoreSO.Int;
-        highScores.Add(highScore);
         scoreSO.Int = 0;
 
         ObjectPool.DestroySpellsAll();
         ObjectPool.ClearPools();
 
-        levelSetIndex = 0;
+        _levelSetIndex = 0;
         currentChapterIndex = 0;
 
 
@@ -451,7 +440,7 @@ public class GameManager : StaticInstance<GameManager>
     {
         HandlePause();
 
-        levelSetIndex = 0;
+        _levelSetIndex = 0;
         currentChapterIndex = 0;
         firstLevel = true;
         levelName.text = "";
