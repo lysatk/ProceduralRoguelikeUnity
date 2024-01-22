@@ -535,8 +535,7 @@ public class GameManager : StaticInstance<GameManager>
         ScoreManager.Instance.CalculateScoreAndSave(startTime, endTime);
         PauseGame();
         winMenuObject.SetActive(true);
-        //Display wynik+Credits
-        //LoadMainMenu
+        
 
     }
 

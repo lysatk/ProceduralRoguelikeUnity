@@ -38,7 +38,7 @@ public class CharacterStatsUI : MonoBehaviour
     private const float speedSoftCap = 9f;
     private const float speedHardCap = 14f;
 
-  
+
     private void OnEnable()
     {
         GameManager.gamePaused = true;
@@ -58,7 +58,8 @@ public class CharacterStatsUI : MonoBehaviour
 
                 UpdateUI();
                 fullHealButton.interactable = player.stats.CurrentHp < player.stats.MaxHp;
-                if(fullHealButton.interactable) { fullhealButtonText.text = "Heal"; }
+                if (fullHealButton.interactable) { fullhealButtonText.text = "Heal"; }
+                else { fullhealButtonText.text = ""; }
             }
             else
             {
@@ -102,11 +103,11 @@ public class CharacterStatsUI : MonoBehaviour
         {
             player.stats.MovementSpeed += 0.5f;
         }
-        else 
+        else
         {
             player.stats.MovementSpeed += 0.25f;
         }
-       
+
         availablePoints--;
         UpdateUI();
     }
@@ -206,9 +207,9 @@ public class CharacterStatsUI : MonoBehaviour
         armorText.text = "Armor: " + player.stats.Armor;
 
         if (player.stats.MovementSpeed >= 14)
-            speedText.text = "Speed: " + player.stats.MovementSpeed +" (MAX)";
+            speedText.text = "Speed: " + player.stats.MovementSpeed + " (MAX)";
         else
-        speedText.text = "Speed: " + player.stats.MovementSpeed;
+            speedText.text = "Speed: " + player.stats.MovementSpeed;
 
         dmgModText.text = "Damage Mod: " + player.stats.DmgModifier;
         cooldownText.text = "Cooldown: " + player.stats.CooldownModifier;
@@ -228,9 +229,9 @@ public class CharacterStatsUI : MonoBehaviour
     public void ConfirmLevelUp()
     {
 
-    
+
         GameManager.Instance.ConfirmLevelUpAndContinue();
-        
+
     }
 
 

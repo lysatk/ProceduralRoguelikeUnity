@@ -18,6 +18,7 @@ public class ScoreDisplayUI : MonoBehaviour
 
     public void GoToMainMenu()
     {
+        GameManager.Instance.ResumeGame();
         SceneManager.LoadScene("MainMenu");
     }
 
