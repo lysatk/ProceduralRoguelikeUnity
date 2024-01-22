@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Cultclop
   m_EditorClassIdentifier: 
   _stats:
-    _MaxHp: 200
+    _MaxHp: 70
     _Armor: 1
-    _MovementSpeed: 0
-    _DmgModifier: 1
+    _MovementSpeed: 5
+    _DmgModifier: 2
     _CooldownModifier: 1
   Prefab: {fileID: 8109268066809691, guid: caab27e2ff891044b841bd302f7c60b4, type: 3}
   Description: 

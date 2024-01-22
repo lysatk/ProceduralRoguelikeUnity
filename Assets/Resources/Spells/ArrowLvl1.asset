@@ -18,7 +18,7 @@ MonoBehaviour:
   Prefab: {fileID: 639514538004180302, guid: b85d32e0559008143975122f89e98706, type: 3}
   spellDamage: 4
   conditions: []
-  speed: 12
+  speed: 10
   destroyTime: 4
   caster: {fileID: 0}
   CastFromHeroeNoStaff: 0
