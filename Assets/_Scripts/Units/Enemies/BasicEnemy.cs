@@ -140,6 +140,7 @@ public class BasicEnemy : EnemyBase
         else if (IsPlayerInRange(rangeOfChase))
         {
             Move(player.position);
+           
         }
         else
         {

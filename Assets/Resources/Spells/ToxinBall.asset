@@ -25,5 +25,5 @@ MonoBehaviour:
   destroyTime: 4
   caster: {fileID: 0}
   CastFromHeroeNoStaff: 0
-  cooldown: 4.5
+  cooldown: 1.2
   spellSlot: 0

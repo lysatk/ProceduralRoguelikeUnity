@@ -15,7 +15,7 @@ MonoBehaviour:
   Name: BossSpellCrawler
   Description: 
   image: {fileID: 0}
-  Prefab: {fileID: 639514538004180302, guid: 39faf6974b701cb4193a52122fe86b92, type: 3}
+  Prefab: {fileID: 639514538004180302, guid: a623afd37456d1c4db3f6db1f84bd394, type: 3}
   spellDamage: 0
   conditions: []
   speed: 0

@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 473902857}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.591, y: -0.036, z: 0}
+  m_LocalPosition: {x: 0.32, y: 0, z: 0}
   m_LocalScale: {x: 0.4, y: 0.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -109,7 +109,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 879450142}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.1, y: -0.044, z: 0}
+  m_LocalPosition: {x: 0.91, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -477,6 +477,7 @@ MonoBehaviour:
     _DmgModifier: 0
     _CooldownModifier: 0
   healthBarManagerObj: {fileID: 93546767448373356, guid: 5839fd94658f5d8478df7c081c688f01, type: 3}
+  healthBar: {fileID: 0}
   collisionOffset: 0.05
   movementFilter:
     useTriggers: 0
@@ -497,7 +498,6 @@ MonoBehaviour:
   SecondarySpell: {fileID: 11400000, guid: ec8e86ac708b4a343b47ed617f483fee, type: 2}
   QSpell: {fileID: 11400000, guid: 7c97eee9b4e81bd49a1a279eb346c11e, type: 2}
   ESpell: {fileID: 11400000, guid: 1c9568aaef6e6eb49bdd2f8f44e4b9ec, type: 2}
-  DashSpell: {fileID: 11400000, guid: 73bad2014ba9fc4468bb4c527dc55f3d, type: 2}
   _invincibilityDurationSeconds: 0.45
   isInvincible: 0
 --- !u!95 &8531856476346468769
