@@ -113,6 +113,7 @@ MonoBehaviour:
     _DmgModifier: 0
     _CooldownModifier: 0
   healthBarManagerObj: {fileID: 0}
+  healthBar: {fileID: 0}
   movementFilter:
     useTriggers: 0
     useLayerMask: 0
@@ -154,9 +155,9 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6262015385233187950}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: b0a15ebda40b986479bf977d9bc66211, type: 2}
+  m_Controller: {fileID: 9100000, guid: 7ac95b6295fed584c8833bf294d3bc3e, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 1

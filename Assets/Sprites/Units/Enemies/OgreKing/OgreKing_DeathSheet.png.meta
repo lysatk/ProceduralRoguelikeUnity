@@ -101,143 +101,131 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Ogre_DeathSheet_0
+      name: OgreKing_DeathSheet_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 138
+        y: 164.16667
         width: 24
-        height: 26
-      alignment: 9
-      pivot: {x: 0.5, y: 0.1229706}
+        height: 32.833332
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f69a1860074aaf140a634b0c3f89b8a1
-      internalID: 1564104280
+      spriteID: 224dec44b79349c48a6125aabce9acdd
+      internalID: 31287274
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ogre_DeathSheet_1
+      name: OgreKing_DeathSheet_1
       rect:
         serializedVersion: 2
         x: 0
-        y: 111
+        y: 132.16667
         width: 24
-        height: 27
-      alignment: 9
-      pivot: {x: 0.5, y: 0.1229706}
+        height: 32.833332
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4ca57c18b84f7974cb04175debd3e0f9
-      internalID: -1270999491
+      spriteID: 68423ded4725bd94ea4eeb2262e063ae
+      internalID: 1679537162
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ogre_DeathSheet_2
+      name: OgreKing_DeathSheet_2
       rect:
         serializedVersion: 2
         x: 0
-        y: 84
+        y: 100.16667
         width: 24
-        height: 27
-      alignment: 9
-      pivot: {x: 0.5, y: 0.1229706}
+        height: 32.833332
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6d552606c662a2f478fe2dac6511bddf
-      internalID: -1316274433
+      spriteID: fb81a161753de614abd20890b6f8b664
+      internalID: 1681829821
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ogre_DeathSheet_3
+      name: OgreKing_DeathSheet_3
       rect:
         serializedVersion: 2
         x: 0
-        y: 57
+        y: 68.16667
         width: 24
-        height: 27
-      alignment: 9
-      pivot: {x: 0.5, y: 0.1229706}
+        height: 32.833332
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 67e13bf2a962c574eb18ba5d6da73801
-      internalID: -221841036
+      spriteID: 7b67567ae8dfefa4e83458b26ac7e336
+      internalID: -241756827
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ogre_DeathSheet_4
+      name: OgreKing_DeathSheet_4
       rect:
         serializedVersion: 2
         x: 0
-        y: 30
+        y: 36.166668
         width: 24
-        height: 27
-      alignment: 9
-      pivot: {x: 0.5, y: 0.1229706}
+        height: 32.833332
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0c43547702171fd4f80032101fb85836
-      internalID: -217438638
+      spriteID: fa63531531ef04a4b81fa01680939de8
+      internalID: 666744183
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ogre_DeathSheet_5
+      name: OgreKing_DeathSheet_5
       rect:
         serializedVersion: 2
         x: 0
-        y: 3
+        y: 4.166668
         width: 24
-        height: 27
-      alignment: 9
-      pivot: {x: 0.5, y: 0.1229706}
+        height: 32.833332
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1c07fbf6e854af243ac940df40bbe148
-      internalID: 993791216
+      spriteID: 062ebd23e74b2aa4b8565e2510501a90
+      internalID: 44757416
       vertices: []
       indices: 
       edges: []
@@ -253,12 +241,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Ogre_DeathSheet_0: 1564104280
-      Ogre_DeathSheet_1: -1270999491
-      Ogre_DeathSheet_2: -1316274433
-      Ogre_DeathSheet_3: -221841036
-      Ogre_DeathSheet_4: -217438638
-      Ogre_DeathSheet_5: 993791216
+      OgreKing_DeathSheet_0: 31287274
+      OgreKing_DeathSheet_1: 1679537162
+      OgreKing_DeathSheet_2: 1681829821
+      OgreKing_DeathSheet_3: -241756827
+      OgreKing_DeathSheet_4: 666744183
+      OgreKing_DeathSheet_5: 44757416
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

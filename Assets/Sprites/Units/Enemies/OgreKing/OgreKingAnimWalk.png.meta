@@ -101,185 +101,173 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: OgreBossAnimWalk_0
+      name: OgreKingAnimWalk_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 8
         y: 224
-        width: 18
-        height: 25
-      alignment: 9
-      pivot: {x: 0.5, y: 0.1229706}
+        width: 21
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6471eca4a24384f4a92b0a59492ca513
-      internalID: 219646178
+      spriteID: b433c5fc7b52beb429ae7b977107d099
+      internalID: 1432808341
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: OgreBossAnimWalk_1
+      name: OgreKingAnimWalk_1
       rect:
         serializedVersion: 2
-        x: 0
+        x: 7
         y: 192
-        width: 18
-        height: 25
-      alignment: 9
-      pivot: {x: 0.5, y: 0.1229706}
+        width: 22
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 102689716c01c7c4b8c98aa4edfab248
-      internalID: -1604416214
+      spriteID: 9244dae6442c2744b84348580f708af2
+      internalID: -1680499090
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: OgreBossAnimWalk_2
+      name: OgreKingAnimWalk_2
       rect:
         serializedVersion: 2
-        x: 0
+        x: 7
         y: 160
-        width: 18
-        height: 25
-      alignment: 9
-      pivot: {x: 0.5, y: 0.1229706}
+        width: 22
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 51ca59ddf9ef758409bb74001b6a1a62
-      internalID: 1883158623
+      spriteID: f0a28345dc7509b428f977e59acf647a
+      internalID: -1608688499
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: OgreBossAnimWalk_3
+      name: OgreKingAnimWalk_3
       rect:
         serializedVersion: 2
-        x: 0
+        x: 7
         y: 128
-        width: 18
-        height: 25
-      alignment: 9
-      pivot: {x: 0.5, y: 0.1229706}
+        width: 22
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fdd8cef0b7089c445a9a12dab1126e40
-      internalID: -1304055342
+      spriteID: 2d4e5bbf7ec8a644aafa531996da4a1f
+      internalID: -243809266
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: OgreBossAnimWalk_4
+      name: OgreKingAnimWalk_4
       rect:
         serializedVersion: 2
-        x: 0
+        x: 7
         y: 96
-        width: 18
-        height: 25
-      alignment: 9
-      pivot: {x: 0.5, y: 0.1229706}
+        width: 22
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2096b4af3135534448dd4425c4edd4e9
-      internalID: 1751491185
+      spriteID: d315bf9577d7d714698fc5aa96ba427b
+      internalID: -1280587031
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: OgreBossAnimWalk_5
+      name: OgreKingAnimWalk_5
       rect:
         serializedVersion: 2
-        x: 0
+        x: 7
         y: 64
-        width: 18
-        height: 25
-      alignment: 9
-      pivot: {x: 0.5, y: 0.1229706}
+        width: 22
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 302c220b622ed6242a0000b3da7785eb
-      internalID: 975021262
+      spriteID: 4b617e6fb334fc2469214d87bb2ce56b
+      internalID: 415439098
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: OgreBossAnimWalk_6
+      name: OgreKingAnimWalk_6
       rect:
         serializedVersion: 2
-        x: 0
+        x: 7
         y: 32
-        width: 18
-        height: 25
-      alignment: 9
-      pivot: {x: 0.5, y: 0.1229706}
+        width: 22
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 30be4dd459a55e14889dc5a8abbd5b69
-      internalID: 1409440160
+      spriteID: e49d6f0e61786f244a3c6beb4158e2c1
+      internalID: -1758158624
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: OgreBossAnimWalk_7
+      name: OgreKingAnimWalk_7
       rect:
         serializedVersion: 2
-        x: 0
+        x: 7
         y: 0
-        width: 18
-        height: 25
-      alignment: 9
-      pivot: {x: 0.5, y: 0.1229706}
+        width: 22
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6211580a581129f4c999a1ebb68fcf54
-      internalID: 1392667708
+      spriteID: 6b2964d94aa25a94b9707dfa70b193c7
+      internalID: -740900046
       vertices: []
       indices: 
       edges: []
@@ -295,14 +283,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      OgreBossAnimWalk_0: 219646178
-      OgreBossAnimWalk_1: -1604416214
-      OgreBossAnimWalk_2: 1883158623
-      OgreBossAnimWalk_3: -1304055342
-      OgreBossAnimWalk_4: 1751491185
-      OgreBossAnimWalk_5: 975021262
-      OgreBossAnimWalk_6: 1409440160
-      OgreBossAnimWalk_7: 1392667708
+      OgreKingAnimWalk_0: 1432808341
+      OgreKingAnimWalk_1: -1680499090
+      OgreKingAnimWalk_2: -1608688499
+      OgreKingAnimWalk_3: -243809266
+      OgreKingAnimWalk_4: -1280587031
+      OgreKingAnimWalk_5: 415439098
+      OgreKingAnimWalk_6: -1758158624
+      OgreKingAnimWalk_7: -740900046
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
