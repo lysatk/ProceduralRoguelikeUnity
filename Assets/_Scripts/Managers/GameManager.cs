@@ -179,7 +179,7 @@ public class GameManager : StaticInstance<GameManager>
                 HandleBossReached();
                 break;
             case GameState.Win:
-                HandleWin();
+                HandleWin(ScoreManager.Instance.currentScore);
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
@@ -237,6 +237,11 @@ public class GameManager : StaticInstance<GameManager>
 
     void HandlePostLevel()
     {
+        if (LevelManager.Instance.currentLevelNum >= 9)
+        {
+            ConfirmLevelUpAndContinue();
+            return;
+        }
         UpdateUIForLevelUp();
 
         ObjectPool.ReturnAllObjects();
@@ -528,6 +533,7 @@ public class GameManager : StaticInstance<GameManager>
     {
         endTime = Time.time;
         ScoreManager.Instance.CalculateScoreAndSave(startTime, endTime);
+        PauseGame();
         winMenuObject.SetActive(true);
         //Display wynik+Credits
         //LoadMainMenu

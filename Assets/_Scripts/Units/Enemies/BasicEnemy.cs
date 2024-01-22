@@ -78,7 +78,7 @@ public class BasicEnemy : EnemyBase
         navMeshAgent.stoppingDistance = rangeOfAttack;
         navMeshAgent.updateRotation = false;
         navMeshAgent.updateUpAxis = false;
-        navMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.MedQualityObstacleAvoidance;
+        navMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance;
     }
 
     private void Update()

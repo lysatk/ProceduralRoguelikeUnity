@@ -113,6 +113,7 @@ MonoBehaviour:
     _DmgModifier: 0
     _CooldownModifier: 0
   healthBarManagerObj: {fileID: 0}
+  healthBar: {fileID: 0}
   movementFilter:
     useTriggers: 0
     useLayerMask: 0
@@ -142,7 +143,7 @@ MonoBehaviour:
   attackPhaseDuration: 1
   movementBiasDuration: 5
   maxAttackRate: 1
-  minAttackRate: 0.3
+  minAttackRate: 0.9
   wanderingRange: 3
   wanderingDuration: 2
   restMovementDuration: 1

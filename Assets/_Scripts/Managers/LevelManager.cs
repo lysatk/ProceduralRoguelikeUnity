@@ -25,7 +25,7 @@ namespace Assets._Scripts.Managers
 
 
         int totalEnemies;
-        int currentLevelNum = 1;
+        public int currentLevelNum = 1;
         LevelGenerator levelGenerator;
 
         private void Start()
@@ -51,6 +51,7 @@ namespace Assets._Scripts.Managers
                 if (currentLevelNum == 9)
                 {
                     GameManager.Instance.ChangeState(GameState.Win);
+                    return;
                 }
                     LevelGenerator.SetTileIndex(currentLevelNum / 3, levelGenerator);
                 currentLevelNum++;

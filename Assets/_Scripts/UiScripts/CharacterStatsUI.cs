@@ -58,6 +58,7 @@ public class CharacterStatsUI : MonoBehaviour
 
                 UpdateUI();
                 fullHealButton.interactable = player.stats.CurrentHp < player.stats.MaxHp;
+                if(fullHealButton.interactable) { fullhealButtonText.text = "Heal"; }
             }
             else
             {

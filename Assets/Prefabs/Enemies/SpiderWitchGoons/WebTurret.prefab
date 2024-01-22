@@ -113,6 +113,7 @@ MonoBehaviour:
     _DmgModifier: 0
     _CooldownModifier: 0
   healthBarManagerObj: {fileID: 0}
+  healthBar: {fileID: 0}
   movementFilter:
     useTriggers: 0
     useLayerMask: 0
@@ -142,7 +143,7 @@ MonoBehaviour:
   attackPhaseDuration: 1
   movementBiasDuration: 5
   maxAttackRate: 1
-  minAttackRate: 0.3
+  minAttackRate: 0.2
   wanderingRange: 0
   wanderingDuration: 0
   restMovementDuration: 1
@@ -186,6 +187,7 @@ MonoBehaviour:
     _DmgModifier: 0
     _CooldownModifier: 0
   healthBarManagerObj: {fileID: 0}
+  healthBar: {fileID: 0}
   movementFilter:
     useTriggers: 0
     useLayerMask: 0
@@ -205,9 +207,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   scoreSO: {fileID: 11400000, guid: a537fb5d8087b124a8e1e8f4b21500ba, type: 2}
-  scoreValue: 0
+  scoreValue: 20
   rangeOfAttack: 10
-  attackCooldown: 0.8
+  attackCooldown: 0.4
   spell: {fileID: 11400000, guid: 2f1dfc58f778d0c48933dd790cc58f60, type: 2}
 --- !u!1 &7212438722113357005
 GameObject:

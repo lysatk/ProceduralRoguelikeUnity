@@ -730,8 +730,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6296184746928933637}
   m_HandleRect: {fileID: 0}
   m_Direction: 0
-  m_Value: 0.49020958
-  m_Size: 0.89253825
+  m_Value: 0.490211
+  m_Size: 0.8925382
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1210,7 +1210,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2107785485413617433
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1227,10 +1227,10 @@ RectTransform:
   m_Father: {fileID: 1296697992969855703}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 100, y: -375}
+  m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8996511896089184161
 CanvasRenderer:
@@ -1489,7 +1489,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5954468220290917903
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1506,10 +1506,10 @@ RectTransform:
   m_Father: {fileID: 8549951292812502286}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 100, y: -375}
+  m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7355454072262124462
 CanvasRenderer:
@@ -1567,7 +1567,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &9169070291947752512
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1634,7 +1634,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4080280707315172796}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a785631252ab2454a910f20b89ba1cf5, type: 3}
   m_Name: 
@@ -2775,8 +2775,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 4.1439, y: 0}
-  m_SizeDelta: {x: -8.2878, y: 0}
+  m_AnchoredPosition: {x: 8.0696, y: 0}
+  m_SizeDelta: {x: -0.4363, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4019165399826712491
 CanvasRenderer:
@@ -2806,7 +2806,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: "CONGRATULATIONS!!! \n\nyou have defeated the crystal daemon and won the
+    game!\n\nYou can finally rest now.\n\nOr perhaps...\ntry again?"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7558cb61c12f1724a9b096f03b3644e2, type: 2}
   m_sharedMaterial: {fileID: 3255377415285397355, guid: 7558cb61c12f1724a9b096f03b3644e2, type: 2}

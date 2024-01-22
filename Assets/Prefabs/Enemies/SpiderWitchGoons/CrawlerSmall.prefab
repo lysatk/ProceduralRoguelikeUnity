@@ -113,6 +113,7 @@ MonoBehaviour:
     _DmgModifier: 0
     _CooldownModifier: 0
   healthBarManagerObj: {fileID: 0}
+  healthBar: {fileID: 0}
   movementFilter:
     useTriggers: 0
     useLayerMask: 0

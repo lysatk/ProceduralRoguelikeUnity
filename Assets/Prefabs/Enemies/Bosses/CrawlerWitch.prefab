@@ -113,6 +113,7 @@ MonoBehaviour:
     _DmgModifier: 0
     _CooldownModifier: 0
   healthBarManagerObj: {fileID: 0}
+  healthBar: {fileID: 0}
   movementFilter:
     useTriggers: 0
     useLayerMask: 0
@@ -186,7 +187,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 0.44
-  m_BaseOffset: 1.49
+  m_BaseOffset: 0.96
   m_WalkableMask: 1
   m_ObstacleAvoidanceType: 2
 --- !u!1 &7894988952765809410
@@ -263,7 +264,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.4439087, y: 2.749878}
+  m_Size: {x: 2.57, y: 1.73}
   m_EdgeRadius: 0
 --- !u!1001 &5021696542079753168
 PrefabInstance:
