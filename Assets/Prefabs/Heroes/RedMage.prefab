@@ -496,8 +496,8 @@ MonoBehaviour:
   mageNameSO: {fileID: 11400000, guid: 488fa0a66c85f7747b4582dc17b80341, type: 2}
   PrimarySpell: {fileID: 11400000, guid: 497e8287116868f439d223a737b3e764, type: 2}
   SecondarySpell: {fileID: 11400000, guid: ec8e86ac708b4a343b47ed617f483fee, type: 2}
-  QSpell: {fileID: 11400000, guid: 7c97eee9b4e81bd49a1a279eb346c11e, type: 2}
-  ESpell: {fileID: 11400000, guid: 1c9568aaef6e6eb49bdd2f8f44e4b9ec, type: 2}
+  QSpell: {fileID: 11400000, guid: 4405a2c73411e1749b1e890359228232, type: 2}
+  ESpell: {fileID: 11400000, guid: 9292ee4cde0b9f0489ee860d09e1e39a, type: 2}
   _invincibilityDurationSeconds: 0.45
   isInvincible: 0
 --- !u!95 &8531856476346468769
