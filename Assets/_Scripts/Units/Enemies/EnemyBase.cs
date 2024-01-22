@@ -130,6 +130,17 @@ public abstract class EnemyBase : UnitBase
 
             navMeshAgent.SetDestination(target);
 
+            Vector3 normalizedVelocity = navMeshAgent.velocity.normalized;
+            Vector3 crossProduct = Vector3.Cross(transform.forward, normalizedVelocity);
+
+            if (crossProduct.y > 0)
+            {
+                spriteRenderer.flipX = true;
+            }
+            else if (crossProduct.y < 0)
+            {
+                spriteRenderer.flipX = false;
+            }
 
             if (navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
             {

@@ -187,7 +187,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 0.81
-  m_BaseOffset: 0.23
+  m_BaseOffset: 0.77
   m_WalkableMask: 1
   m_ObstacleAvoidanceType: 4
 --- !u!1 &7894988952765809410

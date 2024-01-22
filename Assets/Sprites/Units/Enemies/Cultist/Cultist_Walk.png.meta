@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e43b998358a7ce341bc0faea64cddfe3
+guid: a2cc4f3ac05dffd40aca10c581255cd2
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -105,13 +105,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: crawler_Witch_idle_0
+      name: Cultist_Walk_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 94
-        width: 27
-        height: 19
+        x: 1
+        y: 224
+        width: 11
+        height: 15
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -119,20 +119,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4117d1457f201a742a3ce82354ec179a
-      internalID: 1504100404
+      spriteID: 1ca558771e911864db8a225724e81f2f
+      internalID: -1118572081
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: crawler_Witch_idle_1
+      name: Cultist_Walk_1
       rect:
         serializedVersion: 2
-        x: 0
-        y: 62
-        width: 27
-        height: 18
+        x: 1
+        y: 192
+        width: 12
+        height: 15
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,19 +140,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9705f91ec55b35340b90276c1fe0e767
-      internalID: -1777739040
+      spriteID: b13dc3fc2e562b84699273c9ef9d2580
+      internalID: 1048513725
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: crawler_Witch_idle_2
+      name: Cultist_Walk_2
       rect:
         serializedVersion: 2
-        x: 0
-        y: 30
-        width: 27
+        x: 1
+        y: 160
+        width: 11
         height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -161,20 +161,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5ed1231113a0630439552b18abd8ddc2
-      internalID: -302636195
+      spriteID: 7df5f6af859885d4d89e9062951f955e
+      internalID: -1965169013
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: crawler_Witch_idle_3
+      name: Cultist_Walk_3
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 27
-        height: 20
+        x: 1
+        y: 128
+        width: 12
+        height: 15
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -182,8 +182,92 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 22a82c9dd59c96a439e1624e06ff1378
-      internalID: -1951309592
+      spriteID: e83a8fc0df25ee047916cedcca5ba833
+      internalID: -958098476
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cultist_Walk_4
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 96
+        width: 12
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6c597d9c547cac54994429e5dee8f4bb
+      internalID: 1069191219
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cultist_Walk_5
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 64
+        width: 12
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95a6baaed66eda04fa3a745bfca3834d
+      internalID: -1275273996
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cultist_Walk_6
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 32
+        width: 12
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e7cde29ded842f46adc9ee355f79e5b
+      internalID: 1740766972
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cultist_Walk_7
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 0
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e6d70cdbd3a2dc64792bae9a59bbbb12
+      internalID: -2024774963
       vertices: []
       indices: 
       edges: []
@@ -199,10 +283,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      crawler_Witch_idle_0: 1504100404
-      crawler_Witch_idle_1: -1777739040
-      crawler_Witch_idle_2: -302636195
-      crawler_Witch_idle_3: -1951309592
+      Cultist_Walk_0: -1118572081
+      Cultist_Walk_1: 1048513725
+      Cultist_Walk_2: -1965169013
+      Cultist_Walk_3: -958098476
+      Cultist_Walk_4: 1069191219
+      Cultist_Walk_5: -1275273996
+      Cultist_Walk_6: 1740766972
+      Cultist_Walk_7: -2024774963
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

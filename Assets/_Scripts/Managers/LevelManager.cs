@@ -48,6 +48,7 @@ namespace Assets._Scripts.Managers
            
             if (totalEnemies == 0 && !GameManager.firstLevel)
             {
+                
                 if (currentLevelNum == 9)
                 {
                     GameManager.Instance.ChangeState(GameState.Win);

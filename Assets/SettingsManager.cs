@@ -39,6 +39,7 @@ public class SettingsManager : MonoBehaviour
     public void OnEffectsVolumeChanged()
     {
         SaveEffectsVolume(effectsVolumeSlider.value);
+        AudioSystem.Instance.PlayEnemyDeathSound();
         UpdateAudioSystemVolume();
         UpdateSliderText(effectsVolumeSlider.value, effectsVolumeText);
     }
@@ -71,6 +72,7 @@ public class SettingsManager : MonoBehaviour
     {
         PlayerPrefs.SetFloat("EffectsVolume", volume);
         PlayerPrefs.Save();
+        
     }
 
     private float LoadEffectsVolume()

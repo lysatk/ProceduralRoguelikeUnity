@@ -356,6 +356,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f64114b9a8a76264cb732f9eb77d52d0, type: 3}
+--- !u!95 &60943309 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 4205326429302936719, guid: f953082eddb3d354ca7228b75e7c5bc2, type: 3}
+  m_PrefabInstance: {fileID: 4205326428952239171}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &468278446 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 730131362431176049, guid: f64114b9a8a76264cb732f9eb77d52d0, type: 3}
@@ -820,5 +825,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: 'SceneTransitionManager '
       objectReference: {fileID: 0}
+    - target: {fileID: 4205326429212515694, guid: f953082eddb3d354ca7228b75e7c5bc2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4205326429271532276, guid: f953082eddb3d354ca7228b75e7c5bc2, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 219.378
+      objectReference: {fileID: 0}
+    - target: {fileID: 4205326429271532276, guid: f953082eddb3d354ca7228b75e7c5bc2, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 29.513
+      objectReference: {fileID: 0}
+    - target: {fileID: 6998405076798817732, guid: f953082eddb3d354ca7228b75e7c5bc2, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 60943309}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f953082eddb3d354ca7228b75e7c5bc2, type: 3}

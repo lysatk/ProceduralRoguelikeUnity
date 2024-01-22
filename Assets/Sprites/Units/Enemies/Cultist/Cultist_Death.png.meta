@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e43b998358a7ce341bc0faea64cddfe3
+guid: fec231f1e600b424faf4b40f6faf46e6
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -105,13 +105,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: crawler_Witch_idle_0
+      name: Cultist_Death_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 94
-        width: 27
-        height: 19
+        y: 189
+        width: 16
+        height: 27
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -119,20 +119,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4117d1457f201a742a3ce82354ec179a
-      internalID: 1504100404
+      spriteID: 8f5eca4869157bb4c8222afd612a7a76
+      internalID: 664712932
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: crawler_Witch_idle_1
+      name: Cultist_Death_1
       rect:
         serializedVersion: 2
         x: 0
-        y: 62
-        width: 27
-        height: 18
+        y: 162
+        width: 16
+        height: 27
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,20 +140,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9705f91ec55b35340b90276c1fe0e767
-      internalID: -1777739040
+      spriteID: 564f78b9917ee06428bd2097b15b1cc7
+      internalID: -1211839479
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: crawler_Witch_idle_2
+      name: Cultist_Death_2
       rect:
         serializedVersion: 2
         x: 0
-        y: 30
-        width: 27
-        height: 16
+        y: 135
+        width: 16
+        height: 27
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -161,20 +161,104 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5ed1231113a0630439552b18abd8ddc2
-      internalID: -302636195
+      spriteID: a6e693b310fea104a8e603bbfd31fdde
+      internalID: 860347382
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: crawler_Witch_idle_3
+      name: Cultist_Death_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 108
+        width: 16
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a528e69d0ade4384bbae474ca0125206
+      internalID: 160038903
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cultist_Death_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 81
+        width: 16
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6935b67c0d9918b4485346569c56b97f
+      internalID: -1859591677
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cultist_Death_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 54
+        width: 16
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af2b25ed2c730b24aaaa2fad810aa3d6
+      internalID: -1509131958
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cultist_Death_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 27
+        width: 16
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d3c693a95e5d8e84a97faae7cab8401b
+      internalID: 432874610
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cultist_Death_7
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 27
-        height: 20
+        width: 16
+        height: 27
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -182,8 +266,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 22a82c9dd59c96a439e1624e06ff1378
-      internalID: -1951309592
+      spriteID: 9d40046c5b6ab5b4990c12d1e9223889
+      internalID: 1597145035
       vertices: []
       indices: 
       edges: []
@@ -199,10 +283,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      crawler_Witch_idle_0: 1504100404
-      crawler_Witch_idle_1: -1777739040
-      crawler_Witch_idle_2: -302636195
-      crawler_Witch_idle_3: -1951309592
+      Cultist_Death_0: 664712932
+      Cultist_Death_1: -1211839479
+      Cultist_Death_2: 860347382
+      Cultist_Death_3: 160038903
+      Cultist_Death_4: -1859591677
+      Cultist_Death_5: -1509131958
+      Cultist_Death_6: 432874610
+      Cultist_Death_7: 1597145035
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

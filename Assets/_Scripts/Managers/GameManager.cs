@@ -255,6 +255,7 @@ public class GameManager : StaticInstance<GameManager>
 
     private void PrepareLevel(int enemyCount, bool isBossLevel = false)
     {
+        enemies.Clear();
         if (isBossLevel)
         {
             var bossType = GetBossTypeForLevelSet(_levelSetIndex);
@@ -446,9 +447,9 @@ public class GameManager : StaticInstance<GameManager>
         levelName.text = "";
         LevelManager.Instance.StopAllCoroutines();
 
-        highScore.score = scoreSO.Int;
-        highScores.Add(highScore);
-        scoreSO.Int = 0;
+       // highScore.score = scoreSO.Int;
+        //highScores.Add(highScore);
+       // scoreSO.Int = 0;
 
         levelName.text = "Press L To Start";
 
