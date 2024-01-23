@@ -251,6 +251,7 @@ public class GameManager : StaticInstance<GameManager>
         FindObjectOfType<LevelGenerator>().GenerateMap();
         PrepareLevel(10, true);
         _levelSetIndex++;
+        currentChapterIndex++;
     }
 
     private void PrepareLevel(int enemyCount, bool isBossLevel = false)
@@ -528,8 +529,6 @@ public class GameManager : StaticInstance<GameManager>
         ScoreManager.Instance.CalculateScoreAndSave(startTime, endTime);
         PauseGame();
         winMenuObject.SetActive(true);
-        
-
     }
 
 

@@ -33,7 +33,7 @@ public class ScoreDisplayUI : MonoBehaviour
         int[] highScores = ScoreManager.Instance.GetTopScores();
         for (int i = 0; i < highScores.Length && i < highScoreTexts.Count; i++)
         {
-            highScoreTexts[i].text = "High Score " + (i + 1) + ": " + highScores[i].ToString();
+            highScoreTexts[i].text =  highScores[i].ToString();
         }
     }
 }
