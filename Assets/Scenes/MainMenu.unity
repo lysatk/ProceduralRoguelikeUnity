@@ -164,7 +164,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1208333316303894074, guid: f64114b9a8a76264cb732f9eb77d52d0, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1.0499878
+      value: 1.0500488
       objectReference: {fileID: 0}
     - target: {fileID: 1270846273481327699, guid: f64114b9a8a76264cb732f9eb77d52d0, type: 3}
       propertyPath: musicVolumeText
@@ -241,6 +241,18 @@ PrefabInstance:
     - target: {fileID: 2369827036399098774, guid: f64114b9a8a76264cb732f9eb77d52d0, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3602287829415910089, guid: f64114b9a8a76264cb732f9eb77d52d0, type: 3}
+      propertyPath: m_text
+      value: Mage of the Realm
+      objectReference: {fileID: 0}
+    - target: {fileID: 3602287829415910089, guid: f64114b9a8a76264cb732f9eb77d52d0, type: 3}
+      propertyPath: m_margin.x
+      value: -64.832504
+      objectReference: {fileID: 0}
+    - target: {fileID: 3602287829415910089, guid: f64114b9a8a76264cb732f9eb77d52d0, type: 3}
+      propertyPath: m_margin.z
+      value: -61.817123
       objectReference: {fileID: 0}
     - target: {fileID: 7916989875598768385, guid: f64114b9a8a76264cb732f9eb77d52d0, type: 3}
       propertyPath: m_Name
